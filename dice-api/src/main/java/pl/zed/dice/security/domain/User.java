@@ -24,6 +24,7 @@ public class User {
     @NotNull
     private Boolean enabled;
 
+    @Column(name = "LASTPASSWORDRESETDATE")
     @Temporal(TemporalType.TIMESTAMP)
     @NotNull
     private Date lastPasswordResetDate;

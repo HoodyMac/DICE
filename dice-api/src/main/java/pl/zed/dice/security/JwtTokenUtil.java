@@ -21,21 +21,33 @@ public class JwtTokenUtil {
     private Long expiration;
 
     public String getUsernameFromToken(String token) {
-        final Claims claims = getClaimsFromToken(token);
-        return claims.getSubject();
+        try {
+            final Claims claims = getClaimsFromToken(token);
+            return claims.getSubject();
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
     }
 
     public Date getCreatedDateFromToken(String token) {
-        final Claims claims = getClaimsFromToken(token);
-        return new Date((Long) claims.get("created_at"));
+        try {
+            final Claims claims = getClaimsFromToken(token);
+            return new Date((Long) claims.get("created_at"));
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
     }
 
     public Date getExpirationDateFromToken(String token) {
-        final Claims claims = getClaimsFromToken(token);
-        return claims.getExpiration();
+        try {
+            final Claims claims = getClaimsFromToken(token);
+            return claims.getExpiration();
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
     }
 
-    private Claims getClaimsFromToken(String token) {
+    private Claims getClaimsFromToken(String token) throws IllegalArgumentException {
         return Jwts.parser()
                 .setSigningKey(secret)
                 .parseClaimsJws(token)
