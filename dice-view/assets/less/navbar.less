@@ -1,0 +1,27 @@
+@import "colors";
+
+header{height: 52px;
+  .nav-menu{ min-height: 35px; border-radius: 0; position: fixed;  top: 0; left: -2%; width: 104%; z-index: 1024;
+    .navbar{padding-right: 10%; padding-left: 10%; background-color: @navBar_bg; border-color: @navBar_border;
+      .navbar-header{
+        .navbar-brand{ margin:0; padding: 5px; height: auto; width: 100px;
+          .logotype{ margin:0; padding-top: 3px; padding-left: 0; width: 60%; height: auto; }
+        }
+      }
+      .navbar-collapse{
+        .nav{
+          a{color: @navBar_font; background-color: @navBar_bg;
+            &:hover{background-color: @navBar_bgHover; color: @navBar_fontHover;}
+          }
+          ul{color: @navBar_font; background-color: @navBar_bg;}
+        }
+        .navbar-form{
+          button{background-color: @navBar_bgButton; color: @navBar_fontButton;
+            &:hover{background-color: @navBar_bgHoverButton; color: @navBar_fontButton;}
+          }
+        }
+      }
+    }
+
+  }
+}

@@ -1,7 +1,10 @@
 var gulp = require('gulp');
+var less = require('gulp-less');
+var path = require('path');
+var browserSync = require('browser-sync');
 
 var assetsDev = 'assets/';
-var assetsProd = 'src/';
+var assetsProd = 'app/';
 
 var appDev = 'dev/';
 var appProd = 'app/';
@@ -25,6 +28,15 @@ var imagemin = require('gulp-imagemin');
 
 var tsProject = typescript.createProject('tsconfig.json');
 
+gulp.task('build-less', function () {
+  return gulp.src(assetsDev + 'less/**/*.less')
+    .pipe(less({
+      paths: [ path.join(__dirname, 'less', 'includes') ]
+    }))
+    .pipe(gulp.dest(assetsProd + 'css/'))
+    .pipe(browserSync.stream());
+});
+
 gulp.task('build-css', function () {
     return gulp.src(assetsDev + 'scss/*.scss')
         .pipe(sourcemaps.init())
@@ -39,7 +51,7 @@ gulp.task('build-ts', function () {
         .pipe(sourcemaps.init())
         .pipe(typescript(tsProject))
         .pipe(sourcemaps.write())
-        //.pipe(jsuglify())
+        // .pipe(jsuglify())
         .pipe(gulp.dest(appProd));
 });
 
@@ -60,6 +72,7 @@ gulp.task('watch', function () {
     gulp.watch(appDev + '**/*.ts', ['build-ts']);
     gulp.watch(assetsDev + 'scss/**/*.scss', ['build-css']);
     gulp.watch(assetsDev + 'img/*', ['build-img']);
+    gulp.watch(assetsDev + 'less/**/*.less', ['build-less']);
 });
 
-gulp.task('default', ['watch', 'build-ts', 'build-css']);
+gulp.task('default', ['watch', 'build-ts', 'build-img', 'build-css', 'build-less']);
