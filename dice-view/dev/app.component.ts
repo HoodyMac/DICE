@@ -6,10 +6,7 @@ import {NavbarComponent} from "./navbar/navbar.component";
 
 @Component({
     selector: 'dice-app',
-    template: `
-        <dice-nav></dice-nav>
-        <router-outlet></router-outlet>
-    `,
+    templateUrl: 'dev/app.component.html',
     directives: [ROUTER_DIRECTIVES, NavbarComponent, HomeComponent, ProfileComponent]
 })
 @RouteConfig([
