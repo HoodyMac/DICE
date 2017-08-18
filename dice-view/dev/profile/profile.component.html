@@ -1,1 +1,211 @@
-Profile page here
+<section class="user_info">
+    <div class="container">
+        <diw class="row">
+            <div class="col-md-3 col-sm-4 col-xs-5 custom-col-image">
+                <div class="profile_image">
+                    <div class="img">
+                        <a href="#"><img src="../img/Ivan_Loichuk_bg.jpg" alt=""></a>
+                    </div>
+                    <div class="change_photo">
+                        <button type="button" class="modal-trigger btn btn-default" data-modal="modal-change-photo">Change photo</button><!-- Trigger Modal. -->
+                        <!-- Modal window -->
+                        <div class="modal" id="modal-change-photo">
+                            <div class="modal-box">
+                                <div class="modal-header">
+                                    <div class="close-modal">&#10006;</div>
+                                    <p>Crop your profile photo</p>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- This is the image we're attaching Jcrop to -->
+                                    <img src="../img/TEEN.jpg" id="cropbox" style="" />
+
+                                    <!-- This is the form that our event handler fills -->
+                                    <form action="" method="post" onsubmit="return checkCoords();">
+                                        <input type="hidden" id="x" name="x" />
+                                        <input type="hidden" id="y" name="y" />
+                                        <input type="hidden" id="w" name="w" />
+                                        <input type="hidden" id="h" name="h" />
+                                        <input type="submit" value="Crop and Save" class="btn btn-default " />
+                                        <!-- Important!!  Upload image size (width <= 800, height: auto) -->
+                                        <span class="btn btn-default btn-file">Upload image<input type="file" value="Upload image" class="btn btn-large btn-inverse"/></span>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="forum_box">
+                    <ul class="forums">
+                        <li class="header"><p>Last activity</p></li>
+                        <li class="forum_posts">
+                            <ul>
+                                <li class="forum_post">
+                                    <table>
+                                        <tr>
+                                            <td rowspan="2" class="img_block"><a href="#" class="img"><img src="../img/Ivan_Loichuk_bg.jpg" alt=""></a></td>
+                                            <td colspan="2" class="title_block"><a href="#"><span>How to fix this</span></a></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="author_block"><a href="#" ><span>Ivan,</span></a></td>
+                                            <td class="views_block"><span class="views_label"><img
+                                                    src="../img/views-icon.png" alt="Views"></span> <span class="views_value">2,455</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3" class="date_block"><span>Sunday, 4 July</span></td>
+                                        </tr>
+                                    </table>
+                                </li>
+                                <li class="forum_post">
+                                    <table>
+                                        <tr>
+                                            <td rowspan="2" class="img_block"><a href="#" class="img"><img src="../img/Ivan_Loichuk_bg.jpg" alt=""></a></td>
+                                            <td colspan="2" class="title_block"><a href="#"><span>How to fix this. Help please.........</span></a></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="author_block"><a href="#" ><span>Bartolamiej</span></a></td>
+                                            <td class="views_block"><span class="views_label"><img
+                                                    src="../img/views-icon.png" alt="Views"></span> <span class="views_value">2,455</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3" class="date_block"><span>Sunday, 4 July</span></td>
+                                        </tr>
+                                    </table>
+                                </li>
+                                <li class="forum_post">
+                                    <table>
+                                        <tr>
+                                            <td rowspan="2" class="img_block"><a href="#" class="img"><img src="../img/Ivan_Loichuk_bg.jpg" alt=""></a></td>
+                                            <td colspan="2" class="title_block"><a href="#"><span>How to fix this</span></a></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="author_block"><a href="#" ><span>Ivan</span></a></td>
+                                            <td class="views_block"><span class="views_label"><img
+                                                    src="../img/views-icon.png" alt="Views"></span> <span class="views_value">2,455</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3" class="date_block"><span>Sunday, 4 July</span></td>
+                                        </tr>
+                                    </table>
+                                </li>
+                                <li class="forum_post">
+                                    <table>
+                                        <tr>
+                                            <td rowspan="2" class="img_block"><a href="#" class="img"><img src="../img/Ivan_Loichuk_bg.jpg" alt=""></a></td>
+                                            <td colspan="2" class="title_block"><a href="#"><span>How to fix this</span></a></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="author_block"><a href="#" ><span>Ivan</span></a></td>
+                                            <td class="views_block"><span class="views_label"><img
+                                                    src="../img/views-icon.png" alt="Views"></span> <span class="views_value">2,455</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3" class="date_block"><span>Sunday, 4 July</span></td>
+                                        </tr>
+                                    </table>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-9 col-sm-8 col-xs-7 custom-col-info">
+                <div class="page_info">
+                    <div class="page_top">
+                        <p class="userName">Ivan Loichuk</p>
+                        <p class="isOnline">online</p>
+                    </div>
+                    <div class="separator"></div>
+                    <div class="profile_info">
+                        <div class="profile_info_row">
+                            <div class="label_info">City:</div>
+                            <div class="value">Rivne Rivnenska oblast</div>
+                            <div class="edit_user_info">
+                                <a href="#" id="link_edit_icon" title="Edit profile"><img src="../img/edit_icon_gray.png" id="edit_icon" alt="Edit profile" title="Edit profile"></a>
+                            </div>
+                        </div>
+                        <div class="profile_info_row">
+                            <div class="label_info">Education:</div>
+                            <div class="value">Lublin University of Technology</div>
+                        </div>
+                        <div class="profile_info_row">
+                            <div class="label_info">Work:</div>
+                            <div class="value">Example</div>
+                        </div>
+                        <div class="profile_info_row">
+                            <div class="label_info">Age:</div>
+                            <div class="value">19 years old</div>
+                        </div>
+                        <div class="profile_info_row">
+                            <div class="label_info">Programing languages:</div>
+                            <div class="value">Java, C++.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="counts_module">
+                    <div class="page_count">
+                        <a href="#"><span class="label_module">Friends</span></a>
+                        <span class="value_module">55</span>
+                    </div>
+                    <div class="page_count">
+                        <a href="#"><span class="label_module">Groups</span></a>
+                        <span class="value_module">24</span>
+                    </div>
+                    <div class="page_count">
+                        <a href="#"><span class="label_module">Photos</span></a>
+                        <span class="value_module">454</span>
+                    </div>
+                    <div class="page_count">
+                        <a href="#"><span class="label_module">Music</span></a>
+                        <span class="value_module">545</span>
+                    </div>
+                    <div class="page_count">
+                        <a href="#"><span class="label_module">Posts</span></a>
+                        <span class="value_module">14</span>
+                    </div>
+                </div>
+            </div>
+        </diw>
+    </div>
+</section>
+<section class="page_blocks">
+    <div class="container">
+        <div class="row">
+            <div class="page_block col-md-6">
+
+            </div>
+            <div class="page_block col-md-6">
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="copyright col-md-2 col-sm-6 col-xs-12">
+                <p>Dice@2017</p><hr>
+            </div>
+
+            <div class="settings col-md-4 col-sm-6 col-xs-12">
+                <ul>
+                    <li class="list-gr"><a href="#">about</a></li>
+                    <li class="list-gr"><a href="#">help</a></li>
+                    <li class="list-gr"><a href="#">developers</a></li>
+                </ul><hr>
+            </div>
+
+            <div class="languages col-md-6 col-sm-12 col-xs-12">
+                <ul>
+                    <li class="list-gr">Language: </li>
+                    <li class="list-gr"><a href="#">english</a></li>
+                    <li class="list-gr"><a href="#">polish</a></li>
+                    <li class="list-gr"><a href="#">українська</a></li>
+                    <li class="list-gr"><a href="#">русский</a></li>
+                </ul>
+                <hr>
+            </div>
+
+        </div>
+    </div>
+</footer>

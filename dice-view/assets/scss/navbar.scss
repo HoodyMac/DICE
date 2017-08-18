@@ -1,0 +1,51 @@
+header {
+  height: 52px;
+}
+header .nav-menu {
+  min-height: 35px;
+  border-radius: 0;
+  position: fixed;
+  top: 0;
+  left: -2%;
+  width: 104%;
+  z-index: 1024;
+}
+header .nav-menu .navbar {
+  padding-right: 10%;
+  padding-left: 10%;
+  background-color: #8A25E9;
+  border-color: #5700b6;
+}
+header .nav-menu .navbar .navbar-header .navbar-brand {
+  margin: 0;
+  padding: 5px;
+  height: auto;
+  width: 100px;
+}
+header .nav-menu .navbar .navbar-header .navbar-brand .logotype {
+  margin: 0;
+  padding-top: 3px;
+  padding-left: 0;
+  width: 60%;
+  height: auto;
+}
+header .nav-menu .navbar .navbar-collapse .nav a {
+  color: #ffffff;
+  background-color: #8A25E9;
+}
+header .nav-menu .navbar .navbar-collapse .nav a:hover {
+  background-color: #6803c7;
+  color: #ffffff;
+}
+header .nav-menu .navbar .navbar-collapse .nav ul {
+  color: #ffffff;
+  background-color: #8A25E9;
+}
+header .nav-menu .navbar .navbar-collapse .navbar-form button {
+  background-color: #FFFFFF;
+  color: #000000;
+}
+header .nav-menu .navbar .navbar-collapse .navbar-form button:hover {
+  background-color: #eeeeee;
+  color: #000000;
+}
