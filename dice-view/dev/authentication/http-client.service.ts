@@ -1,0 +1,36 @@
+import {Injectable} from 'angular2/core';
+import {Headers, Http, RequestOptionsArgs, Response} from "angular2/http";
+import 'rxjs/Rx';
+import {Observable} from "rxjs/Observable";
+
+
+@Injectable()
+export class HttpClient {
+
+  constructor(private _http: Http) {}
+
+  private createRequestOptionsArgs(): RequestOptionsArgs {
+    let headers = new Headers();
+    headers.append('x-auth-token', localStorage.getItem('token'));
+    headers.append('Content-Type', 'application/json');
+    return {
+      headers: headers
+    };
+  }
+
+  get(url) {
+    return this._http.get(url, this.createRequestOptionsArgs());
+  }
+
+  post(url: string, body: string): Observable<Response> {
+    return this._http.post(url, JSON.stringify(body), this.createRequestOptionsArgs());
+  }
+
+  put(url: string, body: string): Observable<Response> {
+    return this._http.put(url, body, this.createRequestOptionsArgs());
+  }
+
+  delete(url: string): Observable<Response> {
+    return this._http.delete(url, this.createRequestOptionsArgs());
+  }
+}
