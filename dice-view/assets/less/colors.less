@@ -1,5 +1,9 @@
 // all modules
 @box_bg: #ffffff;
+@font_label: #7d7d7d;
+@font_value: #000000;
+@box_border: #d4d4d4;
+
 // navigation
 @navBar_bg: #8A25E9;
 @navBar_font: #ffffff;
@@ -14,9 +18,9 @@
 
 // user information
 
-@userInfo_fontLabel: #7d7d7d;
-@userInfo_fontValue: #000000;
-@userInfo_border: #d4d4d4;
+@userInfo_fontLabel: @font_label;
+@userInfo_fontValue: @font_value;
+@userInfo_border: @box_border;
 
 @userInfo_fontLabelHover: @userInfo_fontLabel + #222222;
 
@@ -28,3 +32,9 @@
 
 @forum_font_title_hover: @navBar_border;
 @forum_font_author_hover: @forum_font_author - #444444;
+
+// search page
+@search_border: @navBar_border;
+@search_font_info: @font_label - #222222;
+@search_fontHover_info: @font_value;
+
