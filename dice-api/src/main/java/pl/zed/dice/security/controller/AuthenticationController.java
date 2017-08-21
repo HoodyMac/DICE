@@ -18,7 +18,7 @@ import pl.zed.dice.security.service.JwtAuthenticationResponse;
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
-public class AuthenticationRestController {
+public class AuthenticationController {
 
     @Value("Authorization")
     private String tokenHeader;
