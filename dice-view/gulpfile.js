@@ -1,30 +1,27 @@
-var gulp = require('gulp');
-var less = require('gulp-less');
-var path = require('path');
-var browserSync = require('browser-sync');
+var gulp        = require('gulp'),
+    path        = require('path'),
+    browserSync = require('browser-sync'),
+    cache       = require('gulp-cache'),
+    del         = require('del'),
+    /* CSS */
+    less        = require('gulp-less'),
+    cssnano     = require('gulp-cssnano'),
+    rename      = require('gulp-rename'),
+    /* JS & TS */
+    jsuglify    = require('gulp-uglify'),
+    typescript  = require('gulp-typescript'),
+    sourcemaps  = require('gulp-sourcemaps'),
+    /* Images */
+    imagemin    = require('gulp-imagemin');
 
-var assetsDev = 'assets/';
-var assetsProd = 'app/';
-
-var appDev = 'dev/';
-var appProd = 'app/';
+    /* Path variables */
+var assetsDev   = 'assets/',
+    assetsProd  = 'app/',
+    appDev = 'dev/',
+    appProd = 'app/';
 
 /* Mixed */
 var ext_replace = require('gulp-ext-replace');
-
-/* CSS */
-var postcss = require('gulp-postcss');
-var sourcemaps = require('gulp-sourcemaps');
-var autoprefixer = require('autoprefixer');
-var precss = require('precss');
-var cssnano = require('cssnano');
-
-/* JS & TS */
-var jsuglify = require('gulp-uglify');
-var typescript = require('gulp-typescript');
-
-/* Images */
-var imagemin = require('gulp-imagemin');
 
 var tsProject = typescript.createProject('tsconfig.json');
 
@@ -37,13 +34,13 @@ gulp.task('build-less', function () {
     .pipe(browserSync.stream());
 });
 
-gulp.task('build-css', function () {
-    return gulp.src(assetsDev + 'scss/*.scss')
-        .pipe(sourcemaps.init())
-        .pipe(postcss([precss, autoprefixer, cssnano]))
-        .pipe(sourcemaps.write())
-        .pipe(ext_replace('.css'))
-        .pipe(gulp.dest(assetsProd + 'css/'));
+gulp.task('css-min', ['build-less'], function() {
+    return gulp.src([
+        appProd + 'css/*.css'
+    ])
+        .pipe(cssnano())
+        .pipe(rename({suffix: '.min'}))
+        .pipe(gulp.dest(appProd + 'css'));
 });
 
 gulp.task('build-ts', function () {
@@ -68,11 +65,19 @@ gulp.task('build-html', function () {
         .pipe(gulp.dest(appProd));
 });
 
-gulp.task('watch', function () {
-    gulp.watch(appDev + '**/*.ts', ['build-ts']);
-    gulp.watch(assetsDev + 'scss/**/*.scss', ['build-css']);
-    gulp.watch(assetsDev + 'img/*', ['build-img']);
-    gulp.watch(assetsDev + 'less/**/*.less', ['build-less']);
+gulp.task('clean', function() {
+    return del.sync(assetsProd);
 });
 
-gulp.task('default', ['watch', 'build-ts', 'build-img', 'build-css', 'build-less']);
+gulp.task('clear', function () {
+    return cache.clearAll();
+});
+
+gulp.task('watch', ['clean', 'build-ts' , 'build-img', 'css-min' ] ,function () {
+    gulp.watch(appDev + '**/*.ts', ['build-ts']);
+    gulp.watch(assetsDev + 'img/*', ['build-img']);
+    gulp.watch(appDev + '**/*.html', ['build-html'], browserSync.reload);
+    gulp.watch(assetsDev + 'less/**/*.less', ['css-min']);
+});
+
+gulp.task('default', ['watch']);
