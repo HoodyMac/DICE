@@ -3,7 +3,6 @@ import {Headers, Http, RequestOptionsArgs, Response} from "@angular/http";
 import 'rxjs/Rx';
 import {Observable} from "rxjs/Observable";
 
-
 @Injectable()
 export class HttpClient {
 
@@ -22,11 +21,11 @@ export class HttpClient {
     return this._http.get(url, this.createRequestOptionsArgs());
   }
 
-  post(url: string, body: string): Observable<Response> {
+  post(url: string, body: any): Observable<Response> {
     return this._http.post(url, JSON.stringify(body), this.createRequestOptionsArgs());
   }
 
-  put(url: string, body: string): Observable<Response> {
+  put(url: string, body: any): Observable<Response> {
     return this._http.put(url, body, this.createRequestOptionsArgs());
   }
 
