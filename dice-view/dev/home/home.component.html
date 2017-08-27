@@ -37,14 +37,16 @@
             <h2>Log in</h2>
             <h4>Please complete the form.</h4>
           </div>
-          <form [ngFormModel]="singInForm" (ngSubmit)="onSignIn(singInForm.value)">
+          <form #f="ngForm" (ngSubmit)="onSignIn(f.value)">
             <div class="signin_form">
               <input type="text" class="form-control" placeholder="Username"
-                     [ngFormControl]="singInForm.controls['username']">
+                     name="username"
+                     ngModel #username="ngModel">
             </div>
             <div class="signin_form">
               <input type="password" class="form-control" placeholder="Password"
-                     [ngFormControl]="singInForm.controls['password']">
+                     name="password"
+                     ngModel #password="ngModel">
             </div>
             <button type="submit" class="btn btn-default btn-signin  button">SIGN IN</button>
           </form>

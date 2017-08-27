@@ -1,7 +1,6 @@
-import {Component} from 'angular2/core';
+import {Component} from '@angular/core';
 
 @Component({
-    selector: 'dice-nav',
     templateUrl: 'dev/search/search.component.html',
     styleUrls: ['../app/css/search.css']
 })
