@@ -1,0 +1,104 @@
+@import "colors";
+
+
+section.friends{
+  .friends-header{ width: 100%; border: 1px solid @box_border; background-color: @box_bg; border-radius: 2px;
+    .menu{display: inline-block; padding: 1% 2% 1% 2%;
+      img{display: inline-block; }
+      a{padding: 5px 10px; display: inline-block; color: #000000; text-decoration: none;
+        &.username{padding: 5px 8px;}
+        &:hover{color: @search_border;}
+        &.nav-followers{display: none;}
+      }
+    }
+    form{ padding: 1% 2% 2% 2%;;
+      input{display: inline-block; width: 100%;}
+    }
+  }
+
+  .search-filter{ background-color: @box_bg; border:1px solid @box_border; border-radius: 2px; width: 100%;
+    .menu{
+      ul{
+        li{
+          &.active{
+            a{background-color: @friends_activeBg; color: @friends_activeFont; border-radius: 0;}
+          }
+
+        }
+      }
+    }
+    .followers{width: 100%; display: none;
+      label{width: auto; padding: 5% 3% 3% 5%; font-weight: 500;
+        &.sex{width: auto; font-weight: 500; padding-right: 3%; vertical-align: middle;}
+      }
+    }
+    .online_group{width: 100%;
+      label{vertical-align: top; font-weight: 500; padding: 3% 0 3% 3%; }
+      input{ margin: 5% 0 0 5%;}
+    }
+  }
+
+  .friends-content{width: 100%;
+    ul{width: 100%; float: left; padding: 2% 0 0 2%; border: 1px solid @box_border; border-radius: 2px; margin-top: 2%; background-color: @box_bg; margin-bottom: 7%; list-style: none;
+      li{ background-color: fade(@friends_activeBg, 7%); border: 1px solid @box_border; margin: 0 2% 2% 0; width: 48%; float: left; }
+      .content_box{
+        table{width: 100%; tr, td{  vertical-align: middle;}
+          .img_block{width: 25%;
+            img{width: 100%; padding: 5% 5%;}
+          }
+          .info_block{ height: 100%; width: 35%; vertical-align: text-top; padding-left: 2%; padding-top: 2%;
+            a{display: block; font-size: 16px;
+              &.title{font-size: 20px;
+                &:hover{text-decoration: none;}
+              }
+            }
+            span{display: block;
+              &.town{position: relative; bottom: 5px; color: @search_font_info; }
+              &.work{position: relative; bottom: 7px; color: @search_font_info; }
+            }
+          }
+          .add_button{text-align: center; vertical-align: middle; width: 40%;
+            input{width: 90%; margin: 1% 5%;}
+            a{color: @font_value;}
+          }
+          .mutual_friends{
+            .span{color: #000000;}
+          }
+          .gallery_block{width: 13%; vertical-align: middle;
+            .small_gallery{ width: 100%;
+              img{width: 50%; float: left; padding: 3%;}
+            }
+          }
+          .gallery_link{text-align: center;}
+        }
+      }
+    }
+  }
+}
+
+/*--- (media) Responsive style -----------------------*/
+
+@media (max-width: 990px){
+  section.friends .main-content ul li { width: 98%; }
+}
+
+@media (max-width: 620px) {
+  .custom-col-filter{width: 70%; margin-left: 15%; margin-right: 15%; }
+  .custom-col-results{width: 100%; margin-top: 5%;}
+}
+
+@media (max-width: 480px){
+  .custom-col-filter{width: 80%; margin-left: 10%; margin-right: 10%; }
+  .custom-col-results{width: 100%;}
+
+}
+
+@media (max-width: 340px){
+  .custom-col-filter{width: 100%; margin-left: 0; margin-right: 0; }
+  .custom-col-results{width: 100%;}
+
+  section.friends .main-content ul .content_box table .add_button input { margin: 1% 0; width: 95%; }
+
+}
+
+/*--- END (media) Responsive style -----------------------*/
