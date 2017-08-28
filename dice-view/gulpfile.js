@@ -73,11 +73,11 @@ gulp.task('clear', function () {
     return cache.clearAll();
 });
 
-gulp.task('watch', ['build-ts' , 'build-img', 'css-min' ] ,function () {
+gulp.task('watch', ['build-html','build-ts' , 'build-img', 'css-min' ] ,function () {
     gulp.watch(appDev + '**/*.ts', ['build-ts']);
     gulp.watch(assetsDev + 'img/*', ['build-img']);
     gulp.watch(appDev + '**/*.html', ['build-html'], browserSync.reload);
-    gulp.watch(assetsDev + 'less/**/*.less', ['css-min']);
+    gulp.watch(assetsDev + 'less/**/*.less', ['build-less']);
 });
 
 gulp.task('default', ['watch']);

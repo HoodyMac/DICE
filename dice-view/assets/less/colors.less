@@ -4,9 +4,11 @@
 @font_value: #000000;
 @box_border: #d4d4d4;
 
-// navigation
-@navBar_bg: #8A25E9;
+// main color
+@navBar_bg:   #124CE9;  //#8A25E9;
 @navBar_font: #ffffff;
+
+// navigation
 @navBar_bgButton: #FFFFFF;
 @navBar_fontButton: #000000;
 
@@ -16,13 +18,16 @@
 @navBar_borderButton: @navBar_bg - #222222;
 @navBar_bgHoverButton: @navBar_bgButton - #111111;
 
-// user information
+// profile page
 
 @userInfo_fontLabel: @font_label;
 @userInfo_fontValue: @font_value;
 @userInfo_border: @box_border;
 
 @userInfo_fontLabelHover: @userInfo_fontLabel + #222222;
+@profile_buttonBg: fade(@navBar_bg, 90%);
+@profile_buttonFont: @navBar_font;
+@profile_buttonHover: @profile_buttonBg - #111111;
 
 // forum box
 @forum_font_author: #ed143d;
@@ -37,4 +42,13 @@
 @search_border: @navBar_border;
 @search_font_info: @font_label - #222222;
 @search_fontHover_info: @font_value;
+
+//friends page
+@friends_activeBg: fade(@navBar_bg, 80%);
+@friends_activeFont: @navBar_font;
+
+// edit page
+@edit_buttonBg: fade(@navBar_bg, 90%);
+@edit_buttonFont: @navBar_font;
+@edit_buttonHover: @edit_buttonBg - #111111;
 

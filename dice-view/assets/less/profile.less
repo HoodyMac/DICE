@@ -1,52 +1,52 @@
 @import "colors";
 
-section.user_info{height: 700px;
+section.user_info{padding-bottom: 50px;
     .profile_image{border: 1px solid @userInfo_border; border-radius: 2px; background-color: @box_bg;
         .img{ border-radius: 2px;
             img{width: 100%; height: auto; padding: 5% 5% 5% 5%;}
         }
         .change_photo{text-align: center; width: 100%; height: 43px;
-            button{ background-color: @navBar_bg; border-radius: 2px; color: @navBar_font; width: 90%;
-                &:hover{background-color: @navBar_bgHover; color: @navBar_fontHover; text-decoration: none;}
+            button{ background-color: @profile_buttonBg; border-radius: 2px;  border: none; color: @profile_buttonFont; width: 90%;
+                &:hover{background-color: @profile_buttonHover; text-decoration: none;}
             }
             .modal{ z-index: 900; display: none; position: fixed; width: 100%; height: 100%; left: 0; top: 0; background: rgb(0,0,0);
-                    background: rgba(0,0,0,.8); overflow: auto;
+                background: rgba(0,0,0,.8); overflow: auto;
 
                 .modal-box { z-index: 900; position: relative; max-width: 900px; margin: 10% auto; animation-name: modalbox;
-                            animation-duration: .3s; animation-timing-function: ease-out;
-                    .modal-header { padding: 10px 20px; background: @navBar_bg; color: #ffffff;
-                        p{font-size: 24px; margin: 0;}
-                        .close-modal { float: right; cursor: pointer; width: 5px;
+                    animation-duration: .3s; animation-timing-function: ease-out;
+                    .modal-header { padding: 0 20px; background: @navBar_bg; color: #ffffff;
+                        p{font-size: 20px; padding: 1% 0; margin: 0;}
+                        .close-modal { float: right; cursor: pointer; width: 5px; position: relative; top: 10px;
                         }
                     }
                     .modal-body { background: #ECEFF1; padding: 20px 40px;
                         .jcrop-holder{margin: 0 auto;}
                         form{text-align: center;
-                            input{margin-top: 3%; background-color: @navBar_bgButton; color: @navBar_fontButton;
-                                &:hover{background-color: @navBar_bgHoverButton;}
+                            input{margin-top: 3%; background-color: @profile_buttonBg; border: none; color: @profile_buttonFont;
+                                &:hover{background-color: @profile_buttonHover;}
                             }
                             input[type=file]{ display: inline; position: absolute; top: 0; right: 0; min-width: 100%; min-height: 100%; text-align: right; filter: alpha(opacity=0);
-                                    opacity: 0; outline: none; cursor: inherit; }
-                            .btn-file{ position: relative; overflow: hidden; height: 34px; width: 15%; color: @navBar_fontButton; border-radius: 5px; background: @navBar_bgButton;
+                                opacity: 0; outline: none; cursor: inherit; }
+                            .btn-file{ position: relative; overflow: hidden; height: 33px; width: 15%; background-color: @profile_buttonBg; border: none; color: @profile_buttonFont;
                                 line-height: 20px; margin-top: 3%;
-                                &:hover{background-color: @navBar_bgHoverButton;}
+                                &:hover{background-color: @profile_buttonHover;}
                             }
                         }
                     }
                 }
-               }
             }
-            @-webkit-keyframes modalbox {
-                0% { top: -250px; opacity: 0; }
-                100% { top: 0; opacity: 1; }
-            }
-            @keyframes modalbox {
-                0% { top: -250px; opacity: 0; }
-                100% { top: 0; opacity: 1; }
-            }
-
         }
-    .forum_box{width: 100%; border: 1px solid @userInfo_border; margin-top: 7%; background-color: @box_bg; margin-bottom: 7%;
+        @-webkit-keyframes modalbox {
+            0% { top: -250px; opacity: 0; }
+            100% { top: 0; opacity: 1; }
+        }
+        @keyframes modalbox {
+            0% { top: -250px; opacity: 0; }
+            100% { top: 0; opacity: 1; }
+        }
+
+    }
+    .forum_box{width: 100%; border: 1px solid @userInfo_border; border-radius: 2px; margin-top: 7%; background-color: @box_bg; margin-bottom: 7%;
         ul{list-style: none; padding: 0; margin: 0;}
         .forums{
             li{padding: 2%;}
@@ -56,8 +56,8 @@ section.user_info{height: 700px;
                 .forum_post{
                     table{width: 100%;
                         a {
-                            img{padding-right: 15%; width: 100%;}
-                          }
+                            img{padding-right: 15%; width: 100%; vertical-align: text-top;}
+                        }
                         .title_block{
                             a{color: @forum_font_title; text-decoration: none;
                                 &:hover{text-decoration: none; color: @forum_font_title_hover;}
@@ -98,7 +98,7 @@ section.user_info{height: 700px;
             }
         }
     }
-    .counts_module{ border: 1px solid; margin-top: 2%; border-color: @userInfo_border; display: inline-flex; width: 100%; background-color: @box_bg;
+    .counts_module{ border: 1px solid; border-radius: 2px; margin-top: 2%; border-color: @userInfo_border; display: inline-flex; width: 100%; background-color: @box_bg;
         .page_count{ padding: 1% 2% 1% 2%; text-align: center; display: grid; border-right: 1px solid @userInfo_border; width: 20%;
             &:last-child{border: none;}
             a{color: @userInfo_fontValue; font-size: 16px; text-decoration: none;
@@ -112,27 +112,9 @@ section.user_info{height: 700px;
     }
 }
 
-footer { height: 50px; background-color: #fff; border-top: 1px solid #888888; color: #000000;
-    .settings, .languages{
-        .list-gr { display: inline; padding: 10px 15px; }
-        ul{ padding: 15px 0 5px 0;
-            li{
-                a{color: #888888;
-                    &:hover{color: #000000; text-decoration: none;}
-                }
-            }
-        }
-    }
-    .copyright{
-        p{ padding: 15px 5px 5px 15px;}
-    }
-}
-
 /*--- (media) Responsive style -----------------------*/
 
 @media (max-width: 1272px){
-    header{height: 102px;}
-
     section.user_info{
         .profile_image{
             .change_photo{
@@ -145,7 +127,6 @@ footer { height: 50px; background-color: #fff; border-top: 1px solid #888888; co
 }
 
 @media (max-width: 768px){
-    header{height: 52px;}
     .navbar-collapse{
         ul, a{text-align: center;}
         .form-group{width: 75%;  float: left; margin-right: 2%;}
