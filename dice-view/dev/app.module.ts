@@ -12,11 +12,15 @@ import {SearchComponent} from "./search/search.component";
 import {NavbarComponent} from "./navbar/navbar.component";
 import {FooterComponent} from "./footer/footer.component";
 import {NavbarService} from "./common/services/navbar.service";
+import {FriendsComponent} from "./friends/friends.component";
+import {EditComponent} from "./edit/edit.component";
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'search', component: SearchComponent },
+  { path: 'friends', component: FriendsComponent },
+  { path: 'edit', component: EditComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full'}
 ];
 
@@ -33,6 +37,8 @@ const appRoutes: Routes = [
     AppComponent,
     HomeComponent,
     ProfileComponent,
+    FriendsComponent,
+    EditComponent,
     SearchComponent,
     NavbarComponent,
     FooterComponent

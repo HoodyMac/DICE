@@ -1,0 +1,177 @@
+@import "colors";
+
+section.edit{ padding-bottom: 2%;
+  .edit-header{ width: 100%; border: 1px solid @box_border; background-color: @box_bg; border-radius: 2px;
+    .menu{display: inline-block; padding: 1% 2% 1% 2%;
+      img{display: inline-block; }
+      a{padding: 5px 10px; display: inline-block; color: #000000; text-decoration: none;
+        &.username{padding: 5px 8px;}
+        &:hover{color: @search_border;}
+        &.nav-general_settings{display: none;}
+      }
+    }
+  }
+
+  .edit-menu{ background-color: @box_bg; border:1px solid @box_border; border-radius: 2px; width: 100%;
+    .menu{
+      ul{
+        li{
+          &.active{
+            a{background-color: @friends_activeBg; color: @friends_activeFont; border-radius: 0;}
+          }
+
+        }
+      }
+    }
+  }
+
+  .edit-content{ width: 100%; margin-top: 2%; background-color: @box_bg; border:1px solid @box_border; border-radius: 2px;
+    form.basic_info_form{ padding: 2%; width: 100%; text-align: center;
+      .edit-form{width: 100%; margin: 1% 0;
+        &:last-child{width: 50%; padding-left: 35%;
+          button{ width: 100%; background-color: @edit_buttonBg; border: none; color: @edit_buttonFont;
+            &:hover{background-color: @edit_buttonHover;}
+          }
+        }
+        #edit_prg_lang{width: 50%; padding-top: 2%;}
+        #edit_prg_lang_chosen{border: none;
+          input{ padding: 4% 0 0 3%; }
+          .chosen-choices{border: 1px solid #ccc; border-radius: 4px; height: 34px; position: relative; right: 2px;
+            .search-choice{ margin: 6px 5px 3px 0;}
+          }
+          .chosen-drop{
+            .active-result, .result-selected{text-align: left;}
+          }
+        }
+        input{ width: 50%; display: inline-block;}
+        select{width: 50%; height: 34px; border: 1px solid #ccc; border-radius: 4px; padding: 4px 10px; position: relative; right: 2px;}
+        label{width: 20%; text-align: left;}
+      }
+
+    }
+
+    .general_settings_form{ display: none; padding: 3%; text-align: center;
+      .block{ width: 80%; display: inline-flex;
+        .settings_label{width: 35%; padding-left: 20%; text-align: left; }
+        .settings_value{width: 35%;
+          input{ width: 100%; background-color: #fff; border: 1px solid #ddd; padding-left: 5%; margin-bottom: 4%;}
+        }
+        .modal_change{ width: 20%; text-align: left; font-size: 13px; padding-left: 3%;}
+        &:last-child{ padding-left: 38%; width: 65%;
+          button{width: 40%; background-color: @edit_buttonBg; border: none; color: @edit_buttonFont;
+            &:hover{background-color: @edit_buttonHover;}
+          }
+        }
+      }
+
+    }
+
+    .modal{ z-index: 900; display: none; position: fixed; width: 100%; height: 100%; left: 0; top: 0; background: rgb(0,0,0);
+      background: rgba(0,0,0,.8); overflow: auto;
+
+      .modal-box { z-index: 900; position: relative;  max-width: 50%; margin: 10% auto; animation-name: modalbox;
+        animation-duration: .3s; animation-timing-function: ease-out;
+        .modal-header { padding: 0 20px; background: @navBar_bg; color: #ffffff;
+          p{ font-size: 18px; padding: 1%; margin: 0;}
+          .close-modal { float: right; position: relative; cursor: pointer; width: 4px; top: 7px;
+          }
+        }
+        .modal-body { background: #ECEFF1; padding: 0;
+          .jcrop-holder{margin: 0 auto;}
+          form{
+            .form-group{ padding: 0 22% ; display: inline-flex; width: 100%;
+              input{width: 57%;}
+              label{width: 40%; position: relative; top: 7px;}
+              button{ width: 25%; margin: 2% 2%; background-color: @edit_buttonBg; border: none; color: @edit_buttonFont;
+                &:hover{background-color: @edit_buttonHover;}
+              }
+              &:last-child{ border-top: 1px solid; text-align: center; display: block;}
+            }
+          }
+          .info{ width: 100%; padding: 1% 5% 3% 5%; font-size: 12px;}
+        }
+      }
+    }
+
+  }
+}
+
+/*--- (media) Responsive style -----------------------*/
+
+@media (max-width: 1272px){
+
+}
+
+@media (max-width: 990px){
+  section.edit{
+    .edit-content{
+      .general_settings_form{
+        .block{
+          .settings_label{width: 25%; padding-left: 0; text-align: left; }
+          .settings_value{width: 55%; }
+          &:last-child{padding-left: 57%; width: 100%;}
+        }
+      }
+      .modal{
+        .modal-box { margin: 15% auto;
+          .modal-body {
+            form {
+              .form-group{padding: 0 5%;
+                input{width: 50%;}
+                label{width: 50%; }
+                button{ width: 25%; margin: 2% 2%;
+                }
+              }
+            }
+          }
+        }
+      }
+
+    }
+  }
+}
+@media (max-width: 768px){
+  section.edit{
+    .edit-content{
+      form.basic_info_form{
+        .edit-form{
+          label{width: 30%;}
+          &:last-child{padding-left: 40%; width: 60%;}
+        }
+      }
+    }
+  }
+  section.edit .edit-content .modal .modal-box{ max-width: 70%;}
+}
+
+@media (max-width: 620px) {
+  .custom-col-menu{width: 100%;}
+  .custom-col-edit-panel{width: 100%; margin-top: 2%;}
+
+  section.edit .edit-content .modal .modal-box{ max-width: 90%;}
+}
+
+@media (max-width: 480px){
+  .custom-col-menu{width: 100%; }
+  .custom-col-edit-panel{width: 100%;}
+}
+
+@media (max-width: 340px){
+  .custom-col-menu{width: 100%;}
+  .custom-col-edit-panel{width: 100%;}
+
+  section.edit .edit-content form.basic_info_form .edit-form {
+    &:last-child{ padding-left: 35%;}
+    input { width: 60%; }
+    select{ width: 60%; }
+  }
+  section.edit .edit-content .modal .modal-box{ margin: 20% auto;
+    .modal-body form .form-group { padding: 0 5%;
+      label{ display: none;}
+      input{ width: 100%;}
+    }
+  }
+
+}
+
+/*--- END (media) Responsive style -----------------------*/

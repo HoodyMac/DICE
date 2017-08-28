@@ -1,0 +1,122 @@
+<section class="edit">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-4 col-xs-5 custom-col-menu">
+                <div class="edit-menu">
+                    <div class="menu" >
+                        <ul id="nav-edit" class="nav nav-pills nav-stacked">
+                            <li class="active"><a href="#" class="basic_info">Basic info</a></li>
+                            <li><a href="#" class="general_settings">General</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9 col-sm-8 col-xs-7 custom-col-edit-panel">
+                <div class="edit-header">
+                    <div class="menu" id="">
+                        <div>
+                            <a href="#" class="active username">UserName</a>
+                            <img src="/app/img/arrow.png" alt="">
+                            <a href="#" class="nav-basic_info">Basic info</a>
+                            <a href="#" class="nav-general_settings">General</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="edit-content">
+                    <form class="basic_info_form" action="" method="POST">
+                        <div class="edit-form">
+                            <label for="edit_name">Name</label><input type="text" id="edit_name" class="form-control" placeholder="Name">
+                        </div>
+                        <div class="edit-form">
+                            <label for="edit_name">Surname</label><input type="text" id="edit_surname" class="form-control" placeholder="Surname">
+                        </div>
+                        <div class="edit-form">
+                            <label for="edit_sex">Sex</label>
+                            <select name="edit_sex" id="edit_sex">
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                        </div>
+                        <div class="edit-form">
+                            <label for="edit_birthday">Birthday</label><input type="date" id="edit_birthday" class="form-control" placeholder="Birthday (mm/dd/yyyy)">
+                        </div>
+                        <div class="edit-form">
+                            <label for="edit_name">City</label><input type="text" id="edit_city" class="form-control" placeholder="City">
+                        </div>
+                        <div class="edit-form">
+                            <label for="edit_name">Education</label><input type="text" id="edit_education" class="form-control" placeholder="Education">
+                        </div>
+                        <div class="edit-form">
+                            <label for="edit_name">Work</label><input type="text" id="edit_work" class="form-control" placeholder="Work">
+                        </div>
+                        <div class="edit-form"><label for="edit_prg_lang">Programing languages</label>
+                            <select name="edit_prg_lang" id="edit_prg_lang"  data-placeholder="Choose your languages" class="chosen-select" multiple tabindex="5" size="5">
+                                <option value="java">Java</option>
+                                <option value="php">PHP</option>
+                                <option value="java" >Java</option>
+                            </select>
+                        </div>
+                        <div class="edit-form">
+                            <button type="submit" class="btn btn-default button">Save</button>
+                        </div>
+
+                    </form>
+
+                    <div class="general_settings_form">
+                        <div class="block">
+                            <div class="settings_label">
+                                <label class="password_label">Password</label>
+                            </div>
+                            <div class="settings_value">
+                                <input type="password" id="edit_password" name="edit_password" value="example" disabled="disabled">
+                            </div>
+                            <a href=""  class="modal_change modal-trigger" data-modal="modal-edit-password">Change</a>
+                        </div>
+                        <div class="block">
+                            <div class="settings_label">
+                                <label class="email_label">Email</label>
+                            </div>
+                            <div class="settings_value">
+                                <input type="email" id="edit_email" name="edit_email" value="example@gmail.com">
+                            </div>
+                        </div>
+                        <div class="block">
+                            <button type="submit" class="btn btn-default button">Save</button>
+                        </div>
+                    </div>
+                    <!--#####-Modal window for general settings-######-->
+                    <div class="modal" id="modal-edit-password">
+                        <div class="modal-box">
+                            <div class="modal-header">
+                                <div class="close-modal">&#10006;</div>
+                                <p>Change password</p>
+                            </div>
+                            <div class="modal-body">
+                                <div class="info">You can use any combination of Latin letters, numbers and special symbols ! @ # $ % ^ & * ( ) _ - +. Your password should not be shorter than 6 characters.</div>
+                                <form action="" method="POST">
+                                    <div class="form-group">
+                                        <label for="current_pass">Current password</label>
+                                        <input type="password" class="form-control" id="current_pass" name="current_pass" placeholder="Current password">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="new_pass">New password</label>
+                                        <input type="password" class="form-control" id="new_pass" name="new_pass" placeholder="New password">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="confirm_pass">Confirm password</label>
+                                        <input type="password" class="form-control" id="confirm_pass" name="confirm_pass" placeholder="Confirm password">
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="reset" class="btn btn-default close-modal button">Cancel</button>
+                                        <button type="submit" class="btn btn-default button">Save</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!--#### End modal window #### -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
