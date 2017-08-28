@@ -1,6 +1,6 @@
 {
   "name": "dice-view",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "scripts": {
     "lite": "lite-server -c bs-config.js",
     "gulp": "gulp",
@@ -44,7 +44,7 @@
     "gulp-imagemin": "^2.4.0",
     "gulp-postcss": "^6.0.1",
     "gulp-sourcemaps": "^1.6.0",
-    "gulp-typescript": "^2.10.0",
+    "gulp-typescript": "3.2.2",
     "gulp-uglify": "^1.5.1",
     "http-proxy-middleware": "^0.17.4",
     "lite-server": "^2.1.0"
