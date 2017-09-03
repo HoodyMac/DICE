@@ -33,14 +33,22 @@ gulp.task('build-less', function () {
     .pipe(gulp.dest(assetsProd + 'css/'))
     .pipe(browserSync.stream());
 });
+gulp.task('build-less-in-dev', function () {
+    return gulp.src(appDev + '**/*.less')
+        .pipe(less({
+            paths: [ path.join(__dirname, 'less', 'includes') ]
+        }))
+        .pipe(gulp.dest(assetsProd))
+        .pipe(browserSync.stream());
+});
 
-gulp.task('css-min', ['build-less'], function() {
+gulp.task('css-min', ['build-less', 'build-less-in-dev'], function () {
     return gulp.src([
-        appProd + 'css/*.css'
+        appProd + '**/*.css'
     ])
         .pipe(cssnano())
         .pipe(rename({suffix: '.min'}))
-        .pipe(gulp.dest(appProd + 'css'));
+        .pipe(gulp.dest(appProd));
 });
 
 gulp.task('build-ts', function () {
@@ -78,6 +86,7 @@ gulp.task('watch', ['build-html','build-ts' , 'build-img', 'css-min' ] ,function
     gulp.watch(assetsDev + 'img/*', ['build-img']);
     gulp.watch(appDev + '**/*.html', ['build-html'], browserSync.reload);
     gulp.watch(assetsDev + 'less/**/*.less', ['build-less']);
+    gulp.watch(appDev + '**/*.less', ['build-less-in-dev']);
 });
 
 gulp.task('default', ['watch']);
