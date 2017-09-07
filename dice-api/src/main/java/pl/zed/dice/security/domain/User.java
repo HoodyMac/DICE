@@ -37,6 +37,14 @@ public class User {
     )
     private List<Authority> authorities;
 
+    @OneToOne
+    private UserProfile profile;
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
     public Long getId() {
         return id;
     }
@@ -83,5 +91,13 @@ public class User {
 
     public void setAuthorities(List<Authority> authorities) {
         this.authorities = authorities;
+    }
+
+    public UserProfile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(UserProfile profile) {
+        this.profile = profile;
     }
 }

@@ -1,7 +1,6 @@
-package pl.zed.dice.user;
+package pl.zed.dice.security.domain;
 
 import org.springframework.format.annotation.DateTimeFormat;
-import pl.zed.dice.security.domain.User;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -35,15 +34,12 @@ public class UserProfile {
     private String street;
 
     private String interests;
-    
-    @OneToOne
-    private User user;
-    
+
     public UserProfile(){
 
     }
 
-    public UserProfile(String firstName, String lastName, Gender gender, Date birthDate, String phoneNumber, String city, String street, String interests, User user) {
+    public UserProfile(String firstName, String lastName, Gender gender, Date birthDate, String phoneNumber, String city, String street, String interests) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
@@ -52,7 +48,13 @@ public class UserProfile {
         this.city = city;
         this.street = street;
         this.interests = interests;
-        this.user = user;
+    }
+
+    public UserProfile(String firstName, String lastName, Gender gender, Date birthDate) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.birthDate = birthDate;
     }
 
     public Long getId() {
@@ -125,13 +127,5 @@ public class UserProfile {
 
     public void setInterests(String interests) {
         this.interests = interests;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 }
