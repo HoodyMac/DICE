@@ -2,12 +2,105 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3 col-sm-4 col-xs-5 custom-col-image">
-                <profile_image></profile_image>
-                <forum_box></forum_box>
+                <div class="profile_image">
+                    <div class="img" >
+                        <!-- <a href="#"><img src="{{profileImgSrc.cropImgSrc}}" alt=""></a> -->
+                        <a href="#"><img src="{{userInfo[0].cropImgSrc}}" alt=""></a>   <!-- crop image -->
+                    </div>
+                    <div class="change_photo">
+                        <button type="button"  (click)="toggle('modal-change-photo')" class="modal-trigger btn btn-default" data-modal="modal-change-photo">Change photo</button><!-- Trigger Modal. -->
+                        <!-- Modal window -->
+                        <div class="modal" id="modal-change-photo">
+                            <div  class="modal-box">
+                                <div class="modal-header">
+                                    <div (click)="toggle('modal-change-photo')" class="close-modal">&#10006;</div>
+                                    <p>{{modalWindowTitle}}</p>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- This is the image we're attaching Jcrop to -->
+
+                                    <img src="{{userInfo[0].originalImgSrc}}" #cropImgSrc id="cropbox" style=""/>  <!-- original image -->
+
+                                    <!-- This is the form that our event handler fills -->
+                                    <form action="" method="post" (submit)="checkCoords()" onsubmit="return checkCoords();">
+                                        <input type="hidden" #x id="x" name="x" />
+                                        <input type="hidden" #y id="y" name="y" />
+                                        <input type="hidden" #w id="w" name="w" />
+                                        <input type="hidden" #h id="h" name="h" />
+                                        <input (click)="cropImageAndSave(cropImgSrc.src, x.value, y.value, w.value, h.value)" type="submit" value="Crop and Save" class="btn btn-default " />
+                                        <!-- Important!!  Upload image size (width <= 800, height: auto) -->
+                                        <span class="btn btn-default btn-file">Upload image<input type="file" value="Upload image" class="btn btn-large btn-inverse"/></span>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="forum_box">
+                    <ul class="forums">
+                        <li class="header"><p>Last activity</p></li>
+                        <li class="forum_posts">
+                            <ul>
+                                <li class="forum_post">
+                                    <table>
+                                        <tr>
+                                            <td rowspan="2" class="img_block"><a href="#" class="img"><img src="app/img/Ivan_Loichuk_bg.jpg" alt=""></a></td>
+                                            <td colspan="2" class="title_block"><a href="#"><span>How to fix this</span></a></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="author_block"><a href="#" ><span>Ivan,</span></a></td>
+                                            <td class="views_block"><span class="views_label"><img
+                                                    src="app/img/views-icon.png" alt="Views"></span> <span class="views_value">2,455</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3" class="date_block"><span>Sunday, 4 July</span></td>
+                                        </tr>
+                                    </table>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
             </div>
             <div class="col-md-9 col-sm-8 col-xs-7 custom-col-info">
-                <user_info></user_info>
-                <counts_module></counts_module>
+                <div class="page_info">
+                    <div class="page_top">
+                        <p class="userName">{{userInfo[0].username}}</p>
+                        <p class="isOnline">{{userInfo[0].isOnline ? 'online' : 'offline'}}</p>
+                    </div>
+                    <div class="separator"></div>
+                    <div class="profile_info">
+                        <div class="profile_info_row">
+                            <div class="label_info">{{userLabel.cityLabel}}:</div>
+                            <div class="value">{{userInfo[0].city}}</div>
+                            <div class="edit_user_info">
+                                <a href="edit" id="link_edit_icon" title="Edit profile"><img src="/app/img/edit_icon_gray.png" id="edit_icon" alt="Edit profile" title="Edit profile"></a>
+                            </div>
+                        </div>
+                        <div class="profile_info_row">
+                            <div class="label_info">{{userLabel.educationLabel}}:</div>
+                            <div class="value">{{userInfo[0].education}}</div>
+                        </div>
+                        <div class="profile_info_row">
+                            <div class="label_info">{{userLabel.workLabel}}:</div>
+                            <div class="value">{{userInfo[0].work}}</div>
+                        </div>
+                        <div class="profile_info_row">
+                            <div class="label_info">{{userLabel.ageLabel}}:</div>
+                            <div class="value">{{userInfo[0].age}}</div>
+                        </div>
+                        <div class="profile_info_row">
+                            <div class="label_info">{{userLabel.prgLangLabel}}:</div>
+                            <div class="value">{{userInfo[0].prgLanguages}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="counts_module" *ngIf="countModules">
+                    <div class="page_count" *ngFor="let module of countModules">
+                        <a href="#"><span class="label_module">{{module.label}}</span></a>
+                        <span class="value_module">{{module.value}}</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -14,10 +14,8 @@ import {FooterComponent} from "./footer/footer.component";
 import {NavbarService} from "./common/services/navbar.service";
 import {FriendsComponent} from "./friends/friends.component";
 import {EditComponent} from "./edit/edit.component";
-import {ForumBoxComponent} from "./profile/forum_box/forum_box.component";
-import {CountModuleComponent} from "./profile/count_modules/count_modules.component";
-import {UserInfoComponent} from "./profile/user_info/user_info.component";
-import {ProfileImageComponent} from "./profile/profile_image/profile_image.component";
+
+
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -41,11 +39,6 @@ const appRoutes: Routes = [
     AppComponent,
     HomeComponent,
     ProfileComponent,
-      //profile module
-      ForumBoxComponent,
-      CountModuleComponent,
-      UserInfoComponent,
-      ProfileImageComponent,
     FriendsComponent,
     EditComponent,
     SearchComponent,
