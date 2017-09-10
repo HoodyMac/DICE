@@ -61,7 +61,7 @@
     <div class="row">
       <div class="col-md-4  col-sm-6 col-xs-12 reset_padding">
         <div class="form">
-          <form class="signup" novalidate [formGroup]="form" password-matcher>                <!-- signup form -->
+          <form class="signup" novalidate [formGroup]="form" password-matcher #f="ngForm" (ngSubmit)="onSignUp(f.value)">                <!-- signup form -->
             <span><h2>Sign Up</h2></span>
 
             <div class="signup_form">
@@ -69,7 +69,6 @@
               <div class="errors" *ngIf="form.get('firstname').touched">
                 <p *ngIf="form.get('firstname').errors != null ? form.get('firstname').errors.required :  false ">You must enter a firstname</p>
                 <p *ngIf="form.get('firstname').errors != null ? form.get('firstname').errors.maxlength :  false " >Long firstname</p>
-
               </div>
 
             </div>

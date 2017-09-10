@@ -5,6 +5,7 @@ import {HttpModule} from "@angular/http";
 import {AppComponent} from "./app.component";
 import {HttpClient} from "./common/services/http-client.service";
 import {AuthenticationService} from "./common/services/authentication.service";
+import {RegistrationService} from "./common/services/registration.service";
 import {RouterModule, Routes} from "@angular/router";
 import {ProfileComponent} from "./profile/profile.component";
 import {HomeComponent, PasswordMatcher} from "./home/home.component";
@@ -47,7 +48,7 @@ const appRoutes: Routes = [
     FooterComponent,
     PasswordMatcher
   ],
-  providers: [HttpClient, AuthenticationService, NavbarService],
+  providers: [HttpClient, AuthenticationService, NavbarService, RegistrationService],
   bootstrap: [AppComponent]
 
 })

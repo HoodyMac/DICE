@@ -1,7 +1,7 @@
 import {Component, Directive} from '@angular/core';
 import {AuthenticationService} from "../common/services/authentication.service";
 import {NavbarService} from "../common/services/navbar.service";
-import {HomeService} from "../services/home.service";
+import {RegistrationService} from "../common/services/registration.service";
 import {
   NG_VALIDATORS, AbstractControl, Validators, FormGroup, FormControl, FormBuilder,} from "@angular/forms";
 
@@ -22,8 +22,7 @@ export class PasswordMatcher{
 @Component({
   selector: 'reactive-forms-comp',
   templateUrl: 'dev/home/home.component.html',
-  styleUrls: ['../app/css/home.css'],
-  providers: [HomeService]
+  styleUrls: ['../app/css/home.css']
 })
 
 export class HomeComponent {
@@ -31,9 +30,10 @@ export class HomeComponent {
 
   constructor(
     private _authenticationService: AuthenticationService,
+    private registrationService: RegistrationService,
     private _nav: NavbarService,
-    private fb:FormBuilder) {
 
+    private fb:FormBuilder) {
       this.form = this.fb.group({
         firstname: ['', Validators.compose([ Validators.required, Validators.maxLength(60)])],
         lastname: ['',Validators.compose([ Validators.required, Validators.maxLength(60)])],
@@ -51,6 +51,11 @@ export class HomeComponent {
 
   onSignIn(credentials) {
     this._authenticationService.doLogin(credentials);
+  }
+
+  onSignUp(credentials){
+    console.log(credentials);
+    this.registrationService.doSignUp(credentials);
   }
 }
 
