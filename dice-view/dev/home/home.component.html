@@ -61,35 +61,60 @@
     <div class="row">
       <div class="col-md-4  col-sm-6 col-xs-12 reset_padding">
         <div class="form">
-          <form class="signup">                    <!-- signup form -->
+          <form class="signup" novalidate [formGroup]="form" password-matcher>                <!-- signup form -->
             <span><h2>Sign Up</h2></span>
 
             <div class="signup_form">
-              <input type="text" class="form-control" id="name" placeholder="Name">
+              <input type="text" class="form-control" formControlName="firstname" name="firstname" id="firstname" placeholder="Name">
+              <div class="errors" *ngIf="form.get('firstname').touched">
+                <p *ngIf="form.get('firstname').errors != null ? form.get('firstname').errors.required :  false ">You must enter a firstname</p>
+                <p *ngIf="form.get('firstname').errors != null ? form.get('firstname').errors.maxlength :  false " >Long firstname</p>
+
+              </div>
+
             </div>
             <div class="signup_form">
-              <input type="text" class="form-control" id="surname" placeholder="Surname">
+              <input type="text" class="form-control" formControlName="lastname" id="lastname" placeholder="Surname">
+              <div class="errors" *ngIf="form.get('lastname').touched">
+                <p *ngIf="form.get('lastname').errors != null ? form.get('lastname').errors.required :  false ">You must enter a lastname</p>
+                <p *ngIf="form.get('lastname').errors != null ? form.get('lastname').errors.maxlength :  false " >Long lastname</p>
+              </div>
             </div>
             <div class="sex">
               <label for="male"> Male
-                <input type="radio" name="sex" id="male" value="Male"></label>
+                <input type="radio"  formControlName="gender"  id="male" value="Male"></label>
               <label for="female">Female
-                <input type="radio" name="sex" id="female" value="Female"></label>
+                <input type="radio" formControlName="gender" id="female" value="Female"></label>
+              <div class="errors" *ngIf="form.get('gender').touched">
+                <p *ngIf="form.get('gender').invalid">You must select a gender</p>
+              </div>
             </div>
             <div class="birthday signup_form">
-              <input type="date" name="age" id="age" placeholder="Birthday">
+              <input type="date"  formControlName="birthdayDate"  id="birthdayDate" placeholder="Birthday">
+              <div class="errors" *ngIf="form.get('birthdayDate').touched">
+                <p *ngIf="form.get('birthdayDate').invalid">You must enter a birthdayDate</p>
+              </div>
             </div>
             <div class="signup_form">
-              <input type="email" class="form-control" id="email" placeholder="Email">
+              <input type="email" class="form-control" formControlName="email"  id="email" placeholder="Email" pattern = "^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+              <div class="errors" *ngIf="form.get('email').touched" >
+                <p *ngIf="form.get('email').errors != null ? form.get('email').errors.required :  false " >You must enter an email address</p>
+                <p *ngIf="form.get('email').errors != null ? form.get('email').errors.pattern :  false " >Your email address is invalid. Please enter a valid address</p>
+              </div>
             </div>
             <div class="signup_form">
-              <input type="password" class="form-control" id="pwd" placeholder="Password">
+              <input type="password" class="form-control" formControlName="password"  id="password" placeholder="Password">
+              <div class="errors" *ngIf="form.get('password').touched">
+                <p *ngIf="form.get('password').invalid">You must enter a password</p>
+              </div>
             </div>
             <div class="signup_form">
-              <input type="password" class="form-control" id="verify_pwd" placeholder="Verify your password">
+              <input type="password" class="form-control" formControlName="confirmPassword" id="confirmPassword" placeholder="Verify your password">
+              <div class="errors" *ngIf="form.get('confirmPassword').touched">
+                <p *ngIf="form.get('confirmPassword').invalid || form.errors != null">Confirm password don't match</p>
+              </div>
             </div>
-
-            <button type="submit" class="btn btn-default btn-signin button">SIGN UP</button>
+            <button type="submit" class="btn btn-default btn-signin button" [disabled]="!form.valid">SIGN UP</button>
           </form>
         </div>
 

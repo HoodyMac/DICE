@@ -1,13 +1,13 @@
 import {NgModule} from "@angular/core";
 import {BrowserModule} from "@angular/platform-browser";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
 import {AppComponent} from "./app.component";
 import {HttpClient} from "./common/services/http-client.service";
 import {AuthenticationService} from "./common/services/authentication.service";
 import {RouterModule, Routes} from "@angular/router";
 import {ProfileComponent} from "./profile/profile.component";
-import {HomeComponent} from "./home/home.component";
+import {HomeComponent, PasswordMatcher} from "./home/home.component";
 import {SearchComponent} from "./search/search.component";
 import {NavbarComponent} from "./navbar/navbar.component";
 import {FooterComponent} from "./footer/footer.component";
@@ -30,6 +30,7 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     RouterModule.forRoot(
       appRoutes
@@ -43,7 +44,8 @@ const appRoutes: Routes = [
     EditComponent,
     SearchComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    PasswordMatcher
   ],
   providers: [HttpClient, AuthenticationService, NavbarService],
   bootstrap: [AppComponent]
