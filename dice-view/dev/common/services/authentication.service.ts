@@ -8,9 +8,13 @@ export class AuthenticationService {
 
   doLogin(credentials: any): void {
     this._http.post('/auth', credentials)
-      .map(res => res.json())
+      .map(res => {
+        console.log(res);
+        return res.json();
+      })
       .subscribe(
         data => {
+          console.log(data);
           if(data) {
             localStorage.setItem('token', data.token)
           }
