@@ -1,8 +1,9 @@
 package pl.zed.dice.asm;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import pl.zed.dice.security.domain.Gender;
-import pl.zed.dice.security.domain.User;
+import pl.zed.dice.security.domain.UserAccount;
 import pl.zed.dice.security.domain.UserProfile;
 import pl.zed.dice.security.model.UserDTO;
 
@@ -14,8 +15,8 @@ import java.util.Date;
 @Component
 public class UserAsm {
 
-    public User convertDtoToUser(UserDTO userDTO){
-        return new User(userDTO.getUsername(), userDTO.getPassword());
+    public UserAccount convertDtoToUserAccount(UserDTO userDTO){
+        return new UserAccount(userDTO.getEmail(), new BCryptPasswordEncoder().encode(userDTO.getPassword()), true, new Date());
     }
 
     public UserProfile convertDtoToUserProfile(UserDTO userDTO) throws ParseException {

@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-public class User {
+public class UserAccount {
 
     @Id
     @GeneratedValue
@@ -40,9 +40,14 @@ public class User {
     @OneToOne
     private UserProfile profile;
 
-    public User(String username, String password) {
+    public UserAccount() {
+    }
+
+    public UserAccount(String username, String password, Boolean enabled, Date lastPasswordResetDate) {
         this.username = username;
         this.password = password;
+        this.enabled = enabled;
+        this.lastPasswordResetDate = lastPasswordResetDate;
     }
 
     public Long getId() {

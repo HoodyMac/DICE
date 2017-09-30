@@ -26,19 +26,11 @@ public class UserRestController {
     @Autowired
     private UserDetailsService userDetailsService;
 
-    @Autowired
-    private UserService userService;
-
     @GetMapping("/user")
     public JwtUser getAuthenticatedUser(HttpServletRequest request) {
         String token = request.getHeader(tokenHeader);
         String username = jwtTokenUtil.getUsernameFromToken(token);
         return (JwtUser) userDetailsService.loadUserByUsername(username);
-    }
-
-    @PostMapping("/save")
-    public void save(@RequestBody UserDTO userDTO) throws ParseException {
-        userService.save(userDTO);
     }
 
 }

@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import pl.zed.dice.security.JwtUserFactory;
-import pl.zed.dice.security.domain.User;
+import pl.zed.dice.security.domain.UserAccount;
 import pl.zed.dice.security.repository.UserRepository;
 
 @Service
@@ -17,12 +17,12 @@ public class JwtUserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username);
+        UserAccount userAccount = userRepository.findByUsername(username);
 
-        if(user == null) {
-            throw new UsernameNotFoundException(String.format("No user found with username: '%s'.", username));
+        if(userAccount == null) {
+            throw new UsernameNotFoundException(String.format("No userAccount found with username: '%s'.", username));
         } else {
-            return JwtUserFactory.create(user);
+            return JwtUserFactory.create(userAccount);
         }
     }
 }

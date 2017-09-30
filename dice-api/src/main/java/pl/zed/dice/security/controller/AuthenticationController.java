@@ -13,9 +13,12 @@ import org.springframework.web.bind.annotation.*;
 import pl.zed.dice.security.JwtAuthenticationRequest;
 import pl.zed.dice.security.JwtTokenUtil;
 import pl.zed.dice.security.JwtUser;
+import pl.zed.dice.security.model.UserDTO;
 import pl.zed.dice.security.service.JwtAuthenticationResponse;
+import pl.zed.dice.security.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.ParseException;
 
 @RestController
 public class AuthenticationController {
@@ -31,6 +34,9 @@ public class AuthenticationController {
 
     @Autowired
     private UserDetailsService userDetailsService;
+
+    @Autowired
+    private UserService userService;
 
     @PostMapping("/auth")
     public ResponseEntity createAuthenticationToken(@RequestBody JwtAuthenticationRequest jwtAuthenticationRequest) {
@@ -61,5 +67,10 @@ public class AuthenticationController {
         } else {
             return ResponseEntity.badRequest().body(null);
         }
+    }
+
+    @PostMapping("/save")
+    public void save(@RequestBody UserDTO userDTO) throws ParseException {
+        userService.save(userDTO);
     }
 }

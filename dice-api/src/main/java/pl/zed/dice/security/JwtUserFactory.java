@@ -3,7 +3,7 @@ package pl.zed.dice.security;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import pl.zed.dice.security.domain.Authority;
-import pl.zed.dice.security.domain.User;
+import pl.zed.dice.security.domain.UserAccount;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,7 +13,7 @@ public class JwtUserFactory {
     private JwtUserFactory() {
     }
 
-    public static JwtUser create(User user) {
+    public static JwtUser create(UserAccount user) {
         return new JwtUser(
                 user.getId(),
                 user.getUsername(),

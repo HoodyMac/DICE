@@ -56,7 +56,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
                 // allow authentication requests
-                .antMatchers("/auth/**").permitAll()
+                .antMatchers("/auth/**", "/save/**").permitAll()
                 .anyRequest().authenticated();
 
         // add custom JWT base security filter
