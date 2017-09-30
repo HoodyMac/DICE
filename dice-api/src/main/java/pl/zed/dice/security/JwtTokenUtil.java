@@ -24,7 +24,7 @@ public class JwtTokenUtil {
         try {
             final Claims claims = getClaimsFromToken(token);
             return claims.getSubject();
-        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
             return null;
         }
     }
@@ -48,10 +48,16 @@ public class JwtTokenUtil {
     }
 
     private Claims getClaimsFromToken(String token) throws IllegalArgumentException {
-        return Jwts.parser()
-                .setSigningKey(secret)
-                .parseClaimsJws(token)
-                .getBody();
+        Claims claims;
+        try {
+            claims = Jwts.parser()
+                    .setSigningKey(secret)
+                    .parseClaimsJws(token)
+                    .getBody();
+        } catch (Exception e) {
+            claims = null;
+        }
+        return claims;
     }
 
     private Boolean isTokenExpired(String token) {
