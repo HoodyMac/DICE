@@ -4,6 +4,7 @@ import {NavbarService} from "../common/services/navbar.service";
 import {RegistrationService} from "../common/services/registration.service";
 import {
   NG_VALIDATORS, AbstractControl, Validators, FormGroup, FormControl, FormBuilder,} from "@angular/forms";
+import {Router} from "@angular/router";
 
 function passwordMatcher(c: AbstractControl){
   if(!c.get('password') || !c.get('confirmPassword')) return null;
@@ -32,7 +33,7 @@ export class HomeComponent {
     private _authenticationService: AuthenticationService,
     private registrationService: RegistrationService,
     private _nav: NavbarService,
-
+    private _route: Router,
     private fb:FormBuilder) {
       this.form = this.fb.group({
         firstname: ['', Validators.compose([ Validators.required, Validators.maxLength(60)])],
@@ -50,7 +51,10 @@ export class HomeComponent {
   }
 
   onSignIn(credentials) {
-    this._authenticationService.doLogin(credentials);
+    this._authenticationService.doLogin(credentials).subscribe(
+      data => this._route.navigate(['profile']),
+      err => console.log('error')
+    );
   }
 
   onSignUp(credentials){

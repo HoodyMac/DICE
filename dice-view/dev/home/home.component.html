@@ -37,7 +37,7 @@
             <h2>Log in</h2>
             <h4>Please complete the form.</h4>
           </div>
-          <form #f="ngForm" (ngSubmit)="onSignIn(f.value)">
+          <form #formSignIn="ngForm" (ngSubmit)="onSignIn(formSignIn.value)">
             <div class="signin_form">
               <input type="text" class="form-control" placeholder="Username"
                      name="username"
