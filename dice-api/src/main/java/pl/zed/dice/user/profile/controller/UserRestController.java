@@ -1,17 +1,13 @@
-package pl.zed.dice.security.controller;
+package pl.zed.dice.user.profile.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 import pl.zed.dice.security.JwtTokenUtil;
 import pl.zed.dice.security.JwtUser;
-import pl.zed.dice.security.model.UserDTO;
-import pl.zed.dice.security.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
-import java.text.ParseException;
 
 @RestController
 @RequestMapping("/api")

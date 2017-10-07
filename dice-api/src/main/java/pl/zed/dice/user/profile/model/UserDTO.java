@@ -1,4 +1,4 @@
-package pl.zed.dice.security.model;
+package pl.zed.dice.user.profile.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 

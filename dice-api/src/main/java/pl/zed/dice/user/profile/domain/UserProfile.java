@@ -1,4 +1,4 @@
-package pl.zed.dice.security.domain;
+package pl.zed.dice.user.profile.domain;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
