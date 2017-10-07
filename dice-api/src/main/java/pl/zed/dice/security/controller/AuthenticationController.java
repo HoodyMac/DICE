@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.zed.dice.security.JwtAuthenticationRequest;
 import pl.zed.dice.security.JwtTokenUtil;
 import pl.zed.dice.security.JwtUser;
-import pl.zed.dice.security.model.UserDTO;
+import pl.zed.dice.user.profile.model.UserDTO;
 import pl.zed.dice.security.service.JwtAuthenticationResponse;
 import pl.zed.dice.security.service.UserService;
 
@@ -67,5 +67,10 @@ public class AuthenticationController {
         } else {
             return ResponseEntity.badRequest().body(null);
         }
+    }
+
+    @PostMapping("/auth/create")
+    public void save(@RequestBody UserDTO userDTO) throws ParseException {
+        userService.save(userDTO);
     }
 }
