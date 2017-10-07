@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/api")
-public class UserRestController {
+public class UserProfileController {
 
     @Value("Authorization")
     private String tokenHeader;
