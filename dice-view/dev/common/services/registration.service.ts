@@ -7,7 +7,7 @@ export class RegistrationService{
     constructor(private _http: HttpClient) {}
     
       doSignUp(credentials: any): void {
-        this._http.post('/api/user/save', credentials)
+        this._http.post('/save', credentials)
           .map(res => res.json())
           .subscribe(
             data => {

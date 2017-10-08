@@ -31,4 +31,9 @@ public class UserService {
         userAccount.setProfile(userProfile);
         userRepository.save(userAccount);
     }
+
+    public UserDTO getUserProfile(Long id){
+        UserProfile userProfile = userProfileRepository.findById(id).get();
+        return userAsm.getUserProfileDto(userProfile);
+    }
 }

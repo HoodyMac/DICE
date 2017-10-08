@@ -5,7 +5,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
@@ -17,44 +16,48 @@ public class UserProfile {
     private Long id;
 
     @Size(min = 2, max = 128)
-    private String firstName;
+    private String firstname;
 
     @Size(min = 2, max = 128)
-    private String lastName;
+    private String lastname;
 
     private Gender gender;
 
     @DateTimeFormat
-    private Date birthDate;
+    private Date birthdayDate;
 
     private String phoneNumber;
 
     private String city;
 
-    private String street;
+    private String origImage;
 
-    private String interests;
+    private String cropImage;
+
+    private String programmingLanguages;
+
 
     public UserProfile(){
 
     }
 
-    public UserProfile(String firstName, String lastName, Gender gender, Date birthDate, String phoneNumber, String city, String street, String interests) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public UserProfile(String firstname, String lastname, Gender gender, Date birthdayDate, String phoneNumber, String city, String origImage, String cropImage, String programmingLanguages) {
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.gender = gender;
-        this.birthDate = birthDate;
+        this.birthdayDate = birthdayDate;
         this.phoneNumber = phoneNumber;
         this.city = city;
-        this.street = street;
-        this.interests = interests;
+        this.origImage = origImage;
+        this.cropImage = cropImage;
+        this.programmingLanguages = programmingLanguages;
     }
 
-    public UserProfile(String firstName, String lastName, Gender gender, Date birthDate) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public UserProfile(String firstname, String lastname, Gender gender, Date birthdayDate) {
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.gender = gender;
-        this.birthDate = birthDate;
+        this.birthdayDate = birthdayDate;
     }
 
     public Long getId() {
@@ -65,20 +68,20 @@ public class UserProfile {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public Gender getGender() {
@@ -89,12 +92,12 @@ public class UserProfile {
         this.gender = gender;
     }
 
-    public Date getBirthDate() {
-        return birthDate;
+    public Date getBirthdayDate() {
+        return birthdayDate;
     }
 
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
+    public void setBirthdayDate(Date birthdayDate) {
+        this.birthdayDate = birthdayDate;
     }
 
     public String getPhoneNumber() {
@@ -113,19 +116,27 @@ public class UserProfile {
         this.city = city;
     }
 
-    public String getStreet() {
-        return street;
+    public String getOrigImage() {
+        return origImage;
     }
 
-    public void setStreet(String street) {
-        this.street = street;
+    public void setOrigImage(String origImage) {
+        this.origImage = origImage;
     }
 
-    public String getInterests() {
-        return interests;
+    public String getCropImage() {
+        return cropImage;
     }
 
-    public void setInterests(String interests) {
-        this.interests = interests;
+    public void setCropImage(String cropImage) {
+        this.cropImage = cropImage;
+    }
+
+    public String getProgrammingLanguages() {
+        return programmingLanguages;
+    }
+
+    public void setProgrammingLanguages(String programmingLanguages) {
+        this.programmingLanguages = programmingLanguages;
     }
 }

@@ -21,10 +21,16 @@ public class UserAsm {
 
     public UserProfile convertDtoToUserProfile(UserDTO userDTO) throws ParseException {
         DateFormat format = new SimpleDateFormat("MMMM d, yyyy");
-        Date date = format.parse(userDTO.getDate());
+        Date date = format.parse(userDTO.getBirthdayDate());
 
-        return new UserProfile(userDTO.getFirstName(), userDTO.getLastName(),
+        return new UserProfile(userDTO.getFirstname(), userDTO.getLastname(),
                 userDTO.getGender().equalsIgnoreCase("Female")? Gender.FEMALE : Gender.MALE, date);
     }
 
+    public UserDTO getUserProfileDto(UserProfile userProfile){
+        return new UserDTO(userProfile.getFirstname(), userProfile.getLastname(),
+                userProfile.getGender().toString(), userProfile.getOrigImage(), userProfile.getCropImage(),
+                userProfile.getBirthdayDate().toString(), userProfile.getPhoneNumber(),
+                userProfile.getCity(), userProfile.getProgrammingLanguages());
+    }
 }

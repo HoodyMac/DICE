@@ -68,9 +68,4 @@ public class AuthenticationController {
             return ResponseEntity.badRequest().body(null);
         }
     }
-
-    @PostMapping("/save")
-    public void save(@RequestBody UserDTO userDTO) throws ParseException {
-        userService.save(userDTO);
-    }
 }

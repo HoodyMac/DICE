@@ -1,23 +1,62 @@
 package pl.zed.dice.security.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserDTO {
 
+    private Long userId;
     private String email;
     private String password;
-    private String firstName;
-    private String lastName;
+    private String firstname;
+    private String lastname;
     private String gender;
-    private String date;
+    private String origImage;
+    private String cropImage;
+    private String birthdayDate;
+    private String phoneNumber;
+    private String city;
+    private String programmingLanguages;
 
     public UserDTO(){}
 
-    public UserDTO(String email, String password, String firstName, String lastName, String gender, String date) {
+    //for registration
+    public UserDTO(String email, String password, String firstname, String lastname, String gender, String birthdayDate){
         this.email = email;
         this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.gender = gender;
-        this.date = date;
+        this.birthdayDate = birthdayDate;
+    }
+
+    public UserDTO(String firstname, String lastname, String gender, String origImage,
+                   String cropImage, String birthdayDate, String phoneNumber, String city, String programmingLanguages){
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.gender = gender;
+        this.origImage = origImage;
+        this.cropImage = cropImage;
+        this.birthdayDate = birthdayDate;
+        this.phoneNumber = phoneNumber;
+        this.city = city;
+        this.programmingLanguages = programmingLanguages;
+    }
+
+    //for editing
+    public UserDTO(String email, String password, String firstname, String lastname, String gender, String origImage,
+                   String cropImage, String birthdayDate, String phoneNumber, String city, String programmingLanguages) {
+        this.email = email;
+        this.password = password;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.gender = gender;
+        this.origImage = origImage;
+        this.cropImage = cropImage;
+        this.birthdayDate = birthdayDate;
+        this.phoneNumber = phoneNumber;
+        this.city = city;
+        this.programmingLanguages = programmingLanguages;
     }
 
     public String getEmail() {
@@ -36,20 +75,20 @@ public class UserDTO {
         this.password = password;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getGender() {
@@ -60,11 +99,59 @@ public class UserDTO {
         this.gender = gender;
     }
 
-    public String getDate() {
-        return date;
+    public String getBirthdayDate() {
+        return birthdayDate;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setBirthdayDate(String birthdayDate) {
+        this.birthdayDate = birthdayDate;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public String getOrigImage() {
+        return origImage;
+    }
+
+    public void setOrigImage(String origImage) {
+        this.origImage = origImage;
+    }
+
+    public String getCropImage() {
+        return cropImage;
+    }
+
+    public void setCropImage(String cropImage) {
+        this.cropImage = cropImage;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getProgrammingLanguages() {
+        return programmingLanguages;
+    }
+
+    public void setProgrammingLanguages(String programmingLanguages) {
+        this.programmingLanguages = programmingLanguages;
     }
 }

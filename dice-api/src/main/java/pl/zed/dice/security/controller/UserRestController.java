@@ -26,6 +26,9 @@ public class UserRestController {
     @Autowired
     private UserDetailsService userDetailsService;
 
+    @Autowired
+    private UserService userService;
+
     @GetMapping("/user")
     public JwtUser getAuthenticatedUser(HttpServletRequest request) {
         String token = request.getHeader(tokenHeader);
@@ -33,4 +36,8 @@ public class UserRestController {
         return (JwtUser) userDetailsService.loadUserByUsername(username);
     }
 
+    @PostMapping("/user/save")
+    public void save(@RequestBody UserDTO userDTO) throws ParseException {
+        userService.save(userDTO);
+    }
 }
