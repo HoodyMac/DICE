@@ -35,8 +35,7 @@ public class AuthenticationController {
     @Autowired
     private UserDetailsService userDetailsService;
 
-    @Autowired
-    private UserService userService;
+
 
     @PostMapping("/auth")
     public ResponseEntity createAuthenticationToken(@RequestBody JwtAuthenticationRequest jwtAuthenticationRequest) {
@@ -67,10 +66,5 @@ public class AuthenticationController {
         } else {
             return ResponseEntity.badRequest().body(null);
         }
-    }
-
-    @PostMapping("/auth/create")
-    public void save(@RequestBody UserDTO userDTO) throws ParseException {
-        userService.save(userDTO);
     }
 }

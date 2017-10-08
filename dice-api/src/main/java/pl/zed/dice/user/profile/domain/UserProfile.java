@@ -1,7 +1,7 @@
 package pl.zed.dice.user.profile.domain;
 
 import org.springframework.format.annotation.DateTimeFormat;
-import pl.zed.dice.security.model.UserDTO;
+import pl.zed.dice.user.profile.model.UserDTO;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,7 +11,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 
 @Entity
 public class UserProfile {
