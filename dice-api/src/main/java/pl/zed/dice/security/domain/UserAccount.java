@@ -1,5 +1,7 @@
 package pl.zed.dice.security.domain;
 
+import pl.zed.dice.user.profile.domain.UserProfile;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
