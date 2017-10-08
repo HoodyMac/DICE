@@ -5,7 +5,7 @@
                 <div class="profile_image">
                     <div class="img" >
                         <!-- <a href="#"><img src="{{profileImgSrc.cropImgSrc}}" alt=""></a> -->
-                        <a href="#"><img src="{{userInfo[0].cropImgSrc}}" alt=""></a>   <!-- crop image -->
+                        <a href="#"><img src="{{userInfo.cropImgSrc}}" alt=""></a>   <!-- crop image -->
                     </div>
                     <div class="change_photo">
                         <button type="button"  (click)="toggle('modal-change-photo')" class="modal-trigger btn btn-default" data-modal="modal-change-photo">Change photo</button><!-- Trigger Modal. -->
@@ -19,7 +19,7 @@
                                 <div class="modal-body">
                                     <!-- This is the image we're attaching Jcrop to -->
 
-                                    <img src="{{userInfo[0].originalImgSrc}}" #cropImgSrc id="cropbox" style=""/>  <!-- original image -->
+                                    <img src="{{userInfo.originalImgSrc}}" #cropImgSrc id="cropbox" style=""/>  <!-- original image -->
 
                                     <!-- This is the form that our event handler fills -->
                                     <form action="" method="post" (submit)="checkCoords()" onsubmit="return checkCoords();">
@@ -65,33 +65,33 @@
             <div class="col-md-9 col-sm-8 col-xs-7 custom-col-info">
                 <div class="page_info">
                     <div class="page_top">
-                        <p class="userName">{{userInfo[0].username}}</p>
-                        <p class="isOnline">{{userInfo[0].isOnline ? 'online' : 'offline'}}</p>
+                        <p class="userName">{{userInfo.username}}</p>
+                        <p class="isOnline">{{userInfo.isOnline ? 'online' : 'offline'}}</p>
                     </div>
                     <div class="separator"></div>
                     <div class="profile_info">
                         <div class="profile_info_row">
-                            <div class="label_info">{{userLabel.cityLabel}}:</div>
-                            <div class="value">{{userInfo[0].city}}</div>
+                            <div class="label_info">City:</div>
+                            <div class="value">{{userInfo.city}}</div>
                             <div class="edit_user_info">
                                 <a href="edit" id="link_edit_icon" title="Edit profile"><img src="/app/img/edit_icon_gray.png" id="edit_icon" alt="Edit profile" title="Edit profile"></a>
                             </div>
                         </div>
                         <div class="profile_info_row">
-                            <div class="label_info">{{userLabel.educationLabel}}:</div>
-                            <div class="value">{{userInfo[0].education}}</div>
+                            <div class="label_info">Education:</div>
+                            <div class="value">{{userInfo.education}}</div>
                         </div>
                         <div class="profile_info_row">
-                            <div class="label_info">{{userLabel.workLabel}}:</div>
-                            <div class="value">{{userInfo[0].work}}</div>
+                            <div class="label_info">Work:</div>
+                            <div class="value">{{userInfo.work}}</div>
                         </div>
                         <div class="profile_info_row">
-                            <div class="label_info">{{userLabel.ageLabel}}:</div>
-                            <div class="value">{{userInfo[0].age}}</div>
+                            <div class="label_info">Age:</div>
+                            <div class="value">{{userInfo.age}}</div>
                         </div>
                         <div class="profile_info_row">
-                            <div class="label_info">{{userLabel.prgLangLabel}}:</div>
-                            <div class="value">{{userInfo[0].prgLanguages}}</div>
+                            <div class="label_info">Programming languages:</div>
+                            <div class="value">{{userInfo.prgLanguages}}</div>
                         </div>
                     </div>
                 </div>
