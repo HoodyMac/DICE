@@ -19,7 +19,7 @@
                                 <div class="modal-body">
                                     <!-- This is the image we're attaching Jcrop to -->
 
-                                    <img src="{{userInfo[0].originalImgSrc}}" #cropImgSrc id="cropbox" style=""/>  <!-- original image -->
+                                    <img src="{{userInfo[0].originalImgSrc}}" #cropImgSrc #cropbox id="cropbox" style=""/>  <!-- original image -->
 
                                     <!-- This is the form that our event handler fills -->
                                     <form action="" method="post" (submit)="checkCoords()" onsubmit="return checkCoords();">
@@ -74,7 +74,7 @@
                             <div class="label_info">{{userLabel.cityLabel}}:</div>
                             <div class="value">{{userInfo[0].city}}</div>
                             <div class="edit_user_info">
-                                <a href="edit" id="link_edit_icon" title="Edit profile"><img src="/app/img/edit_icon_gray.png" id="edit_icon" alt="Edit profile" title="Edit profile"></a>
+                                <a href="edit" id="link_edit_icon" title="Edit profile"><img [src]="editImgSrc" (mouseover)="onMouseOver()" (mouseout)="onMouseOut()" id="edit_icon" alt="Edit profile" title="Edit profile"></a>
                             </div>
                         </div>
                         <div class="profile_info_row">

@@ -3,8 +3,9 @@ import {AuthenticationService} from "../common/services/authentication.service";
 import {NavbarService} from "../common/services/navbar.service";
 import {RegistrationService} from "../common/services/registration.service";
 import {
-  NG_VALIDATORS, AbstractControl, Validators, FormGroup, FormControl, FormBuilder,} from "@angular/forms";
+  NG_VALIDATORS, AbstractControl, Validators, FormGroup, FormBuilder,} from "@angular/forms";
 import {Router} from "@angular/router";
+
 
 function passwordMatcher(c: AbstractControl){
   if(!c.get('password') || !c.get('confirmPassword')) return null;

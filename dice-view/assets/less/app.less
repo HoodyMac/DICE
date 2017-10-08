@@ -1,3 +1,4 @@
+@import "colors";
 html{
   height: 100%;
 }
@@ -12,3 +13,19 @@ body{
   margin: 0;
 }
 hr{width: 100%; margin: 0; padding: 0;}
+
+/* style for 'Edit page' added because it should be executed after executing the script */
+section.edit .edit-content form.basic_info_form .edit-form{
+  #edit_prg_lang { width: 50%; padding-top: 2%; }
+  #edit_prg_lang_chosen {border: none;
+    input { padding: 4% 0 0 3%;}
+    .chosen-choices { border: 1px solid #ccc; border-radius: 4px; height: 34px; position: relative; right: 2px;
+      .search-choice { margin: 6px 5px 3px 0; }}
+    .chosen-drop{
+      .active-result, .result-selected{text-align: left;}
+    }
+  }
+}
+section.user_info .profile_image .change_photo .modal .modal-box .modal-body .jcrop-holder {
+  margin: 0 auto;
+}

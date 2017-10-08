@@ -79,7 +79,7 @@
                 <p *ngIf="form.get('lastname').errors != null ? form.get('lastname').errors.maxlength :  false " >Long lastname</p>
               </div>
             </div>
-            <div class="sex">
+            <div class="gender">
               <label for="male"> Male
                 <input type="radio"  formControlName="gender"  id="male" value="Male"></label>
               <label for="female">Female
@@ -89,7 +89,7 @@
               </div>
             </div>
             <div class="birthday signup_form">
-              <input type="date"  formControlName="birthdayDate"  id="birthdayDate" placeholder="Birthday">
+              <input type="date"  formControlName="birthdayDate" id="birthdayDate" placeholder="Birthday">
               <div class="errors" *ngIf="form.get('birthdayDate').touched">
                 <p *ngIf="form.get('birthdayDate').invalid">You must enter a birthdayDate</p>
               </div>
@@ -151,7 +151,6 @@
               Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
               when an unknown printer took a galle</p>
           </div>
-
         </div>
       </div>
     </div> <!--  End row -->

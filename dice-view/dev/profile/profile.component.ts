@@ -1,6 +1,7 @@
-import {Component} from '@angular/core';
+import {Component, AfterViewInit, ElementRef, ViewChild} from '@angular/core';
 import {ProfileService} from "../services/profile.service";
 let clicked = true;
+declare var jQuery: any;
 
 @Component({
   templateUrl: 'dev/profile/profile.component.html',
@@ -8,12 +9,19 @@ let clicked = true;
   providers: [ProfileService]
 })
 
-export class ProfileComponent {
+export class ProfileComponent implements AfterViewInit{
   userInfo: any; //userInfo[];
   countModules: any; //count_module[];
   userLabel: Object;
   modalWindowTitle: string;
   croppedImgSrc: Object;
+  editImgSrc: string = "/app/img/edit_icon_gray.png";
+  @ViewChild('cropbox') cropbox: ElementRef;
+  @ViewChild('x') x: ElementRef;
+  @ViewChild('y') y: ElementRef;
+  @ViewChild('w') w: ElementRef;
+  @ViewChild('h') h: ElementRef;
+
 
   constructor(private profileService: ProfileService) {
     this.profileService.getUserInfo("server_url").subscribe(value => {
@@ -65,6 +73,34 @@ export class ProfileComponent {
 
   };
 
+
+  ngAfterViewInit() {
+    if( jQuery(this.cropbox.nativeElement).length > 0){
+      jQuery(this.cropbox.nativeElement).Jcrop({
+        aspectRatio: 1,
+        onSelect: updateCoords
+      });
+    }
+
+    function updateCoords(c)
+    {
+      jQuery(this.x).val(c.x);
+      jQuery(this.y).val(c.y);
+      jQuery(this.w).val(c.w);
+      jQuery(this.h).val(c.h);
+    };
+  }
+
+  // change image src for edit icon
+  onMouseOver(): void {
+    this.editImgSrc = "/app/img/edit_icon_black.png";
+  }
+
+  onMouseOut(): void {
+    this.editImgSrc = "/app/img/edit_icon_gray.png";
+  }
+
+
   cropImageAndSave(imgSrc, x , y, w, h){
     let imgCropData = {
       "imgSrc" : imgSrc,
@@ -90,8 +126,6 @@ export class ProfileComponent {
       clicked = true;
     }
   }
-
-
 }
 
 interface userInfo{

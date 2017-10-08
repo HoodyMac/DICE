@@ -3,11 +3,12 @@
 section.edit{ padding-bottom: 2%;
   .edit-header{ width: 100%; border: 1px solid @box_border; background-color: @box_bg; border-radius: 2px;
     .menu{display: inline-block; padding: 1% 2% 1% 2%;
+      .nav_show{display: inline-block;}
+      .nav_hide{display: none;}
       img{display: inline-block; }
       a{padding: 5px 10px; display: inline-block; color: #000000; text-decoration: none;
         &.username{padding: 5px 8px;}
         &:hover{color: @search_border;}
-        &.nav-general_settings{display: none;}
       }
     }
   }
@@ -15,11 +16,9 @@ section.edit{ padding-bottom: 2%;
   .edit-menu{ background-color: @box_bg; border:1px solid @box_border; border-radius: 2px; width: 100%;
     .menu{
       ul{
-        li{
-          &.active{
-            a{background-color: @friends_activeBg; color: @friends_activeFont; border-radius: 0;}
-          }
-
+        li{ padding: 10px; cursor: pointer;
+          &:hover{ background-color: @edit_navHoverBg;}
+          &.active{ background-color: @friends_activeBg; color: @friends_activeFont; border-radius: 0; }
         }
       }
     }
@@ -31,16 +30,6 @@ section.edit{ padding-bottom: 2%;
         &:last-child{width: 50%; padding-left: 35%;
           button{ width: 100%; background-color: @edit_buttonBg; border: none; color: @edit_buttonFont;
             &:hover{background-color: @edit_buttonHover;}
-          }
-        }
-        #edit_prg_lang{width: 50%; padding-top: 2%;}
-        #edit_prg_lang_chosen{border: none;
-          input{ padding: 4% 0 0 3%; }
-          .chosen-choices{border: 1px solid #ccc; border-radius: 4px; height: 34px; position: relative; right: 2px;
-            .search-choice{ margin: 6px 5px 3px 0;}
-          }
-          .chosen-drop{
-            .active-result, .result-selected{text-align: left;}
           }
         }
         input{ width: 50%; display: inline-block;}
