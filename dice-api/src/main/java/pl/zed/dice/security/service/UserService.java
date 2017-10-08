@@ -36,4 +36,11 @@ public class UserService {
         UserProfile userProfile = userProfileRepository.findById(id).get();
         return userAsm.getUserProfileDto(userProfile);
     }
+
+    public UserDTO editUserProfile(Long id, UserDTO userDTO) throws ParseException {
+        UserProfile userProfile = userProfileRepository.findById(id).get();
+        userProfile.edit(userDTO);
+        userProfileRepository.save(userProfile);
+        return userAsm.getUserProfileDto(userProfile);
+    }
 }

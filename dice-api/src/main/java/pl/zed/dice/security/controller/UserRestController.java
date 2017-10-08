@@ -40,4 +40,14 @@ public class UserRestController {
     public void save(@RequestBody UserDTO userDTO) throws ParseException {
         userService.save(userDTO);
     }
+
+    @GetMapping("/user/{id}")
+    public UserDTO getProfile(@PathVariable Long id){
+        return userService.getUserProfile(id);
+    }
+
+    @PutMapping("/profile/{id}")
+    public UserDTO editProfile(@PathVariable Long id, @RequestBody UserDTO userDTO) throws ParseException {
+        return userService.editUserProfile(id, userDTO);
+    }
 }

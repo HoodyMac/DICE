@@ -1,12 +1,17 @@
 package pl.zed.dice.security.domain;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import pl.zed.dice.security.model.UserDTO;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.Size;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 @Entity
 public class UserProfile {
@@ -36,12 +41,17 @@ public class UserProfile {
 
     private String programmingLanguages;
 
+    private String work;
+
+    private String education;
+
+    private Boolean isOnline;
 
     public UserProfile(){
 
     }
 
-    public UserProfile(String firstname, String lastname, Gender gender, Date birthdayDate, String phoneNumber, String city, String origImage, String cropImage, String programmingLanguages) {
+    public UserProfile(String firstname, String lastname, Gender gender, Date birthdayDate, String phoneNumber, String city, String origImage, String cropImage, String programmingLanguages, String work, String education) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.gender = gender;
@@ -51,6 +61,8 @@ public class UserProfile {
         this.origImage = origImage;
         this.cropImage = cropImage;
         this.programmingLanguages = programmingLanguages;
+        this.work = work;
+        this.education = education;
     }
 
     public UserProfile(String firstname, String lastname, Gender gender, Date birthdayDate) {
@@ -138,5 +150,41 @@ public class UserProfile {
 
     public void setProgrammingLanguages(String programmingLanguages) {
         this.programmingLanguages = programmingLanguages;
+    }
+
+    public String getWork() {
+        return work;
+    }
+
+    public void setWork(String work) {
+        this.work = work;
+    }
+
+    public Boolean getOnline() {
+        return isOnline;
+    }
+
+    public void setOnline(Boolean online) {
+        isOnline = online;
+    }
+
+    public String getEducation() {
+        return education;
+    }
+
+    public void setEducation(String education) {
+        this.education = education;
+    }
+
+    public void edit(UserDTO userDTO) throws ParseException {
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = format.parse(userDTO.getBirthdayDate());
+        this.firstname = userDTO.getFirstname();
+        this.lastname = userDTO.getLastname();
+        this.gender = userDTO.getGender().equalsIgnoreCase("female") ? Gender.FEMALE : Gender.MALE;
+        this.birthdayDate = date;
+        this.city = userDTO.getCity();
+        this.education = userDTO.getEducation();
+        this.work = userDTO.getWork();
     }
 }

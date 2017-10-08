@@ -58,7 +58,6 @@ export class HomeComponent {
   }
 
   onSignUp(credentials){
-    console.log(credentials);
     this.registrationService.doSignUp(credentials);
   }
 }

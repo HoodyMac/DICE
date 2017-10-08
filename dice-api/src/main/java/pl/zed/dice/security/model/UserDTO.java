@@ -17,6 +17,9 @@ public class UserDTO {
     private String phoneNumber;
     private String city;
     private String programmingLanguages;
+    private String work;
+    private String education;
+    private Boolean isOnline;
 
     public UserDTO(){}
 
@@ -44,10 +47,7 @@ public class UserDTO {
     }
 
     //for editing
-    public UserDTO(String email, String password, String firstname, String lastname, String gender, String origImage,
-                   String cropImage, String birthdayDate, String phoneNumber, String city, String programmingLanguages) {
-        this.email = email;
-        this.password = password;
+    public UserDTO(String firstname, String lastname, String gender, String origImage, String cropImage, String birthdayDate, String phoneNumber, String city, String programmingLanguages, String work, String education) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.gender = gender;
@@ -57,6 +57,8 @@ public class UserDTO {
         this.phoneNumber = phoneNumber;
         this.city = city;
         this.programmingLanguages = programmingLanguages;
+        this.work = work;
+        this.education = education;
     }
 
     public String getEmail() {
@@ -153,5 +155,29 @@ public class UserDTO {
 
     public void setProgrammingLanguages(String programmingLanguages) {
         this.programmingLanguages = programmingLanguages;
+    }
+
+    public String getWork() {
+        return work;
+    }
+
+    public void setWork(String work) {
+        this.work = work;
+    }
+
+    public Boolean getOnline() {
+        return isOnline;
+    }
+
+    public void setOnline(Boolean online) {
+        isOnline = online;
+    }
+
+    public String getEducation() {
+        return education;
+    }
+
+    public void setEducation(String education) {
+        this.education = education;
     }
 }

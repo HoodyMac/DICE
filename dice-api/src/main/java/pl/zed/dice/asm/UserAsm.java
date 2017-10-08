@@ -11,6 +11,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 @Component
 public class UserAsm {
@@ -20,7 +21,7 @@ public class UserAsm {
     }
 
     public UserProfile convertDtoToUserProfile(UserDTO userDTO) throws ParseException {
-        DateFormat format = new SimpleDateFormat("MMMM d, yyyy");
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date date = format.parse(userDTO.getBirthdayDate());
 
         return new UserProfile(userDTO.getFirstname(), userDTO.getLastname(),
@@ -31,6 +32,8 @@ public class UserAsm {
         return new UserDTO(userProfile.getFirstname(), userProfile.getLastname(),
                 userProfile.getGender().toString(), userProfile.getOrigImage(), userProfile.getCropImage(),
                 userProfile.getBirthdayDate().toString(), userProfile.getPhoneNumber(),
-                userProfile.getCity(), userProfile.getProgrammingLanguages());
+                userProfile.getCity(), userProfile.getProgrammingLanguages(), userProfile.getWork(),
+                userProfile.getEducation());
     }
+
 }
