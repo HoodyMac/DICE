@@ -6,8 +6,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 import pl.zed.dice.security.JwtTokenUtil;
 import pl.zed.dice.security.JwtUser;
+import pl.zed.dice.security.service.UserService;
+import pl.zed.dice.user.profile.model.UserDTO;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.ParseException;
 
 @RestController
 @RequestMapping("/api")
@@ -22,13 +25,15 @@ public class UserProfileController {
     @Autowired
     private UserDetailsService userDetailsService;
 
+    @Autowired
+    private UserService userService;
+
     @GetMapping("/user")
     public JwtUser getAuthenticatedUser(HttpServletRequest request) {
         String token = request.getHeader(tokenHeader);
         String username = jwtTokenUtil.getUsernameFromToken(token);
         return (JwtUser) userDetailsService.loadUserByUsername(username);
     }
-<<<<<<< HEAD:dice-api/src/main/java/pl/zed/dice/security/controller/UserRestController.java
 
     @PostMapping("/user/save")
     public void save(@RequestBody UserDTO userDTO) throws ParseException {
@@ -44,6 +49,4 @@ public class UserProfileController {
     public UserDTO editProfile(@PathVariable Long id, @RequestBody UserDTO userDTO) throws ParseException {
         return userService.editUserProfile(id, userDTO);
     }
-=======
->>>>>>> ddb5e390f9f51fe29a2cb92b71189dc600afe52e:dice-api/src/main/java/pl/zed/dice/user/profile/controller/UserProfileController.java
 }
