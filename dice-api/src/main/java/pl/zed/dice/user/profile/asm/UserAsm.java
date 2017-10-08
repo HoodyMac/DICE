@@ -1,11 +1,11 @@
-package pl.zed.dice.asm;
+package pl.zed.dice.user.profile.asm;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
-import pl.zed.dice.security.domain.Gender;
 import pl.zed.dice.security.domain.UserAccount;
-import pl.zed.dice.security.domain.UserProfile;
-import pl.zed.dice.security.model.UserDTO;
+import pl.zed.dice.user.profile.domain.Gender;
+import pl.zed.dice.user.profile.domain.UserProfile;
+import pl.zed.dice.user.profile.model.UserDTO;
 
 import java.text.DateFormat;
 import java.text.ParseException;
