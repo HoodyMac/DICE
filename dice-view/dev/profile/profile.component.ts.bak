@@ -12,7 +12,6 @@ declare var jQuery: any;
 export class ProfileComponent implements AfterViewInit{
   userInfo: any; //userInfo[];
   countModules: any; //count_module[];
-  userLabel: Object;
   modalWindowTitle: string;
   croppedImgSrc: Object;
   editImgSrc: string = "/app/img/edit_icon_gray.png";
@@ -24,21 +23,21 @@ export class ProfileComponent implements AfterViewInit{
 
 
   constructor(private profileService: ProfileService) {
-    this.profileService.getUserInfo("server_url").subscribe(value => {
-          this.userInfo = value;
-        },
-        err => {
-          console.log('Something went wrong!');
-        }
-    );
-
-    this.profileService.getModule("server_url").subscribe(module => {
-          this.countModules = module;
-        },
-        err => {
-          console.log('Something went wrong! ');
-        }
-    );
+    // this.profileService.getUserInfo("server_url").subscribe(value => {
+    //       this.userInfo = value;
+    //     },
+    //     err => {
+    //       console.log('Something went wrong!');
+    //     }
+    // );
+    //
+    // this.profileService.getModule("server_url").subscribe(module => {
+    //       this.countModules = module;
+    //     },
+    //     err => {
+    //       console.log('Something went wrong! ');
+    //     }
+    // );
 
 /* ######## EXAMPLES ################### */
     this.countModules = [{
@@ -46,7 +45,7 @@ export class ProfileComponent implements AfterViewInit{
       value: 45
     }];
 
-    this.userInfo = [{
+    this.userInfo = {
       originalImgSrc: "/app/img/Ivan_Loichuk_bg500x500.jpg",
       cropImgSrc:  "/app/img/Ivan_Loichuk_bg.jpg",
       username: "Ivan Loichuk",
@@ -56,17 +55,6 @@ export class ProfileComponent implements AfterViewInit{
       age: 25,
       prgLanguages: "PHP",
       isOnline: true
-    }];
-
-/* ################################## */
-
-    this.userLabel = {
-      cityLabel: "City",
-      educationLabel: "Education",
-      workLabel: "Work",
-      ageLabel: "Age",
-      prgLangLabel: "Programming languages",
-      phoneNumberLabel: "Phone number"
     };
 
     this.modalWindowTitle = "Crop your profile photo";

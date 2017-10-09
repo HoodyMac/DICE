@@ -5,8 +5,8 @@
                 <div class="edit-menu">
                     <div class="menu" >
                         <ul id="nav-edit" class="nav nav-pills nav-stacked">
-                            <li class="active"><a href="#" class="basic_info">Basic info</a></li>
-                            <li><a href="#" class="general_settings">General</a></li>
+                            <li class="basic_info {{showEdit ? 'active': ''}}" (click)="showEditSettings()">Basic info</li>
+                            <li class="general_settings {{showGeneral ? 'active' : ''}}" (click)="showGeneralSettings()">General</li>
                         </ul>
                     </div>
                 </div>
@@ -17,22 +17,22 @@
                         <div>
                             <a href="#" class="active username">UserName</a>
                             <img src="/app/img/arrow.png" alt="">
-                            <a href="#" class="nav-basic_info">Basic info</a>
-                            <a href="#" class="nav-general_settings">General</a>
+                            <a href="#" class="nav-basic_info {{showEdit ? 'nav_show' : 'nav_hide'}}" >Basic info</a>
+                            <a href="#" class="nav-general_settings {{showGeneral ? 'nav_show' : 'nav_hide'}}">General</a>
                         </div>
                     </div>
                 </div>
                 <div class="edit-content">
-                    <form class="basic_info_form" action="" method="POST">
+                    <form class="basic_info_form {{showEdit ? 'show' : 'hide'}}" action="" method="POST">
                         <div class="edit-form">
                             <label for="edit_name">Name</label><input type="text" id="edit_name" class="form-control" placeholder="Name">
                         </div>
                         <div class="edit-form">
-                            <label for="edit_name">Lastname</label><input type="text" id="edit_surname" class="form-control" placeholder="Surname">
+                            <label for="edit_lastname">Surname</label><input type="text" id="edit_lastname" class="form-control" placeholder="Surname">
                         </div>
                         <div class="edit-form">
-                            <label for="edit_sex">Sex</label>
-                            <select name="edit_sex" id="edit_sex">
+                            <label for="edit_gender">Sex</label>
+                            <select name="edit_gender" id="edit_gender">
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
                             </select>
@@ -50,7 +50,7 @@
                             <label for="edit_name">Work</label><input type="text" id="edit_work" class="form-control" placeholder="Work">
                         </div>
                         <div class="edit-form"><label for="edit_prg_lang">Programing languages</label>
-                            <select name="edit_prg_lang" id="edit_prg_lang"  data-placeholder="Choose your languages" class="chosen-select" multiple tabindex="5" size="5">
+                            <select name="edit_prg_lang" id="edit_prg_lang" #choosenSelect  data-placeholder="Choose your languages" class="chosen-select" multiple tabindex="5" size="5">
                                 <option value="java">Java</option>
                                 <option value="php">PHP</option>
                                 <option value="java" >Java</option>
@@ -62,7 +62,7 @@
 
                     </form>
 
-                    <div class="general_settings_form">
+                    <div class="general_settings_form {{showGeneral ? 'show' : 'hide'}}">
                         <div class="block">
                             <div class="settings_label">
                                 <label class="password_label">Password</label>
@@ -70,7 +70,7 @@
                             <div class="settings_value">
                                 <input type="password" id="edit_password" name="edit_password" value="example" disabled="disabled">
                             </div>
-                            <a href=""  class="modal_change modal-trigger" data-modal="modal-edit-password">Change</a>
+                            <a class="modal_change modal-trigger" data-modal="modal-edit-password" (click)="toggle('modal-edit-password')">Change</a>
                         </div>
                         <div class="block">
                             <div class="settings_label">
@@ -88,7 +88,7 @@
                     <div class="modal" id="modal-edit-password">
                         <div class="modal-box">
                             <div class="modal-header">
-                                <div class="close-modal">&#10006;</div>
+                                <div class="close-modal" (click)="toggle('modal-edit-password')">&#10006;</div>
                                 <p>Change password</p>
                             </div>
                             <div class="modal-body">
@@ -107,7 +107,7 @@
                                         <input type="password" class="form-control" id="confirm_pass" name="confirm_pass" placeholder="Confirm password">
                                     </div>
                                     <div class="form-group">
-                                        <button type="reset" class="btn btn-default close-modal button">Cancel</button>
+                                        <button type="reset" class="btn btn-default close-modal button" (click)="toggle('modal-edit-password')">Cancel</button>
                                         <button type="submit" class="btn btn-default button">Save</button>
                                     </div>
                                 </form>

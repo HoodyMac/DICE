@@ -17,6 +17,7 @@ import {FriendsComponent} from "./friends/friends.component";
 import {EditComponent} from "./edit/edit.component";
 
 
+
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'profile', component: ProfileComponent },
