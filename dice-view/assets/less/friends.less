@@ -3,11 +3,12 @@
 section.friends{
   .friends-header{ width: 100%; border: 1px solid @box_border; background-color: @box_bg; border-radius: 2px;
     .menu{display: inline-block; padding: 1% 2% 1% 2%;
+      .nav_show{display: inline-block;}
+      .nav_hide{display: none;}
       img{display: inline-block; }
       a{padding: 5px 10px; display: inline-block; color: #000000; text-decoration: none;
         &.username{padding: 5px 8px;}
         &:hover{color: @search_border;}
-        &.nav-followers{display: none;}
       }
     }
     form{ padding: 1% 2% 2% 2%;;
@@ -18,15 +19,14 @@ section.friends{
   .search-filter{ background-color: @box_bg; border:1px solid @box_border; border-radius: 2px; width: 100%;
     .menu{
       ul{
-        li{
-          &.active{
-            a{background-color: @friends_activeBg; color: @friends_activeFont; border-radius: 0;}
+        li{padding: 10px; cursor: pointer;
+          &.active{background-color: @friends_activeBg; color: @friends_activeFont; border-radius: 0;
           }
 
         }
       }
     }
-    .followers{width: 100%; display: none;
+    .followers{width: 100%;
       label{width: auto; padding: 5% 3% 3% 5%; font-weight: 500;
         &.gender{width: auto; font-weight: 500; padding-right: 3%; vertical-align: middle;}
       }
@@ -78,7 +78,7 @@ section.friends{
 /*--- (media) Responsive style -----------------------*/
 
 @media (max-width: 990px){
-  section.friends .main-content ul li { width: 98%; }
+  section.friends .friends-content ul li { width: 98%; }
 }
 
 @media (max-width: 620px) {
@@ -96,7 +96,7 @@ section.friends{
   .custom-col-filter{width: 100%; margin-left: 0; margin-right: 0; }
   .custom-col-results{width: 100%;}
 
-  section.friends .main-content ul .content_box table .add_button input { margin: 1% 0; width: 95%; }
+  section.friends .friends-content ul .content_box table .add_button input { margin: 1% 0; width: 95%; }
 
 }
 

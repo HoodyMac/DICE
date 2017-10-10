@@ -5,7 +5,17 @@ import {Component} from '@angular/core';
   styleUrls: ['../app/css/friends.css']
 })
 export class FriendsComponent {
+  showFriends:boolean = true;
+  showFollowers:boolean = false;
 
+  showMyFriends(){
+    this.showFriends = true;
+    this.showFollowers = false;
+  }
+  showMyFollowers(){
+    this.showFriends = false;
+    this.showFollowers = true;
+  }
 }
 
 

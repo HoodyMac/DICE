@@ -5,16 +5,16 @@
         <div class="search-filter">
           <div class="menu" >
             <ul id="nav-friends" class="nav nav-pills nav-stacked">
-              <li class="active"><a href="#" class="myFriends">My friends</a></li>
-              <li><a href="#" class="myFollowers">Followers</a></li>
+              <li class="{{showFriends ? 'active': ''}}" (click)="showMyFriends()" >My friends</li>
+              <li class="{{showFollowers ? 'active': ''}}" (click)="showMyFollowers()">Followers</li>
             </ul>
           </div>
           <form action="" method="POST">
-            <div class="followers">
+            <div class="followers {{showFollowers ? 'show' : 'hide'}}">
               <label for="outgoing">Outgoing</label><input type="checkbox" name="follow" id="outgoing">
               <label for="pending">Pending</label><input type="checkbox" name="follow" id="pending">
             </div>
-            <div class="online_group">
+            <div class="online_group {{showFriends ? 'show' : 'hide'}}">
               <input type="checkbox" name="online_now" id="online_now">
               <label for="online_now">online now</label>
             </div>
@@ -27,8 +27,8 @@
             <div>
               <a href="#" class="active username">UserName</a>
               <img src="/app/img/arrow.png" alt="">
-              <a href="#" class="nav-friends">Friends</a>
-              <a href="#" class="nav-followers">Followers</a>
+              <a href="#" class="nav-friends {{showFriends ? 'nav_show' : 'nav_hide'}}">Friends</a>
+              <a href="#" class="nav-followers {{showFollowers ? 'nav_show' : 'nav_hide'}}">Followers</a>
             </div>
           </div>
           <form>

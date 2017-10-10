@@ -11,12 +11,17 @@
 
                         <div class="age_group">
                             <label>Age</label>
-                            <select name="age_from" id="age_from">
-                                <option value="0">from</option>
-                            </select>
-                            <select name="age_to" id="age_to">
-                                <option value="0">to</option>
-                            </select>
+                            <div>
+                                <select  name="age_from" id="age_from"  class="chosen-select" data-placeholder="from" #choseAgeFrom>
+                                    <option></option>
+                                    <option *ngFor="let ageValue of ageValues" value="{{ageValue}}">{{ageValue}}</option>
+                                </select>
+                                <select name="age_to" id="age_to" class="chosen-select" data-placeholder="to" #choseAgeTo>
+                                    <option></option>
+                                    <option *ngFor="let ageValue of ageValues" value="{{ageValue}}">{{ageValue}}</option>
+                                </select>
+                            </div>
+
                         </div>
                         <div class="sex_group">
                             <label>Gender</label>
@@ -27,13 +32,16 @@
                             <input type="checkbox" name="online_now" id="online_now">
                             <label for="online_now">online now</label>
                         </div>
-                        <select name="prg_lang" id="prg_lang" size="1">
-                            <option selected="selected">Choose programming language</option>
-                            <option>Java</option>
-                            <option>C++</option>
-                            <option>PHP</option>
-                            <option>JavaScript</option>
-                        </select>
+                        <div id="lang_select">
+                            <select name="prg_lang" id="prg_lang" size="1" class="chosen-select" data-placeholder="Choose language" #choseLang>
+                                <option></option>
+                                <option>Java</option>
+                                <option>C++</option>
+                                <option>PHP</option>
+                                <option>JavaScript</option>
+                            </select>
+                        </div>
+
                     </form>
                 </div>
             </div>
@@ -42,7 +50,7 @@
                     <div class="menu" id="">
                         <ul id="search_menu">
                             <li><a href="#" class="active">Friends</a></li>
-                            <li><a href="#">Groups</a></li>
+                            <!-- <li><a href="#">Groups</a></li> -->
                         </ul>
                     </div>
                     <form>
