@@ -28,7 +28,12 @@ export class PasswordMatcher{
 })
 
 export class HomeComponent {
-  form: FormGroup;
+  public form: FormGroup;
+
+  public showRegistrationMessage: boolean = false;
+  public registrationMessage: string;
+  public showLoginMessage: boolean = false;
+  public loginMessage: string;
 
   constructor(
     private _authenticationService: AuthenticationService,
@@ -53,13 +58,22 @@ export class HomeComponent {
 
   onSignIn(credentials) {
     this._authenticationService.doLogin(credentials).subscribe(
-      data => this._route.navigate(['profile']),
-      err => console.log('error')
+      () => this._route.navigate(['profile']),
+      () => {
+        this.loginMessage = "Incorrect email or password.";
+        this.showLoginMessage = true;
+      }
     );
   }
 
   onSignUp(credentials){
-    this.registrationService.doSignUp(credentials);
+    this.registrationService.doSignUp(credentials)
+      .subscribe(
+        () => {
+          this.registrationMessage = "Your account has been registered.";
+          this.showRegistrationMessage = true;
+        }
+      );
   }
 }
 

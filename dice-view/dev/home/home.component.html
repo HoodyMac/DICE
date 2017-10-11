@@ -37,6 +37,11 @@
             <h2>Log in</h2>
             <h4>Please complete the form.</h4>
           </div>
+
+          <div class="alert alert-danger signin_form"  *ngIf="showLoginMessage">
+            <strong>Failed!</strong> {{loginMessage}}
+          </div>
+
           <form #formSignIn="ngForm" (ngSubmit)="onSignIn(formSignIn.value)">
             <div class="signin_form">
               <input type="text" class="form-control" placeholder="Username"
@@ -63,6 +68,10 @@
         <div class="form">
           <form class="signup" novalidate [formGroup]="form" password-matcher #f="ngForm" (ngSubmit)="onSignUp(f.value)">                <!-- signup form -->
             <span><h2>Sign Up</h2></span>
+
+            <div class="alert alert-success signup_form" *ngIf="showRegistrationMessage">
+              <strong>Success!</strong> {{registrationMessage}}
+            </div>
 
             <div class="signup_form">
               <input type="text" class="form-control" formControlName="firstname" name="firstname" id="firstname" placeholder="Name">
