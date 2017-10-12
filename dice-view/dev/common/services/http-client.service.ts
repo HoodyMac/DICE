@@ -10,7 +10,8 @@ export class HttpClient {
 
   private createRequestOptionsArgs(): RequestOptionsArgs {
     let headers = new Headers();
-    headers.append('x-auth-token', localStorage.getItem('token'));
+    headers.append('Authorization', localStorage.getItem('token'));
+    console.log(localStorage.getItem("token"));
     headers.append('Content-Type', 'application/json');
     return {
       headers: headers

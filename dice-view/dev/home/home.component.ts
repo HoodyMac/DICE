@@ -1,6 +1,5 @@
 import {Component, Directive} from '@angular/core';
 import {AuthenticationService} from "../common/services/authentication.service";
-import {NavbarService} from "../common/services/navbar.service";
 import {RegistrationService} from "../common/services/registration.service";
 import {
   NG_VALIDATORS, AbstractControl, Validators, FormGroup, FormBuilder,} from "@angular/forms";
@@ -38,7 +37,6 @@ export class HomeComponent {
   constructor(
     private _authenticationService: AuthenticationService,
     private registrationService: RegistrationService,
-    private _nav: NavbarService,
     private _route: Router,
     private fb:FormBuilder) {
       this.form = this.fb.group({
@@ -53,7 +51,9 @@ export class HomeComponent {
   }
 
   ngOnInit(): void {
-    this._nav.hide();
+    if(this._authenticationService.isLoggedIn()) {
+      this._route.navigate(['profile']);
+    }
   }
 
   onSignIn(credentials) {
