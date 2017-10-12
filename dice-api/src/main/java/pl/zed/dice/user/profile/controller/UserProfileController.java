@@ -2,8 +2,6 @@ package pl.zed.dice.user.profile.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 import pl.zed.dice.security.JwtTokenUtil;
@@ -33,8 +31,8 @@ public class UserProfileController {
     @GetMapping("/user")
     public JwtUser getAuthenticatedUser(HttpServletRequest request) {
         String token = request.getHeader(tokenHeader);
-        String username = jwtTokenUtil.getUsernameFromToken(token);
-        return (JwtUser) userDetailsService.loadUserByUsername(username);
+        String email = jwtTokenUtil.getEmailFromToken(token);
+        return (JwtUser) userDetailsService.loadUserByUsername(email);
     }
 
     @PostMapping("/user/save")

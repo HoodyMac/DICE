@@ -14,12 +14,10 @@ import pl.zed.dice.security.JwtAuthenticationRequest;
 import pl.zed.dice.security.JwtTokenUtil;
 import pl.zed.dice.security.JwtUser;
 import pl.zed.dice.security.model.UserInfoDTO;
-import pl.zed.dice.user.profile.model.UserDTO;
 import pl.zed.dice.security.service.JwtAuthenticationResponse;
 import pl.zed.dice.security.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
-import java.text.ParseException;
 
 @RestController
 public class AuthenticationController {
@@ -43,14 +41,14 @@ public class AuthenticationController {
     public ResponseEntity createAuthenticationToken(@RequestBody JwtAuthenticationRequest jwtAuthenticationRequest) {
         final Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        jwtAuthenticationRequest.getUsername(),
+                        jwtAuthenticationRequest.getEmail(),
                         jwtAuthenticationRequest.getPassword()
                 )
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         // generate token
-        final UserDetails userDetails = userDetailsService.loadUserByUsername(jwtAuthenticationRequest.getUsername());
+        final UserDetails userDetails = userDetailsService.loadUserByUsername(jwtAuthenticationRequest.getEmail());
         final String token = jwtTokenUtil.generateToken(userDetails);
         final UserInfoDTO userInfoDTO = userService.getUserInfo(userDetails.getUsername());
 
@@ -60,12 +58,12 @@ public class AuthenticationController {
     @GetMapping("/refresh")
     public ResponseEntity refreshAndGetAuthenticationToken(HttpServletRequest request) {
         String token = request.getHeader(tokenHeader);
-        String username = jwtTokenUtil.getUsernameFromToken(token);
-        JwtUser user = (JwtUser) userDetailsService.loadUserByUsername(username);
+        String email = jwtTokenUtil.getEmailFromToken(token);
+        JwtUser user = (JwtUser) userDetailsService.loadUserByUsername(email);
 
         if(jwtTokenUtil.canTokenBeRefreshed(token, user.getLastPasswordResetDate())) {
             String refreshedToken = jwtTokenUtil.refreshToken(token);
-            UserInfoDTO userInfoDTO = userService.getUserInfo(username);
+            UserInfoDTO userInfoDTO = userService.getUserInfo(email);
             return ResponseEntity.ok(new JwtAuthenticationResponse(refreshedToken, userInfoDTO));
         } else {
             return ResponseEntity.badRequest().body(null);

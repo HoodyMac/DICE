@@ -20,7 +20,7 @@ public class JwtTokenUtil {
     @Value("604800")
     private Long expiration;
 
-    public String getUsernameFromToken(String token) {
+    public String getEmailFromToken(String token) {
         try {
             final Claims claims = getClaimsFromToken(token);
             return claims.getSubject();
@@ -104,10 +104,10 @@ public class JwtTokenUtil {
     public Boolean validateToken(String token, UserDetails userDetails) {
         JwtUser user = (JwtUser) userDetails;
 
-        final String username = getUsernameFromToken(token);
+        final String email = getEmailFromToken(token);
         final Date created = getCreatedDateFromToken(token);
 
-        return username.equals(user.getUsername())
+        return email.equals(user.getUsername())
                 && !isTokenExpired(token)
                 && !isCreatedBeforeLastPasswordReset(created, user.getLastPasswordResetDate());
     }

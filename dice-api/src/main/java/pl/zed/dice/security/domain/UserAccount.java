@@ -17,7 +17,7 @@ public class UserAccount {
 
     @NotNull
     @Size(min = 4, max = 50)
-    private String username;
+    private String email;
 
     @NotNull
     @Size(min = 4, max = 100)
@@ -45,8 +45,8 @@ public class UserAccount {
     public UserAccount() {
     }
 
-    public UserAccount(String username, String password, Boolean enabled, Date lastPasswordResetDate) {
-        this.username = username;
+    public UserAccount(String email, String password, Boolean enabled, Date lastPasswordResetDate) {
+        this.email = email;
         this.password = password;
         this.enabled = enabled;
         this.lastPasswordResetDate = lastPasswordResetDate;
@@ -60,12 +60,12 @@ public class UserAccount {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {

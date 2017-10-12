@@ -9,7 +9,7 @@ public class UserAccountAsm {
 
     public UserInfoDTO convertAccountToUserInfoDTO(UserAccount userAccount) {
         return new UserInfoDTO(
-                userAccount.getUsername(),
+                userAccount.getEmail(),
                 userAccount.getProfile().getFirstname(),
                 userAccount.getProfile().getLastname(),
                 userAccount.getProfile().getGender(),

@@ -49,8 +49,8 @@ public class UserService {
         return userAsm.getUserProfileDto(userProfile);
     }
 
-    public UserInfoDTO getUserInfo(String username) {
-        UserAccount userAccount = userRepository.findByUsername(username);
+    public UserInfoDTO getUserInfo(String email) {
+        UserAccount userAccount = userRepository.findByEmail(email);
         return userAccountAsm.convertAccountToUserInfoDTO(userAccount);
     }
 }
