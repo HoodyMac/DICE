@@ -55,6 +55,7 @@ export class ProfileComponent implements AfterViewInit{
       work: "Spark",
       age: 25,
       prgLanguages: "PHP",
+      phoneNumber: "+752115558",
       isOnline: true
     }];
 
@@ -137,6 +138,7 @@ interface userInfo{
   work:string;
   age:string;
   prgLanguages:string;
+  phoneNumber:string;
   isOnline:boolean;
 }
 
