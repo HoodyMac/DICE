@@ -2,6 +2,8 @@ package pl.zed.dice.security.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.zed.dice.security.asm.UserAccountAsm;
+import pl.zed.dice.security.model.UserInfoDTO;
 import pl.zed.dice.user.profile.asm.UserAsm;
 import pl.zed.dice.security.domain.UserAccount;
 import pl.zed.dice.user.profile.domain.UserProfile;
@@ -23,6 +25,9 @@ public class UserService {
     @Autowired
     private UserAsm userAsm;
 
+    @Autowired
+    private UserAccountAsm userAccountAsm;
+
     public void save(UserDTO userDTO) throws ParseException {
         UserAccount userAccount = userAsm.convertDtoToUserAccount(userDTO);
         UserProfile userProfile = userAsm.convertDtoToUserProfile(userDTO);
@@ -42,5 +47,10 @@ public class UserService {
         userProfile.edit(userDTO);
         userProfileRepository.save(userProfile);
         return userAsm.getUserProfileDto(userProfile);
+    }
+
+    public UserInfoDTO getUserInfo(String username) {
+        UserAccount userAccount = userRepository.findByUsername(username);
+        return userAccountAsm.convertAccountToUserInfoDTO(userAccount);
     }
 }

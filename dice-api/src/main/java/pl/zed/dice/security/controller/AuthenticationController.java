@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.zed.dice.security.JwtAuthenticationRequest;
 import pl.zed.dice.security.JwtTokenUtil;
 import pl.zed.dice.security.JwtUser;
+import pl.zed.dice.security.model.UserInfoDTO;
 import pl.zed.dice.user.profile.model.UserDTO;
 import pl.zed.dice.security.service.JwtAuthenticationResponse;
 import pl.zed.dice.security.service.UserService;
@@ -35,7 +36,8 @@ public class AuthenticationController {
     @Autowired
     private UserDetailsService userDetailsService;
 
-
+    @Autowired
+    private UserService userService;
 
     @PostMapping("/auth")
     public ResponseEntity createAuthenticationToken(@RequestBody JwtAuthenticationRequest jwtAuthenticationRequest) {
@@ -50,8 +52,9 @@ public class AuthenticationController {
         // generate token
         final UserDetails userDetails = userDetailsService.loadUserByUsername(jwtAuthenticationRequest.getUsername());
         final String token = jwtTokenUtil.generateToken(userDetails);
+        final UserInfoDTO userInfoDTO = userService.getUserInfo(userDetails.getUsername());
 
-        return ResponseEntity.ok(new JwtAuthenticationResponse(token));
+        return ResponseEntity.ok(new JwtAuthenticationResponse(token, userInfoDTO));
     }
 
     @GetMapping("/refresh")
@@ -62,7 +65,8 @@ public class AuthenticationController {
 
         if(jwtTokenUtil.canTokenBeRefreshed(token, user.getLastPasswordResetDate())) {
             String refreshedToken = jwtTokenUtil.refreshToken(token);
-            return ResponseEntity.ok(new JwtAuthenticationResponse(refreshedToken));
+            UserInfoDTO userInfoDTO = userService.getUserInfo(username);
+            return ResponseEntity.ok(new JwtAuthenticationResponse(refreshedToken, userInfoDTO));
         } else {
             return ResponseEntity.badRequest().body(null);
         }
