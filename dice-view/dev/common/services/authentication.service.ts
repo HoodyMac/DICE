@@ -10,7 +10,7 @@ export class AuthenticationService {
 
   constructor(private _http: HttpClient) {}
 
-  doLogin(credentials: any): Observable {
+  login(credentials: any): Observable {
     return this._http.post('/auth', credentials)
       .map(res => {
         const data = res.json();
@@ -37,11 +37,16 @@ export class AuthenticationService {
       );
   }
 
+  logout(): void {
+    localStorage.removeItem('token');
+    this.userInfo = {};
+  }
+
   getUserInfo() {
     return this.userInfo;
   }
 
   isLoggedIn(): boolean {
-    return localStorage.getItem("token");
+    return localStorage.getItem('token');
   }
 }

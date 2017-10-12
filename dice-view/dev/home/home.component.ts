@@ -35,9 +35,9 @@ export class HomeComponent {
   public loginMessage: string;
 
   constructor(
-    private _authenticationService: AuthenticationService,
+    private authenticationService: AuthenticationService,
     private registrationService: RegistrationService,
-    private _route: Router,
+    private route: Router,
     private fb:FormBuilder) {
       this.form = this.fb.group({
         firstname: ['', Validators.compose([ Validators.required, Validators.maxLength(60)])],
@@ -51,14 +51,14 @@ export class HomeComponent {
   }
 
   ngOnInit(): void {
-    if(this._authenticationService.isLoggedIn()) {
-      this._route.navigate(['profile']);
+    if(this.authenticationService.isLoggedIn()) {
+      this.route.navigate(['profile']);
     }
   }
 
   onSignIn(credentials) {
-    this._authenticationService.doLogin(credentials).subscribe(
-      () => this._route.navigate(['profile']),
+    this.authenticationService.login(credentials).subscribe(
+      () => this.route.navigate(['profile']),
       () => {
         this.loginMessage = "Incorrect email or password.";
         this.showLoginMessage = true;
