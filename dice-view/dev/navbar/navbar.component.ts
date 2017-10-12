@@ -1,4 +1,6 @@
 import {Component} from '@angular/core';
+import {AuthenticationService} from "../common/services/authentication.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'dice-nav',
@@ -6,6 +8,24 @@ import {Component} from '@angular/core';
   styleUrls: ['../app/css/navbar.css']
 })
 export class NavbarComponent {
+  private userInfo = {};
 
+  constructor(
+    private authenticationService: AuthenticationService,
+    private route: Router) {
+    if(authenticationService.isLoggedIn()) {
+      authenticationService.refresh()
+        .subscribe(
+          data => {
+            this.userInfo = data;
+          }
+        )
+    }
+  }
+
+  public onLogout(): void {
+    this.authenticationService.logout();
+    this.route.navigate(['home']);
+  }
 }
 

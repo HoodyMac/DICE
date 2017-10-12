@@ -1,6 +1,5 @@
 import {Component, Directive} from '@angular/core';
 import {AuthenticationService} from "../common/services/authentication.service";
-import {NavbarService} from "../common/services/navbar.service";
 import {RegistrationService} from "../common/services/registration.service";
 import {
   NG_VALIDATORS, AbstractControl, Validators, FormGroup, FormBuilder,} from "@angular/forms";
@@ -36,10 +35,9 @@ export class HomeComponent {
   public loginMessage: string;
 
   constructor(
-    private _authenticationService: AuthenticationService,
+    private authenticationService: AuthenticationService,
     private registrationService: RegistrationService,
-    private _nav: NavbarService,
-    private _route: Router,
+    private route: Router,
     private fb:FormBuilder) {
       this.form = this.fb.group({
         firstname: ['', Validators.compose([ Validators.required, Validators.maxLength(60)])],
@@ -53,12 +51,14 @@ export class HomeComponent {
   }
 
   ngOnInit(): void {
-    this._nav.hide();
+    if(this.authenticationService.isLoggedIn()) {
+      this.route.navigate(['profile']);
+    }
   }
 
   onSignIn(credentials) {
-    this._authenticationService.doLogin(credentials).subscribe(
-      () => this._route.navigate(['profile']),
+    this.authenticationService.login(credentials).subscribe(
+      () => this.route.navigate(['profile']),
       () => {
         this.loginMessage = "Incorrect email or password.";
         this.showLoginMessage = true;

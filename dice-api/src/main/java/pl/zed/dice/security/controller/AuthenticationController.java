@@ -20,6 +20,7 @@ import pl.zed.dice.security.service.UserService;
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
+@RequestMapping("/auth")
 public class AuthenticationController {
 
     @Value("Authorization")
@@ -37,7 +38,7 @@ public class AuthenticationController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/auth")
+    @PostMapping
     public ResponseEntity createAuthenticationToken(@RequestBody JwtAuthenticationRequest jwtAuthenticationRequest) {
         final Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(

@@ -44,9 +44,9 @@
 
           <form #formSignIn="ngForm" (ngSubmit)="onSignIn(formSignIn.value)">
             <div class="signin_form">
-              <input type="text" class="form-control" placeholder="Username"
-                     name="username"
-                     ngModel #username="ngModel">
+              <input type="email" class="form-control" placeholder="Email"
+                     name="email"
+                     ngModel #email="ngModel">
             </div>
             <div class="signin_form">
               <input type="password" class="form-control" placeholder="Password"

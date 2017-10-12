@@ -1,5 +1,5 @@
-import {NavbarService} from "./common/services/navbar.service";
 import {Component} from "@angular/core";
+import {AuthenticationService} from "./common/services/authentication.service";
 
 @Component({
     selector: 'dice-app',
@@ -7,5 +7,5 @@ import {Component} from "@angular/core";
 })
 export class AppComponent {
 
-  constructor(public nav: NavbarService) {}
+  constructor(public authenticationService: AuthenticationService) {}
 }

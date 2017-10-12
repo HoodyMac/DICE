@@ -1,5 +1,6 @@
 import {Component, AfterViewInit, ElementRef, ViewChild} from '@angular/core';
 import {ProfileService} from "../services/profile.service";
+import {AuthenticationService} from "../common/services/authentication.service";
 let clicked = true;
 declare var jQuery: any;
 
@@ -23,7 +24,11 @@ export class ProfileComponent implements AfterViewInit{
   @ViewChild('h') h: ElementRef;
 
 
-  constructor(private profileService: ProfileService) {
+  constructor(
+    private profileService: ProfileService,
+    private authenticationService: AuthenticationService) {
+    console.log(this.authenticationService.getUserInfo());
+
     this.profileService.getUserInfo("server_url").subscribe(value => {
           this.userInfo = value;
         },

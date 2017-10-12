@@ -12,7 +12,6 @@ import {HomeComponent, PasswordMatcher} from "./home/home.component";
 import {SearchComponent} from "./search/search.component";
 import {NavbarComponent} from "./navbar/navbar.component";
 import {FooterComponent} from "./footer/footer.component";
-import {NavbarService} from "./common/services/navbar.service";
 import {FriendsComponent} from "./friends/friends.component";
 import {EditComponent} from "./edit/edit.component";
 
@@ -48,7 +47,7 @@ const appRoutes: Routes = [
     FooterComponent,
     PasswordMatcher
   ],
-  providers: [HttpClient, AuthenticationService, NavbarService, RegistrationService],
+  providers: [HttpClient, AuthenticationService, RegistrationService],
   bootstrap: [AppComponent]
 
 })
