@@ -66,17 +66,6 @@ export class ProfileComponent implements AfterViewInit{
 
 /* ################################## */
 
-    this.userLabel = {
-      cityLabel: "City",
-      educationLabel: "Education",
-      workLabel: "Work",
-      ageLabel: "Age",
-      prgLangLabel: "Programming languages",
-      phoneNumberLabel: "Phone number"
-    };
-
-    this.modalWindowTitle = "Crop your profile photo";
-
   };
 
 

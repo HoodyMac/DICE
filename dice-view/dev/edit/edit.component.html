@@ -23,34 +23,34 @@
                     </div>
                 </div>
                 <div class="edit-content">
-                    <form class="basic_info_form {{showEdit ? 'show' : 'hide'}}" action="" method="POST">
+                    <form class="basic_info_form {{showEdit ? 'show' : 'hide'}}" action="" method="POST" #editForm="ngForm" (ngSubmit)="saveUserBasicInfo(editForm.value)">
                         <div class="edit-form">
-                            <label for="edit_name">Name:</label><input type="text" id="edit_name" class="form-control" placeholder="Name">
+                            <label for="edit_firstName">First name:</label><input type="text" id="edit_firstName" class="form-control" placeholder="Name"  ngModel name="firstName">
                         </div>
                         <div class="edit-form">
-                            <label for="edit_lastname">Surname:</label><input type="text" id="edit_lastname" class="form-control" placeholder="Surname">
+                            <label for="edit_lastName">Last name:</label><input type="text" id="edit_lastName" class="form-control" placeholder="Last name" ngModel name="lastName">
                         </div>
                         <div class="edit-form">
                             <label for="edit_gender">Gender:</label>
-                            <select name="edit_gender" id="edit_gender">
+                            <select name="edit_gender" id="edit_gender" #gender>
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
                             </select>
                         </div>
                         <div class="edit-form">
-                            <label for="edit_birthday">Birthday:</label><input type="date" id="edit_birthday" class="form-control" placeholder="Birthday (mm/dd/yyyy)">
+                            <label for="edit_birthday">Birthday:</label><input type="date" id="edit_birthday" class="form-control" placeholder="Birthday (mm/dd/yyyy)"  ngModel name="birthday">
                         </div>
                         <div class="edit-form">
-                            <label for="edit_name">City:</label><input type="text" id="edit_city" class="form-control" placeholder="City">
+                            <label for="edit_city">City:</label><input type="text" id="edit_city" class="form-control" placeholder="City"  ngModel name="city">
                         </div>
                         <div class="edit-form">
-                            <label for="edit_name">Education:</label><input type="text" id="edit_education" class="form-control" placeholder="Education">
+                            <label for="edit_education">Education:</label><input type="text" id="edit_education" class="form-control" placeholder="Education" ngModel name="education">
                         </div>
                         <div class="edit-form">
-                            <label for="edit_name">Work:</label><input type="text" id="edit_work" class="form-control" placeholder="Work">
+                            <label for="edit_work">Work:</label><input type="text" id="edit_work" class="form-control" placeholder="Work" ngModel name="work">
                         </div>
                         <div class="edit-form"><label for="edit_prg_lang">Programing languages:</label>
-                            <select name="edit_prg_lang" id="edit_prg_lang" #choosenSelect  data-placeholder="Choose your languages" class="chosen-select" multiple tabindex="5" size="5">
+                            <select id="edit_prg_lang" #choosenSelect  data-placeholder="Choose your languages" class="chosen-select" multiple tabindex="5" size="5" >
                                 <option value="java">Java</option>
                                 <option value="php">PHP</option>
                                 <option value="java" >Java</option>
@@ -61,8 +61,7 @@
                         </div>
 
                     </form>
-
-                    <div class="general_settings_form {{showGeneral ? 'show' : 'hide'}}">
+                    <form class="general_settings_form {{showGeneral ? 'show' : 'hide'}}" #editGeneralData="ngForm" (ngSubmit)="saveUserBasicInfo(editGeneralData.value)">
                         <div class="block">
                             <div class="settings_label">
                                 <label class="password_label">Password:</label>
@@ -77,7 +76,7 @@
                                 <label class="email_label">Email:</label>
                             </div>
                             <div class="settings_value">
-                                <input type="email" id="edit_email" name="edit_email" value="example@gmail.com">
+                                <input type="email" id="edit_email" ngModel name="edit_email" value="example@gmail.com">
                             </div>
                         </div>
                         <div class="block">
@@ -85,13 +84,13 @@
                                 <label class="phone_label">Phone number:</label>
                             </div>
                             <div class="settings_value">
-                                <input type="text" id="edit_phoneNumber" name="edit_phoneNumber" value="+81555255">
+                                <input type="text" id="edit_phoneNumber" ngModel name="edit_phoneNumber" value="+81555255">
                             </div>
                         </div>
                         <div class="block">
                             <button type="submit" class="btn btn-default button">Save</button>
                         </div>
-                    </div>
+                    </form>
                     <!--#####-Modal window for general settings-######-->
                     <div class="modal" id="modal-edit-password">
                         <div class="modal-box">
@@ -101,14 +100,14 @@
                             </div>
                             <div class="modal-body">
                                 <div class="info">You can use any combination of Latin letters, numbers and special symbols ! @ # $ % ^ & * ( ) _ - +. Your password should not be shorter than 6 characters.</div>
-                                <form action="" method="POST">
+                                <form action="" method="POST" #editPasswordData="ngForm" (ngSubmit)="saveUserPassword(editPasswordData.value)">
                                     <div class="form-group">
                                         <label for="current_pass">Current password:</label>
                                         <input type="password" class="form-control" id="current_pass" name="current_pass" placeholder="Current password">
                                     </div>
                                     <div class="form-group">
                                         <label for="new_pass">New password:</label>
-                                        <input type="password" class="form-control" id="new_pass" name="new_pass" placeholder="New password">
+                                        <input type="password" class="form-control" id="new_pass" ngModel name="new_pass" placeholder="New password">
                                     </div>
                                     <div class="form-group">
                                         <label for="confirm_pass">Confirm password:</label>

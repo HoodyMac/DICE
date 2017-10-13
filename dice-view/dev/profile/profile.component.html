@@ -14,7 +14,7 @@
                             <div  class="modal-box">
                                 <div class="modal-header">
                                     <div (click)="toggle('modal-change-photo')" class="close-modal">&#10006;</div>
-                                    <p>{{modalWindowTitle}}</p>
+                                    <p>Crop your profile photo</p>
                                 </div>
                                 <div class="modal-body">
                                     <!-- This is the image we're attaching Jcrop to -->
@@ -71,26 +71,26 @@
                     <div class="separator"></div>
                     <div class="profile_info">
                         <div class="profile_info_row">
-                            <div class="label_info">{{userLabel.cityLabel}}:</div>
+                            <div class="label_info">City:</div>
                             <div class="value">{{userInfo[0].city}}</div>
                             <div class="edit_user_info">
                                 <a href="edit" id="link_edit_icon" title="Edit profile"><img [src]="editImgSrc" (mouseover)="onMouseOver()" (mouseout)="onMouseOut()" id="edit_icon" alt="Edit profile" title="Edit profile"></a>
                             </div>
                         </div>
                         <div class="profile_info_row">
-                            <div class="label_info">{{userLabel.educationLabel}}:</div>
+                            <div class="label_info">Education:</div>
                             <div class="value">{{userInfo[0].education}}</div>
                         </div>
                         <div class="profile_info_row">
-                            <div class="label_info">{{userLabel.workLabel}}:</div>
+                            <div class="label_info">Work:</div>
                             <div class="value">{{userInfo[0].work}}</div>
                         </div>
                         <div class="profile_info_row">
-                            <div class="label_info">{{userLabel.ageLabel}}:</div>
+                            <div class="label_info">Age:</div>
                             <div class="value">{{userInfo[0].age}}</div>
                         </div>
                         <div class="profile_info_row">
-                            <div class="label_info">{{userLabel.prgLangLabel}}:</div>
+                            <div class="label_info">Programming languages:</div>
                             <div class="value">{{userInfo[0].prgLanguages}}</div>
                         </div>
                     </div>
