@@ -1,7 +1,7 @@
 import {NgModule} from "@angular/core";
 import {BrowserModule} from "@angular/platform-browser";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {HttpModule} from "@angular/http";
+import {Http, HttpModule} from "@angular/http";
 import {AppComponent} from "./app.component";
 import {HttpClient} from "./common/services/http-client.service";
 import {AuthenticationService} from "./common/services/authentication.service";
@@ -14,8 +14,7 @@ import {NavbarComponent} from "./navbar/navbar.component";
 import {FooterComponent} from "./footer/footer.component";
 import {FriendsComponent} from "./friends/friends.component";
 import {EditComponent} from "./edit/edit.component";
-
-
+import {TranslateModule, TranslateStaticLoader, TranslateLoader} from "ng2-translate";
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -34,7 +33,12 @@ const appRoutes: Routes = [
     HttpModule,
     RouterModule.forRoot(
       appRoutes
-    )
+    ),
+    TranslateModule.forRoot({
+      provide: TranslateLoader,
+      useFactory: (http: Http) => new TranslateStaticLoader(http, '/assets/i18n', '.json'),
+      deps: [Http]
+    })
   ],
   declarations: [
     AppComponent,
