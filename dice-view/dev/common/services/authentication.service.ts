@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "./http-client.service";
 import 'rxjs/Rx';
 import {Observable} from "rxjs/Observable";
-import {isUndefined} from "util";
 
 @Injectable()
 export class AuthenticationService {
