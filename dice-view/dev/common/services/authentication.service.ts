@@ -15,9 +15,7 @@ export class AuthenticationService {
       .map(res => {
         const data = res.json();
         if(data) {
-          console.log(data.token);
           localStorage.setItem('token', data.token);
-          console.log(localStorage.getItem('token'));
         }
         this.userInfo = data.userInfo;
       });
@@ -47,6 +45,7 @@ export class AuthenticationService {
   }
 
   isLoggedIn(): boolean {
-    return localStorage.getItem('token');
+    return !!localStorage.getItem('token');
+
   }
 }

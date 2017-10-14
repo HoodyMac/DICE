@@ -27,7 +27,6 @@ export class ProfileComponent implements AfterViewInit{
   constructor(
     private profileService: ProfileService,
     private authenticationService: AuthenticationService) {
-    console.log(this.authenticationService.getUserInfo());
 
     this.profileService.getUserInfo("server_url").subscribe(value => {
           this.userInfo = value;

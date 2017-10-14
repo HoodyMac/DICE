@@ -1,4 +1,4 @@
-import {Component, Directive} from '@angular/core';
+import {Component, Directive, OnInit} from '@angular/core';
 import {AuthenticationService} from "../common/services/authentication.service";
 import {RegistrationService} from "../common/services/registration.service";
 import {
@@ -26,7 +26,7 @@ export class PasswordMatcher{
   styleUrls: ['../app/css/home.css']
 })
 
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   public form: FormGroup;
 
   public showRegistrationMessage: boolean = false;

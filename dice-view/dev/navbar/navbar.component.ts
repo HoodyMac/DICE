@@ -12,7 +12,7 @@ export class NavbarComponent {
 
   constructor(
     private authenticationService: AuthenticationService,
-    private route: Router) {
+    private router: Router) {
     if(authenticationService.isLoggedIn()) {
       authenticationService.refresh()
         .subscribe(
@@ -25,7 +25,7 @@ export class NavbarComponent {
 
   public onLogout(): void {
     this.authenticationService.logout();
-    this.route.navigate(['home']);
+    this.router.navigate(['home']);
   }
 }
 

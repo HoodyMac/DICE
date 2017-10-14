@@ -22,7 +22,6 @@ export class EditComponent implements AfterViewInit{
     constructor(
         private editService: EditService,
         private authenticationService: AuthenticationService) {
-        console.log(this.authenticationService.getUserInfo());
 
         this.editService.getUserBasicInfo("server_url").subscribe(value => {
                 this.userBasicInfo = value;
