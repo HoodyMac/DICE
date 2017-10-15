@@ -1,6 +1,7 @@
 import {Component, AfterViewInit, ElementRef, ViewChild} from '@angular/core';
 import {ProfileService} from "../services/profile.service";
 import {AuthenticationService} from "../common/services/authentication.service";
+import {Router} from '@angular/router';
 let clicked = true;
 declare var jQuery: any;
 
@@ -11,7 +12,7 @@ declare var jQuery: any;
 })
 
 export class ProfileComponent implements AfterViewInit{
-  userInfo: any; //userInfo[];
+  userInfo; //userInfo[];
   countModules: any; //count_module[];
   userLabel: Object;
   modalWindowTitle: string;
@@ -26,10 +27,12 @@ export class ProfileComponent implements AfterViewInit{
 
   constructor(
     private profileService: ProfileService,
-    private authenticationService: AuthenticationService) {
+    private authenticationService: AuthenticationService,
+    private _router: Router) {
 
-    this.profileService.getUserInfo("server_url").subscribe(value => {
-          this.userInfo = value;
+    this.profileService.getUserInfo("me").subscribe(
+      data => {
+          this.userInfo = data;
         },
         err => {
           console.log('Something went wrong!');
@@ -50,18 +53,18 @@ export class ProfileComponent implements AfterViewInit{
       value: 45
     }];
 
-    this.userInfo = [{
-      originalImgSrc: "/app/img/Ivan_Loichuk_bg500x500.jpg",
-      cropImgSrc:  "/app/img/Ivan_Loichuk_bg.jpg",
-      username: "Ivan Loichuk",
-      city: "Rivne",
-      education: "Politech",
-      work: "Spark",
-      age: 25,
-      prgLanguages: "PHP",
-      phoneNumber: "+752115558",
-      isOnline: true
-    }];
+    // this.userInfo = [{
+    //   originalImgSrc: "/app/img/Ivan_Loichuk_bg500x500.jpg",
+    //   cropImgSrc:  "/app/img/Ivan_Loichuk_bg.jpg",
+    //   username: "Ivan Loichuk",
+    //   city: "Rivne",
+    //   education: "Politech",
+    //   work: "Spark",
+    //   age: 25,
+    //   prgLanguages: "PHP",
+    //   phoneNumber: "+752115558",
+    //   isOnline: true
+    // }];
 
 /* ################################## */
 
@@ -120,20 +123,26 @@ export class ProfileComponent implements AfterViewInit{
       clicked = true;
     }
   }
+
+  editProfile(){
+    this._router.navigate(['/edit', {user: this.userInfo.userId}])
+  }
 }
 
-interface userInfo{
-  originalImgSrc: string;
-  cropImgSrc: string;
-  username:string;
-  city:string;
-  education:string;
-  work:string;
-  age:string;
-  prgLanguages:string;
-  phoneNumber:string;
-  isOnline:boolean;
-}
+// interface userInfo{
+//   userId: number;
+//   originalImgSrc: string;
+//   cropImgSrc: string;
+//   firstname:string;
+//   lastname:string;
+//   city:string;
+//   education:string;
+//   work:string;
+//   age:string;
+//   prgLanguages:string;
+//   phoneNumber:string;
+//   isOnline:boolean;
+// }
 
 interface count_module{
   label:string;

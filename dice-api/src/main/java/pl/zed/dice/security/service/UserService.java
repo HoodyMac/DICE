@@ -14,6 +14,7 @@ import pl.zed.dice.user.profile.model.UserProfileDTO;
 import pl.zed.dice.security.repository.UserProfileRepository;
 import pl.zed.dice.security.repository.UserRepository;
 
+import javax.transaction.Transactional;
 import java.text.ParseException;
 import java.util.Optional;
 
@@ -53,14 +54,10 @@ public class UserService {
     }
 
     public UserProfileDTO editUserProfile(Long id, UserProfileDTO userProfileDTO) throws ParseException {
-        Optional<UserProfile> userProfile = userProfileRepository.findById(id);
-        if(userProfile.isPresent()){
-            userProfile.get().edit(userProfileDTO);
-            userProfileRepository.save(userProfile.get());
-            return userAsm.makeUserProfileDTO(userProfile.get());
-        }else
-            throw new UserNotFoundException(id);
-
+        UserProfile userProfile = userProfileRepository.getOne(id);
+        userProfile.edit(userProfileDTO);
+        userProfileRepository.save(userProfile);
+        return userAsm.makeUserProfileDTO(userProfile);
     }
 
     public UserInfoDTO getUserInfo(String email) {

@@ -20,7 +20,7 @@ export class ProfileService{
         return this.http.get(url).map(res => res.json());
     }
 
-    getUserInfo(url){
+    getUserInfo(id: any){
         /**
              {
                 originalImgSrc: string;
@@ -35,7 +35,10 @@ export class ProfileService{
                 isOnline:boolean;
             }
          */
-        return this.http.get(url).map(res => res.json());
+        if(id != "me"){
+            return this.http.get("/api/user/"+id).map(res => res.json());
+        }else
+            return this.http.get("/api/me").map(res => res.json());
     }
 
     postCoordsImageCrop(cropImgData: Object, url){

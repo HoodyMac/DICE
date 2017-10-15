@@ -25,10 +25,10 @@
                 <div class="edit-content">
                     <form class="basic_info_form {{showEdit ? 'show' : 'hide'}}" action="" method="POST" #editForm="ngForm" (ngSubmit)="saveUserBasicInfo(editForm.value)">
                         <div class="edit-form">
-                            <label for="edit_firstName">First name:</label><input type="text" id="edit_firstName" class="form-control" placeholder="Name"  ngModel name="firstName">
+                            <label for="edit_firstName">First name:</label><input type="text" id="edit_firstName" class="form-control" placeholder="Name"  ngModel name="firstname">
                         </div>
                         <div class="edit-form">
-                            <label for="edit_lastName">Last name:</label><input type="text" id="edit_lastName" class="form-control" placeholder="Last name" ngModel name="lastName">
+                            <label for="edit_lastName">Last name:</label><input type="text" id="edit_lastName" class="form-control" placeholder="Last name" ngModel name="lastname">
                         </div>
                         <div class="edit-form">
                             <label for="edit_gender">Gender:</label>
@@ -38,7 +38,7 @@
                             </select>
                         </div>
                         <div class="edit-form">
-                            <label for="edit_birthday">Birthday:</label><input type="date" id="edit_birthday" class="form-control" placeholder="Birthday (mm/dd/yyyy)"  ngModel name="birthday">
+                            <label for="edit_birthday">Birthday:</label><input type="date" id="edit_birthday" class="form-control" placeholder="Birthday (mm/dd/yyyy)"  ngModel name="birthdayDate">
                         </div>
                         <div class="edit-form">
                             <label for="edit_city">City:</label><input type="text" id="edit_city" class="form-control" placeholder="City"  ngModel name="city">
@@ -84,7 +84,7 @@
                                 <label class="phone_label">Phone number:</label>
                             </div>
                             <div class="settings_value">
-                                <input type="text" id="edit_phoneNumber" ngModel name="edit_phoneNumber" value="+81555255">
+                                <input type="text" id="edit_phoneNumber" ngModel name="phoneNumber" value="+81555255">
                             </div>
                         </div>
                         <div class="block">

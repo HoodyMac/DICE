@@ -72,6 +72,10 @@
               <strong>Success!</strong> {{registrationMessage}}
             </div>
 
+            <div class="alert alert-danger signup_form" *ngIf="showErrorMessage">
+              <strong>{{errorMessage}}</strong>
+            </div>
+
             <div class="signup_form">
               <input type="text" class="form-control" formControlName="firstname" name="firstname" id="firstname" placeholder="Name">
               <div class="errors" *ngIf="form.get('firstname').touched">

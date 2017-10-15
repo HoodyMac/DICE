@@ -180,7 +180,9 @@ public class UserProfile {
         Date date = format.parse(userProfileDTO.getBirthdayDate());
         this.firstname = userProfileDTO.getFirstname();
         this.lastname = userProfileDTO.getLastname();
-        this.gender = userProfileDTO.getGender().equalsIgnoreCase("female") ? Gender.FEMALE : Gender.MALE;
+        if(userProfileDTO.getGender() != null) {
+            this.gender = userProfileDTO.getGender().equalsIgnoreCase("female") ? Gender.FEMALE : Gender.MALE;
+        }
         this.birthdayDate = date;
         this.city = userProfileDTO.getCity();
         this.education = userProfileDTO.getEducation();

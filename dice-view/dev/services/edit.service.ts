@@ -9,7 +9,7 @@ export class EditService{
         console.log('PostService Initialized...');
 
     }
-    getUserBasicInfo(url){
+    getUserBasicInfo(id){
         /**
          {
             firstName: string;
@@ -23,7 +23,7 @@ export class EditService{
 
         }
          */
-        return this.http.get(url).map(res => res.json());
+        return this.http.get("/api/user/"+id).map(res => res.json());
     }
 
     getUserGeneralInfo(url){
@@ -49,14 +49,13 @@ export class EditService{
         return this.http.get(url).map(res => res.json());
     }
 
-    setUserBasicInfo(editUserInfo: Object, url){
-        return this.http.post(
-            url,
-            JSON.stringify(editUserInfo)
-        ).map(res => res.json());
+    setUserBasicInfo(editUserInfo: Object, id){
+        return this.http.put("/api/profile/"+id, editUserInfo).map(res => {
+            return res.json();
+        });
     }
 
-    setUserGeneralInfo(editGeneralData: Object, url){
+    setUserGeneralInfo(editGeneralData: any, url){
         return this.http.post(
             url,
             JSON.stringify(editGeneralData)

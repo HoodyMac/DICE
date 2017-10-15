@@ -31,6 +31,8 @@ export class HomeComponent implements OnInit {
 
   public showRegistrationMessage: boolean = false;
   public registrationMessage: string;
+  public errorMessage: string;
+  public showErrorMessage: boolean = false;
   public showLoginMessage: boolean = false;
   public loginMessage: string;
 
@@ -72,6 +74,10 @@ export class HomeComponent implements OnInit {
         () => {
           this.registrationMessage = "Your account has been registered.";
           this.showRegistrationMessage = true;
+        },
+        error =>{
+          this.errorMessage = error._body;
+          this.showErrorMessage = true;
         }
       );
   }

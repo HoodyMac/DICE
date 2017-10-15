@@ -9,8 +9,8 @@ public class UserProfileDTO {
     private String firstname;
     private String lastname;
     private String gender;
-    private String origImage;
-    private String cropImage;
+    private String originalImgSrc;
+    private String cropImgSrc;
     private String birthdayDate;
     private String phoneNumber;
     private String city;
@@ -21,32 +21,27 @@ public class UserProfileDTO {
 
     public UserProfileDTO(){}
 
-    public UserProfileDTO(String firstname, String lastname, String gender, String origImage,
-                          String cropImage, String birthdayDate, String phoneNumber, String city, String programmingLanguages){
+    public UserProfileDTO(Long userId, String firstname, String lastname, String gender, String originalImgSrc, String cropImgSrc, String birthdayDate, String phoneNumber, String city, String programmingLanguages, String work, String education) {
+        this.userId = userId;
         this.firstname = firstname;
         this.lastname = lastname;
         this.gender = gender;
-        this.origImage = origImage;
-        this.cropImage = cropImage;
-        this.birthdayDate = birthdayDate;
-        this.phoneNumber = phoneNumber;
-        this.city = city;
-        this.programmingLanguages = programmingLanguages;
-    }
-
-    //for editing
-    public UserProfileDTO(String firstname, String lastname, String gender, String origImage, String cropImage, String birthdayDate, String phoneNumber, String city, String programmingLanguages, String work, String education) {
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.gender = gender;
-        this.origImage = origImage;
-        this.cropImage = cropImage;
+        this.originalImgSrc = originalImgSrc;
+        this.cropImgSrc = cropImgSrc;
         this.birthdayDate = birthdayDate;
         this.phoneNumber = phoneNumber;
         this.city = city;
         this.programmingLanguages = programmingLanguages;
         this.work = work;
         this.education = education;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getFirstname() {
@@ -73,36 +68,28 @@ public class UserProfileDTO {
         this.gender = gender;
     }
 
+    public String getOriginalImgSrc() {
+        return originalImgSrc;
+    }
+
+    public void setOriginalImgSrc(String originalImgSrc) {
+        this.originalImgSrc = originalImgSrc;
+    }
+
+    public String getCropImgSrc() {
+        return cropImgSrc;
+    }
+
+    public void setCropImgSrc(String cropImgSrc) {
+        this.cropImgSrc = cropImgSrc;
+    }
+
     public String getBirthdayDate() {
         return birthdayDate;
     }
 
     public void setBirthdayDate(String birthdayDate) {
         this.birthdayDate = birthdayDate;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public String getOrigImage() {
-        return origImage;
-    }
-
-    public void setOrigImage(String origImage) {
-        this.origImage = origImage;
-    }
-
-    public String getCropImage() {
-        return cropImage;
-    }
-
-    public void setCropImage(String cropImage) {
-        this.cropImage = cropImage;
     }
 
     public String getPhoneNumber() {
@@ -137,19 +124,19 @@ public class UserProfileDTO {
         this.work = work;
     }
 
-    public Boolean getOnline() {
-        return isOnline;
-    }
-
-    public void setOnline(Boolean online) {
-        isOnline = online;
-    }
-
     public String getEducation() {
         return education;
     }
 
     public void setEducation(String education) {
         this.education = education;
+    }
+
+    public Boolean getOnline() {
+        return isOnline;
+    }
+
+    public void setOnline(Boolean online) {
+        isOnline = online;
     }
 }

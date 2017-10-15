@@ -1,6 +1,7 @@
 import {Component, ViewChild, ElementRef, AfterViewInit, Input, Output, EventEmitter} from '@angular/core';
 import {EditService} from "../services/edit.service";
 import {AuthenticationService} from "../common/services/authentication.service";
+import {ActivatedRoute} from '@angular/router';
 let clicked = true;
 declare var jQuery: any;
 
@@ -14,17 +15,26 @@ export class EditComponent implements AfterViewInit{
     showEdit:boolean = true;
     showGeneral:boolean = false;
     editUserPass: Object;
-    userBasicInfo: userBasicInfo[];
-    userGeneralInfo: userGeneralInfo[];
+    userBasicInfo;
+    userGeneralInfo;
     userPass: Object;
     progLang: Object;
+    userId: Number;
 
     constructor(
         private editService: EditService,
-        private authenticationService: AuthenticationService) {
+        private authenticationService: AuthenticationService,
+        private activatedRoute: ActivatedRoute) {
 
-        this.editService.getUserBasicInfo("server_url").subscribe(value => {
+        this.activatedRoute.params.subscribe(
+            data =>{
+                this.userId = data['user'];
+            }
+        );
+
+        this.editService.getUserBasicInfo(this.userId).subscribe(value => {
                 this.userBasicInfo = value;
+                console.log(this.userBasicInfo);
             },
             err => {
                 console.log('Something went wrong!');
@@ -53,8 +63,14 @@ export class EditComponent implements AfterViewInit{
 
     saveUserBasicInfo(editForm: Object){
         this.progLang = jQuery(this.choosenSelect.nativeElement).val();
-        editForm['progLang'] = this.progLang;
-        this.editService.setUserBasicInfo(editForm, "server_url");
+        //editForm['programmingLanguages'] = this.progLang;
+        console.log(editForm);
+        this.editService.setUserBasicInfo(editForm, this.userId)
+        .subscribe(
+            data =>{
+                this.userBasicInfo = data;
+            }
+        );
     }
 
     saveUserGeneralInfo(editGeneralData: Object){

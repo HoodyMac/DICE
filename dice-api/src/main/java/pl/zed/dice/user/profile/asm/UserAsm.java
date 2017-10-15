@@ -33,7 +33,7 @@ public class UserAsm {
     }
 
     public UserProfileDTO makeUserProfileDTO(UserProfile userProfile){
-        return new UserProfileDTO(userProfile.getFirstname(), userProfile.getLastname(),
+        return new UserProfileDTO(userProfile.getId(), userProfile.getFirstname(), userProfile.getLastname(),
                 userProfile.getGender().toString(), userProfile.getOrigImage(), userProfile.getCropImage(),
                 userProfile.getBirthdayDate().toString(), userProfile.getPhoneNumber(),
                 userProfile.getCity(), userProfile.getProgrammingLanguages(), userProfile.getWork(),
