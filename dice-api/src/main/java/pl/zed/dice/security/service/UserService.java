@@ -2,16 +2,20 @@ package pl.zed.dice.security.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.zed.dice.exception.user.UserAlreadyExistsException;
+import pl.zed.dice.exception.user.UserNotFoundException;
 import pl.zed.dice.security.asm.UserAccountAsm;
 import pl.zed.dice.security.model.UserInfoDTO;
 import pl.zed.dice.user.profile.asm.UserAsm;
 import pl.zed.dice.security.domain.UserAccount;
 import pl.zed.dice.user.profile.domain.UserProfile;
 import pl.zed.dice.user.profile.model.UserDTO;
+import pl.zed.dice.user.profile.model.UserProfileDTO;
 import pl.zed.dice.security.repository.UserProfileRepository;
 import pl.zed.dice.security.repository.UserRepository;
 
 import java.text.ParseException;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -29,28 +33,43 @@ public class UserService {
     private UserAccountAsm userAccountAsm;
 
     public void save(UserDTO userDTO) throws ParseException {
-        UserAccount userAccount = userAsm.convertDtoToUserAccount(userDTO);
-        UserProfile userProfile = userAsm.convertDtoToUserProfile(userDTO);
+        if(userRepository.findByEmail(userDTO.getEmail()) == null) {
+            UserProfile userProfile = userAsm.makeUserProfile(userDTO);
+            userProfileRepository.save(userProfile);
 
-        userProfileRepository.save(userProfile);
-        userAccount.setProfile(userProfile);
-        userRepository.save(userAccount);
+            UserAccount userAccount = userAsm.makeUserAccount(userDTO);
+            userAccount.setProfile(userProfile);
+            userRepository.save(userAccount);
+        }else
+            throw new UserAlreadyExistsException(userDTO.getEmail());
     }
 
-    public UserDTO getUserProfile(Long id){
-        UserProfile userProfile = userProfileRepository.findById(id).get();
-        return userAsm.getUserProfileDto(userProfile);
+    public UserProfileDTO getUserProfile(Long id){
+        Optional<UserProfile> userProfile = userProfileRepository.findById(id);
+        if(userProfile.isPresent()){
+            return userAsm.makeUserProfileDTO(userProfile.get());
+        }else
+            throw new UserNotFoundException(id);
     }
 
-    public UserDTO editUserProfile(Long id, UserDTO userDTO) throws ParseException {
-        UserProfile userProfile = userProfileRepository.findById(id).get();
-        userProfile.edit(userDTO);
-        userProfileRepository.save(userProfile);
-        return userAsm.getUserProfileDto(userProfile);
+    public UserProfileDTO editUserProfile(Long id, UserProfileDTO userProfileDTO) throws ParseException {
+        Optional<UserProfile> userProfile = userProfileRepository.findById(id);
+        if(userProfile.isPresent()){
+            userProfile.get().edit(userProfileDTO);
+            userProfileRepository.save(userProfile.get());
+            return userAsm.makeUserProfileDTO(userProfile.get());
+        }else
+            throw new UserNotFoundException(id);
+
     }
 
     public UserInfoDTO getUserInfo(String email) {
         UserAccount userAccount = userRepository.findByEmail(email);
         return userAccountAsm.convertAccountToUserInfoDTO(userAccount);
+    }
+
+    public UserProfileDTO getMyProfile(String email){
+        UserAccount userAccount = userRepository.findByEmail(email);
+        return userAsm.makeUserProfileDTO(userAccount.getProfile());
     }
 }

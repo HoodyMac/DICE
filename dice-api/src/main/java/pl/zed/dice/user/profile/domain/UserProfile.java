@@ -1,7 +1,7 @@
 package pl.zed.dice.user.profile.domain;
 
 import org.springframework.format.annotation.DateTimeFormat;
-import pl.zed.dice.user.profile.model.UserDTO;
+import pl.zed.dice.user.profile.model.UserProfileDTO;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -175,15 +175,15 @@ public class UserProfile {
         this.education = education;
     }
 
-    public void edit(UserDTO userDTO) throws ParseException {
+    public void edit(UserProfileDTO userProfileDTO) throws ParseException {
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = format.parse(userDTO.getBirthdayDate());
-        this.firstname = userDTO.getFirstname();
-        this.lastname = userDTO.getLastname();
-        this.gender = userDTO.getGender().equalsIgnoreCase("female") ? Gender.FEMALE : Gender.MALE;
+        Date date = format.parse(userProfileDTO.getBirthdayDate());
+        this.firstname = userProfileDTO.getFirstname();
+        this.lastname = userProfileDTO.getLastname();
+        this.gender = userProfileDTO.getGender().equalsIgnoreCase("female") ? Gender.FEMALE : Gender.MALE;
         this.birthdayDate = date;
-        this.city = userDTO.getCity();
-        this.education = userDTO.getEducation();
-        this.work = userDTO.getWork();
+        this.city = userProfileDTO.getCity();
+        this.education = userProfileDTO.getEducation();
+        this.work = userProfileDTO.getWork();
     }
 }

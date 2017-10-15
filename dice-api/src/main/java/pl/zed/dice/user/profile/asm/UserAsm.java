@@ -6,6 +6,7 @@ import pl.zed.dice.security.domain.UserAccount;
 import pl.zed.dice.user.profile.domain.Gender;
 import pl.zed.dice.user.profile.domain.UserProfile;
 import pl.zed.dice.user.profile.model.UserDTO;
+import pl.zed.dice.user.profile.model.UserProfileDTO;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -16,11 +17,14 @@ import java.util.Locale;
 @Component
 public class UserAsm {
 
-    public UserAccount convertDtoToUserAccount(UserDTO userDTO){
-        return new UserAccount(userDTO.getEmail(), new BCryptPasswordEncoder().encode(userDTO.getPassword()), true, new Date());
+    public UserAccount makeUserAccount(UserDTO userDTO){
+        return new UserAccount(
+                userDTO.getEmail(),
+                new BCryptPasswordEncoder().encode(userDTO.getPassword()),
+                true, new Date());
     }
 
-    public UserProfile convertDtoToUserProfile(UserDTO userDTO) throws ParseException {
+    public UserProfile makeUserProfile(UserDTO userDTO) throws ParseException {
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date date = format.parse(userDTO.getBirthdayDate());
 
@@ -28,8 +32,8 @@ public class UserAsm {
                 userDTO.getGender().equalsIgnoreCase("Female")? Gender.FEMALE : Gender.MALE, date);
     }
 
-    public UserDTO getUserProfileDto(UserProfile userProfile){
-        return new UserDTO(userProfile.getFirstname(), userProfile.getLastname(),
+    public UserProfileDTO makeUserProfileDTO(UserProfile userProfile){
+        return new UserProfileDTO(userProfile.getFirstname(), userProfile.getLastname(),
                 userProfile.getGender().toString(), userProfile.getOrigImage(), userProfile.getCropImage(),
                 userProfile.getBirthdayDate().toString(), userProfile.getPhoneNumber(),
                 userProfile.getCity(), userProfile.getProgrammingLanguages(), userProfile.getWork(),
