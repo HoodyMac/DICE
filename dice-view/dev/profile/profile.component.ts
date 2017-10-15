@@ -2,6 +2,7 @@ import {Component, AfterViewInit, ElementRef, ViewChild} from '@angular/core';
 import {ProfileService} from "../services/profile.service";
 import {AuthenticationService} from "../common/services/authentication.service";
 import {Router} from '@angular/router';
+import {userInfo} from "os";
 let clicked = true;
 declare var jQuery: any;
 
@@ -12,10 +13,8 @@ declare var jQuery: any;
 })
 
 export class ProfileComponent implements AfterViewInit{
-  userInfo; //userInfo[];
-  countModules: any; //count_module[];
-  userLabel: Object;
-  modalWindowTitle: string;
+  userInfo = {};
+  countModules: any;
   croppedImgSrc: Object;
   editImgSrc: string = "/app/img/edit_icon_gray.png";
   @ViewChild('cropbox') cropbox: ElementRef;
@@ -32,7 +31,9 @@ export class ProfileComponent implements AfterViewInit{
 
     this.profileService.getUserInfo("me").subscribe(
       data => {
+          console.log(data);
           this.userInfo = data;
+          console.log(this.userInfo);
         },
         err => {
           console.log('Something went wrong!');
@@ -43,7 +44,7 @@ export class ProfileComponent implements AfterViewInit{
           this.countModules = module;
         },
         err => {
-          console.log('Something went wrong! ');
+          console.log('Something went wrong!');
         }
     );
 
@@ -52,19 +53,6 @@ export class ProfileComponent implements AfterViewInit{
       label: "Friends",
       value: 45
     }];
-
-    // this.userInfo = [{
-    //   originalImgSrc: "/app/img/Ivan_Loichuk_bg500x500.jpg",
-    //   cropImgSrc:  "/app/img/Ivan_Loichuk_bg.jpg",
-    //   username: "Ivan Loichuk",
-    //   city: "Rivne",
-    //   education: "Politech",
-    //   work: "Spark",
-    //   age: 25,
-    //   prgLanguages: "PHP",
-    //   phoneNumber: "+752115558",
-    //   isOnline: true
-    // }];
 
 /* ################################## */
 
@@ -127,24 +115,4 @@ export class ProfileComponent implements AfterViewInit{
   editProfile(){
     this._router.navigate(['/edit', {user: this.userInfo.userId}])
   }
-}
-
-// interface userInfo{
-//   userId: number;
-//   originalImgSrc: string;
-//   cropImgSrc: string;
-//   firstname:string;
-//   lastname:string;
-//   city:string;
-//   education:string;
-//   work:string;
-//   age:string;
-//   prgLanguages:string;
-//   phoneNumber:string;
-//   isOnline:boolean;
-// }
-
-interface count_module{
-  label:string;
-  value:number;
 }

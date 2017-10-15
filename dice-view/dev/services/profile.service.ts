@@ -36,9 +36,13 @@ export class ProfileService{
             }
          */
         if(id != "me"){
-            return this.http.get("/api/user/"+id).map(res => res.json());
+            return this.http.get("/api/user/"+id).map(res => {
+                return res.json();
+            });
         }else
-            return this.http.get("/api/me").map(res => res.json());
+            return this.http.get("/api/me").map(res => {
+                return res.json();
+            });
     }
 
     postCoordsImageCrop(cropImgData: Object, url){

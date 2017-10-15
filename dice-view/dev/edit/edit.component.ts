@@ -15,15 +15,14 @@ export class EditComponent implements AfterViewInit{
     showEdit:boolean = true;
     showGeneral:boolean = false;
     editUserPass: Object;
-    userBasicInfo;
-    userGeneralInfo;
+    userBasicInfo = {};
+    userGeneralInfo = {};
     userPass: Object;
     progLang: Object;
     userId: Number;
 
     constructor(
         private editService: EditService,
-        private authenticationService: AuthenticationService,
         private activatedRoute: ActivatedRoute) {
 
         this.activatedRoute.params.subscribe(
@@ -41,31 +40,32 @@ export class EditComponent implements AfterViewInit{
             }
         );
 
-        this.editService.getUserGeneralInfo("server_url").subscribe(value => {
-                this.userGeneralInfo = value;
-            },
-            err => {
-                console.log('Something went wrong!');
-            }
-        );
 
 
-        this.editService.getPass("server_url").subscribe(value => {
-                this.userPass = value;
-            },
-            err => {
-                console.log('Something went wrong!');
-            }
-        );
+        // this.editService.getUserGeneralInfo("server_url").subscribe(value => {
+        //         this.userGeneralInfo = value;
+        //     },
+        //     err => {
+        //         console.log('Something went wrong!');
+        //     }
+        // );
+        //
+        //
+        // this.editService.getPass("server_url").subscribe(value => {
+        //         this.userPass = value;
+        //     },
+        //     err => {
+        //         console.log('Something went wrong!');
+        //     }
+        // );
 
 
-    };
+    }
 
-    saveUserBasicInfo(editForm: Object){
+    saveUserBasicInfo(){
         this.progLang = jQuery(this.choosenSelect.nativeElement).val();
-        //editForm['programmingLanguages'] = this.progLang;
-        console.log(editForm);
-        this.editService.setUserBasicInfo(editForm, this.userId)
+        //this.userBasicInfo['programmingLanguages'] = this.progLang;
+        this.editService.setUserBasicInfo(this.userBasicInfo, this.userId)
         .subscribe(
             data =>{
                 this.userBasicInfo = data;
@@ -110,21 +110,3 @@ export class EditComponent implements AfterViewInit{
         }
     }
 }
-
-interface userBasicInfo{
-    firstName: string;
-    lastName: string;
-    gender:string;
-    birthday:string;
-    city:string;
-    education:string;
-    work:string;
-    age:string;
-    prgLanguages:string;
-}
-
-interface userGeneralInfo {
-    email: string,
-    phoneNumber: string
-}
-

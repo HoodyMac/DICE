@@ -23,7 +23,9 @@ export class EditService{
 
         }
          */
-        return this.http.get("/api/user/"+id).map(res => res.json());
+        return this.http.get("/api/user/"+id).map(res => {
+            return res.json();
+        });
     }
 
     getUserGeneralInfo(url){
@@ -50,6 +52,7 @@ export class EditService{
     }
 
     setUserBasicInfo(editUserInfo: Object, id){
+        console.log(editUserInfo);
         return this.http.put("/api/profile/"+id, editUserInfo).map(res => {
             return res.json();
         });

@@ -5,7 +5,7 @@
                 <div class="profile_image">
                     <div class="img" >
                         <!-- <a href="#"><img src="{{profileImgSrc.cropImgSrc}}" alt=""></a> -->
-                        <a href="#"><img src="{{userInfo.cropImgSrc}}" alt=""></a>   <!-- crop image -->
+                        <a href="#"><img src="{{ userInfo.cropImgSrc ? userInfo.cropImgSrc : '/app/img/default_user_photo.jpg'}}" alt=""></a>   <!-- crop image -->
                     </div>
                     <div class="change_photo">
                         <button type="button"  (click)="toggle('modal-change-photo')" class="modal-trigger btn btn-default" data-modal="modal-change-photo">Change photo</button><!-- Trigger Modal. -->
@@ -19,7 +19,7 @@
                                 <div class="modal-body">
                                     <!-- This is the image we're attaching Jcrop to -->
 
-                                    <img src="{{userInfo.originalImgSrc}}" #cropImgSrc #cropbox id="cropbox" style=""/>  <!-- original image -->
+                                    <img src="{{ userInfo.originalImgSrc ? userInfo.originalImgSrc : '/app/img/default_user_photo.jpg'}}" #cropImgSrc #cropbox id="cropbox" style=""/>  <!-- original image -->
 
                                     <!-- This is the form that our event handler fills -->
                                     <form action="" method="post" (submit)="checkCoords()" onsubmit="return checkCoords();">
@@ -27,7 +27,7 @@
                                         <input type="hidden" #y id="y" name="y" />
                                         <input type="hidden" #w id="w" name="w" />
                                         <input type="hidden" #h id="h" name="h" />
-                                        <input (click)="cropImageAndSave(cropImgSrc.src, x.value, y.value, w.value, h.value)" type="submit" value="Crop and Save" class="btn btn-default " />
+                                        <input (click)="cropImageAndSave( x.value, y.value, w.value, h.value)" type="submit" value="Crop and Save" class="btn btn-default " />
                                         <!-- Important!!  Upload image size (width <= 800, height: auto) -->
                                         <span class="btn btn-default btn-file">Upload image<input type="file" value="Upload image" class="btn btn-large btn-inverse"/></span>
                                     </form>
@@ -87,11 +87,11 @@
                         </div>
                         <div class="profile_info_row">
                             <div class="label_info">Age:</div>
-                            <div class="value">{{userInfo.age}}</div>
+                            <div class="value">{{userInfo.birthdayDate | date: 'dd/MM/yyyy'}}</div>
                         </div>
                         <div class="profile_info_row">
                             <div class="label_info">Programming languages:</div>
-                            <div class="value">{{userInfo.prgLanguages}}</div>
+                            <div class="value">{{userInfo.programmingLanguages}}</div>
                         </div>
                     </div>
                 </div>
