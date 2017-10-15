@@ -2,12 +2,17 @@ package pl.zed.dice.user.profile.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 import pl.zed.dice.security.JwtTokenUtil;
 import pl.zed.dice.security.JwtUser;
 import pl.zed.dice.security.service.UserService;
 import pl.zed.dice.user.profile.model.UserDTO;
+import pl.zed.dice.user.profile.model.UserProfileDTO;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
@@ -36,17 +41,24 @@ public class UserProfileController {
     }
 
     @PostMapping("/user/save")
+    @ResponseStatus(HttpStatus.OK)
     public void save(@RequestBody UserDTO userDTO) throws ParseException {
         userService.save(userDTO);
     }
 
     @GetMapping("/user/{id}")
-    public UserDTO getProfile(@PathVariable Long id){
+    public UserProfileDTO getProfile(@PathVariable Long id){
         return userService.getUserProfile(id);
     }
 
     @PutMapping("/profile/{id}")
-    public UserDTO editProfile(@PathVariable Long id, @RequestBody UserDTO userDTO) throws ParseException {
-        return userService.editUserProfile(id, userDTO);
+    public UserProfileDTO editProfile(@PathVariable Long id, @RequestBody UserProfileDTO userProfileDTO) throws ParseException {
+        return userService.editUserProfile(id, userProfileDTO);
+    }
+
+    @GetMapping("/me")
+    public UserProfileDTO getMySelf(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        return userService.getMyProfile(auth.getName());
     }
 }
