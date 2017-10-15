@@ -1,7 +1,54 @@
 {
   "HOME": {
-    "HOME": "Домашняя страница",
+
+    "HOME": "Главная",
     "ABOUT": "О нас",
-    "SIGN_IN": "Вход"
+    "SIGN_IN": "Вход",
+
+    "Its_free": "Это бесплатно",
+    "jmt-info_h2": "Присоединяйтесь с друзьям-разработчикам на DICE",
+    "jmt-info_h3": "Получите мгновенные обновления о том, что вас интересует в ИТ. И помогите своим друзьям-разработчикам в реальном времени.",
+    "registration": "РЕГИСТРАЦИЯ",
+    "log_in": "Авторизоваться",
+    "complete_form": "Заполните форму.",
+    "sign_in": "Авторизоваться",
+    "sign_up": "Регистрация",
+
+    "failed": "Ошибка!",
+    "success": "Успех!",
+
+    "firstNameAlert": "Вы должны ввести имя",
+    "firstNameLongAlert": "Слишком длинное имя",
+    "lastNameAlert": "Вы должны ввести фамилию",
+    "lastNameLongAlert": "Слишком длинная фамилия",
+    "genderAlert": "Вы должны вибрать пол",
+    "birthdayAlert": "Вы должны ввести дату рождения",
+    "emailAlert": "Вы должны ввести адрес электронной почты",
+    "emailInvalidAlert": "Введите действительный адрес электронной почты",
+    "passwordAlert": "Вы должны ввести первое пароль",
+    "passwordConfirmAlert": "Паролі не сходятся",
+
+    "genderMale": "Мужчина",
+    "genderFemale": "Женщина",
+
+    "makePosts": "Публикация новостей",
+    "sendMess": "Сообщения",
+    "makeQuestion": "Задай вопрос",
+    "forumDev": "Форум для разработчиков",
+    "whatIsDice": "Что такое DICE?",
+    "diceDescription": "DICE - это бесплатная социальная сеть, которая позволяет зарегистрированным пользователям создать свой профиль, отправлять сообщения и поддерживать связь с друзьями или коллегами.",
+    "diceSuchAs": "DICE включает публичные функции, такие как:",
+    "makePostsDesc": "- позволяет участникам публиковать, читать и отвечать на объявления.",
+    "sendMessDesc": "- позволяет членам использовать личние сообщения.",
+    "forumDevDesc": " - a great place to post questions and share comments with fellow developers or discuss a variety of development topics IT.",
+
+    "placeholder": {
+      "firstName" : "First name",
+      "lastName": "Last name",
+      "birthday": "Birthday",
+      "email": "Email",
+      "password": "Password",
+      "passwordVerify": "Verify your password"
+    }
   }
 }

@@ -24,35 +24,35 @@
     <div class="row">
       <div class="col-md-6 col-xs-12">
         <div class="jmt-info">              <!-- some information and signup button -->
-          <h4>It’s free</h4>
-          <h2>Connect with developer friends on DICE</h2>
-          <h3>Get in-the-moment updates on the things that interest you on IT. And help your developer friends, in real time.</h3>
-          <p><a class="btn btn-primary btn-lg button" href="home#registration" role="button">REGISTRATION</a></p>
+          <h4 translate>HOME.Its_free</h4>
+          <h2 translate>HOME.jmt-info_h2</h2>
+          <h3 translate>HOME.jmt-info_h3</h3>
+          <p><a class="btn btn-primary btn-lg button" href="home#registration" role="button" translate>HOME.registration</a></p>
         </div>
       </div>
       <div class="col-md-offset-1 col-md-4 col-sm-offset-2 col-sm-8 col-xs-12">
         <div class="signin">                <!-- signin form -->
           <div class="info">
-            <h2>Log in</h2>
-            <h4>Please complete the form.</h4>
+            <h2 translate>HOME.log_in</h2>
+            <h4 translate>HOME.complete_form</h4>
           </div>
 
           <div class="alert alert-danger signin_form"  *ngIf="showLoginMessage">
-            <strong>Failed!</strong> {{loginMessage}}
+            <strong translate>HOME.failed</strong> {{loginMessage}}
           </div>
 
           <form #formSignIn="ngForm" (ngSubmit)="onSignIn(formSignIn.value)">
             <div class="signin_form">
-              <input type="email" class="form-control" placeholder="Email"
+              <input type="email" class="form-control" placeholder="{{'HOME.placeholder.email' | translate }}"
                      name="email"
-                     ngModel #email="ngModel">
+                     ngModel #email="ngModel" translate>
             </div>
             <div class="signin_form">
-              <input type="password" class="form-control" placeholder="Password"
+              <input type="password" class="form-control" placeholder="{{'HOME.placeholder.password' | translate }}"
                      name="password"
                      ngModel #password="ngModel">
             </div>
-            <button type="submit" class="btn btn-default btn-signin  button">SIGN IN</button>
+            <button type="submit" class="btn btn-default btn-signin  button" translate>HOME.sign_in</button>
           </form>
         </div>
       </div>
@@ -66,62 +66,62 @@
       <div class="col-md-4  col-sm-6 col-xs-12 reset_padding">
         <div class="form">
           <form class="signup" novalidate [formGroup]="form" password-matcher #f="ngForm" (ngSubmit)="onSignUp(f.value)">                <!-- signup form -->
-            <span><h2>Sign Up</h2></span>
+            <span><h2 translate>HOME.sign_up</h2></span>
 
             <div class="alert alert-success signup_form" *ngIf="showRegistrationMessage">
-              <strong>Success!</strong> {{registrationMessage}}
+              <strong translate>HOME.success</strong> {{registrationMessage}}
             </div>
 
             <div class="signup_form">
-              <input type="text" class="form-control" formControlName="firstname" name="firstname" id="firstname" placeholder="Name">
+              <input type="text" class="form-control" formControlName="firstname" name="firstname" id="firstname" placeholder="{{'HOME.placeholder.firstName' | translate}}">
               <div class="errors" *ngIf="form.get('firstname').touched">
-                <p *ngIf="form.get('firstname').errors != null ? form.get('firstname').errors.required :  false ">You must enter a firstname</p>
-                <p *ngIf="form.get('firstname').errors != null ? form.get('firstname').errors.maxlength :  false " >Long firstname</p>
+                <p *ngIf="form.get('firstname').errors != null ? form.get('firstname').errors.required :  false " translate>HOME.firstNameAlert</p>
+                <p *ngIf="form.get('firstname').errors != null ? form.get('firstname').errors.maxlength :  false " translate>HOME.firstNameLongAlert</p>
               </div>
 
             </div>
             <div class="signup_form">
-              <input type="text" class="form-control" formControlName="lastname" id="lastname" placeholder="Surname">
+              <input type="text" class="form-control" formControlName="lastname" id="lastname" placeholder="{{'HOME.placeholder.lastName' | translate}}">
               <div class="errors" *ngIf="form.get('lastname').touched">
-                <p *ngIf="form.get('lastname').errors != null ? form.get('lastname').errors.required :  false ">You must enter a lastname</p>
-                <p *ngIf="form.get('lastname').errors != null ? form.get('lastname').errors.maxlength :  false " >Long lastname</p>
+                <p *ngIf="form.get('lastname').errors != null ? form.get('lastname').errors.required :  false " translate>HOME.lastNameAlert</p>
+                <p *ngIf="form.get('lastname').errors != null ? form.get('lastname').errors.maxlength :  false " translate>HOME.lastNameLongAlert</p>
               </div>
             </div>
             <div class="gender">
-              <label for="male"> Male
+              <label for="male" translate> HOME.genderMale
                 <input type="radio"  formControlName="gender"  id="male" value="Male"></label>
-              <label for="female">Female
+              <label for="female" translate>HOME.genderFemale
                 <input type="radio" formControlName="gender" id="female" value="Female"></label>
               <div class="errors" *ngIf="form.get('gender').touched">
-                <p *ngIf="form.get('gender').invalid">You must select a gender</p>
+                <p *ngIf="form.get('gender').invalid" translate>HOME.genderAlert</p>
               </div>
             </div>
             <div class="birthday signup_form">
-              <input type="date"  formControlName="birthdayDate" id="birthdayDate" placeholder="Birthday">
+              <input type="date"  formControlName="birthdayDate" id="birthdayDate" placeholder="{{'HOME.placeholder.birthday' | translate }}">
               <div class="errors" *ngIf="form.get('birthdayDate').touched">
-                <p *ngIf="form.get('birthdayDate').invalid">You must enter a birthdayDate</p>
+                <p *ngIf="form.get('birthdayDate').invalid" translate>HOME.birthdayAlert</p>
               </div>
             </div>
             <div class="signup_form">
-              <input type="email" class="form-control" formControlName="email"  id="email" placeholder="Email" pattern = "^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+              <input type="email" class="form-control" formControlName="email"  id="email" placeholder="{{'HOME.placeholder.email' | translate }}" pattern = "^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
               <div class="errors" *ngIf="form.get('email').touched" >
-                <p *ngIf="form.get('email').errors != null ? form.get('email').errors.required :  false " >You must enter an email address</p>
-                <p *ngIf="form.get('email').errors != null ? form.get('email').errors.pattern :  false " >Your email address is invalid. Please enter a valid address</p>
+                <p *ngIf="form.get('email').errors != null ? form.get('email').errors.required :  false " translate>HOME.emailAlert</p>
+                <p *ngIf="form.get('email').errors != null ? form.get('email').errors.pattern :  false " translate>HOME.emailInvalidAlert</p>
               </div>
             </div>
             <div class="signup_form">
-              <input type="password" class="form-control" formControlName="password"  id="password" placeholder="Password">
+              <input type="password" class="form-control" formControlName="password"  id="password" placeholder="{{'HOME.placeholder.password' | translate }}">
               <div class="errors" *ngIf="form.get('password').touched">
-                <p *ngIf="form.get('password').invalid">You must enter a password</p>
+                <p *ngIf="form.get('password').invalid" translate>HOME.passwordAlert</p>
               </div>
             </div>
             <div class="signup_form">
-              <input type="password" class="form-control" formControlName="confirmPassword" id="confirmPassword" placeholder="Verify your password">
+              <input type="password" class="form-control" formControlName="confirmPassword" id="confirmPassword" placeholder="{{'HOME.placeholder.passwordVerify' | translate }}">
               <div class="errors" *ngIf="form.get('confirmPassword').touched">
-                <p *ngIf="form.get('confirmPassword').invalid || form.errors != null">Confirm password don't match</p>
+                <p *ngIf="form.get('confirmPassword').invalid || form.errors != null" translate>HOME.passwordConfirmAlert</p>
               </div>
             </div>
-            <button type="submit" class="btn btn-default btn-signin button" [disabled]="!form.valid">SIGN UP</button>
+            <button type="submit" class="btn btn-default btn-signin button" [disabled]="!form.valid" translate>HOME.sign_up</button>
           </form>
         </div>
 
@@ -131,19 +131,19 @@
           <div class="slides">
             <div class="slide">
               <img src="/app/img/slide_1.png" alt="">
-              <div class="text"><p>Make posts</p></div>
+              <div class="text"><p translate>HOME.makePosts</p></div>
             </div>
             <div class="slide">
               <img src="/app/img/slide_1.png" alt="">
-              <div class="text"><p>Send messages</p></div>
+              <div class="text"><p translate>HOME.sendMess</p></div>
             </div>
             <div class="slide">
               <img src="/app/img/slide_1.png" alt="">
-              <div class="text"><p>Make a question</p></div>
+              <div class="text"><p translate>HOME.makeQuestion</p></div>
             </div>
             <div class="slide">
               <img src="/app/img/slide_1.png" alt="">
-              <div class="text"><p>Forum for Developers</p></div>
+              <div class="text"><p translate>HOME.forumDev</p></div>
             </div>
           </div>
 
@@ -151,17 +151,16 @@
       </div>
       <div class="col-md-4 col-sm-3 col-xs-6 reset_padding">
         <div class="about_dice_info">
-          <div class="title">
-            What is DICE?
+          <div class="title" translate>
+            HOME.whatIsDice
           </div>
           <div class="text">
-            <p>DICE is a free social networking website that allows registered users to create profiles, send messages and keep in touch with developer friends or colleagues.<br><br></p>
-              <h4>The site includes public features such as:</h4><br>
-            <p>
-              <span class="bold">Make posts</span> - allows members to post, read and respond to classified ads.<br>
-              <span class="bold">Send a messages</span> - allows members use Direct Messages to have private conversations with people about IT and other content.<br>
-              <span class="bold">Forum for Developers</span> - a great place to post questions and share comments with fellow developers or discuss a variety of development topics IT.
-            </p>
+            <p translate>HOME.diceDescription<br><br></p>
+              <h4 translate>HOME.diceSuchAs</h4><br>
+            <p translate> <span class="bold" translate>HOME.makePosts</span>HOME.makePostsDesc<br> </p>
+            <p translate><span class="bold" translate>HOME.sendMess</span>HOME.sendMessDesc<br></p>
+            <p translate><span class="bold" translate>HOME.forumDev</span>HOME.forumDevDesc</p>
+
           </div>
         </div>
       </div>

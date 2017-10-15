@@ -1,7 +1,54 @@
 {
   "HOME": {
-    "HOME": "Strona domowa",
+
+    "HOME": "DICE",
     "ABOUT": "O nas",
-    "SIGN_IN": "Zaloguj"
+    "SIGN_IN": "Zaloguj się",
+
+    "Its_free": "To jest za darmo",
+    "jmt-info_h2": "Nawiąż kontakt z przyjaciółmi w sferze IT z DICE",
+    "jmt-info_h3": "Uzyskaj aktualne informacje dotyczące rzeczy, które Cię interesują w informatyce. Pomóż swoim znajomym programistom, w czasie rzeczywistym",
+    "registration": "Dołącz do nas",
+    "log_in": "Zaloguj się",
+    "complete_form": "Proszę wypełnić formularz.",
+    "sign_in": "Zaloguj się",
+    "sign_up": "Rejestracja",
+
+    "failed": "Błąd!",
+    "success": "Powodzenie!",
+
+    "firstNameAlert": "Musisz podać imię",
+    "firstNameLongAlert": "Imię jest zbyt długie",
+    "lastNameAlert": "Musisz podać nazwisko",
+    "lastNameLongAlert": "Nazwisko jest zbyt długie",
+    "genderAlert": "Musisz wybrać płeć",
+    "birthdayAlert": "Musisz podać datę urodzenia",
+    "emailAlert": "Musisz podać email",
+    "emailInvalidAlert": "Proszę wprowadzić poprawny adres email.",
+    "passwordAlert": "Musisz podać hasło",
+    "passwordConfirmAlert": "Hasła nie są identyczne",
+
+    "genderMale": "Mężczyzna",
+    "genderFemale": "Kobieta",
+
+    "makePosts": "Publikowanie nowości",
+    "sendMess": "Wiadomości",
+    "makeQuestion": "Zadaj pytanie",
+    "forumDev": "Forum dla programistów",
+    "whatIsDice": "Co to jest DICE?",
+    "diceDescription": "DICE to darmowa strona społecznościowa, która umożliwia zarejestrowanym użytkownikom tworzenie własnego profilu, wysyłanie wiadomości i utrzymywanie kontaktów z przyjaciółmi lub kolegami",
+    "diceSuchAs": "DICE zawiera takie funkcje publiczne, jak:",
+    "makePostsDesc": "- pozwala użytkownikom publikować, czytać i odpowiadać na ogłoszenia.",
+    "sendMessDesc": "- umożliwia użytkownikom korzystanie z komunikatów bezpośrednich do osobistych rozmów.",
+    "forumDevDesc": "- świetne miejsce do publikowania swoich pytań i wymiany doświadczeniem z kolegami.",
+
+    "placeholder": {
+      "firstName" : "Imię",
+      "lastName": "Nazwisko",
+      "birthday": "Data urodzenia",
+      "email": "Email",
+      "password": "Hasło",
+      "passwordVerify": "Wprowadź hasło jeszcze raz"
+    }
   }
 }
