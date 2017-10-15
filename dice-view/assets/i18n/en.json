@@ -1,7 +1,54 @@
 {
   "HOME": {
+
     "HOME": "home",
     "ABOUT": "about",
-    "SIGN_IN": "sign in"
+    "SIGN_IN": "sign in",
+
+    "Its_free": "It’s free",
+    "jmt-info_h2": "Connect with developer friends on DICE",
+    "jmt-info_h3": "Get in-the-moment updates on the things that interest you on IT. And help your developer friends, in real time",
+    "registration": "REGISTRATION",
+    "log_in": "Log in",
+    "complete_form": "Please complete the form.",
+    "sign_in": "Sign in",
+    "sign_up": "Sign up",
+
+    "failed": "Failed!",
+    "success": "Success!",
+
+    "firstNameAlert": "You must enter a firstname",
+    "firstNameLongAlert": "Long firstname",
+    "lastNameAlert": "You must enter a lastname",
+    "lastNameLongAlert": "Long lastname",
+    "genderAlert": "You must select a gender",
+    "birthdayAlert": "You must enter a birthdayDate",
+    "emailAlert": "You must enter an email address",
+    "emailInvalidAlert": "Your email address is invalid. Please enter a valid address",
+    "passwordAlert": "You must enter a password",
+    "passwordConfirmAlert": "Confirm password don't match",
+
+    "genderMale": "Male",
+    "genderFemale": "Female",
+
+    "makePosts": "Make posts",
+    "sendMess": "Send messages",
+    "makeQuestion": "Make a question",
+    "forumDev": "Forum for Developers",
+    "whatIsDice": "What is DICE?",
+    "diceDescription": "DICE is a free social networking website that allows registered users to create profiles, send messages and keep in touch with developer friends or colleagues",
+    "diceSuchAs": "The site includes public features such as:",
+    "makePostsDesc": "- allows members to post, read and respond to classified ads.",
+    "sendMessDesc": "- allows members use Direct Messages to have private conversations with people about IT and other content.",
+    "forumDevDesc": " - a great place to post questions and share comments with fellow developers or discuss a variety of development topics IT.",
+
+    "placeholder": {
+      "firstName" : "First name",
+      "lastName": "Last name",
+      "birthday": "Birthday",
+      "email": "Email",
+      "password": "Password",
+      "passwordVerify": "Verify your password"
+    }
   }
 }
