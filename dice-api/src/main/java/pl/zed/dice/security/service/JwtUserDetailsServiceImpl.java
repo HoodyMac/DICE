@@ -7,17 +7,17 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import pl.zed.dice.security.JwtUserFactory;
 import pl.zed.dice.security.domain.UserAccount;
-import pl.zed.dice.security.repository.UserRepository;
+import pl.zed.dice.security.repository.UserAccountRepository;
 
 @Service
 public class JwtUserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserAccountRepository userAccountRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserAccount userAccount = userRepository.findByEmail(username);
+        UserAccount userAccount = userAccountRepository.findByEmail(username);
 
         if(userAccount == null) {
             throw new UsernameNotFoundException(String.format("No userAccount found with email: '%s'.", username));

@@ -3,11 +3,7 @@ package pl.zed.dice.user.profile.domain;
 import org.springframework.format.annotation.DateTimeFormat;
 import pl.zed.dice.user.profile.model.UserProfileDTO;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.transaction.Transactional;
+import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -29,7 +25,7 @@ public class UserProfile {
 
     private Gender gender;
 
-    @DateTimeFormat
+    @Temporal(TemporalType.DATE)
     private Date birthdayDate;
 
     private String phoneNumber;

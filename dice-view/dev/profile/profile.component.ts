@@ -2,6 +2,8 @@ import {Component, AfterViewInit, ElementRef, ViewChild} from '@angular/core';
 import {ProfileService} from "../services/profile.service";
 import {AuthenticationService} from "../common/services/authentication.service";
 import {Router} from '@angular/router';
+import {userInfo} from "os";
+import {ProfilePictureService} from "../common/services/profile-picture.service";
 let clicked = true;
 declare var jQuery: any;
 
@@ -12,27 +14,30 @@ declare var jQuery: any;
 })
 
 export class ProfileComponent implements AfterViewInit{
-  userInfo; //userInfo[];
+  @ViewChild('fileInput') inputEl: ElementRef;
+
+  userInfo: any; //userInfo[];
   countModules: any; //count_module[];
   userLabel: Object;
   modalWindowTitle: string;
+  userInfo = {};
+  countModules: any;
   croppedImgSrc: Object;
   editImgSrc: string = "/app/img/edit_icon_gray.png";
   @ViewChild('cropbox') cropbox: ElementRef;
-  @ViewChild('x') x: ElementRef;
-  @ViewChild('y') y: ElementRef;
-  @ViewChild('w') w: ElementRef;
-  @ViewChild('h') h: ElementRef;
 
 
   constructor(
     private profileService: ProfileService,
     private authenticationService: AuthenticationService,
-    private _router: Router) {
+    private _router: Router,
+    private profilePictureService: ProfilePictureService) {
 
     this.profileService.getUserInfo("me").subscribe(
       data => {
+          console.log(data);
           this.userInfo = data;
+          console.log(this.userInfo);
         },
         err => {
           console.log('Something went wrong!');
@@ -43,7 +48,7 @@ export class ProfileComponent implements AfterViewInit{
           this.countModules = module;
         },
         err => {
-          console.log('Something went wrong! ');
+          console.log('Something went wrong!');
         }
     );
 
@@ -52,19 +57,6 @@ export class ProfileComponent implements AfterViewInit{
       label: "Friends",
       value: 45
     }];
-
-    // this.userInfo = [{
-    //   originalImgSrc: "/app/img/Ivan_Loichuk_bg500x500.jpg",
-    //   cropImgSrc:  "/app/img/Ivan_Loichuk_bg.jpg",
-    //   username: "Ivan Loichuk",
-    //   city: "Rivne",
-    //   education: "Politech",
-    //   work: "Spark",
-    //   age: 25,
-    //   prgLanguages: "PHP",
-    //   phoneNumber: "+752115558",
-    //   isOnline: true
-    // }];
 
 /* ################################## */
 
@@ -81,10 +73,10 @@ export class ProfileComponent implements AfterViewInit{
 
     function updateCoords(c)
     {
-      jQuery(this.x).val(c.x);
-      jQuery(this.y).val(c.y);
-      jQuery(this.w).val(c.w);
-      jQuery(this.h).val(c.h);
+      jQuery('#x').val(c.x);
+      jQuery('#y').val(c.y);
+      jQuery('#w').val(c.w);
+      jQuery('#h').val(c.h);
     };
   }
 
@@ -98,17 +90,17 @@ export class ProfileComponent implements AfterViewInit{
   }
 
 
-  cropImageAndSave(imgSrc, x , y, w, h){
+  cropImageAndSave(x, y, w, h){
     let imgCropData = {
-      "imgSrc" : imgSrc,
       "x" : x,
       "y" : y,
       "w" : w,
       "h" : h
     };
-     this.profileService.postCoordsImageCrop(imgCropData, "server_url").subscribe(src =>{
-        this.croppedImgSrc = src;    // return only cropped image src
-     });
+    console.log(imgCropData);
+     // this.profileService.postCoordsImageCrop(imgCropData, "server_url").subscribe(src =>{
+     //    this.croppedImgSrc = src;    // return only cropped image src
+     // });
   };
 
   // open and close modal window
@@ -124,27 +116,22 @@ export class ProfileComponent implements AfterViewInit{
     }
   }
 
+  upload() {
+    let inputEl: HTMLInputElement = this.inputEl.nativeElement;
+    let fileCount: number = inputEl.files.length;
+    let formData = new FormData();
+    if (fileCount > 0) { // a file was selected
+      for (let i = 0; i < fileCount; i++) {
+        formData.append('file', inputEl.files.item(i));
+      }
+      this.profilePictureService.uploadProfilePicture(formData)
+        .subscribe(
+          () => console.log('done')
+        );
+    }
+  }
+
   editProfile(){
     this._router.navigate(['/edit']);
   }
-}
-
-// interface userInfo{
-//   userId: number;
-//   originalImgSrc: string;
-//   cropImgSrc: string;
-//   firstname:string;
-//   lastname:string;
-//   city:string;
-//   education:string;
-//   work:string;
-//   age:string;
-//   prgLanguages:string;
-//   phoneNumber:string;
-//   isOnline:boolean;
-// }
-
-interface count_module{
-  label:string;
-  value:number;
 }

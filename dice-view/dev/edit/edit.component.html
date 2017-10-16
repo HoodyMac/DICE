@@ -15,7 +15,7 @@
                 <div class="edit-header">
                     <div class="menu" id="">
                         <div>
-                            <a href="#" class="active username">UserName</a>
+                            <a href="home" class="active username">{{userBasicInfo.firstname +' '+ userBasicInfo.lastname}}</a>
                             <img src="/app/img/arrow.png" alt="">
                             <a href="#" class="nav-basic_info {{showEdit ? 'nav_show' : 'nav_hide'}}" >Basic info</a>
                             <a href="#" class="nav-general_settings {{showGeneral ? 'nav_show' : 'nav_hide'}}">General</a>
@@ -23,34 +23,39 @@
                     </div>
                 </div>
                 <div class="edit-content">
-                    <form class="basic_info_form {{showEdit ? 'show' : 'hide'}}" action="" method="POST" #editForm="ngForm" (ngSubmit)="saveUserBasicInfo(editForm.value)">
+                    <form class="basic_info_form {{showEdit ? 'show' : 'hide'}}" action="" method="POST" #editForm="ngForm" (ngSubmit)="saveUserBasicInfo()">
                         <div class="edit-form">
-                            <label for="edit_firstName">First name:</label><input type="text" id="edit_firstName" class="form-control" placeholder="Name"  ngModel name="firstname">
+                            <label for="edit_firstName">First name:</label><input type="text" id="edit_firstName" class="form-control" [(ngModel)]="userBasicInfo.firstname" placeholder="First name" name="firstname">
                         </div>
                         <div class="edit-form">
-                            <label for="edit_lastName">Last name:</label><input type="text" id="edit_lastName" class="form-control" placeholder="Last name" ngModel name="lastname">
+                            <label for="edit_lastName">Last name:</label><input type="text" id="edit_lastName" class="form-control" [(ngModel)]="userBasicInfo.lastname" placeholder="Last name" name="lastname">
+                        </div>
+
+                        <div class="edit-form">
+                             <label class="phone_label" for="edit_phoneNumber">Phone number:</label>
+                             <input type="text" id="edit_phoneNumber" class="form-control" [(ngModel)]="userGeneralInfo.phoneNumber" placeholder="Phone number" name="phoneNumber">
                         </div>
                         <div class="edit-form">
                             <label for="edit_gender">Gender:</label>
-                            <select name="edit_gender" id="edit_gender" #gender>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
+                            <select name="edit_gender" id="edit_gender" [(ngModel)]="userBasicInfo.gender" ng-reflect-model="userBasicInfo.gender">
+                                <option value="MALE">Male</option>
+                                <option value="FEMALE">Female</option>
                             </select>
                         </div>
                         <div class="edit-form">
-                            <label for="edit_birthday">Birthday:</label><input type="date" id="edit_birthday" class="form-control" placeholder="Birthday (mm/dd/yyyy)"  ngModel name="birthdayDate">
+                            <label for="edit_birthday">Birthday:</label><input type="date" id="edit_birthday" class="form-control" [(ngModel)]="userBasicInfo.birthdayDate" placeholder="Birthday" name="birthdayDate">
                         </div>
                         <div class="edit-form">
-                            <label for="edit_city">City:</label><input type="text" id="edit_city" class="form-control" placeholder="City"  ngModel name="city">
+                            <label for="edit_city">City:</label><input type="text" id="edit_city" class="form-control" [(ngModel)]="userBasicInfo.city" placeholder="City" name="city">
                         </div>
                         <div class="edit-form">
-                            <label for="edit_education">Education:</label><input type="text" id="edit_education" class="form-control" placeholder="Education" ngModel name="education">
+                            <label for="edit_education">Education:</label><input type="text" id="edit_education" class="form-control" [(ngModel)]="userBasicInfo.education" placeholder="Education"  name="education">
                         </div>
                         <div class="edit-form">
-                            <label for="edit_work">Work:</label><input type="text" id="edit_work" class="form-control" placeholder="Work" ngModel name="work">
+                            <label for="edit_work">Work:</label><input type="text" id="edit_work" class="form-control" [(ngModel)]="userBasicInfo.work" placeholder="Work" name="work">
                         </div>
                         <div class="edit-form"><label for="edit_prg_lang">Programing languages:</label>
-                            <select id="edit_prg_lang" #choosenSelect  data-placeholder="Choose your languages" class="chosen-select" multiple tabindex="5" size="5" >
+                            <select id="edit_prg_lang" #choosenSelect data-placeholder="Choose your languages" class="chosen-select" multiple tabindex="5" size="5" >
                                 <option value="java">Java</option>
                                 <option value="php">PHP</option>
                                 <option value="java" >Java</option>
@@ -67,7 +72,7 @@
                                 <label class="password_label">Password:</label>
                             </div>
                             <div class="settings_value">
-                                <input type="password" id="edit_password" name="edit_password" value="example" disabled="disabled">
+                                <input type="password" id="edit_password" name="edit_password" value="" disabled="disabled">
                             </div>
                             <a class="modal_change modal-trigger" data-modal="modal-edit-password" (click)="toggle('modal-edit-password')">Change</a>
                         </div>
@@ -76,15 +81,7 @@
                                 <label class="email_label">Email:</label>
                             </div>
                             <div class="settings_value">
-                                <input type="email" id="edit_email" ngModel name="edit_email" value="example@gmail.com">
-                            </div>
-                        </div>
-                        <div class="block">
-                            <div class="settings_label">
-                                <label class="phone_label">Phone number:</label>
-                            </div>
-                            <div class="settings_value">
-                                <input type="text" id="edit_phoneNumber" ngModel name="phoneNumber" value="+81555255">
+                                <input type="email" id="edit_email" ngModel name="edit_email" value="{{userGeneralInfo.email}}">
                             </div>
                         </div>
                         <div class="block">

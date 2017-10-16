@@ -17,7 +17,7 @@ public class JwtTokenUtil {
     @Value("secret")
     private String secret;
 
-    @Value("604800")
+    @Value("6048000")
     private Long expiration;
 
     public String getEmailFromToken(String token) {
