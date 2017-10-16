@@ -25,10 +25,6 @@ export class ProfileComponent implements AfterViewInit{
   croppedImgSrc: Object;
   editImgSrc: string = "/app/img/edit_icon_gray.png";
   @ViewChild('cropbox') cropbox: ElementRef;
-  @ViewChild('x') x: ElementRef;
-  @ViewChild('y') y: ElementRef;
-  @ViewChild('w') w: ElementRef;
-  @ViewChild('h') h: ElementRef;
 
 
   constructor(
@@ -77,10 +73,10 @@ export class ProfileComponent implements AfterViewInit{
 
     function updateCoords(c)
     {
-      jQuery(this.x).val(c.x);
-      jQuery(this.y).val(c.y);
-      jQuery(this.w).val(c.w);
-      jQuery(this.h).val(c.h);
+      jQuery('#x').val(c.x);
+      jQuery('#y').val(c.y);
+      jQuery('#w').val(c.w);
+      jQuery('#h').val(c.h);
     };
   }
 
@@ -94,17 +90,17 @@ export class ProfileComponent implements AfterViewInit{
   }
 
 
-  cropImageAndSave(imgSrc, x , y, w, h){
+  cropImageAndSave(x, y, w, h){
     let imgCropData = {
-      "imgSrc" : imgSrc,
       "x" : x,
       "y" : y,
       "w" : w,
       "h" : h
     };
-     this.profileService.postCoordsImageCrop(imgCropData, "server_url").subscribe(src =>{
-        this.croppedImgSrc = src;    // return only cropped image src
-     });
+    console.log(imgCropData);
+     // this.profileService.postCoordsImageCrop(imgCropData, "server_url").subscribe(src =>{
+     //    this.croppedImgSrc = src;    // return only cropped image src
+     // });
   };
 
   // open and close modal window
