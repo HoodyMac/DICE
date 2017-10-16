@@ -3,6 +3,7 @@ import {ProfileService} from "../services/profile.service";
 import {AuthenticationService} from "../common/services/authentication.service";
 import {Router} from '@angular/router';
 import {userInfo} from "os";
+import {ProfilePictureService} from "../common/services/profile-picture.service";
 let clicked = true;
 declare var jQuery: any;
 
@@ -13,6 +14,12 @@ declare var jQuery: any;
 })
 
 export class ProfileComponent implements AfterViewInit{
+  @ViewChild('fileInput') inputEl: ElementRef;
+
+  userInfo: any; //userInfo[];
+  countModules: any; //count_module[];
+  userLabel: Object;
+  modalWindowTitle: string;
   userInfo = {};
   countModules: any;
   croppedImgSrc: Object;
@@ -27,7 +34,8 @@ export class ProfileComponent implements AfterViewInit{
   constructor(
     private profileService: ProfileService,
     private authenticationService: AuthenticationService,
-    private _router: Router) {
+    private _router: Router,
+    private profilePictureService: ProfilePictureService) {
 
     this.profileService.getUserInfo("me").subscribe(
       data => {
@@ -109,6 +117,21 @@ export class ProfileComponent implements AfterViewInit{
     else {
       modal.style.display = 'none';
       clicked = true;
+    }
+  }
+
+  upload() {
+    let inputEl: HTMLInputElement = this.inputEl.nativeElement;
+    let fileCount: number = inputEl.files.length;
+    let formData = new FormData();
+    if (fileCount > 0) { // a file was selected
+      for (let i = 0; i < fileCount; i++) {
+        formData.append('file', inputEl.files.item(i));
+      }
+      this.profilePictureService.uploadProfilePicture(formData)
+        .subscribe(
+          () => console.log('done')
+        );
     }
   }
 

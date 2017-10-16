@@ -11,10 +11,9 @@ import pl.zed.dice.security.domain.UserAccount;
 import pl.zed.dice.user.profile.domain.UserProfile;
 import pl.zed.dice.user.profile.model.UserDTO;
 import pl.zed.dice.user.profile.model.UserProfileDTO;
-import pl.zed.dice.security.repository.UserProfileRepository;
-import pl.zed.dice.security.repository.UserRepository;
+import pl.zed.dice.user.profile.repository.UserProfileRepository;
+import pl.zed.dice.security.repository.UserAccountRepository;
 
-import javax.transaction.Transactional;
 import java.text.ParseException;
 import java.util.Optional;
 
@@ -22,7 +21,7 @@ import java.util.Optional;
 public class UserService {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserAccountRepository userAccountRepository;
 
     @Autowired
     private UserProfileRepository userProfileRepository;
@@ -34,13 +33,13 @@ public class UserService {
     private UserAccountAsm userAccountAsm;
 
     public void save(UserDTO userDTO) throws ParseException {
-        if(userRepository.findByEmail(userDTO.getEmail()) == null) {
+        if(userAccountRepository.findByEmail(userDTO.getEmail()) == null) {
             UserProfile userProfile = userAsm.makeUserProfile(userDTO);
             userProfileRepository.save(userProfile);
 
             UserAccount userAccount = userAsm.makeUserAccount(userDTO);
             userAccount.setProfile(userProfile);
-            userRepository.save(userAccount);
+            userAccountRepository.save(userAccount);
         }else
             throw new UserAlreadyExistsException(userDTO.getEmail());
     }
@@ -61,12 +60,12 @@ public class UserService {
     }
 
     public UserInfoDTO getUserInfo(String email) {
-        UserAccount userAccount = userRepository.findByEmail(email);
+        UserAccount userAccount = userAccountRepository.findByEmail(email);
         return userAccountAsm.convertAccountToUserInfoDTO(userAccount);
     }
 
     public UserProfileDTO getMyProfile(String email){
-        UserAccount userAccount = userRepository.findByEmail(email);
+        UserAccount userAccount = userAccountRepository.findByEmail(email);
         return userAsm.makeUserProfileDTO(userAccount.getProfile());
     }
 }

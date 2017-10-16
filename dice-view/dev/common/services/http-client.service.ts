@@ -25,6 +25,10 @@ export class HttpClient {
     return this._http.post(url, JSON.stringify(body), this.createRequestOptionsArgs());
   }
 
+  post(url: string, body: any, requestOptions: any): Observable<Response> {
+    return this._http.post(url, body, requestOptions);
+  }
+
   put(url: string, body: any): Observable<Response> {
     return this._http.put(url, body, this.createRequestOptionsArgs());
   }

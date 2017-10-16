@@ -15,6 +15,7 @@ import {FooterComponent} from "./footer/footer.component";
 import {FriendsComponent} from "./friends/friends.component";
 import {EditComponent} from "./edit/edit.component";
 import {TranslateModule, TranslateStaticLoader, TranslateLoader} from "ng2-translate";
+import {ProfilePictureService} from "./common/services/profile-picture.service";
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -51,7 +52,7 @@ const appRoutes: Routes = [
     FooterComponent,
     PasswordMatcher
   ],
-  providers: [HttpClient, AuthenticationService, RegistrationService],
+  providers: [HttpClient, AuthenticationService, RegistrationService, ProfilePictureService],
   bootstrap: [AppComponent]
 
 })

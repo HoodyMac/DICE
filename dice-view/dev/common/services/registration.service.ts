@@ -4,7 +4,7 @@ import 'rxjs/Rx';
 import {Observable} from "rxjs/Observable";
 
 @Injectable()
-export class RegistrationService{
+export class RegistrationService {
     constructor(private _http: HttpClient) {}
 
       doSignUp(credentials: any): Observable {
