@@ -33,7 +33,7 @@
 
                         <div class="edit-form">
                              <label class="phone_label" for="edit_phoneNumber">Phone number:</label>
-                             <input type="text" id="edit_phoneNumber" class="form-control" [(ngModel)]="userGeneralInfo.phoneNumber" placeholder="Phone number" name="phoneNumber">
+                             <input type="text" id="edit_phoneNumber" class="form-control" [(ngModel)]="userBasicInfo.phoneNumber" placeholder="Phone number" name="phoneNumber">
                         </div>
                         <div class="edit-form">
                             <label for="edit_gender">Gender:</label>
@@ -66,7 +66,7 @@
                         </div>
 
                     </form>
-                    <form class="general_settings_form {{showGeneral ? 'show' : 'hide'}}" #editGeneralData="ngForm" (ngSubmit)="saveUserBasicInfo(editGeneralData.value)">
+                    <form class="general_settings_form {{showGeneral ? 'show' : 'hide'}}" #editGeneralData="ngForm" (submit)="saveUserEmail(editGeneralData.value)">
                         <div class="block">
                             <div class="settings_label">
                                 <label class="password_label">Password:</label>
@@ -81,7 +81,7 @@
                                 <label class="email_label">Email:</label>
                             </div>
                             <div class="settings_value">
-                                <input type="email" id="edit_email" ngModel name="edit_email" value="{{userGeneralInfo.email}}">
+                                <input type="email" id="edit_email" [(ngModel)]="userBasicInfo.email" name="email" value="{{userGeneralInfo.email}}">
                             </div>
                         </div>
                         <div class="block">
@@ -100,11 +100,11 @@
                                 <form action="" method="POST" #editPasswordData="ngForm" (ngSubmit)="saveUserPassword(editPasswordData.value)">
                                     <div class="form-group">
                                         <label for="current_pass">Current password:</label>
-                                        <input type="password" class="form-control" id="current_pass" name="current_pass" placeholder="Current password">
+                                        <input type="password" class="form-control" id="current_pass" ngModel name="oldPassword" placeholder="Current password">
                                     </div>
                                     <div class="form-group">
                                         <label for="new_pass">New password:</label>
-                                        <input type="password" class="form-control" id="new_pass" ngModel name="new_pass" placeholder="New password">
+                                        <input type="password" class="form-control" id="new_pass" ngModel name="password" placeholder="New password">
                                     </div>
                                     <div class="form-group">
                                         <label for="confirm_pass">Confirm password:</label>

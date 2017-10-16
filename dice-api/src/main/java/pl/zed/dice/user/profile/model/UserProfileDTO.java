@@ -37,7 +37,6 @@ public class UserProfileDTO {
         this.education = education;
     }
 
-
     public Long getUserId() {
         return userId;
     }

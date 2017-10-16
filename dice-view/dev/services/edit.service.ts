@@ -32,17 +32,14 @@ export class EditService{
         });
     }
 
-    setUserGeneralInfo(editGeneralData: any){
-        return this.http.post(
-            "/api/account",
-            JSON.stringify(editGeneralData)
-        ).map(res => res.json());
+    setUserEmail(editGeneralData: any){
+        return this.http.put("/api/account", editGeneralData).map(res => res.json());
     }
 
     setUserPassword(editUserPass){
-        return this.http.post(
-            "/api/account",
-            JSON.stringify(editUserPass)
+        console.log(editUserPass);
+        return this.http.put(
+            "/api/account", editUserPass
         ).map(res => res.json());
     }
 }

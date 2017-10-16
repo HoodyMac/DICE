@@ -10,13 +10,13 @@ import pl.zed.dice.exception.user.UserNotFoundException;
 import pl.zed.dice.exception.user.WrongOldPasswordException;
 import pl.zed.dice.security.asm.UserAccountAsm;
 import pl.zed.dice.security.model.UserInfoDTO;
+import pl.zed.dice.security.repository.UserAccountRepository;
 import pl.zed.dice.user.profile.asm.UserAsm;
 import pl.zed.dice.security.domain.UserAccount;
 import pl.zed.dice.user.profile.domain.UserProfile;
 import pl.zed.dice.user.profile.model.UserDTO;
 import pl.zed.dice.user.profile.model.UserProfileDTO;
-import pl.zed.dice.security.repository.UserProfileRepository;
-import pl.zed.dice.security.repository.UserRepository;
+import pl.zed.dice.user.profile.repository.UserProfileRepository;
 
 import java.text.ParseException;
 import java.util.Optional;
@@ -25,7 +25,7 @@ import java.util.Optional;
 public class UserService {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserAccountRepository userRepository;
 
     @Autowired
     private UserProfileRepository userProfileRepository;
@@ -90,7 +90,7 @@ public class UserService {
     public UserProfileDTO getMyProfile(String email){
         UserAccount userAccount = userRepository.findByEmail(email);
         UserProfileDTO userProfileDTO = userAsm.makeUserProfileDTO(userAccount.getProfile());
-        userProfileDTO.setEducation(userAccount.getEmail());
+        userProfileDTO.setEmail(userAccount.getEmail());
         return userProfileDTO;
     }
 }

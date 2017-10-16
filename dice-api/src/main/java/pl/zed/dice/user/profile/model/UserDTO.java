@@ -10,6 +10,8 @@ public class UserDTO {
     private String birthdayDate;
     private String oldPassword;
 
+    public UserDTO(){}
+
     public String getEmail() {
         return email;
     }

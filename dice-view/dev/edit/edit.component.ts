@@ -66,7 +66,7 @@ export class EditComponent implements AfterViewInit{
         this.progLang = jQuery(this.choosenSelect.nativeElement).val();
         this.userBasicInfo.programmingLanguages= this.progLang.toString();
         console.log(this.userBasicInfo.programmingLanguages);
-        this.editService.setUserBasicInfo(this.userBasicInfo, this.userId)
+        this.editService.setUserBasicInfo(this.userBasicInfo)
         .subscribe(
             data =>{
                 this.userBasicInfo = data;
@@ -74,11 +74,27 @@ export class EditComponent implements AfterViewInit{
         );
     }
 
-    saveUserGeneralInfo(editGeneralData: Object){
-        this.editService.setUserGeneralInfo(editGeneralData, "server_url");
+    saveUserEmail(editGeneralData: Object){
+        console.log(editGeneralData);
+        this.editService.setUserEmail(editGeneralData).subscribe(
+            success =>{
+                console.log("Edited");
+            },
+            error =>{
+                console.log("Ooops :(");
+            }
+        );
     }
+
     saveUserPassword(editUserPass){
-        this.editService.setUserPassword(editUserPass, "server_url");
+        this.editService.setUserPassword(editUserPass).subscribe(
+            success =>{
+                console.log("Changed :)");
+            },
+            error =>{
+                console.log(error._body);
+            }
+        );
     }
 
     // jQuery Chosen initialize...
