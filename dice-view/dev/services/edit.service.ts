@@ -23,48 +23,25 @@ export class EditService{
 
         }
          */
-        return this.http.get("/api/user/"+id).map(res => res.json());
+        return this.http.get("/api/me").map(res => res.json());
     }
 
-    getUserGeneralInfo(url){
-
-            /**
-             {
-                email: string,
-                phoneNumber: string
-             }
-
-             */
-            return this.http.get(url).map(res => res.json());
-    }
-
-    getPass(url){
-
-        /**
-         {
-            password: string;
-         }
-
-         */
-        return this.http.get(url).map(res => res.json());
-    }
-
-    setUserBasicInfo(editUserInfo: Object, id){
-        return this.http.put("/api/profile/"+id, editUserInfo).map(res => {
+    setUserBasicInfo(editUserInfo: Object){
+        return this.http.put("/api/profile/", editUserInfo).map(res => {
             return res.json();
         });
     }
 
-    setUserGeneralInfo(editGeneralData: any, url){
+    setUserGeneralInfo(editGeneralData: any){
         return this.http.post(
-            url,
+            "/api/account",
             JSON.stringify(editGeneralData)
         ).map(res => res.json());
     }
 
-    setUserPassword(editUserPass, url){
+    setUserPassword(editUserPass){
         return this.http.post(
-            url,
+            "/api/account",
             JSON.stringify(editUserPass)
         ).map(res => res.json());
     }

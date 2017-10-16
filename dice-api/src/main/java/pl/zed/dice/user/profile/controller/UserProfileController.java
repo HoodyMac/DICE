@@ -46,14 +46,22 @@ public class UserProfileController {
         userService.save(userDTO);
     }
 
-    @GetMapping("/user/{id}")
+    @GetMapping("/profile/{id}")
     public UserProfileDTO getProfile(@PathVariable Long id){
         return userService.getUserProfile(id);
     }
 
-    @PutMapping("/profile/{id}")
-    public UserProfileDTO editProfile(@PathVariable Long id, @RequestBody UserProfileDTO userProfileDTO) throws ParseException {
-        return userService.editUserProfile(id, userProfileDTO);
+    @PutMapping("/profile")
+    public UserProfileDTO editProfile(@RequestBody UserProfileDTO userProfileDTO) throws ParseException {
+        return userService.editUserProfile(userProfileDTO);
+    }
+
+    @PutMapping("/account")
+    public void editUserAccountPassword(@RequestBody UserDTO userDTO){
+        if(userDTO.getPassword() == null){
+            userService.editUserAccountEmail(userDTO);
+        }else
+            userService.editUserPassword(userDTO);
     }
 
     @GetMapping("/me")

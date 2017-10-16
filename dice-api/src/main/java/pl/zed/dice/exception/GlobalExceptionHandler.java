@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import pl.zed.dice.exception.user.UserAlreadyExistsException;
 import pl.zed.dice.exception.user.UserNotFoundException;
+import pl.zed.dice.exception.user.WrongOldPasswordException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -20,6 +21,12 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(UserAlreadyExistsException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
     public String handleUserAlreadyExistsException(Exception ex){
+        return ex.getMessage();
+    }
+
+    @ExceptionHandler(WrongOldPasswordException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public String handleWrongPasswordException(Exception ex){
         return ex.getMessage();
     }
 }

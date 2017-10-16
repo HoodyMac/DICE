@@ -18,6 +18,7 @@ public class UserProfileDTO {
     private String work;
     private String education;
     private Boolean isOnline;
+    private String email;
 
     public UserProfileDTO(){}
 
@@ -35,6 +36,7 @@ public class UserProfileDTO {
         this.work = work;
         this.education = education;
     }
+
 
     public Long getUserId() {
         return userId;
@@ -138,5 +140,13 @@ public class UserProfileDTO {
 
     public void setOnline(Boolean online) {
         isOnline = online;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

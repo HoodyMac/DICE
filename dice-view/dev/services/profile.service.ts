@@ -36,7 +36,7 @@ export class ProfileService{
             }
          */
         if(id != "me"){
-            return this.http.get("/api/user/"+id).map(res => res.json());
+            return this.http.get("/api/profile/"+id).map(res => res.json());
         }else
             return this.http.get("/api/me").map(res => res.json());
     }

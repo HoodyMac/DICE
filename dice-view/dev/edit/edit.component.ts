@@ -16,7 +16,6 @@ export class EditComponent implements AfterViewInit{
     showGeneral:boolean = false;
     editUserPass: Object;
     userBasicInfo;
-    userGeneralInfo;
     userPass: Object;
     progLang: Object;
     userId: Number;
@@ -40,32 +39,13 @@ export class EditComponent implements AfterViewInit{
                 console.log('Something went wrong!');
             }
         );
-
-        this.editService.getUserGeneralInfo("server_url").subscribe(value => {
-                this.userGeneralInfo = value;
-            },
-            err => {
-                console.log('Something went wrong!');
-            }
-        );
-
-
-        this.editService.getPass("server_url").subscribe(value => {
-                this.userPass = value;
-            },
-            err => {
-                console.log('Something went wrong!');
-            }
-        );
-
-
     };
 
     saveUserBasicInfo(editForm: Object){
         this.progLang = jQuery(this.choosenSelect.nativeElement).val();
-        //editForm['programmingLanguages'] = this.progLang;
+        editForm['programmingLanguages'] = this.progLang;
         console.log(editForm);
-        this.editService.setUserBasicInfo(editForm, this.userId)
+        this.editService.setUserBasicInfo(editForm)
         .subscribe(
             data =>{
                 this.userBasicInfo = data;
@@ -74,10 +54,10 @@ export class EditComponent implements AfterViewInit{
     }
 
     saveUserGeneralInfo(editGeneralData: Object){
-        this.editService.setUserGeneralInfo(editGeneralData, "server_url");
+        this.editService.setUserGeneralInfo(editGeneralData);
     }
     saveUserPassword(editUserPass){
-        this.editService.setUserPassword(editUserPass, "server_url");
+        this.editService.setUserPassword(editUserPass);
     }
 
     // jQuery Chosen initialize...
@@ -111,20 +91,20 @@ export class EditComponent implements AfterViewInit{
     }
 }
 
-interface userBasicInfo{
-    firstName: string;
-    lastName: string;
-    gender:string;
-    birthday:string;
-    city:string;
-    education:string;
-    work:string;
-    age:string;
-    prgLanguages:string;
-}
+// interface userBasicInfo{
+//     firstName: string;
+//     lastName: string;
+//     gender:string;
+//     birthday:string;
+//     city:string;
+//     education:string;
+//     work:string;
+//     age:string;
+//     prgLanguages:string;
+// }
 
-interface userGeneralInfo {
-    email: string,
-    phoneNumber: string
-}
+// interface userGeneralInfo {
+//     email: string,
+//     phoneNumber: string
+// }
 

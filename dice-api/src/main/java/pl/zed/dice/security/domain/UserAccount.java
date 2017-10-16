@@ -1,6 +1,8 @@
 package pl.zed.dice.security.domain;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import pl.zed.dice.user.profile.domain.UserProfile;
+import pl.zed.dice.user.profile.model.UserDTO;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -50,6 +52,14 @@ public class UserAccount {
         this.password = password;
         this.enabled = enabled;
         this.lastPasswordResetDate = lastPasswordResetDate;
+    }
+
+    public void editUserEmail(UserDTO userDTO){
+        this.email = userDTO.getEmail();
+    }
+
+    public void editUserPassword(UserDTO userDTO){
+        this.password = new BCryptPasswordEncoder().encode(userDTO.getPassword());
     }
 
     public Long getId() {

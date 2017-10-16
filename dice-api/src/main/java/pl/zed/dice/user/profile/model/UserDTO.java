@@ -8,6 +8,7 @@ public class UserDTO {
     private String lastname;
     private String gender;
     private String birthdayDate;
+    private String oldPassword;
 
     public String getEmail() {
         return email;
@@ -55,5 +56,13 @@ public class UserDTO {
 
     public void setBirthdayDate(String birthdayDate) {
         this.birthdayDate = birthdayDate;
+    }
+
+    public String getOldPassword() {
+        return oldPassword;
+    }
+
+    public void setOldPassword(String oldPassword) {
+        this.oldPassword = oldPassword;
     }
 }

@@ -3,9 +3,11 @@ package pl.zed.dice.user.profile.domain;
 import org.springframework.format.annotation.DateTimeFormat;
 import pl.zed.dice.user.profile.model.UserProfileDTO;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.transaction.Transactional;
 import javax.validation.constraints.Size;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -180,12 +182,11 @@ public class UserProfile {
         Date date = format.parse(userProfileDTO.getBirthdayDate());
         this.firstname = userProfileDTO.getFirstname();
         this.lastname = userProfileDTO.getLastname();
-        if(userProfileDTO.getGender() != null) {
-            this.gender = userProfileDTO.getGender().equalsIgnoreCase("female") ? Gender.FEMALE : Gender.MALE;
-        }
+        this.gender = userProfileDTO.getGender().equalsIgnoreCase("female") ? Gender.FEMALE : Gender.MALE;
         this.birthdayDate = date;
         this.city = userProfileDTO.getCity();
         this.education = userProfileDTO.getEducation();
         this.work = userProfileDTO.getWork();
+        this.programmingLanguages = userProfileDTO.getProgrammingLanguages();
     }
 }

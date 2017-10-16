@@ -125,7 +125,7 @@ export class ProfileComponent implements AfterViewInit{
   }
 
   editProfile(){
-    this._router.navigate(['/edit', {user: this.userInfo.userId}])
+    this._router.navigate(['/edit']);
   }
 }
 
