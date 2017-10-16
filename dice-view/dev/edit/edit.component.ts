@@ -15,7 +15,7 @@ export class EditComponent implements AfterViewInit{
     showEdit:boolean = true;
     showGeneral:boolean = false;
     editUserPass: Object;
-    userBasicInfo = {};
+    userBasicInfo = {programmingLanguages: null};
     userGeneralInfo = {};
     userPass: Object;
     progLang: Object;
@@ -64,7 +64,8 @@ export class EditComponent implements AfterViewInit{
 
     saveUserBasicInfo(){
         this.progLang = jQuery(this.choosenSelect.nativeElement).val();
-        //this.userBasicInfo['programmingLanguages'] = this.progLang;
+        this.userBasicInfo.programmingLanguages= this.progLang.toString();
+        console.log(this.userBasicInfo.programmingLanguages);
         this.editService.setUserBasicInfo(this.userBasicInfo, this.userId)
         .subscribe(
             data =>{

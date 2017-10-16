@@ -71,25 +71,25 @@
                     <div class="separator"></div>
                     <div class="profile_info">
                         <div class="profile_info_row">
-                            <div class="label_info">City:</div>
-                            <div class="value">{{userInfo.city}}</div>
+                            <div class="label_info city" *ngIf="userInfo.city">City:</div>
+                            <div class="value" *ngIf="userInfo.city">{{userInfo.city}}</div>
                             <div class="edit_user_info">
                                 <a (click)="editProfile()" id="link_edit_icon" title="Edit profile"><img [src]="editImgSrc" (mouseover)="onMouseOver()" (mouseout)="onMouseOut()" id="edit_icon" alt="Edit profile" title="Edit profile"></a>
                             </div>
                         </div>
-                        <div class="profile_info_row">
+                        <div class="profile_info_row" *ngIf="userInfo.education">
                             <div class="label_info">Education:</div>
                             <div class="value">{{userInfo.education}}</div>
                         </div>
-                        <div class="profile_info_row">
+                        <div class="profile_info_row" *ngIf="userInfo.work">
                             <div class="label_info">Work:</div>
                             <div class="value">{{userInfo.work}}</div>
                         </div>
-                        <div class="profile_info_row">
+                        <div class="profile_info_row" *ngIf="userInfo.birthdayDate">
                             <div class="label_info">Age:</div>
                             <div class="value">{{userInfo.birthdayDate | date: 'dd/MM/yyyy'}}</div>
                         </div>
-                        <div class="profile_info_row">
+                        <div class="profile_info_row" *ngIf="userInfo.programmingLanguages">
                             <div class="label_info">Programming languages:</div>
                             <div class="value">{{userInfo.programmingLanguages}}</div>
                         </div>
