@@ -97,10 +97,9 @@ export class ProfileComponent implements AfterViewInit{
       "w" : w,
       "h" : h
     };
-    console.log(imgCropData);
-     // this.profileService.postCoordsImageCrop(imgCropData, "server_url").subscribe(src =>{
-     //    this.croppedImgSrc = src;    // return only cropped image src
-     // });
+     this.profileService.postCordsImageCrop(imgCropData).subscribe(
+       () => console.log("done")
+     );
   };
 
   // open and close modal window

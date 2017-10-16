@@ -9,7 +9,7 @@ export class ProfilePictureService {
 
   uploadProfilePicture(formData: any): Observable {
     return this._http
-      .post('/api/profile/image/', formData, {
+      .postWithOptions('/api/profile/image/', formData, {
         headers: {
           'Authorization': localStorage.getItem('token')
         }

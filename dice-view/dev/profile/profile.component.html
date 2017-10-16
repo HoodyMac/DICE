@@ -5,7 +5,7 @@
                 <div class="profile_image">
                     <div class="img" >
                         <!-- <a href="#"><img src="{{profileImgSrc.cropImgSrc}}" alt=""></a> -->
-                        <a href="#"><img src="{{ userInfo.cropImgSrc ? '/api/profile/image/' + userInfo.cropImgSrc : '/app/img/default_user_photo.jpg'}}" alt=""></a>   <!-- crop image -->
+                        <a href="#"><img src="{{ userInfo.cropImgSrc ? '/api/profile/image/get/' + userInfo.cropImgSrc : '/app/img/default_user_photo.jpg'}}" alt=""></a>   <!-- crop image -->
                     </div>
                     <div class="change_photo">
                         <button type="button"  (click)="toggle('modal-change-photo')" class="modal-trigger btn btn-default" data-modal="modal-change-photo">Change photo</button><!-- Trigger Modal. -->
@@ -19,7 +19,7 @@
                                 <div class="modal-body">
                                     <!-- This is the image we're attaching Jcrop to -->
 
-                                    <img src="{{ userInfo.originalImgSrc ? '/api/profile/image/' + userInfo.originalImgSrc : '/app/img/default_user_photo.jpg'}}" #cropImgSrc #cropbox id="cropbox" style=""/>  <!-- original image -->
+                                    <img src="{{ userInfo.originalImgSrc ? '/api/profile/image/get/' + userInfo.originalImgSrc : '/app/img/default_user_photo.jpg'}}" #cropImgSrc #cropbox id="cropbox" style=""/>  <!-- original image -->
 
                                     <!-- This is the form that our event handler fills -->
                                     <form action="" method="post" (submit)="checkCoords()" onsubmit="return checkCoords();">

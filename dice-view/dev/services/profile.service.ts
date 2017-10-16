@@ -45,11 +45,8 @@ export class ProfileService{
             });
     }
 
-    postCoordsImageCrop(cropImgData: Object, url){
-            return this.http.post(
-                url,
-                JSON.stringify(cropImgData)
-            ).map(res => res.json());
+    postCordsImageCrop(cropImgData: any) {
+            return this.http.post('/api/profile/image/crop', cropImgData);
     }
 
 }

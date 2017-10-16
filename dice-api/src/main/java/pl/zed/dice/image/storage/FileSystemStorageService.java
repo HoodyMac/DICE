@@ -5,8 +5,9 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
-import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.FileAlreadyExistsException;
@@ -26,20 +27,17 @@ public class FileSystemStorageService implements StorageService {
     }
 
     @Override
-    public void store(MultipartFile file) {
-        store(file, file.getOriginalFilename());
+    public void store(File file) {
+        store(file, file.getName());
     }
 
     @Override
-    public void store(MultipartFile file, String token) {
+    public void store(File file, String token) {
         try {
-            if (file.isEmpty()) {
-                throw new StorageException("Failed to store empty file " + file.getOriginalFilename());
-            }
-            Files.copy(file.getInputStream(), this.rootLocation.resolve(token));
+            Files.copy(new FileInputStream(file), this.rootLocation.resolve(token));
         } catch (FileAlreadyExistsException ignore) {
         } catch (IOException e) {
-            throw new StorageException("Failed to store file " + file.getOriginalFilename(), e);
+            throw new StorageException("Failed to store file " + token, e);
         }
     }
 
