@@ -27,7 +27,7 @@
                                         <input type="hidden" #y id="y" name="y" />
                                         <input type="hidden" #w id="w" name="w" />
                                         <input type="hidden" #h id="h" name="h" />
-                                        <input (click)="cropImageAndSave( x.value, y.value, w.value, h.value)" type="submit" value="Crop and Save" class="btn btn-default " />
+                                        <input (click)="cropImageAndSave( x.value, y.value, w.value, h.value)" type="button" value="Crop and Save" class="btn btn-default " />
                                         <!-- Important!!  Upload image size (width <= 800, height: auto) -->
                                         <span class="btn btn-default btn-file">Upload image<input type="file" value="Upload image" class="btn btn-large btn-inverse" [multiple]="false" #fileInput (change)="upload()"/></span>
                                     </form>
