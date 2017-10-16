@@ -188,5 +188,6 @@ public class UserProfile {
         this.education = userProfileDTO.getEducation();
         this.work = userProfileDTO.getWork();
         this.programmingLanguages = userProfileDTO.getProgrammingLanguages();
+        this.phoneNumber = userProfileDTO.getPhoneNumber();
     }
 }
