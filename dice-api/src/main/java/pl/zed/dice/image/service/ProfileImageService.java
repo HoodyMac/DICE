@@ -16,11 +16,19 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ProfileImageService {
     private static final char DOT_SEPARATOR = '.';
-    public static final String PNG_EXTENSION = "png";
+    private static final String PNG_EXTENSION = "png";
+
+    private final List<String> ALLOWED_EXTENSIONS = new ArrayList<String>() {{
+        add("bmp");
+        add("jpeg");
+        add("png");
+    }};
 
     @Autowired
     private UserProfileRepository userProfileRepository;
@@ -33,6 +41,10 @@ public class ProfileImageService {
 
 
     public void saveOriginalProfileImage(MultipartFile file) throws IOException {
+        String extension = Files.getFileExtension(file.getOriginalFilename()).toLowerCase();
+        if (!ALLOWED_EXTENSIONS.contains(extension)) {
+            throw new IllegalArgumentException(String.format("Can't save file with %s extension", extension));
+        }
         String token = saveProfileImage(multipartToFile(file));
         UserProfile currentUserProfile = securityContextService.getCurrentUserProfile();
         currentUserProfile.setOrigImage(token);
@@ -55,6 +67,9 @@ public class ProfileImageService {
             File croppedImage = new File(Files.getNameWithoutExtension(originalImage.getName()) + DOT_SEPARATOR + PNG_EXTENSION);
             ImageIO.write(bufferedCroppedImage, PNG_EXTENSION, croppedImage);
             String token = saveProfileImage(croppedImage);
+            if (!croppedImage.delete()) {
+                croppedImage.deleteOnExit();
+            }
 
             currentUserProfile.setCropImage(token);
             userProfileRepository.save(currentUserProfile);
@@ -68,8 +83,8 @@ public class ProfileImageService {
             throw new IllegalArgumentException("File is null");
         }
         String token = null;
-        try {
-            token = DigestUtils.md5DigestAsHex(new FileInputStream(file))
+        try(FileInputStream fileInputStream = new FileInputStream(file)) {
+            token = DigestUtils.md5DigestAsHex(fileInputStream)
                     + DOT_SEPARATOR
                     + Files.getFileExtension(file.getName()).toLowerCase();
         } catch (IOException e) {

@@ -33,8 +33,9 @@ public class FileSystemStorageService implements StorageService {
 
     @Override
     public void store(File file, String token) {
-        try {
-            Files.copy(new FileInputStream(file), this.rootLocation.resolve(token));
+
+        try(FileInputStream fileInputStream = new FileInputStream(file);) {
+            Files.copy(fileInputStream, this.rootLocation.resolve(token));
         } catch (FileAlreadyExistsException ignore) {
         } catch (IOException e) {
             throw new StorageException("Failed to store file " + token, e);
