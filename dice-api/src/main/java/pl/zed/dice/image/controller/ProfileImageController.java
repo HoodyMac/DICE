@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import pl.zed.dice.image.model.ProfileImageCropDTO;
+import pl.zed.dice.image.model.ProfileImageResponseDTO;
 import pl.zed.dice.image.service.ProfileImageService;
 import pl.zed.dice.image.storage.StorageService;
 
@@ -23,13 +24,19 @@ public class ProfileImageController {
     private StorageService storageService;
 
     @PostMapping
-    public void upload(@RequestParam("file") MultipartFile file) throws IOException {
-        profileImageService.saveOriginalProfileImage(file);
+    public ResponseEntity<ProfileImageResponseDTO> uploadProfileImage(@RequestParam("file") MultipartFile file) throws IOException {
+        String fileName = profileImageService.saveOriginalProfileImage(file);
+        return ResponseEntity
+                .ok()
+                .body(new ProfileImageResponseDTO(fileName));
     }
 
     @PostMapping("/crop")
-    public void cropProfileImage(@RequestBody ProfileImageCropDTO profileImageCropDTO) {
-        profileImageService.createAndSaveCropedProfileImage(profileImageCropDTO);
+    public ResponseEntity<ProfileImageResponseDTO> cropProfileImage(@RequestBody ProfileImageCropDTO profileImageCropDTO) throws IOException {
+        String fileName = profileImageService.createAndSaveCropedProfileImage(profileImageCropDTO);
+        return ResponseEntity
+                .ok()
+                .body(new ProfileImageResponseDTO(fileName));
     }
 
     @GetMapping("/get/{filename:.+}")

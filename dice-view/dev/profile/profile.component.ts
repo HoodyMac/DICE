@@ -125,7 +125,7 @@ export class ProfileComponent implements AfterViewInit{
       }
       this.profilePictureService.uploadProfilePicture(formData)
         .subscribe(
-          () => console.log('done')
+          (data) => console.log(data)
         );
     }
   }

@@ -9,6 +9,7 @@ import org.springframework.util.FileSystemUtils;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
@@ -27,15 +28,10 @@ public class FileSystemStorageService implements StorageService {
     }
 
     @Override
-    public void store(File file) {
-        store(file, file.getName());
-    }
+    public void store(InputStream inputStream, String token) {
 
-    @Override
-    public void store(File file, String token) {
-
-        try(FileInputStream fileInputStream = new FileInputStream(file);) {
-            Files.copy(fileInputStream, this.rootLocation.resolve(token));
+        try {
+            Files.copy(inputStream, this.rootLocation.resolve(token));
         } catch (FileAlreadyExistsException ignore) {
         } catch (IOException e) {
             throw new StorageException("Failed to store file " + token, e);

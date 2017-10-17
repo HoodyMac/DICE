@@ -13,6 +13,6 @@ export class ProfilePictureService {
         headers: {
           'Authorization': localStorage.getItem('token')
         }
-      })
+      }).map(resp => resp.json());
   }
 }
