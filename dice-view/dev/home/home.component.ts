@@ -1,6 +1,6 @@
 import {Component, Directive, OnInit} from '@angular/core';
 import {AuthenticationService} from "../common/services/authentication.service";
-import {RegistrationService} from "../common/services/registration.service";
+import {RegistrationService} from "../services/registration.service";
 import {
   NG_VALIDATORS, AbstractControl, Validators, FormGroup, FormBuilder,} from "@angular/forms";
 import {Router} from "@angular/router";
