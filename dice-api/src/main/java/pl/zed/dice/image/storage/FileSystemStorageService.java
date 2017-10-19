@@ -1,5 +1,6 @@
 package pl.zed.dice.image.storage;
 
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -29,13 +30,15 @@ public class FileSystemStorageService implements StorageService {
 
     @Override
     public void store(InputStream inputStream, String token) {
-
         try {
             Files.copy(inputStream, this.rootLocation.resolve(token));
         } catch (FileAlreadyExistsException ignore) {
         } catch (IOException e) {
             throw new StorageException("Failed to store file " + token, e);
+        } finally {
+            IOUtils.closeQuietly(inputStream);
         }
+
     }
 
     @Override
@@ -43,7 +46,7 @@ public class FileSystemStorageService implements StorageService {
         try {
             return Files.walk(this.rootLocation, 1)
                     .filter(path -> !path.equals(this.rootLocation))
-                    .map(path -> this.rootLocation.relativize(path));
+                    .map(this.rootLocation::relativize);
         } catch (IOException e) {
             throw new StorageException("Failed to read stored files", e);
         }

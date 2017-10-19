@@ -93,8 +93,10 @@ public class ProfileImageService {
     }
 
     private String generateFilename(InputStream inputStream, String originalFileName) throws IOException {
-        return DigestUtils.md5DigestAsHex(inputStream)
+        String token = DigestUtils.md5DigestAsHex(inputStream)
                 + DOT_SEPARATOR
                 + Files.getFileExtension(originalFileName).toLowerCase();
+        inputStream.close();
+        return token;
     }
 }

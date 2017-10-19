@@ -1,9 +1,6 @@
 import {Component, AfterViewInit, ElementRef, ViewChild} from '@angular/core';
 import {ProfileService} from "../services/profile.service";
-import {AuthenticationService} from "../common/services/authentication.service";
 import {Router} from '@angular/router';
-import {userInfo} from "os";
-import {ProfilePictureService} from "../common/services/profile-picture.service";
 let clicked = true;
 declare var jQuery: any;
 
@@ -18,39 +15,35 @@ export class ProfileComponent implements AfterViewInit{
 
   userInfo: any; //userInfo[];
   countModules: any; //count_module[];
-  userLabel: Object;
-  modalWindowTitle: string;
   userInfo = {};
   countModules: any;
-  croppedImgSrc: Object;
   editImgSrc: string = "/app/img/edit_icon_gray.png";
   @ViewChild('cropbox') cropbox: ElementRef;
+
+  private jcropApi: any;
 
 
   constructor(
     private profileService: ProfileService,
-    private authenticationService: AuthenticationService,
-    private _router: Router,
-    private profilePictureService: ProfilePictureService) {
+    private _router: Router) {
 
     this.profileService.getUserInfo("me").subscribe(
       data => {
-          console.log(data);
           this.userInfo = data;
-          console.log(this.userInfo);
+          this.jcropApi.setImage('/api/profile/image/get/' + this.userInfo.originalImgSrc);
         },
         err => {
           console.log('Something went wrong!');
         }
     );
 
-    this.profileService.getModule("server_url").subscribe(module => {
-          this.countModules = module;
-        },
-        err => {
-          console.log('Something went wrong!');
-        }
-    );
+    // this.profileService.getModule("server_url").subscribe(module => {
+    //       this.countModules = module;
+    //     },
+    //     err => {
+    //       console.log('Something went wrong!');
+    //     }
+    // );
 
 /* ######## EXAMPLES ################### */
     this.countModules = [{
@@ -64,10 +57,13 @@ export class ProfileComponent implements AfterViewInit{
 
 
   ngAfterViewInit() {
+    var that = this;
     if( jQuery(this.cropbox.nativeElement).length > 0){
-      jQuery(this.cropbox.nativeElement).Jcrop({
+      this.jcropApi = jQuery(this.cropbox.nativeElement).Jcrop({
         aspectRatio: 1,
         onSelect: updateCoords
+      }, function() {
+        that.jcropApi = this;
       });
     }
 
@@ -98,7 +94,10 @@ export class ProfileComponent implements AfterViewInit{
       "h" : h
     };
      this.profileService.postCordsImageCrop(imgCropData).subscribe(
-       () => console.log("done")
+       (data) => {
+         this.userInfo.cropImgSrc = data.newImageFileName;
+         console.log(data);
+       }
      );
   };
 
@@ -123,9 +122,12 @@ export class ProfileComponent implements AfterViewInit{
       for (let i = 0; i < fileCount; i++) {
         formData.append('file', inputEl.files.item(i));
       }
-      this.profilePictureService.uploadProfilePicture(formData)
+      this.profileService.uploadProfilePicture(formData)
         .subscribe(
-          (data) => console.log(data)
+          (data) => {
+            this.userInfo.originalImgSrc = data.newImageFileName;
+            this.jcropApi.setImage('/api/profile/image/get/' + this.userInfo.originalImgSrc);
+          }
         );
     }
   }
