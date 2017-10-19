@@ -40,15 +40,15 @@
     "diceSuchAs": "DICE включает публичные функции, такие как:",
     "makePostsDesc": "- позволяет участникам публиковать, читать и отвечать на объявления.",
     "sendMessDesc": "- позволяет членам использовать личние сообщения.",
-    "forumDevDesc": " - a great place to post questions and share comments with fellow developers or discuss a variety of development topics IT.",
+    "forumDevDesc": " - отличное место для размещения вопросов и обмена комментариями с другими разработчиками.",
 
     "placeholder": {
-      "firstName" : "First name",
-      "lastName": "Last name",
-      "birthday": "Birthday",
-      "email": "Email",
-      "password": "Password",
-      "passwordVerify": "Verify your password"
+      "firstName" : "Им'я",
+      "lastName": "Фамилия",
+      "birthday": "День рождения",
+      "email": "Электронный адрес",
+      "password": "Пароль",
+      "passwordVerify": "Введіте пароль ище раз"
     }
   }
 }

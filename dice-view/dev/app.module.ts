@@ -15,6 +15,7 @@ import {FooterComponent} from "./footer/footer.component";
 import {FriendsComponent} from "./friends/friends.component";
 import {EditComponent} from "./edit/edit.component";
 import {TranslateModule, TranslateStaticLoader, TranslateLoader} from "ng2-translate";
+import {ModalModule} from "ng2-modal"
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -38,7 +39,8 @@ const appRoutes: Routes = [
       provide: TranslateLoader,
       useFactory: (http: Http) => new TranslateStaticLoader(http, '/assets/i18n', '.json'),
       deps: [Http]
-    })
+    }),
+    ModalModule
   ],
   declarations: [
     AppComponent,
