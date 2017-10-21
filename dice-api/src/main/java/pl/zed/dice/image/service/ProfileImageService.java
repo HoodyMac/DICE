@@ -12,6 +12,7 @@ import pl.zed.dice.user.profile.domain.UserProfile;
 import pl.zed.dice.user.profile.repository.UserProfileRepository;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
@@ -24,6 +25,7 @@ import java.util.List;
 public class ProfileImageService {
     private static final char DOT_SEPARATOR = '.';
     private static final String PNG_EXTENSION = "png";
+    public static final int MAX_WIDTH = 800;
 
     private final List<String> ALLOWED_EXTENSIONS = new ArrayList<String>() {{
         add("bmp");
@@ -47,7 +49,31 @@ public class ProfileImageService {
         if (!ALLOWED_EXTENSIONS.contains(extension)) {
             throw new IllegalArgumentException(String.format("Can't save file with %s extension", extension));
         }
-        String token = saveProfileImage(file);
+
+        String token;
+
+        InputStream inputStream = file.getInputStream();
+        BufferedImage uploadedImage = ImageIO.read(inputStream);
+        inputStream.close();
+        int width = uploadedImage.getWidth();
+        int height = uploadedImage.getHeight();
+
+        if (width > MAX_WIDTH) {
+            int desiredWidth = MAX_WIDTH;
+            int desiredHeight = height * width / MAX_WIDTH;
+
+            BufferedImage scaledImage = getScaledImage(uploadedImage, desiredWidth, desiredHeight);
+
+            File croppedImage = new File(Files.getNameWithoutExtension(file.getName()) + DOT_SEPARATOR + PNG_EXTENSION);
+            ImageIO.write(scaledImage, PNG_EXTENSION, croppedImage);
+            token = saveProfileImage(croppedImage);
+            if (!croppedImage.delete()) {
+                croppedImage.deleteOnExit();
+            }
+        } else {
+
+            token = saveProfileImage(file);
+        }
         UserProfile currentUserProfile = securityContextService.getCurrentUserProfile();
         String imageToDeleteFileName = currentUserProfile.getOrigImage();
         currentUserProfile.setOrigImage(token);
@@ -109,5 +135,25 @@ public class ProfileImageService {
                 + Files.getFileExtension(originalFileName).toLowerCase();
         inputStream.close();
         return token;
+    }
+
+    private BufferedImage getScaledImage(BufferedImage src, int w, int h){
+        int finalw = w;
+        int finalh = h;
+        double factor = 1.0d;
+        if(src.getWidth() > src.getHeight()){
+            factor = ((double)src.getHeight()/(double)src.getWidth());
+            finalh = (int)(finalw * factor);
+        }else{
+            factor = ((double)src.getWidth()/(double)src.getHeight());
+            finalw = (int)(finalh * factor);
+        }
+
+        BufferedImage resizedImg = new BufferedImage(finalw, finalh, BufferedImage.TRANSLUCENT);
+        Graphics2D g2 = resizedImg.createGraphics();
+        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g2.drawImage(src, 0, 0, finalw, finalh, null);
+        g2.dispose();
+        return resizedImg;
     }
 }
