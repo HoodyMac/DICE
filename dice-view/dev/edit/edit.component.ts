@@ -77,10 +77,10 @@ export class EditComponent implements AfterViewInit{
     saveUserEmail(editGeneralData: Object){
         console.log(editGeneralData);
         this.editService.setUserEmail(editGeneralData).subscribe(
-            success =>{
+            () => {
                 console.log("Edited");
             },
-            error =>{
+            () => {
                 console.log("Ooops :(");
             }
         );

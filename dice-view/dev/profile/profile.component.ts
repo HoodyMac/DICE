@@ -30,7 +30,9 @@ export class ProfileComponent implements AfterViewInit{
     this.profileService.getUserInfo("me").subscribe(
       data => {
           this.userInfo = data;
-          this.jcropApi.setImage('/api/profile/image/get/' + this.userInfo.originalImgSrc);
+          if(this.jcropApi !== undefined) {
+            this.jcropApi.setImage('/api/profile/image/get/' + this.userInfo.originalImgSrc);
+          }
         },
         err => {
           console.log('Something went wrong!');
@@ -59,7 +61,7 @@ export class ProfileComponent implements AfterViewInit{
   ngAfterViewInit() {
     var that = this;
     if( jQuery(this.cropbox.nativeElement).length > 0){
-      this.jcropApi = jQuery(this.cropbox.nativeElement).Jcrop({
+      jQuery(this.cropbox.nativeElement).Jcrop({
         aspectRatio: 1,
         onSelect: updateCoords
       }, function() {
