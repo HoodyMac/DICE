@@ -1,6 +1,5 @@
 package pl.zed.dice.user.profile.domain;
 
-import org.springframework.format.annotation.DateTimeFormat;
 import pl.zed.dice.user.profile.model.UserProfileDTO;
 
 import javax.persistence.*;
@@ -11,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
+@NamedQuery(name = "UserProfile.findByOrigImageOrCropImage", query = "SELECT count(u.id) FROM UserProfile u WHERE LOWER(u.cropImage) = LOWER(?1) or LOWER(u.origImage) = LOWER(?1)")
 public class UserProfile {
 
     @Id

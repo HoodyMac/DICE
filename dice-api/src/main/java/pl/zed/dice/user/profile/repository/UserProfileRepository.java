@@ -6,4 +6,5 @@ import pl.zed.dice.user.profile.domain.UserProfile;
 
 @Repository
 public interface UserProfileRepository extends JpaRepository<UserProfile, Long>{
+    Integer findByOrigImageOrCropImage(String image);
 }

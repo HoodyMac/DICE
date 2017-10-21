@@ -49,8 +49,14 @@ public class ProfileImageService {
         }
         String token = saveProfileImage(file);
         UserProfile currentUserProfile = securityContextService.getCurrentUserProfile();
+        String imageToDeleteFileName = currentUserProfile.getOrigImage();
         currentUserProfile.setOrigImage(token);
         userProfileRepository.save(currentUserProfile);
+
+        if (userProfileRepository.findByOrigImageOrCropImage(imageToDeleteFileName).equals(0)) {
+            storageService.delete(imageToDeleteFileName);
+        }
+
         return token;
     }
 
@@ -74,8 +80,13 @@ public class ProfileImageService {
             croppedImage.deleteOnExit();
         }
 
+        String imageToDeleteFileName = currentUserProfile.getCropImage();
         currentUserProfile.setCropImage(token);
         userProfileRepository.save(currentUserProfile);
+
+        if (userProfileRepository.findByOrigImageOrCropImage(imageToDeleteFileName).equals(0)) {
+            storageService.delete(imageToDeleteFileName);
+        }
 
         return token;
     }
