@@ -1,9 +1,11 @@
-import {Component, ViewChild, ElementRef, AfterViewInit, Input, Output, EventEmitter} from '@angular/core';
+import {Component, ViewChild, ElementRef, AfterViewInit} from '@angular/core';
 import {EditService} from "../services/edit.service";
 import {AuthenticationService} from "../common/services/authentication.service";
 import {ActivatedRoute} from '@angular/router';
+import {FormGroup, FormBuilder} from "@angular/forms";
 let clicked = true;
 declare var jQuery: any;
+
 
 @Component({
     templateUrl: 'dev/edit/edit.component.html',
@@ -14,16 +16,19 @@ export class EditComponent implements AfterViewInit{
     @ViewChild('choosenSelect') choosenSelect: ElementRef;
     showEdit:boolean = true;
     showGeneral:boolean = false;
-    editUserPass: Object;
     userBasicInfo = {programmingLanguages: null};
     userGeneralInfo = {};
-    userPass: Object;
+    showEditMessage: boolean = false;
+    showEditPassMessage: boolean = false;
+    showEditEmailMessage: boolean = false;
     progLang: Object;
     userId: Number;
+    public passwordData: FormGroup;
 
     constructor(
         private editService: EditService,
-        private activatedRoute: ActivatedRoute) {
+        private activatedRoute: ActivatedRoute,
+        private fb:FormBuilder) {
 
         this.activatedRoute.params.subscribe(
             data =>{
@@ -40,25 +45,11 @@ export class EditComponent implements AfterViewInit{
             }
         );
 
-
-
-        // this.editService.getUserGeneralInfo("server_url").subscribe(value => {
-        //         this.userGeneralInfo = value;
-        //     },
-        //     err => {
-        //         console.log('Something went wrong!');
-        //     }
-        // );
-        //
-        //
-        // this.editService.getPass("server_url").subscribe(value => {
-        //         this.userPass = value;
-        //     },
-        //     err => {
-        //         console.log('Something went wrong!');
-        //     }
-        // );
-
+        this.passwordData = this.fb.group({
+            password: [''],
+            confirmPassword: [''],
+            oldPassword: ['']
+        });
 
     }
 
@@ -70,15 +61,24 @@ export class EditComponent implements AfterViewInit{
         .subscribe(
             data =>{
                 this.userBasicInfo = data;
+                this.showEditMessage = true;
+                setTimeout(function() {
+                    this.showEditMessage = false;
+                }.bind(this), 5000);
             }
         );
+
     }
 
     saveUserEmail(editGeneralData: Object){
         console.log(editGeneralData);
         this.editService.setUserEmail(editGeneralData).subscribe(
             () => {
-                console.log("Edited");
+                console.log("Email changed :)");
+                this.showEditEmailMessage = true;
+                setTimeout(function() {
+                    this.showEditEmailMessage = false;
+                }.bind(this), 5000);
             },
             () => {
                 console.log("Ooops :(");
@@ -89,7 +89,11 @@ export class EditComponent implements AfterViewInit{
     saveUserPassword(editUserPass){
         this.editService.setUserPassword(editUserPass).subscribe(
             success =>{
-                console.log("Changed :)");
+                console.log("Password changed :)");
+                this.showEditPassMessage = true;
+                setTimeout(function() {
+                    this.showEditPassMessage = false;
+                }.bind(this), 5000);
             },
             error =>{
                 console.log(error._body);

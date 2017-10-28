@@ -36,11 +36,6 @@
             <h2 translate>HOME.log_in</h2>
             <h4 translate>HOME.complete_form</h4>
           </div>
-
-          <div class="alert alert-danger signin_form"  *ngIf="showLoginMessage">
-            <strong translate>HOME.failed</strong> {{loginMessage}}
-          </div>
-
           <form #formSignIn="ngForm" (ngSubmit)="onSignIn(formSignIn.value)">
             <div class="signin_form">
               <input type="email" class="form-control" placeholder="{{'HOME.placeholder.email' | translate }}"
@@ -51,6 +46,10 @@
               <input type="password" class="form-control" placeholder="{{'HOME.placeholder.password' | translate }}"
                      name="password"
                      ngModel #password="ngModel">
+            </div>
+
+            <div class="alert alert-danger signin_form"  *ngIf="showLoginMessage">
+              <strong translate>HOME.loginFailed</strong>
             </div>
             <button type="submit" class="btn btn-default btn-signin  button" translate>HOME.sign_in</button>
           </form>
@@ -69,7 +68,7 @@
             <span><h2 translate>HOME.sign_up</h2></span>
 
             <div class="alert alert-success signup_form" *ngIf="showRegistrationMessage">
-              <strong translate>HOME.success</strong> {{registrationMessage}}
+              <strong translate>HOME.registrationSuccess</strong> {{registrationMessage}}
             </div>
 
             <div class="alert alert-danger signup_form" *ngIf="showErrorMessage">

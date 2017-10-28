@@ -14,8 +14,12 @@
     "sign_in": "Zaloguj się",
     "sign_up": "Rejestracja",
 
-    "failed": "Błąd!",
-    "success": "Powodzenie!",
+    "loginFailed": "Błąd! Niepoprawne dane logowania.",
+    "registrationSuccess": "Powodzenie! Twoje konto zostało zarejestrowane.",
+    "editMessage": "Twoje dane zostały poprawnie zmienione.",
+    "editEmailMessage": "Twój email został poprawnie zmieniony.",
+    "editPassMessage": "Twoje hasło zostało poprawnie zmienione.",
+    "imageChangeMessage": "Twoje zdjęcie się zmieniło. Proszę, zamknij okno.",
 
     "firstNameAlert": "Musisz podać imię",
     "firstNameLongAlert": "Imię jest zbyt długie",

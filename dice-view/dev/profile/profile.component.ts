@@ -21,6 +21,7 @@ export class ProfileComponent implements AfterViewInit{
   @ViewChild('cropbox') cropbox: ElementRef;
 
   private jcropApi: any;
+  viewImageChangeMessage: boolean = false;
 
 
   constructor(
@@ -98,23 +99,14 @@ export class ProfileComponent implements AfterViewInit{
      this.profileService.postCordsImageCrop(imgCropData).subscribe(
        (data) => {
          this.userInfo.cropImgSrc = data.newImageFileName;
+         this.viewImageChangeMessage = true;
+         setTimeout(function() {
+           this.viewImageChangeMessage = false;
+         }.bind(this), 6000);
          console.log(data);
        }
      );
   };
-
-  // open and close modal window
-  toggle(id): void {
-    let modal = document.getElementById(id);
-    if (clicked) {
-      modal.style.display = 'block';
-      clicked = false;
-    }
-    else {
-      modal.style.display = 'none';
-      clicked = true;
-    }
-  }
 
   upload() {
     let inputEl: HTMLInputElement = this.inputEl.nativeElement;

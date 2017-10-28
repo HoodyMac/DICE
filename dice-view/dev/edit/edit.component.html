@@ -43,7 +43,7 @@
                             </select>
                         </div>
                         <div class="edit-form">
-                            <label for="edit_birthday">Birthday:</label><input type="date" id="edit_birthday" class="form-control" [(ngModel)]="userBasicInfo.birthdayDate" placeholder="Birthday" name="birthdayDate">
+                            <label for="edit_birthday">Birthday:</label><input type="date" id="edit_birthday" class="form-control" [(ngModel)]="userBasicInfo.birthdayDate" required placeholder="Birthday" name="birthdayDate">
                         </div>
                         <div class="edit-form">
                             <label for="edit_city">City:</label><input type="text" id="edit_city" class="form-control" [(ngModel)]="userBasicInfo.city" placeholder="City" name="city">
@@ -61,9 +61,13 @@
                                 <option value="java" >Java</option>
                             </select>
                         </div>
+                        <div class="alert alert-success"  *ngIf="showEditMessage">
+                            <strong translate>HOME.editMessage</strong>
+                        </div>
                         <div class="edit-form">
                             <button type="submit" class="btn btn-default button">Save</button>
                         </div>
+
 
                     </form>
                     <form class="general_settings_form {{showGeneral ? 'show' : 'hide'}}" #editGeneralData="ngForm" (submit)="saveUserEmail(editGeneralData.value)">
@@ -72,7 +76,7 @@
                                 <label class="password_label">Password:</label>
                             </div>
                             <div class="settings_value">
-                                <input type="password" id="edit_password" name="edit_password" value="" disabled="disabled">
+                                <input type="password" id="edit_password" name="edit_password" value="Example pass" disabled="disabled">
                             </div>
                             <a class="modal_change modal-trigger" data-modal="modal-edit-password" (click)="toggle('modal-edit-password')">Change</a>
                         </div>
@@ -81,8 +85,11 @@
                                 <label class="email_label">Email:</label>
                             </div>
                             <div class="settings_value">
-                                <input type="email" id="edit_email" [(ngModel)]="userBasicInfo.email" name="email" value="{{userGeneralInfo.email}}">
+                                <input type="email" id="edit_email" [(ngModel)]="userBasicInfo.email" name="email" required value="{{userGeneralInfo.email}}">
                             </div>
+                        </div>
+                        <div class="alert alert-success"  *ngIf="showEditEmailMessage">
+                            <strong translate>HOME.editEmailMessage</strong>
                         </div>
                         <div class="block">
                             <button type="submit" class="btn btn-default button">Save</button>
@@ -97,22 +104,28 @@
                             </div>
                             <div class="modal-body">
                                 <div class="info">You can use any combination of Latin letters, numbers and special symbols ! @ # $ % ^ & * ( ) _ - +. Your password should not be shorter than 6 characters.</div>
-                                <form action="" method="POST" #editPasswordData="ngForm" (ngSubmit)="saveUserPassword(editPasswordData.value)">
+                                <form novalidate [formGroup]="passwordData" password-matcher #editPasswordData="ngForm"  (ngSubmit)="saveUserPassword(editPasswordData.value)">
                                     <div class="form-group">
                                         <label for="current_pass">Current password:</label>
-                                        <input type="password" class="form-control" id="current_pass" ngModel name="oldPassword" placeholder="Current password">
+                                        <input type="password" class="form-control" id="current_pass" ngModel formControlName="oldPassword" name="oldPassword" required placeholder="Current password">
                                     </div>
                                     <div class="form-group">
                                         <label for="new_pass">New password:</label>
-                                        <input type="password" class="form-control" id="new_pass" ngModel name="password" placeholder="New password">
+                                        <input type="password" class="form-control" id="new_pass" ngModel formControlName="password" name="password"  required placeholder="New password">
                                     </div>
                                     <div class="form-group">
                                         <label for="confirm_pass">Confirm password:</label>
-                                        <input type="password" class="form-control" id="confirm_pass" name="confirm_pass" placeholder="Confirm password">
+                                        <input type="password" class="form-control" id="confirm_pass" formControlName="confirmPassword" name="confirmPassword" required placeholder="Confirm password">
+                                    </div>
+                                    <div class="alert alert-danger" *ngIf="passwordData.get('password').touched && passwordData.errors != null">
+                                        <p *ngIf="passwordData.get('confirmPassword').invalid || passwordData.errors != null" translate>HOME.passwordConfirmAlert</p>
+                                    </div>
+                                    <div class="alert alert-success"  *ngIf="showEditPassMessage">
+                                        <strong translate>HOME.editPassMessage</strong>
                                     </div>
                                     <div class="form-group">
                                         <button type="reset" class="btn btn-default close-modal button" (click)="toggle('modal-edit-password')">Cancel</button>
-                                        <button type="submit" class="btn btn-default button">Save</button>
+                                        <button type="submit" class="btn btn-default button" [disabled]="!passwordData.valid">Save</button>
                                     </div>
                                 </form>
                             </div>

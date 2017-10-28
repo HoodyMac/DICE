@@ -14,8 +14,12 @@
     "sign_in": "Sign in",
     "sign_up": "Sign up",
 
-    "failed": "Failed!",
-    "success": "Success!",
+    "loginFailed": "Failed! Incorrect email or password.",
+    "registrationSuccess": "Success! Your account has been registered.",
+    "editMessage": "Your data has been changed correctly =)",
+    "editEmailMessage": "Your email has been changed correctly.",
+    "editPassMessage": "Your password has been changed correctly.",
+    "imageChangeMessage": "Your photo has changed. Please, close the window.",
 
     "firstNameAlert": "You must enter a firstname",
     "firstNameLongAlert": "Long firstname",
