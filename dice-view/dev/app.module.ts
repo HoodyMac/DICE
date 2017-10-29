@@ -17,6 +17,7 @@ import {FriendsComponent} from "./friends/friends.component";
 import {EditComponent} from "./edit/edit.component";
 import {TranslateModule, TranslateStaticLoader, TranslateLoader} from "ng2-translate";
 import {ModalModule} from "ng2-modal"
+import {MessagesComponent} from "./messages/messages.component";
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -24,6 +25,7 @@ const appRoutes: Routes = [
   { path: 'search', component: SearchComponent },
   { path: 'friends', component: FriendsComponent },
   { path: 'edit', component: EditComponent },
+  { path: 'messages', component: MessagesComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full'}
 ];
 
@@ -52,7 +54,8 @@ const appRoutes: Routes = [
     SearchComponent,
     NavbarComponent,
     FooterComponent,
-    PasswordMatcher
+    PasswordMatcher,
+    MessagesComponent
   ],
   providers: [HttpClient, AuthenticationService, RegistrationService],
   bootstrap: [AppComponent]
