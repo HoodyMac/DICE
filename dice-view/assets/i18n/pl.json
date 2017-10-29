@@ -16,9 +16,6 @@
 
     "loginFailed": "Błąd! Niepoprawne dane logowania.",
     "registrationSuccess": "Powodzenie! Twoje konto zostało zarejestrowane.",
-    "editMessage": "Twoje dane zostały poprawnie zmienione.",
-    "editEmailMessage": "Twój email został poprawnie zmieniony.",
-    "editPassMessage": "Twoje hasło zostało poprawnie zmienione.",
     "imageChangeMessage": "Twoje zdjęcie się zmieniło. Proszę, zamknij okno.",
 
     "firstNameAlert": "Musisz podać imię",
@@ -53,6 +50,69 @@
       "email": "Email",
       "password": "Hasło",
       "passwordVerify": "Wprowadź hasło jeszcze raz"
+    }
+  },
+
+  "HEADER":{
+    "home": "Moja strona",
+    "friends": "Znajomi",
+    "messages": "Wiadomości",
+    "forum": "Forum",
+
+    "search": "Wyszukiwanie",
+    "searchButton": "Szukaj",
+    "settings": "Ustawienia",
+    "log_out": "Wyjdź"
+  },
+
+  "FOOTER":{
+    "about": "o nas",
+    "help": "pomoc",
+    "developers": "deweloperzy",
+    "language": "Język:"
+  },
+
+  "EDIT": {
+    "editMessage": "Twoje dane zostały poprawnie zmienione.",
+    "editEmailMessage": "Twój email został poprawnie zmieniony.",
+    "editPassMessage": "Twoje hasło zostało poprawnie zmienione.",
+
+    "basicInfo": "Podstawowe",
+    "general": "Ogólne",
+    "firstname": "Imię:",
+    "lastname": "Nazwisko:",
+    "phoneNumber": "Numer telefonu:",
+    "gender": "Płeć:",
+    "male": "Mężczyzna",
+    "female": "Kobieta",
+    "birthday": "Data urodzenia:",
+    "city": "Miasto:",
+    "education": "Wyksztawcenie:",
+    "work": "Miejsce pracy:",
+    "programmingLang": "Języki programowania:",
+    "password": "Hasło:",
+    "email": "Email:",
+    "save": "Zapisz",
+    "changePassword": "Zmień hasło",
+    "passwordInfo": "Możesz użyć dowolnej kombinacji łacińskich liter, cyfr i symboli specjalnych! @ # $% ^ & * () _ - +. Hasło nie powinno być krótsze niż 6 znaków.",
+    "currentPassword": "Aktualne hasło:",
+    "newPassword": "Nowe hasło:",
+    "confirmPassword": "Potwierdź hasło:",
+    "cancel": "Anuluj",
+    "change": "Zmień",
+
+    "placeholder":{
+      "firstname": "Imię",
+      "lastname": "Nazwisko",
+      "phoneNumber": "Numer telefonu",
+      "gender": "Płeć",
+      "birthday": "Data urodzenia",
+      "city": "Miasto",
+      "education": "Wyksztawcenie",
+      "work": "Miejsce pracy",
+      "currentPassword": "Aktualne hasło",
+      "newPassword": "Nowe hasło",
+      "confirmPassword": "Potwierdź hasło"
     }
   }
 }
