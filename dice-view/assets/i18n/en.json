@@ -14,8 +14,9 @@
     "sign_in": "Sign in",
     "sign_up": "Sign up",
 
-    "failed": "Failed!",
-    "success": "Success!",
+    "loginFailed": "Failed! Incorrect email or password.",
+    "registrationSuccess": "Success! Your account has been registered.",
+    "imageChangeMessage": "Your photo has changed. Please, close the window.",
 
     "firstNameAlert": "You must enter a firstname",
     "firstNameLongAlert": "Long firstname",
@@ -50,5 +51,70 @@
       "password": "Password",
       "passwordVerify": "Verify your password"
     }
+  },
+
+  "HEADER":{
+    "home": "Home",
+    "friends": "Friends",
+    "messages": "Messages",
+    "forum": "Forum",
+
+    "search": "Search",
+    "searchButton": "Search",
+    "settings": "Settings",
+    "log_out": "Log out"
+  },
+
+  "FOOTER":{
+    "about": "about",
+    "help": "help",
+    "developers": "developers",
+    "language": "Language:"
+  },
+
+  "EDIT":{
+    "editMessage": "Your data has been changed correctly =)",
+    "editEmailMessage": "Your email has been changed correctly.",
+    "editPassMessage": "Your password has been changed correctly.",
+
+    "basicInfo": "Basic info",
+    "general": "General",
+    "firstname": "First name:",
+    "lastname": "Last name:",
+    "phoneNumber": "Phone number:",
+    "gender": "Gender:",
+    "male": "Male",
+    "female": "Female",
+    "birthday": "Birthday:",
+    "city": "City:",
+    "education": "Education:",
+    "work": "Work:",
+    "programmingLang": "Programing languages:",
+    "password": "Password:",
+    "email": "Email:",
+    "save": "Save",
+    "changePassword": "Change password",
+    "passwordInfo": "You can use any combination of Latin letters, numbers and special symbols ! @ # $ % ^ & * ( ) _ - +. Your password should not be shorter than 6 characters.",
+    "currentPassword": "Current password:",
+    "newPassword": "New password:",
+    "confirmPassword": "Confirm password:",
+    "cancel": "Cancel",
+    "change": "Change",
+
+    "placeholder":{
+      "firstname": "First name",
+      "lastname": "Last name",
+      "phoneNumber": "Phone number",
+      "gender": "Gender",
+      "birthday": "Birthday",
+      "city": "City",
+      "education": "Education",
+      "work": "Work",
+      "currentPassword": "Current password",
+      "newPassword": "New password",
+      "confirmPassword": "Confirm password:"
+    }
+
   }
+
 }

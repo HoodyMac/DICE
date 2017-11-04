@@ -1,13 +1,16 @@
 package pl.zed.dice.image.storage;
 
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
-import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
@@ -26,21 +29,16 @@ public class FileSystemStorageService implements StorageService {
     }
 
     @Override
-    public void store(MultipartFile file) {
-        store(file, file.getOriginalFilename());
-    }
-
-    @Override
-    public void store(MultipartFile file, String token) {
+    public void store(InputStream inputStream, String token) {
         try {
-            if (file.isEmpty()) {
-                throw new StorageException("Failed to store empty file " + file.getOriginalFilename());
-            }
-            Files.copy(file.getInputStream(), this.rootLocation.resolve(token));
+            Files.copy(inputStream, this.rootLocation.resolve(token));
         } catch (FileAlreadyExistsException ignore) {
         } catch (IOException e) {
-            throw new StorageException("Failed to store file " + file.getOriginalFilename(), e);
+            throw new StorageException("Failed to store file " + token, e);
+        } finally {
+            IOUtils.closeQuietly(inputStream);
         }
+
     }
 
     @Override
@@ -48,7 +46,7 @@ public class FileSystemStorageService implements StorageService {
         try {
             return Files.walk(this.rootLocation, 1)
                     .filter(path -> !path.equals(this.rootLocation))
-                    .map(path -> this.rootLocation.relativize(path));
+                    .map(this.rootLocation::relativize);
         } catch (IOException e) {
             throw new StorageException("Failed to read stored files", e);
         }

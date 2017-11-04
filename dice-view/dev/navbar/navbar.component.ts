@@ -18,8 +18,9 @@ export class NavbarComponent {
         .subscribe(
           data => {
             this.userInfo = data;
-          }
-        )
+          },
+          err => this.onLogout()
+        );
     }
   }
 

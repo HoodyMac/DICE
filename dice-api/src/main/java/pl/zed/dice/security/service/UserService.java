@@ -44,6 +44,9 @@ public class UserService {
     @Autowired
     private UserAccountAsm userAccountAsm;
 
+    @Autowired
+    private SecurityContextService securityContextService;
+
     public void save(UserDTO userDTO) throws ParseException {
         if(userRepository.findByEmail(userDTO.getEmail()) == null) {
             UserProfile userProfile = userAsm.makeUserProfile(userDTO);
@@ -65,23 +68,21 @@ public class UserService {
     }
 
     public UserProfileDTO editUserProfile(UserProfileDTO userProfileDTO) throws ParseException {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        UserProfile userProfile = userRepository.findByEmail(auth.getName()).getProfile();
+        UserProfile userProfile = securityContextService.getCurrentUserProfile();
         userProfile.edit(userProfileDTO);
         userProfileRepository.save(userProfile);
         return userAsm.makeUserProfileDTO(userProfile);
     }
 
-    public void editUserAccountEmail(UserDTO userDTO){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        UserAccount userAccount = userRepository.findByEmail(auth.getName());
+    public UserAccount editUserAccountEmail(UserDTO userDTO){
+        UserAccount userAccount = securityContextService.getCurrentUserAccount();
         userAccount.editUserEmail(userDTO);
-        userRepository.save(userAccount);
+        userRepository.saveAndFlush(userAccount);
+        return userAccount;
     }
 
     public void editUserPassword(UserDTO userDTO){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        UserAccount userAccount = userRepository.findByEmail(auth.getName());
+        UserAccount userAccount = securityContextService.getCurrentUserAccount();
 
         if(new BCryptPasswordEncoder().matches(userDTO.getOldPassword(), userAccount.getPassword())){
             userAccount.editUserPassword(userDTO);

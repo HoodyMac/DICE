@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
 import  'rxjs/add/operator/map';
 import {HttpClient} from "../common/services/http-client.service";
+import {AuthenticationService} from "../common/services/authentication.service";
 
 @Injectable()
 export class EditService{
 
-    constructor(private http: HttpClient){
+    constructor(private http: HttpClient, private authenticationService: AuthenticationService){
         console.log('PostService Initialized...');
-
     }
     getUserBasicInfo(id){
         /**
@@ -33,7 +33,15 @@ export class EditService{
     }
 
     setUserEmail(editGeneralData: any){
-        return this.http.put("/api/account", editGeneralData).map(res => res.json());
+      return this.http.put("/api/account", editGeneralData).map(
+        res => {
+          const data = res.json();
+          if(data) {
+            localStorage.setItem('token', data.token);
+          }
+          this.authenticationService.refresh().subscribe();
+          return data;
+        });
     }
 
     setUserPassword(editUserPass){

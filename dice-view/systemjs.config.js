@@ -5,7 +5,7 @@
     },
     map: {
       app: 'app',
-
+      "ng2-modal": "node_modules/ng2-modal",
       'ng2-translate': 'npm:ng2-translate/bundles/ng2-translate.umd.js',
       '@angular/core': 'npm:@angular/core/bundles/core.umd.js',
       '@angular/common': 'npm:@angular/common/bundles/common.umd.js',
@@ -26,7 +26,8 @@
       rxjs: {
         defaultExtension: 'js'
       },
-      'ng2-translate' : { defaultExtension: 'js' }
+      'ng2-translate' : { defaultExtension: 'js' },
+      "ng2-modal": { "main": "index.js", "defaultExtension": "js"}
     }
   });
 })(this);

@@ -14,8 +14,9 @@
     "sign_in": "Авторизоваться",
     "sign_up": "Регистрация",
 
-    "failed": "Ошибка!",
-    "success": "Успех!",
+    "loginFailed": "Ошибка! Неверный адрес электронной почты или пароль.",
+    "registrationSuccess": "Успех! Ваша учетная запись зарегистрирована.",
+    "imageChangeMessage":"Ваша фотография изменена. Пожалуйста, закройте окно.",
 
     "firstNameAlert": "Вы должны ввести имя",
     "firstNameLongAlert": "Слишком длинное имя",
@@ -40,15 +41,78 @@
     "diceSuchAs": "DICE включает публичные функции, такие как:",
     "makePostsDesc": "- позволяет участникам публиковать, читать и отвечать на объявления.",
     "sendMessDesc": "- позволяет членам использовать личние сообщения.",
-    "forumDevDesc": " - a great place to post questions and share comments with fellow developers or discuss a variety of development topics IT.",
+    "forumDevDesc": " - отличное место для размещения вопросов и обмена комментариями с другими разработчиками.",
 
     "placeholder": {
-      "firstName" : "First name",
-      "lastName": "Last name",
-      "birthday": "Birthday",
-      "email": "Email",
-      "password": "Password",
-      "passwordVerify": "Verify your password"
+      "firstName" : "Им'я",
+      "lastName": "Фамилия",
+      "birthday": "День рождения",
+      "email": "Электронный адрес",
+      "password": "Пароль",
+      "passwordVerify": "Введіте пароль ище раз"
+    }
+  },
+
+  "HEADER":{
+    "home": "Моя Страница",
+    "friends": "Друзья",
+    "messages": "Сообщения",
+    "forum": "Форум",
+
+    "search": "Поиск",
+    "searchButton": "Поиск",
+    "settings": "Настройки",
+    "log_out": "Вийти"
+  },
+
+  "FOOTER":{
+    "about": "o нас",
+    "help": "помощь",
+    "developers": "разработчики",
+    "language": "Язык:"
+  },
+
+  "EDIT":{
+    "editMessage": "Ваши данные были изменены.",
+    "editEmailMessage": "Aдрес электронной почты был изменен.",
+    "editPassMessage": "Пароль был изменен.",
+
+    "basicInfo": "Основное",
+    "general": "Общее",
+    "firstname": "Имя:",
+    "lastname": "Фамилия:",
+    "phoneNumber": "Мобильный телефон:",
+    "gender": "Пол:",
+    "male": "Мужской",
+    "female": "Женский",
+    "birthday": "День рождения:",
+    "city": "Родной город:",
+    "education": "Образование:",
+    "work": "Место работы:",
+    "programmingLang": "Языки программирования:",
+    "password": "Пароль:",
+    "email": "Aдрес электронной почты:",
+    "save": "Сохранить",
+    "changePassword": "Изменить пароль",
+    "passwordInfo": "Вы можете использовать любую комбинацию латинских букв, цифр и специальных символов! @ # $% ^ & * () _ - +. Ваш пароль не должен быть короче 6 символов.",
+    "currentPassword": "Текущий пароль:",
+    "newPassword": "Новый пароль:",
+    "confirmPassword": "Подтвердите свой пароль:",
+    "cancel": "Отменить",
+    "change": "Изменить",
+
+    "placeholder":{
+      "firstname": "Имя",
+      "lastname": "Фамилия",
+      "phoneNumber": "Мобильный телефон",
+      "gender": "Пол",
+      "birthday": "День рождения",
+      "city": "Родной город",
+      "education": "Образование",
+      "work": "Место работы",
+      "currentPassword": "Текущий пароль",
+      "newPassword": "Новый пароль",
+      "confirmPassword": "Подтвердите свой пароль"
     }
   }
 }

@@ -6,13 +6,15 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import pl.zed.dice.image.model.ProfileImageCropDTO;
+import pl.zed.dice.image.model.ProfileImageResponseDTO;
 import pl.zed.dice.image.service.ProfileImageService;
 import pl.zed.dice.image.storage.StorageService;
 
-import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 
 @RestController
-@RequestMapping("/api/profile/image/")
+@RequestMapping("/api/profile/image")
 public class ProfileImageController {
 
     @Autowired
@@ -22,11 +24,22 @@ public class ProfileImageController {
     private StorageService storageService;
 
     @PostMapping
-    public void upload(HttpServletRequest request, @RequestParam("file") MultipartFile file) {
-        profileImageService.saveProfileImage(file);
+    public ResponseEntity<ProfileImageResponseDTO> uploadProfileImage(@RequestParam("file") MultipartFile file) throws IOException {
+        String fileName = profileImageService.saveOriginalProfileImage(file);
+        return ResponseEntity
+                .ok()
+                .body(new ProfileImageResponseDTO(fileName));
     }
 
-    @GetMapping("{filename:.+}")
+    @PostMapping("/crop")
+    public ResponseEntity<ProfileImageResponseDTO> cropProfileImage(@RequestBody ProfileImageCropDTO profileImageCropDTO) throws IOException {
+        String fileName = profileImageService.createAndSaveCropedProfileImage(profileImageCropDTO);
+        return ResponseEntity
+                .ok()
+                .body(new ProfileImageResponseDTO(fileName));
+    }
+
+    @GetMapping("/get/{filename:.+}")
     @ResponseBody
     public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
 

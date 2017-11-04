@@ -5,17 +5,19 @@ import {Http, HttpModule} from "@angular/http";
 import {AppComponent} from "./app.component";
 import {HttpClient} from "./common/services/http-client.service";
 import {AuthenticationService} from "./common/services/authentication.service";
-import {RegistrationService} from "./common/services/registration.service";
+import {RegistrationService} from "./services/registration.service";
 import {RouterModule, Routes} from "@angular/router";
 import {ProfileComponent} from "./profile/profile.component";
-import {HomeComponent, PasswordMatcher} from "./home/home.component";
+import {HomeComponent} from "./home/home.component";
+import {PasswordMatcher} from "./common/components/passwordMatcher.component";
 import {SearchComponent} from "./search/search.component";
 import {NavbarComponent} from "./navbar/navbar.component";
 import {FooterComponent} from "./footer/footer.component";
 import {FriendsComponent} from "./friends/friends.component";
 import {EditComponent} from "./edit/edit.component";
 import {TranslateModule, TranslateStaticLoader, TranslateLoader} from "ng2-translate";
-import {ProfilePictureService} from "./common/services/profile-picture.service";
+import {ModalModule} from "ng2-modal"
+import {MessagesComponent} from "./messages/messages.component";
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -23,6 +25,7 @@ const appRoutes: Routes = [
   { path: 'search', component: SearchComponent },
   { path: 'friends', component: FriendsComponent },
   { path: 'edit', component: EditComponent },
+  { path: 'messages', component: MessagesComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full'}
 ];
 
@@ -39,7 +42,8 @@ const appRoutes: Routes = [
       provide: TranslateLoader,
       useFactory: (http: Http) => new TranslateStaticLoader(http, '/assets/i18n', '.json'),
       deps: [Http]
-    })
+    }),
+    ModalModule
   ],
   declarations: [
     AppComponent,
@@ -50,9 +54,10 @@ const appRoutes: Routes = [
     SearchComponent,
     NavbarComponent,
     FooterComponent,
-    PasswordMatcher
+    PasswordMatcher,
+    MessagesComponent
   ],
-  providers: [HttpClient, AuthenticationService, RegistrationService, ProfilePictureService],
+  providers: [HttpClient, AuthenticationService, RegistrationService],
   bootstrap: [AppComponent]
 
 })

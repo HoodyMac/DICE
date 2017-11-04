@@ -1,0 +1,109 @@
+@import "colors";
+
+section.messages {
+  .search-friends{ padding: 1%;
+    form{ margin: 0;
+      input{ width: 96%; margin: 0% 2%; }
+    }
+    button{ width: 96%; background-color: @msg_buttonBg; color: @msg_msgBoxFont; margin: 5% 2%;
+      &:hover{background-color: @msg_buttonBgHover;}
+    }
+  }
+
+  .friends-list{ width: 100%; border: 1px solid @box_border; background-color: @box_bg; border-radius: 2px;
+    .list-container{ width: 100%; padding: 1%;
+      .scroll{ overflow-y: scroll; max-height: 73vh;
+        ul{ width: 100%; padding: 0;
+          li{ display: inline-flex; width: 96%; border-radius: 2px; border: 1px solid @msg_liBg; margin: 2px 2%;
+            &:hover{ background-color: @msg_liBgHover; color: @msg_liColor; cursor: pointer;}
+            .user-img{ padding: 2%;
+              .circle{ width: 60px; padding: 2%; height: 60px; border-radius: 50%; background-position: center; background-size: cover;}
+            }
+            .content{ width: 60%; padding: 3% 2% 0 5%;}
+            .last-modify{ width: 20%; padding-top: 8%; text-align: center;}
+          }
+        }
+      }
+    }
+  }
+  .messages-block{width: 100%; border: 1px solid @box_border; background-color: @box_bg; border-radius: 2px;
+    .message_header{ display: inline-table; width: 100%; border-bottom: 1px solid @box_border;
+      .username{ width: 50%; float: left;
+        p{ padding: 15px 26px; font-size: 20px;  margin:0;}
+      }
+      .isOnline{ float: right;
+        p{padding: 15px 25px; color: @msg_isOnineLabel; margin:0;}
+      }
+    }
+    .message_body{
+      .scroll{ overflow-y: scroll; max-height: 80vh; height: 72vh;
+        .message_content{ width: 100%; display: inline-block;
+          &:first-child{
+            .user-img{padding: 2% 2% 0 2%;
+              p{ margin: 0;}
+            }
+            .mess-text{ float: left; position: relative; top: 20px; background-color: @msg_msgBoxBg; color:@msg_msgBoxFont; border-radius: 10px; padding: 5px 10px 5px 10px; max-width: 70%;
+              P{margin: 0;}
+            }
+          }
+          .user-img{ padding: 0 2% 0 2%; float: left;
+            p{ margin: 0;}
+            .circle{ width: 40px; padding: 2%; height: 40px; border-radius: 50%; background-position: center; background-size: cover;}
+          }
+          .send-time{ }
+          .mess-text{ float: left; position: relative; top: 10px; background-color: @msg_msgBoxBg; color:@msg_msgBoxFont; border-radius: 10px; padding: 5px 10px 5px 10px; max-width: 70%;  margin-bottom: 20px;
+            p{margin: 0;}
+          }
+        }
+      }
+      .input-text{ padding: 15px 15px 15px 15px; border-top: 1px solid @box_border; display: inline-flex; width: 100%;
+        form{ width: 100%; display: inline-flex; margin: 0;
+          input[type='text']{ width: 85%; margin-right: 15px; }
+          input[type='submit']{ width: 15%; background-color: @msg_buttonBg; border: none; color: @msg_msgBoxFont;
+            &:hover{background-color: @msg_buttonBgHover;}
+          }
+        }
+
+      }
+    }
+
+  }
+}
+
+/*--- (media) Responsive style -----------------------*/
+
+@media (max-width: 1272px){
+
+}
+
+@media (max-width: 768px){
+  .navbar-collapse{
+    ul, a{text-align: center;}
+    .form-group{width: 75%;  float: left; margin-right: 2%;}
+  }
+
+
+}
+
+@media (max-width: 620px) {
+  .custom-col-friends-list{width: 70%; margin-left: 15%; margin-right: 15%; }
+  .custom-col-messages-block{width: 100%; margin-top: 5%;}
+}
+
+@media (max-width: 480px){
+  .custom-col-friends-list{width: 80%; margin-left: 10%; margin-right: 10%; }
+  .custom-col-messages-block{width: 100%;}
+
+  .navbar-collapse{
+    .form-group{width: 100%;}
+    button{width: 100%;}
+  }
+
+}
+
+@media (max-width: 340px){
+  .custom-col-friends-list{width: 100%; margin-left: 0; margin-right: 0; }
+  .custom-col-messages-block{width: 100%;}
+}
+
+/*--- END (media) Responsive style -----------------------*/

@@ -5,21 +5,21 @@
                 <div class="profile_image">
                     <div class="img" >
                         <!-- <a href="#"><img src="{{profileImgSrc.cropImgSrc}}" alt=""></a> -->
-                        <a href="#"><img src="{{ userInfo.cropImgSrc ? '/api/profile/image/' + userInfo.cropImgSrc : '/app/img/default_user_photo.jpg'}}" alt=""></a>   <!-- crop image -->
+                        <a (click)="imgViewModal.open()"><img [src]="userInfo.cropImgSrc ? '/api/profile/image/get/' + userInfo.cropImgSrc : '/app/img/default_user_photo.jpg'" alt="" ></a>   <!-- crop image -->
                     </div>
                     <div class="change_photo">
-                        <button type="button"  (click)="toggle('modal-change-photo')" class="modal-trigger btn btn-default" data-modal="modal-change-photo">Change photo</button><!-- Trigger Modal. -->
-                        <!-- Modal window -->
-                        <div class="modal" id="modal-change-photo">
-                            <div  class="modal-box">
-                                <div class="modal-header">
-                                    <div (click)="toggle('modal-change-photo')" class="close-modal">&#10006;</div>
-                                    <p>Crop your profile photo</p>
-                                </div>
-                                <div class="modal-body">
+                        <button type="button"  (click)="imgCropViewModal.open()" class="modal-trigger btn btn-default" data-modal="modal-change-photo">Change photo</button><!-- Trigger Modal. -->
+
+                        <!-- Modal view profile image -->
+                        <div class="row">
+                            <modal #imgCropViewModal modalClass="modal-lg" [closeOnOutsideClick]="true" [closeOnEscape]="true">
+                                <modal-header>
+                                    <h1>Crop your profile photo</h1>
+                                </modal-header>
+                                <modal-content>
                                     <!-- This is the image we're attaching Jcrop to -->
 
-                                    <img src="{{ userInfo.originalImgSrc ? '/api/profile/image/' + userInfo.originalImgSrc : '/app/img/default_user_photo.jpg'}}" #cropImgSrc #cropbox id="cropbox" style=""/>  <!-- original image -->
+                                    <img src="{{ userInfo.originalImgSrc ? '/api/profile/image/get/' + userInfo.originalImgSrc : '/app/img/default_user_photo.jpg'}}" #cropImgSrc #cropbox id="cropbox" style="width: 100%;"/>  <!-- original image -->
 
                                     <!-- This is the form that our event handler fills -->
                                     <form action="" method="post" (submit)="checkCoords()" onsubmit="return checkCoords();">
@@ -31,8 +31,28 @@
                                         <!-- Important!!  Upload image size (width <= 800, height: auto) -->
                                         <span class="btn btn-default btn-file">Upload image<input type="file" value="Upload image" class="btn btn-large btn-inverse" [multiple]="false" #fileInput (change)="upload()"/></span>
                                     </form>
-                                </div>
-                            </div>
+                                </modal-content>
+                                <modal-footer>
+                                    <div class="alert alert-success"  *ngIf="viewImageChangeMessage">
+                                        <strong translate>HOME.imageChangeMessage</strong>
+                                    </div>
+                                </modal-footer>
+                            </modal>
+                        </div>
+
+                        <!-- Modal view profile image -->
+                        <div class="row">
+                            <modal #imgViewModal modalClass="modal-lg" [closeOnOutsideClick]="true" [closeOnEscape]="true">
+                                <modal-header>
+                                    <h1></h1>
+                                </modal-header>
+                                <modal-content>
+                                    <img src="{{ userInfo.originalImgSrc ? '/api/profile/image/get/' + userInfo.originalImgSrc : '/app/img/default_user_photo.jpg'}}" class="imgView"/>
+                                </modal-content>
+                                <modal-footer>
+
+                                </modal-footer>
+                            </modal>
                         </div>
                     </div>
                 </div>
