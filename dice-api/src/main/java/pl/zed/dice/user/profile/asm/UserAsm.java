@@ -7,6 +7,7 @@ import pl.zed.dice.user.profile.domain.Gender;
 import pl.zed.dice.user.profile.domain.UserProfile;
 import pl.zed.dice.user.profile.model.UserDTO;
 import pl.zed.dice.user.profile.model.UserProfileDTO;
+import pl.zed.dice.user.profile.model.UserProfileSearchResultDTO;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -38,6 +39,11 @@ public class UserAsm {
                 userProfile.getBirthdayDate().toString(), userProfile.getPhoneNumber(),
                 userProfile.getCity(), userProfile.getProgrammingLanguages(), userProfile.getWork(),
                 userProfile.getEducation());
+    }
+
+    public UserProfileSearchResultDTO makeUserProfileSearchResultDTO(UserProfile userProfile){
+        return new UserProfileSearchResultDTO(userProfile.getFirstname(), userProfile.getLastname(),
+                userProfile.getCity(), userProfile.getWork(), 0);//change 0 on list size of friends
     }
 
 }

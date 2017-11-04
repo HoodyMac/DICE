@@ -13,9 +13,12 @@ import pl.zed.dice.security.JwtUser;
 import pl.zed.dice.security.service.UserService;
 import pl.zed.dice.user.profile.model.UserDTO;
 import pl.zed.dice.user.profile.model.UserProfileDTO;
+import pl.zed.dice.user.profile.model.UserProfileSearchDTO;
+import pl.zed.dice.user.profile.model.UserProfileSearchResultDTO;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -68,5 +71,10 @@ public class UserProfileController {
     public UserProfileDTO getMySelf(){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return userService.getMyProfile(auth.getName());
+    }
+
+    @PostMapping("/search")
+    public List<UserProfileSearchResultDTO> search(@RequestBody UserProfileSearchDTO userProfileSearchDTO){
+        return userService.search(userProfileSearchDTO);
     }
 }

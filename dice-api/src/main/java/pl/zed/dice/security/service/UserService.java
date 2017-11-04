@@ -13,12 +13,20 @@ import pl.zed.dice.security.model.UserInfoDTO;
 import pl.zed.dice.security.repository.UserAccountRepository;
 import pl.zed.dice.user.profile.asm.UserAsm;
 import pl.zed.dice.security.domain.UserAccount;
+import pl.zed.dice.user.profile.domain.Gender;
 import pl.zed.dice.user.profile.domain.UserProfile;
 import pl.zed.dice.user.profile.model.UserDTO;
 import pl.zed.dice.user.profile.model.UserProfileDTO;
+import pl.zed.dice.user.profile.model.UserProfileSearchDTO;
+import pl.zed.dice.user.profile.model.UserProfileSearchResultDTO;
 import pl.zed.dice.user.profile.repository.UserProfileRepository;
 
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -92,5 +100,32 @@ public class UserService {
         UserProfileDTO userProfileDTO = userAsm.makeUserProfileDTO(userAccount.getProfile());
         userProfileDTO.setEmail(userAccount.getEmail());
         return userProfileDTO;
+    }
+
+    public List<UserProfileSearchResultDTO> search(UserProfileSearchDTO userProfileSearchDTO){
+        List<UserProfileSearchResultDTO> result = new ArrayList<>();
+
+        Date dateFrom = null;
+        if(userProfileSearchDTO.getAgeTo() != null) {
+            dateFrom = new Date();
+            dateFrom.setYear(new Date().getYear() - userProfileSearchDTO.getAgeFrom());
+        }
+        Date dateTo = null;
+        if(userProfileSearchDTO.getAgeFrom() != null) {
+            dateTo = new Date();
+            dateTo.setYear(new Date().getYear() - userProfileSearchDTO.getAgeTo());
+        }
+
+        Gender gender = null;
+
+        if(userProfileSearchDTO.getGender() != null) {
+            gender = userProfileSearchDTO.getGender().equalsIgnoreCase("female") ? Gender.FEMALE : Gender.MALE;
+        }
+
+        userProfileRepository.search(userProfileSearchDTO.getFullName(), dateFrom, dateTo, gender,
+                userProfileSearchDTO.getOnline(), userProfileSearchDTO.getCity())
+        .forEach(p -> result.add(userAsm.makeUserProfileSearchResultDTO(p)));
+
+        return result;
     }
 }
