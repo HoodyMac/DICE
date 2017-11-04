@@ -1,8 +1,13 @@
 package pl.zed.dice.user.profile.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import pl.zed.dice.user.profile.domain.Gender;
 import pl.zed.dice.user.profile.domain.UserProfile;
+
+import java.util.Date;
+import java.util.List;
 
 @Repository
 public interface UserProfileRepository extends JpaRepository<UserProfile, Long>{
@@ -13,5 +18,5 @@ public interface UserProfileRepository extends JpaRepository<UserProfile, Long>{
 
     @Query(searchQuery)
     List<UserProfile> search(String fullName, Date dateFrom, Date dateTo, Gender gender,
-                                            Boolean isOnline, String city);
+                             Boolean isOnline, String city);
 }
