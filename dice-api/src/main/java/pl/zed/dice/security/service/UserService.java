@@ -24,6 +24,7 @@ import pl.zed.dice.user.profile.repository.UserProfileRepository;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -106,15 +107,16 @@ public class UserService {
     public List<UserProfileSearchResultDTO> search(UserProfileSearchDTO userProfileSearchDTO){
         List<UserProfileSearchResultDTO> result = new ArrayList<>();
 
-        Date dateFrom = null;
-        if(userProfileSearchDTO.getAgeTo() != null) {
-            dateFrom = new Date();
-            dateFrom.setYear(new Date().getYear() - userProfileSearchDTO.getAgeFrom());
-        }
-        Date dateTo = null;
+        Integer ageFrom = null;
+
         if(userProfileSearchDTO.getAgeFrom() != null) {
-            dateTo = new Date();
-            dateTo.setYear(new Date().getYear() - userProfileSearchDTO.getAgeTo());
+            ageFrom = LocalDate.now().getYear()-userProfileSearchDTO.getAgeFrom();
+        }
+
+        Integer ageTo = null;
+
+        if(userProfileSearchDTO.getAgeTo() != null) {
+            ageTo = LocalDate.now().getYear()-userProfileSearchDTO.getAgeTo();
         }
 
         Gender gender = null;
@@ -123,8 +125,16 @@ public class UserService {
             gender = userProfileSearchDTO.getGender().equalsIgnoreCase("female") ? Gender.FEMALE : Gender.MALE;
         }
 
-        userProfileRepository.search(userProfileSearchDTO.getFullName(), dateFrom, dateTo, gender,
-                userProfileSearchDTO.getOnline(), userProfileSearchDTO.getCity())
+        if(ageTo == null && ageFrom != null){
+            ageTo = 1000;
+        }
+
+        if(ageFrom == null && ageTo != null){
+            ageFrom = LocalDate.now().getYear();
+        }
+
+        userProfileRepository.search(userProfileSearchDTO.getFullName(), ageFrom, ageTo, gender,
+                userProfileSearchDTO.getOnline(), userProfileSearchDTO.getCity(), userProfileSearchDTO.getProgrammingLanguages())
         .forEach(p -> result.add(userAsm.makeUserProfileSearchResultDTO(p)));
 
         return result;

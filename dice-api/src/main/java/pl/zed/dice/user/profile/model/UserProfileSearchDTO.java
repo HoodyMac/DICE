@@ -8,6 +8,7 @@ public class UserProfileSearchDTO {
     private String gender;
     private Boolean isOnline;
     private String city;
+    private String programmingLanguages;
 
     public UserProfileSearchDTO(){}
 
@@ -67,5 +68,13 @@ public class UserProfileSearchDTO {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public String getProgrammingLanguages() {
+        return programmingLanguages;
+    }
+
+    public void setProgrammingLanguages(String programmingLanguages) {
+        this.programmingLanguages = programmingLanguages;
     }
 }

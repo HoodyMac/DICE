@@ -7,15 +7,17 @@ public class UserProfileSearchResultDTO {
     private String city;
     private String work;
     private int friendsCount;
+    private String cropImage;
 
     public UserProfileSearchResultDTO(){}
 
-    public UserProfileSearchResultDTO(String firstName, String lastName, String city, String work, int friendsCount) {
+    public UserProfileSearchResultDTO(String firstName, String lastName, String city, String work, int friendsCount, String cropImage) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.city = city;
         this.work = work;
         this.friendsCount = friendsCount;
+        this.cropImage = cropImage;
     }
 
     public String getFirstName() {
@@ -56,5 +58,13 @@ public class UserProfileSearchResultDTO {
 
     public void setFriendsCount(int friendsCount) {
         this.friendsCount = friendsCount;
+    }
+
+    public String getCropImage() {
+        return cropImage;
+    }
+
+    public void setCropImage(String cropImage) {
+        this.cropImage = cropImage;
     }
 }

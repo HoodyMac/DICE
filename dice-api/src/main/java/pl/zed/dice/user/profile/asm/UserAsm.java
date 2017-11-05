@@ -43,7 +43,7 @@ public class UserAsm {
 
     public UserProfileSearchResultDTO makeUserProfileSearchResultDTO(UserProfile userProfile){
         return new UserProfileSearchResultDTO(userProfile.getFirstname(), userProfile.getLastname(),
-                userProfile.getCity(), userProfile.getWork(), 0);//change 0 on list size of friends
+                userProfile.getCity(), userProfile.getWork(), 0, userProfile.getCropImage());//change 0 on list size of friends
     }
 
 }
