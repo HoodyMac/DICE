@@ -11,6 +11,8 @@ export class SearchService {
 
     getUserSearchData(userSearchData){
 
-        return this.http.post("/api/search", userSearchData).map(res => res.json());
+        return this.http.post("/api/search", userSearchData).map(res =>{
+            return res.json()
+        });
     }
 }
