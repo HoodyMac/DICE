@@ -13,11 +13,11 @@
                             <label>Age</label>
                             <div>
                                 <select  formControlName="ageFrom" (ngModelChange)="getUsersData(searchForm.value)" id="age_from"  class="chosen-select" data-placeholder="from" #choseAgeFrom>
-                                    <option></option>
+                                    <option value="" selected>From</option>
                                     <option *ngFor="let ageValue of ageValues" value="{{ageValue}}">{{ageValue}}</option>
                                 </select>
                                 <select formControlName="ageTo" (ngModelChange)="getUsersData(searchForm.value)" id="age_to" class="chosen-select" data-placeholder="to" #choseAgeTo>
-                                    <option></option>
+                                    <option value="" selected>To</option>
                                     <option *ngFor="let ageValue of ageValues" value="{{ageValue}}">{{ageValue}}</option>
                                 </select>
                             </div>
@@ -26,6 +26,7 @@
                         <div class="sex_group">
                             <label for="gender_form">Gender</label>
                             <select formControlName="gender" (change)="getUsersData(searchForm.value)" ngModel name="gender" id="gender_form">
+                                <option value="" selected>Any</option>
                                 <option value="MALE">Male</option>
                                 <option value="FEMALE">Female</option>
                             </select>
@@ -36,11 +37,11 @@
                         </div>
                         <div id="lang_select">
                             <select formControlName="programmingLanguages" (ngModelChange)="getUsersData(searchForm.value)" id="prg_lang" size="1" class="chosen-select" data-placeholder="Choose language" #choseLang>
-                                <option></option>
-                                <option>Java</option>
-                                <option>C++</option>
-                                <option>PHP</option>
-                                <option>JavaScript</option>
+                                <option value="" selected>Any</option>
+                                <option value="Java">Java</option>
+                                <option value="C++">C++</option>
+                                <option value="PHP">PHP</option>
+                                <option value="JavaScript">JavaScript</option>
                             </select>
                         </div>
 
@@ -56,7 +57,7 @@
                         </ul>
                     </div>
                     <form  [formGroup]="searchForm" (ngSubmit)="getUsersData(searchForm.value)">
-                        <input  formControlName="fullName" type="text" class="form-control" placeholder="Search">
+                        <input  formControlName="fullName" type="text" class="form-control" [(ngModel)]="fullname" name="fullname" placeholder="Search">
                     </form>
                 </div>
 
@@ -68,7 +69,7 @@
                                 <li class="content_box" *ngFor="let data of searchData">
                                     <table>
                                         <tr>
-                                            <td class="img_block" rowspan="3"><a href="#" class="img"><img src="/app/img/Ivan_Loichuk_bg.jpg" alt=""></a></td>
+                                            <td class="img_block" rowspan="3"><a href="#" class="img"><img src="{{data.cropImage}}" alt=""></a></td>
                                             <td class="info_block" rowspan="3">
                                                 <a href="#" class="title"><span>{{data.firstName}}  {{data.lastName}}</span></a>
                                                 <span class="town">{{data.city}}</span>
