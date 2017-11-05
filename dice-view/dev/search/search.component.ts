@@ -19,7 +19,6 @@ export class SearchComponent implements AfterViewInit{
 
     searchData = [];
     public searchForm: FormGroup;
-    public sForm: NgForm;
     public fullname: "";
 
     constructor(private searchService: SearchService,
@@ -46,8 +45,6 @@ export class SearchComponent implements AfterViewInit{
             programmingLanguages: '',
             fullName: ''
         });
-
-
     }
 
     ngAfterViewInit() {
