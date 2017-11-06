@@ -31,6 +31,7 @@ export class SearchComponent implements AfterViewInit{
             }
         );
 
+
         //generate age value
         for (let i = 1; i <= 100; i++) {
             this.ageValues.push(i);
@@ -45,6 +46,7 @@ export class SearchComponent implements AfterViewInit{
             programmingLanguages: '',
             fullName: ''
         });
+
     }
 
     ngAfterViewInit() {
@@ -53,8 +55,6 @@ export class SearchComponent implements AfterViewInit{
         jQuery(this.choseLang.nativeElement).chosen();
         jQuery(this.choseAgeFrom.nativeElement).chosen();
         jQuery(this.choseAgeTo.nativeElement).chosen();
-
-
 
         jQuery('.chosen-container-single').css('width', '70px');
         jQuery('#lang_select > .chosen-container-single').css('width', '90%');
@@ -70,9 +70,11 @@ export class SearchComponent implements AfterViewInit{
             mainClass.getUsersData(searchForm.value);
         });
 
+        this.getUsersData();
     }
 
-    getUsersData(searchData){
+    getUsersData(){
+        let searchData = {};
         searchData['ageFrom'] = jQuery(this.choseAgeFrom.nativeElement).val();
         searchData['ageTo'] = jQuery(this.choseAgeTo.nativeElement).val();
         searchData['programmingLanguages'] = jQuery(this.choseLang.nativeElement).val();
@@ -90,6 +92,5 @@ export class SearchComponent implements AfterViewInit{
                     console.log(this.searchData);
                 }
             );
-
     }
 }
