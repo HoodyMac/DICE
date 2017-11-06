@@ -25,7 +25,7 @@ import java.util.List;
 public class ProfileImageService {
     private static final char DOT_SEPARATOR = '.';
     private static final String PNG_EXTENSION = "png";
-    public static final int MAX_WIDTH = 800;
+    private static final int MAX_WIDTH = 800;
 
     private final List<String> ALLOWED_EXTENSIONS = new ArrayList<String>() {{
         add("bmp");
