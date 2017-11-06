@@ -1,23 +1,19 @@
 package pl.zed.dice.user.profile.model;
 
-public class UserProfileSearchResultDTO {
+public class FriendDTO {
 
     private Long id;
     private String firstName;
     private String lastName;
-    private String city;
-    private String work;
     private int friendsCount;
     private String cropImage;
 
-    public UserProfileSearchResultDTO(){}
+    public FriendDTO(){}
 
-    public UserProfileSearchResultDTO(Long id, String firstName, String lastName, String city, String work, int friendsCount, String cropImage) {
+    public FriendDTO(Long id, String firstName, String lastName, int friendsCount, String cropImage) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.city = city;
-        this.work = work;
         this.friendsCount = friendsCount;
         this.cropImage = cropImage;
     }
@@ -36,22 +32,6 @@ public class UserProfileSearchResultDTO {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getWork() {
-        return work;
-    }
-
-    public void setWork(String work) {
-        this.work = work;
     }
 
     public int getFriendsCount() {

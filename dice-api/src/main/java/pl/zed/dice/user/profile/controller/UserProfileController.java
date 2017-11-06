@@ -17,14 +17,12 @@ import pl.zed.dice.security.domain.UserAccount;
 import pl.zed.dice.security.model.UserInfoDTO;
 import pl.zed.dice.security.service.JwtAuthenticationResponse;
 import pl.zed.dice.security.service.UserService;
-import pl.zed.dice.user.profile.model.UserDTO;
-import pl.zed.dice.user.profile.model.UserProfileDTO;
-import pl.zed.dice.user.profile.model.UserProfileSearchDTO;
-import pl.zed.dice.user.profile.model.UserProfileSearchResultDTO;
+import pl.zed.dice.user.profile.model.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -91,5 +89,33 @@ public class UserProfileController {
     @PostMapping("/search")
     public List<UserProfileSearchResultDTO> search(@RequestBody UserProfileSearchDTO userProfileSearchDTO){
         return userService.search(userProfileSearchDTO);
+    }
+
+    @PostMapping("/friendRequest/{id}")
+    public void sendFriendRequest(@PathVariable Long id){
+        userService.sendFriendRequest(id);
+    }
+
+    @PutMapping("/acceptFriendRequest/{id}")
+    public void acceptFriendRequest(@PathVariable Long id){
+        userService.acceptFriendRequest(id);
+    }
+
+    @PutMapping("/rejectFriendRequest/{id}")
+    public void rejectFriendRequest(@PathVariable Long id){
+        userService.rejectFriendRequest(id);
+    }
+
+    @DeleteMapping("/removeFriend/{id}")
+    public void removeFriend(@PathVariable Long id){
+        userService.removeFriend(id);
+    }
+
+    @GetMapping({"/friends","/friends/{id}"})
+    public List<FriendDTO> getFriends(@PathVariable Optional<Long> id){
+        if(id.isPresent()){
+            return userService.getFriends(id.get());
+        }else
+            return userService.getMyFriends();
     }
 }

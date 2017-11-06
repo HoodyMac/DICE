@@ -8,17 +8,18 @@ import org.springframework.stereotype.Service;
 import pl.zed.dice.exception.user.UserAlreadyExistsException;
 import pl.zed.dice.exception.user.UserNotFoundException;
 import pl.zed.dice.exception.user.WrongOldPasswordException;
+import pl.zed.dice.exception.userProfile.FriendShipDoesNotExist;
 import pl.zed.dice.security.asm.UserAccountAsm;
 import pl.zed.dice.security.model.UserInfoDTO;
 import pl.zed.dice.security.repository.UserAccountRepository;
 import pl.zed.dice.user.profile.asm.UserAsm;
 import pl.zed.dice.security.domain.UserAccount;
+import pl.zed.dice.user.profile.domain.FriendEntity;
+import pl.zed.dice.user.profile.domain.FriendRequestStatus;
 import pl.zed.dice.user.profile.domain.Gender;
 import pl.zed.dice.user.profile.domain.UserProfile;
-import pl.zed.dice.user.profile.model.UserDTO;
-import pl.zed.dice.user.profile.model.UserProfileDTO;
-import pl.zed.dice.user.profile.model.UserProfileSearchDTO;
-import pl.zed.dice.user.profile.model.UserProfileSearchResultDTO;
+import pl.zed.dice.user.profile.model.*;
+import pl.zed.dice.user.profile.repository.FriendShipRepository;
 import pl.zed.dice.user.profile.repository.UserProfileRepository;
 
 import java.text.DateFormat;
@@ -47,6 +48,9 @@ public class UserService {
 
     @Autowired
     private SecurityContextService securityContextService;
+
+    @Autowired
+    private FriendShipRepository friendShipRepository;
 
     public void save(UserDTO userDTO) throws ParseException {
         if(userRepository.findByEmail(userDTO.getEmail()) == null) {
@@ -122,7 +126,9 @@ public class UserService {
         Gender gender = null;
 
         if(userProfileSearchDTO.getGender() != null) {
-            gender = userProfileSearchDTO.getGender().equalsIgnoreCase("female") ? Gender.FEMALE : Gender.MALE;
+            String genderDto = userProfileSearchDTO.getGender();
+                    gender = genderDto.equalsIgnoreCase("female") ?
+                    Gender.FEMALE : genderDto.equalsIgnoreCase("male") ? Gender.MALE : null;
         }
 
         if(ageTo == null && ageFrom != null){
@@ -133,10 +139,92 @@ public class UserService {
             ageFrom = LocalDate.now().getYear();
         }
 
-        userProfileRepository.search(userProfileSearchDTO.getFullName(), ageFrom, ageTo, gender,
-                userProfileSearchDTO.getOnline(), userProfileSearchDTO.getCity(), userProfileSearchDTO.getProgrammingLanguages())
+        String[] fullname = userProfileSearchDTO.getFullName().split(" ");
+
+        userProfileRepository.search(fullname[0], ageFrom, ageTo, gender,
+                userProfileSearchDTO.getOnline(), userProfileSearchDTO.getCity(),
+                userProfileSearchDTO.getProgrammingLanguages(), fullname[1])
         .forEach(p -> result.add(userAsm.makeUserProfileSearchResultDTO(p)));
 
         return result;
+    }
+
+    public void sendFriendRequest(Long id){
+        String requestorName = SecurityContextHolder.getContext().getAuthentication().getName();
+        UserProfile requestor = userRepository.findByEmail(requestorName).getProfile();
+        UserProfile recipient = userProfileRepository.getOne(id);
+
+        if(friendShipRepository.getFriendShip(requestor, recipient) == null) {
+            friendShipRepository.save(new FriendEntity(requestor, recipient, FriendRequestStatus.SENT));
+        }
+    }
+
+    public void acceptFriendRequest(Long id){
+        String recipientName = SecurityContextHolder.getContext().getAuthentication().getName();
+        UserProfile recipient = userRepository.findByEmail(recipientName).getProfile();
+        UserProfile requestor = userProfileRepository.getOne(id);
+
+        FriendEntity friendEntity = friendShipRepository.getFriendShip(requestor, recipient);
+
+        if(friendEntity != null) {
+            friendEntity.setStatus(FriendRequestStatus.ACCEPTED);
+        }else
+            throw new FriendShipDoesNotExist();
+
+        friendShipRepository.save(friendEntity);
+    }
+
+    public void rejectFriendRequest(Long id){
+        String recipientName = SecurityContextHolder.getContext().getAuthentication().getName();
+        UserProfile recipient = userRepository.findByEmail(recipientName).getProfile();
+        UserProfile requestor = userProfileRepository.getOne(id);
+
+        FriendEntity friendEntity = friendShipRepository.getFriendShip(requestor, recipient);
+
+        if(friendEntity != null) {
+            friendEntity.setStatus(FriendRequestStatus.REJECTED);
+        }else
+            throw new FriendShipDoesNotExist();
+
+        friendShipRepository.save(friendEntity);
+    }
+
+    public void removeFriend(Long id){
+        String recipientName = SecurityContextHolder.getContext().getAuthentication().getName();
+        UserProfile recipient = userRepository.findByEmail(recipientName).getProfile();
+        UserProfile requestor = userProfileRepository.getOne(id);
+
+        FriendEntity friendEntity = friendShipRepository.getFriendShip(requestor, recipient);
+
+        if(friendEntity != null) {
+            friendShipRepository.delete(friendEntity);
+        }else
+            throw new FriendShipDoesNotExist();
+    }
+
+    public List<FriendDTO> getMyFriends(){
+        String recipientName = SecurityContextHolder.getContext().getAuthentication().getName();
+        UserProfile recipient = userRepository.findByEmail(recipientName).getProfile();
+        List<FriendDTO> friendDTOS = new ArrayList<>();
+
+        friendShipRepository.getFriends(recipient).forEach(f ->{
+            if(f.getRecipient() == recipient) {
+                friendDTOS.add(userAsm.makeFriendDTO(f.getRequestor()));
+            }else
+                friendDTOS.add(userAsm.makeFriendDTO(f.getRecipient()));
+        });
+
+        return friendDTOS;
+    }
+
+    public List<FriendDTO> getFriends(Long id){
+        UserProfile recipient = userProfileRepository.getOne(id);
+        List<FriendDTO> friendDTOS = new ArrayList<>();
+
+        friendShipRepository.getFriends(recipient).forEach(f ->
+                friendDTOS.add(userAsm.makeFriendDTO(f.getRequestor()))
+        );
+
+        return friendDTOS;
     }
 }

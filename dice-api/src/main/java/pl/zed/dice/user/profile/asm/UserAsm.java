@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import pl.zed.dice.security.domain.UserAccount;
 import pl.zed.dice.user.profile.domain.Gender;
 import pl.zed.dice.user.profile.domain.UserProfile;
+import pl.zed.dice.user.profile.model.FriendDTO;
 import pl.zed.dice.user.profile.model.UserDTO;
 import pl.zed.dice.user.profile.model.UserProfileDTO;
 import pl.zed.dice.user.profile.model.UserProfileSearchResultDTO;
@@ -42,8 +43,12 @@ public class UserAsm {
     }
 
     public UserProfileSearchResultDTO makeUserProfileSearchResultDTO(UserProfile userProfile){
-        return new UserProfileSearchResultDTO(userProfile.getFirstname(), userProfile.getLastname(),
-                userProfile.getCity(), userProfile.getWork(), 0, userProfile.getCropImage());//change 0 on list size of friends
+        return new UserProfileSearchResultDTO(userProfile.getId(), userProfile.getFirstname(), userProfile.getLastname(),
+                userProfile.getCity(), userProfile.getWork(), userProfile.getFriends().size(), userProfile.getCropImage());
     }
 
+    public FriendDTO makeFriendDTO(UserProfile userProfile){
+        return new FriendDTO(userProfile.getId(), userProfile.getFirstname(), userProfile.getLastname(),
+                userProfile.getFriends().size(), userProfile.getCropImage());
+    }
 }

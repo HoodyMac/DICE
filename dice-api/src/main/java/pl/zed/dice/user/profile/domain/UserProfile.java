@@ -8,6 +8,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @NamedQuery(name = "UserProfile.findByOrigImageOrCropImage", query = "SELECT count(u.id) FROM UserProfile u WHERE LOWER(u.cropImage) = LOWER(?1) or LOWER(u.origImage) = LOWER(?1)")
@@ -23,6 +24,7 @@ public class UserProfile {
     @Size(min = 2, max = 128)
     private String lastname;
 
+    //@Enumerated(value = EnumType.STRING)
     private Gender gender;
 
     @Temporal(TemporalType.DATE)
@@ -43,6 +45,9 @@ public class UserProfile {
     private String education;
 
     private Boolean isOnline;
+
+    @ManyToMany
+    List<FriendEntity> friends;
 
     public UserProfile(){
 
@@ -185,5 +190,13 @@ public class UserProfile {
         this.work = userProfileDTO.getWork();
         this.programmingLanguages = userProfileDTO.getProgrammingLanguages();
         this.phoneNumber = userProfileDTO.getPhoneNumber();
+    }
+
+    public List<FriendEntity> getFriends() {
+        return friends;
+    }
+
+    public void setFriends(List<FriendEntity> friends) {
+        this.friends = friends;
     }
 }
