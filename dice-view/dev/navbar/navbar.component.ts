@@ -9,6 +9,7 @@ import {Router} from "@angular/router";
 })
 export class NavbarComponent {
   private userInfo = {};
+  private searchData = {fullName: ""};
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -27,6 +28,10 @@ export class NavbarComponent {
   public onLogout(): void {
     this.authenticationService.logout();
     this.router.navigate(['home']);
+  }
+
+  goSearch(param){
+    this.router.navigate(['/search', { fullname: param }] );
   }
 }
 

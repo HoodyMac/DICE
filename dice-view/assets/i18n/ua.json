@@ -115,5 +115,22 @@
       "newPassword": "Новий пароль",
       "confirmPassword": "Підтвердіть свій пароль"
     }
+  },
+
+  "PROFILE":{
+      "changePhoto":"Змінити фотографію",
+    "cropInfo":"Обріжте фотографію профілю",
+    "uploadImage": "Завантажити зображення",
+    "cropAndSave": "Обрізати та зберегти",
+    "imageChangeMessage": "Ваше фото змінилося. Ви можете закрити вікно.",
+    "cityLabel": "Рiдне мiсто:",
+    "educationLabel":"Освіта:",
+    "workLabel":"Місце роботи:",
+    "ageLabel": "Вік:",
+    "programLangLabel": "Мови програмування:",
+    "newMessages":"Повідомлення",
+    "friends":"Друзі",
+    "posts":"Публікації",
+    "forum":"Форум"
   }
 }

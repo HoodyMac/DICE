@@ -12,16 +12,43 @@ section.messages {
 
   .friends-list{ width: 100%; border: 1px solid @box_border; background-color: @box_bg; border-radius: 2px;
     .list-container{ width: 100%; padding: 1%;
+       .scroll{ overflow-y: scroll; max-height: 73vh;
+         ul{ width: 100%; padding: 0;
+           li{ display: inline-flex; width: 96%; border-radius: 2px; border: 1px solid @msg_liBg; margin: 2px 2%;
+             &:hover{ background-color: @msg_liBgHover; color: @msg_liColor; cursor: pointer;}
+             .user-img{ padding: 2%;
+               .circle{ width: 60px; padding: 2%; height: 60px; border-radius: 50%; background-position: center; background-size: cover;}
+             }
+             .content{ width: 60%; padding: 3% 2% 0 5%; }
+             .last-modify{ width: 20%; padding-top: 8%; text-align: center;}
+           }
+         }
+       }
+     }
+    .list-friends{ width: 100%; padding: 1%;
       .scroll{ overflow-y: scroll; max-height: 73vh;
         ul{ width: 100%; padding: 0;
           li{ display: inline-flex; width: 96%; border-radius: 2px; border: 1px solid @msg_liBg; margin: 2px 2%;
             &:hover{ background-color: @msg_liBgHover; color: @msg_liColor; cursor: pointer;}
             .user-img{ padding: 2%;
-              .circle{ width: 60px; padding: 2%; height: 60px; border-radius: 50%; background-position: center; background-size: cover;}
+              .circle{ width: 30px; padding: 2%; height: 30px; border-radius: 50%; background-position: center; background-size: cover;}
             }
-            .content{ width: 60%; padding: 3% 2% 0 5%;}
-            .last-modify{ width: 20%; padding-top: 8%; text-align: center;}
+            .content{ width: 60%; padding: 13px 0% 0 4%;
+              p{font-size: 16px;}
+            }
+            .isOnline{ width: 26%; padding-top: 13px; text-align: end; color: @msg_isOnineLabel;}
           }
+        }
+      }
+    }
+
+    modal{
+      modal-header{
+        h2{ font-size: 25px; padding: 0 5%;}
+      }
+      modal-content{
+        form{
+          input{margin: 0 3%; width: 91%;}
         }
       }
     }

@@ -18,23 +18,23 @@
                         <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav">
-                                <li class="active"><a href="profile" translate>HEADER.home <span class="sr-only">(current)</span></a></li>
-                                <li><a href="friends" translate>HEADER.friends</a></li>
-                                <li><a href="messages" translate>HEADER.messages</a></li>
-                                <li><a href="#" translate>HEADER.forum</a></li>
+                                <li class="active"><a [routerLink]="['/profile']" translate>HEADER.home <span class="sr-only">(current)</span></a></li>
+                                <li><a [routerLink]="['/friends']" translate>HEADER.friends</a></li>
+                                <li><a [routerLink]="['/messages']" translate>HEADER.messages</a></li>
+                                <li><a [routerLink]="['/forum']" translate>HEADER.forum</a></li>
                             </ul>
-                            <form class="navbar-form navbar-left">
+                            <form class="navbar-form navbar-left" #searchForm="ngForm">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="{{'HEADER.search' | translate }}">
+                                    <input type="text" class="form-control" [(ngModel)]="searchData.fullName" name="fullName" placeholder="{{'HEADER.search' | translate }}">
                                 </div>
-                                <button type="submit" class="btn btn-default" translate>HEADER.searchButton</button>
+                                <button (click)="goSearch(searchData.fullName)" type="submit" class="btn btn-default" translate>HEADER.searchButton</button>
                             </form>
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{userInfo.email}}<span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="edit" translate>HEADER.settings</a></li>
-                                        <li><a href="search" translate>HEADER.search</a></li>
+                                        <li><a [routerLink]="['/edit']" translate>HEADER.settings</a></li>
+                                        <li><a [routerLink]="['/search']" translate>HEADER.search</a></li>
                                         <li role="separator" class="divider"></li>
                                         <li><a (click)="onLogout()" translate>HEADER.log_out</a></li>
                                     </ul>

@@ -16,7 +16,6 @@ export class ProfileComponent implements AfterViewInit{
   userInfo: any; //userInfo[];
   countModules: any; //count_module[];
   userInfo = {};
-  countModules: any;
   editImgSrc: string = "/app/img/edit_icon_gray.png";
   @ViewChild('cropbox') cropbox: ElementRef;
 
@@ -47,14 +46,6 @@ export class ProfileComponent implements AfterViewInit{
     //       console.log('Something went wrong!');
     //     }
     // );
-
-/* ######## EXAMPLES ################### */
-    this.countModules = [{
-      label: "Friends",
-      value: 45
-    }];
-
-/* ################################## */
 
   };
 

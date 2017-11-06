@@ -114,5 +114,22 @@
       "newPassword": "Nowe hasło",
       "confirmPassword": "Potwierdź hasło"
     }
+  },
+
+  "PROFILE":{
+    "changePhoto":"Zmień zdjęcie profilowe",
+    "cropInfo":"Zmień rozmiar zdjęcia",
+    "uploadImage": "Załaduj obrazek",
+    "cropAndSave": "Zmień i zapisz",
+    "imageChangeMessage": "Twoje zdjęcie się zmieniło. Możesz zamknąć okno.",
+    "cityLabel": "Miasto:",
+    "educationLabel":"Wykształcenie:",
+    "workLabel":"Miejsce pracy:",
+    "ageLabel": "Wiek:",
+    "programLangLabel": "Języki programowania:",
+    "newMessages":"Nowe wiadomości",
+    "friends":"Znajomi",
+    "posts":"Publikacje",
+    "forum":"Forum"
   }
 }

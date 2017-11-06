@@ -4,10 +4,56 @@
             <div class="col-md-4 col-sm-5 col-xs-6 custom-col-friends-list">
                 <div class="friends-list">
                     <div class="search-friends">
-                        <button type="button"  (click)="imgCropViewModal.open()" class="modal-trigger btn btn-default">New conversation</button>
+                        <button type="button"  (click)="newConversationModal.open()" class="modal-trigger btn btn-default">New conversation</button>
                         <form>
                             <input type="text" class="form-control" placeholder="Search">
                         </form>
+                    </div>
+                    <!-- Modal view new conversation -->
+                    <div class="row">
+                        <modal #newConversationModal modalClass="modal-md" [closeOnOutsideClick]="true" [closeOnEscape]="true">
+                            <modal-header>
+                                <h2>Add new conversation</h2>
+                            </modal-header>
+                            <modal-content>
+                                <form>
+                                    <input type="text" class="form-control" placeholder="Search">
+                                </form>
+                                <div class="list-friends">
+                                    <div class="scroll">
+                                        <ul>
+                                            <li>
+                                                <div class="user-img">
+                                                    <div class="circle" style="background-image: url(/app/img/Ivan_Loichuk_bg200x200.jpg);"></div>
+                                                </div>
+
+                                                <div class="content">
+                                                    <p class="username">Ivan Loichuk</p>
+                                                </div>
+                                                <div class="isOnline">
+                                                    <p>online</p>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="user-img">
+                                                    <div class="circle" style="background-image: url(/app/img/Ivan_Loichuk_bg200x200.jpg);"></div>
+                                                </div>
+
+                                                <div class="content">
+                                                    <p class="username">Ivan Loichuk</p>
+                                                </div>
+                                                <div class="isOnline">
+                                                    <p>online</p>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </modal-content>
+                            <modal-footer>
+
+                            </modal-footer>
+                        </modal>
                     </div>
                     <div class="list-container">
                         <div class="scroll">

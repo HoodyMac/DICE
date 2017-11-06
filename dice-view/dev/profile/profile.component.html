@@ -8,13 +8,13 @@
                         <a (click)="imgViewModal.open()"><img [src]="userInfo.cropImgSrc ? '/api/profile/image/get/' + userInfo.cropImgSrc : '/app/img/default_user_photo.jpg'" alt="" ></a>   <!-- crop image -->
                     </div>
                     <div class="change_photo">
-                        <button type="button"  (click)="imgCropViewModal.open()" class="modal-trigger btn btn-default" data-modal="modal-change-photo">Change photo</button><!-- Trigger Modal. -->
+                        <button type="button"  (click)="imgCropViewModal.open()" class="modal-trigger btn btn-default" data-modal="modal-change-photo" translate>PROFILE.changePhoto</button><!-- Trigger Modal. -->
 
                         <!-- Modal view profile image -->
                         <div class="row">
                             <modal #imgCropViewModal modalClass="modal-lg" [closeOnOutsideClick]="true" [closeOnEscape]="true">
                                 <modal-header>
-                                    <h1>Crop your profile photo</h1>
+                                    <h1 translate>PROFILE.cropInfo</h1>
                                 </modal-header>
                                 <modal-content>
                                     <!-- This is the image we're attaching Jcrop to -->
@@ -27,14 +27,14 @@
                                         <input type="hidden" #y id="y" name="y" />
                                         <input type="hidden" #w id="w" name="w" />
                                         <input type="hidden" #h id="h" name="h" />
-                                        <input (click)="cropImageAndSave( x.value, y.value, w.value, h.value)" type="button" value="Crop and Save" class="btn btn-default " />
+                                        <input (click)="cropImageAndSave( x.value, y.value, w.value, h.value)" type="button" value="{{'PROFILE.cropAndSave' | translate}}" class="btn btn-default " />
                                         <!-- Important!!  Upload image size (width <= 800, height: auto) -->
-                                        <span class="btn btn-default btn-file">Upload image<input type="file" value="Upload image" class="btn btn-large btn-inverse" [multiple]="false" #fileInput (change)="upload()"/></span>
+                                        <span class="btn btn-default btn-file" translate>PROFILE.uploadImage<input type="file" value="Upload image" class="btn btn-large btn-inverse" [multiple]="false" #fileInput (change)="upload()"/></span>
                                     </form>
                                 </modal-content>
                                 <modal-footer>
                                     <div class="alert alert-success"  *ngIf="viewImageChangeMessage">
-                                        <strong translate>HOME.imageChangeMessage</strong>
+                                        <strong translate>PROFILE.imageChangeMessage</strong>
                                     </div>
                                 </modal-footer>
                             </modal>
@@ -91,34 +91,46 @@
                     <div class="separator"></div>
                     <div class="profile_info">
                         <div class="profile_info_row">
-                            <div class="label_info city" *ngIf="userInfo.city">City:</div>
+                            <div class="label_info city" *ngIf="userInfo.city" translate>PROFILE.cityLabel</div>
                             <div class="value" *ngIf="userInfo.city">{{userInfo.city}}</div>
                             <div class="edit_user_info">
                                 <a (click)="editProfile()" id="link_edit_icon" title="Edit profile"><img [src]="editImgSrc" (mouseover)="onMouseOver()" (mouseout)="onMouseOut()" id="edit_icon" alt="Edit profile" title="Edit profile"></a>
                             </div>
                         </div>
                         <div class="profile_info_row" *ngIf="userInfo.education">
-                            <div class="label_info">Education:</div>
+                            <div class="label_info" translate>PROFILE.educationLabel</div>
                             <div class="value">{{userInfo.education}}</div>
                         </div>
                         <div class="profile_info_row" *ngIf="userInfo.work">
-                            <div class="label_info">Work:</div>
+                            <div class="label_info" translate>PROFILE.workLabel</div>
                             <div class="value">{{userInfo.work}}</div>
                         </div>
                         <div class="profile_info_row" *ngIf="userInfo.birthdayDate">
-                            <div class="label_info">Age:</div>
+                            <div class="label_info" translate>PROFILE.ageLabel</div>
                             <div class="value">{{userInfo.birthdayDate | date: 'dd/MM/yyyy'}}</div>
                         </div>
                         <div class="profile_info_row" *ngIf="userInfo.programmingLanguages">
-                            <div class="label_info">Programming languages:</div>
+                            <div class="label_info" translate>PROFILE.programLangLabel</div>
                             <div class="value">{{userInfo.programmingLanguages}}</div>
                         </div>
                     </div>
                 </div>
-                <div class="counts_module" *ngIf="countModules">
-                    <div class="page_count" *ngFor="let module of countModules">
-                        <a href="#"><span class="label_module">{{module.label}}</span></a>
-                        <span class="value_module">{{module.value}}</span>
+                <div class="counts_module">
+                    <div class="page_count">
+                        <a href="#"><span class="label_module" translate>PROFILE.newMessages</span></a>
+                        <span class="value_module">(1)</span>
+                    </div>
+                    <div class="page_count">
+                        <a href="#"><span class="label_module" translate>PROFILE.friends</span></a>
+                        <span class="value_module">15</span>
+                    </div>
+                    <div class="page_count">
+                        <a href="#"><span class="label_module" translate>PROFILE.posts</span></a>
+                        <span class="value_module">18</span>
+                    </div>
+                    <div class="page_count">
+                        <a href="#"><span class="label_module" translate>PROFILE.forum</span></a>
+                        <span class="value_module">84</span>
                     </div>
                 </div>
             </div>

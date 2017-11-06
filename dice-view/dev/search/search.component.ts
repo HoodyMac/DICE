@@ -1,6 +1,7 @@
 import {Component, AfterViewInit, ElementRef, ViewChild} from '@angular/core';
 import {SearchService} from '../services/search.service'
 import {FormGroup, FormBuilder, NgForm} from "@angular/forms";
+import {ActivatedRoute} from '@angular/router';
 declare var jQuery: any;
 
 @Component({
@@ -15,13 +16,22 @@ export class SearchComponent implements AfterViewInit{
     @ViewChild('choseAgeTo') choseAgeTo: ElementRef;
     ageValues: any = new Array();
 
+
     searchData = [];
     public searchForm: FormGroup;
-    public sForm: NgForm;
+    public fullname: "";
 
     constructor(private searchService: SearchService,
                 private fb:FormBuilder,
-                private sForm: NgForm) {
+                private activatedRoute: ActivatedRoute) {
+
+        this.activatedRoute.params.subscribe(
+            data =>{
+                    this.fullname = data['fullname'];
+            }
+        );
+
+
         //generate age value
         for (let i = 1; i <= 100; i++) {
             this.ageValues.push(i);
@@ -50,7 +60,6 @@ export class SearchComponent implements AfterViewInit{
         jQuery('#lang_select > .chosen-container-single').css('width', '90%');
         jQuery('#lang_select > .chosen-container-single').css('margin', '5px 5%');
 
-
         jQuery(this.choseAgeFrom.nativeElement).chosen().change(function () {
             mainClass.getUsersData(searchForm.value);
         });
@@ -61,9 +70,11 @@ export class SearchComponent implements AfterViewInit{
             mainClass.getUsersData(searchForm.value);
         });
 
+        this.getUsersData();
     }
 
-    getUsersData(searchData){
+    getUsersData(){
+        let searchData = {};
         searchData['ageFrom'] = jQuery(this.choseAgeFrom.nativeElement).val();
         searchData['ageTo'] = jQuery(this.choseAgeTo.nativeElement).val();
         searchData['programmingLanguages'] = jQuery(this.choseLang.nativeElement).val();
@@ -81,6 +92,5 @@ export class SearchComponent implements AfterViewInit{
                     console.log(this.searchData);
                 }
             );
-
     }
 }
