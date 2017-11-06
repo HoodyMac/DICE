@@ -3,5 +3,4 @@
 /src
 *.iml
 .idea/
-debug.log
 package-lock.json
