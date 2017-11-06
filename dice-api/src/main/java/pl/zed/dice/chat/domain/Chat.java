@@ -7,6 +7,11 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "Chat.findChatByParticipants", query = "SELECT c FROM Chat c JOIN c.participants cp WHERE cp.id IN (?1, ?2) GROUP BY c.id HAVING COUNT(c.id) = 2"),
+        @NamedQuery(name = "Chat.findChatWithParticipant", query = "SELECT c FROM Chat c JOIN c.participants cp WHERE cp.id = ?1")
+})
+
 public class Chat {
 
     @Id
@@ -20,11 +25,14 @@ public class Chat {
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastAction;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Message> messages;
+//    @OneToMany(cascade = CascadeType.ALL)
+//    private List<Message> messages;
 
     @ManyToMany(cascade = CascadeType.ALL)
     private List<UserProfile> participants;
+
+    public Chat() {
+    }
 
     public Chat(ChatType type, Date lastAction) {
         this.type = type;
@@ -69,13 +77,13 @@ public class Chat {
         this.lastAction = lastAction;
     }
 
-    public List<Message> getMessages() {
-        return messages;
-    }
-
-    public void setMessages(List<Message> messages) {
-        this.messages = messages;
-    }
+//    public List<Message> getMessages() {
+//        return messages;
+//    }
+//
+//    public void setMessages(List<Message> messages) {
+//        this.messages = messages;
+//    }
 
     public List<UserProfile> getParticipants() {
         return participants;

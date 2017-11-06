@@ -199,4 +199,8 @@ public class UserProfile {
     public void setFriends(List<FriendEntity> friends) {
         this.friends = friends;
     }
+
+    public String getFullname() {
+        return firstname + ' ' + lastname;
+    }
 }
