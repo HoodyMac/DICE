@@ -115,6 +115,23 @@
       "confirmPassword": "Confirm password:"
     }
 
+  },
+
+  "PROFILE":{
+    "changePhoto":"Change photo",
+    "cropInfo":"Crop your profile photo",
+    "uploadImage": "Upload image",
+    "cropAndSave": "Crop and Save",
+    "imageChangeMessage": "Your photo has changed. Please, close the window.",
+    "cityLabel": "City:",
+    "educationLabel":"Education:",
+    "workLabel":"Work:",
+    "ageLabel": "Age:",
+    "programLangLabel": "Programming languages:",
+    "newMessages":"New messages",
+    "friends":"Friends",
+    "posts":"Posts",
+    "forum":"Forum"
   }
 
 }

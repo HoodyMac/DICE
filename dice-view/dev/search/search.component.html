@@ -6,6 +6,7 @@
                     <div class="header">Search parameters</div>
                     <form action="" method="POST" [formGroup]="searchForm"  >
                         <div class="city_group">
+                            <label>City</label>
                             <input type="text" class="form-control" placeholder="Enter a city" formControlName="city" (keyup.enter)="getUsersData()">
                         </div>
 

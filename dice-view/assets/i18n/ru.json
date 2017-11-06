@@ -114,5 +114,23 @@
       "newPassword": "Новый пароль",
       "confirmPassword": "Подтвердите свой пароль"
     }
+  },
+
+
+  "PROFILE":{
+    "changePhoto":"Измени фотографию",
+    "cropInfo":"Обрезать фотографию профиля",
+    "uploadImage": "Загрузить изображение",
+    "cropAndSave": "Обрезать и сохранить",
+    "imageChangeMessage": "Ваша фотография изменилась. Ви можете закрыть окно.",
+    "cityLabel": "Родной город:",
+    "educationLabel":"Образование:",
+    "workLabel":"Место работы:",
+    "ageLabel": "Возраст:",
+    "programLangLabel": "Языки программирования:",
+    "newMessages":"Cообщения",
+    "friends":"Друзья",
+    "posts":"Публикации",
+    "forum":"Форум"
   }
 }
