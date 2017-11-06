@@ -139,14 +139,38 @@ public class UserService {
             ageFrom = LocalDate.now().getYear();
         }
 
-        String[] fullname = userProfileSearchDTO.getFullName().split(" ");
+        String fullName = userProfileSearchDTO.getFullName();
+        User user = new User(fullName, fullName);
 
-        userProfileRepository.search(fullname[0], ageFrom, ageTo, gender,
+        if(fullName != null && !fullName.equals("") && fullName.contains(" ")) {
+            user = new User(userProfileSearchDTO.getFullName().substring(0, fullName.indexOf(" ")),
+                    userProfileSearchDTO.getFullName().substring(fullName.indexOf(" ")+1));
+        }
+
+        userProfileRepository.search(user.getFirstname(), ageFrom, ageTo, gender,
                 userProfileSearchDTO.getOnline(), userProfileSearchDTO.getCity(),
-                userProfileSearchDTO.getProgrammingLanguages(), fullname[1])
+                userProfileSearchDTO.getProgrammingLanguages(), user.getSurname())
         .forEach(p -> result.add(userAsm.makeUserProfileSearchResultDTO(p)));
 
         return result;
+    }
+
+    private class User{
+        private String firstname;
+        private String surname;
+
+        public User(String firstname, String surname) {
+            this.firstname = firstname;
+            this.surname = surname;
+        }
+
+        public String getFirstname() {
+            return firstname;
+        }
+
+        public String getSurname() {
+            return surname;
+        }
     }
 
     public void sendFriendRequest(Long id){

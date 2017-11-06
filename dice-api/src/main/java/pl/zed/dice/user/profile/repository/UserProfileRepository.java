@@ -16,6 +16,8 @@ public interface UserProfileRepository extends JpaRepository<UserProfile, Long>{
     String searchQuery = "select pr from UserProfile pr where ((" +
             "pr.firstname like ?1 AND pr.lastname like ?8) " +
             "OR (pr.firstname like ?8 AND pr.lastname like ?1) " +
+            "OR (pr.firstname like ?1 OR pr.lastname like ?8) " +
+            "OR (pr.firstname like ?8 OR pr.lastname like ?1) " +
             "OR (?8 is null OR ?8 like '') " +
             "OR (?1 is null OR ?1 like '')) " +
             "AND (YEAR(pr.birthdayDate) <= ?2 AND YEAR(pr.birthdayDate) >= ?3 " +
