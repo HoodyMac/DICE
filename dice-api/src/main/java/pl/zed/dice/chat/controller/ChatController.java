@@ -9,7 +9,7 @@ import pl.zed.dice.chat.service.ChatService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/chat")
+@RequestMapping("/api/chats")
 public class ChatController {
 
     @Autowired

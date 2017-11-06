@@ -22,25 +22,13 @@
                                 <div class="list-friends">
                                     <div class="scroll">
                                         <ul>
-                                            <li>
+                                            <li *ngFor="let friend of friends" (click)="createChat(friend.id)">
                                                 <div class="user-img">
-                                                    <div class="circle" style="background-image: url(/app/img/Ivan_Loichuk_bg200x200.jpg);"></div>
+                                                    <div class="circle" [style.background-image]="'url(' + (friend.cropImage ? '/api/profile/image/get/' + friend.cropImage : '/app/img/default_user_photo.jpg') + ')'"></div>
                                                 </div>
 
                                                 <div class="content">
-                                                    <p class="username">Ivan Loichuk</p>
-                                                </div>
-                                                <div class="isOnline">
-                                                    <p>online</p>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="user-img">
-                                                    <div class="circle" style="background-image: url(/app/img/Ivan_Loichuk_bg200x200.jpg);"></div>
-                                                </div>
-
-                                                <div class="content">
-                                                    <p class="username">Ivan Loichuk</p>
+                                                    <p class="username">{{ friend.firstName }} {{ friend.lastName }}</p>
                                                 </div>
                                                 <div class="isOnline">
                                                     <p>online</p>
@@ -58,43 +46,17 @@
                     <div class="list-container">
                         <div class="scroll">
                             <ul>
-                                <li>
+                                <li *ngFor="let chat of chats">
                                     <div class="user-img">
-                                        <div class="circle" style="background-image: url(/app/img/Ivan_Loichuk_bg200x200.jpg);"></div>
+                                        <div class="circle" [style.background-image]="'url(' + (chat.cropImg ? '/api/profile/image/get/' + chat.cropImg : '/app/img/default_user_photo.jpg') + ')'"></div>
                                     </div>
 
                                     <div class="content">
-                                        <p class="username">Ivan Loichuk</p>
+                                        <p class="username">{{ chat.name }}</p>
                                         <p class="last-message">Last message.......</p>
                                     </div>
                                     <div class="last-modify">
-                                        <p>05.10</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="user-img">
-                                        <div class="circle" style="background-image: url(/app/img/Ivan_Loichuk_bg200x200.jpg);"></div>
-                                    </div>
-
-                                    <div class="content">
-                                        <p class="username">Ivan Loichuk</p>
-                                        <p class="last-message">Last message.......</p>
-                                    </div>
-                                    <div class="last-modify">
-                                        <p>05.10</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="user-img">
-                                        <div class="circle" style="background-image: url(/app/img/Ivan_Loichuk_bg200x200.jpg);"></div>
-                                    </div>
-
-                                    <div class="content">
-                                        <p class="username">Ivan Loichuk</p>
-                                        <p class="last-message">Last message.......</p>
-                                    </div>
-                                    <div class="last-modify">
-                                        <p>05.10</p>
+                                        <p>{{ chat.lastAction | date:'dd.MM' }}</p>
                                     </div>
                                 </li>
                             </ul>

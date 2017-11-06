@@ -18,6 +18,7 @@ import {EditComponent} from "./edit/edit.component";
 import {TranslateModule, TranslateStaticLoader, TranslateLoader} from "ng2-translate";
 import {ModalModule} from "ng2-modal"
 import {MessagesComponent} from "./messages/messages.component";
+import {ChatService} from "./services/chat.service";
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -57,7 +58,7 @@ const appRoutes: Routes = [
     PasswordMatcher,
     MessagesComponent
   ],
-  providers: [HttpClient, AuthenticationService, RegistrationService],
+  providers: [HttpClient, AuthenticationService, RegistrationService, ChatService],
   bootstrap: [AppComponent]
 
 })
