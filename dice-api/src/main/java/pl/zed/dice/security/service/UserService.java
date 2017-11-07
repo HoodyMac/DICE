@@ -251,4 +251,15 @@ public class UserService {
 
         return friendDTOS;
     }
+
+    public List<FriendDTO> getFriendRequests(){
+        String recipientName = SecurityContextHolder.getContext().getAuthentication().getName();
+        UserProfile recipient = userRepository.findByEmail(recipientName).getProfile();
+        List<FriendDTO> friendDTOS = new ArrayList<>();
+
+        friendShipRepository.getFriendRequests(recipient).forEach(f ->
+                friendDTOS.add(userAsm.makeFriendDTO(f.getRequestor())));
+
+        return friendDTOS;
+    }
 }

@@ -118,4 +118,9 @@ public class UserProfileController {
         }else
             return userService.getMyFriends();
     }
+
+    @GetMapping("/friendRequests")
+    public List<FriendDTO> getFriendRequests(){
+        return userService.getFriendRequests();
+    }
 }

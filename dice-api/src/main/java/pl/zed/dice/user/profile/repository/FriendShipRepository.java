@@ -20,4 +20,7 @@ public interface FriendShipRepository extends JpaRepository<FriendEntity, Long> 
 
     @Query("select f from FriendEntity f where f.recipient = ?1 AND f.status = 'REJECTED'")
     List<FriendEntity> getFollowers(UserProfile recipient);
+
+    @Query("select f from FriendEntity f where f.recipient = ?1 AND f.status = 'SENT'")
+    List<FriendEntity> getFriendRequests(UserProfile userProfile);
 }

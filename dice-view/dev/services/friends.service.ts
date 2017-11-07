@@ -19,7 +19,7 @@ export class FriendsService {
 
 
     getUserNewFriendsData(){
-        return this.http.get("/api/newFriends").map(res => res.json());
+        return this.http.get("/api/friendRequests").map(res => res.json());
     }
 
     acceptFriendsRequest(idUser){
