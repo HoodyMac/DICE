@@ -6,6 +6,7 @@
           <div class="menu" >
             <ul id="nav-friends" class="nav nav-pills nav-stacked">
               <li class="{{showFriends ? 'active': ''}}" (click)="showMyFriends()" >My friends</li>
+              <li class="{{showNewFriends ? 'active': ''}}" (click)="showMyNewFriends()">New friends</li>
               <li class="{{showFollowers ? 'active': ''}}" (click)="showMyFollowers()">Followers</li>
             </ul>
           </div>
@@ -28,6 +29,7 @@
               <a [routerLink]="['/profile']" class="active username">UserName</a>
               <img src="/app/img/arrow.png" alt="">
               <a href="#" class="nav-friends {{showFriends ? 'nav_show' : 'nav_hide'}}">Friends</a>
+              <a href="#" class="nav-followers {{showNewFriends ? 'nav_show' : 'nav_hide'}}">New friends</a>
               <a href="#" class="nav-followers {{showFollowers ? 'nav_show' : 'nav_hide'}}">Followers</a>
             </div>
           </div>
@@ -38,72 +40,18 @@
 
         <div class="friends-content">
           <ul>
-            <li class="content_box">
+            <li class="content_box" *ngFor="let userData of userFriendsData">
               <table>
                 <tr>
-                  <td class="img_block" rowspan="3"><a href="#" class="img"><img src="/app/img/Ivan_Loichuk_bg.jpg" alt=""></a></td>
+                  <td class="img_block" rowspan="3"><a href="#" class="img"><img src="{{userData.cropImage ? '/api/profile/image/get/' + userData.cropImage : '/app/img/default_user_photo.jpg'}}" alt=""></a></td>
                   <td class="info_block" rowspan="3">
-                    <a href="#" class="title"><span>Ivan Loichuk</span></a>
-                    <a href="#"><span>45 friends</span></a>
+                    <a href="#" class="title"><span>{{userData.firstName}}  {{userData.lastName}}</span></a>
+                    <a href="#"><span>{{userData.friendsCount}} friends</span></a>
                   </td>
                   <td class="add_button" rowspan="3">
-                    <input type="button" class="btn btn-default" value="Send a messege">
-                  </td>
-                </tr>
-              </table>
-            </li>
-            <li class="content_box">
-              <table>
-                <tr>
-                  <td class="img_block" rowspan="3"><a href="#" class="img"><img src="/app/img/Ivan_Loichuk_bg.jpg" alt=""></a></td>
-                  <td class="info_block" rowspan="3">
-                    <a href="#" class="title"><span>Ivan Loichuk</span></a>
-                    <a href="#"><span>45 friends</span></a>
-                  </td>
-                  <td class="add_button" rowspan="3">
-                    <input type="button" class="btn btn-default" value="Send a messege">
-                  </td>
-                </tr>
-              </table>
-            </li>
-            <li class="content_box">
-              <table>
-                <tr>
-                  <td class="img_block" rowspan="3"><a href="#" class="img"><img src="/app/img/Ivan_Loichuk_bg200x200.jpg" alt=""></a></td>
-                  <td class="info_block" rowspan="3">
-                    <a href="#" class="title"><span>Roman Mysan</span></a>
-                    <a href="#"><span>87 friends</span></a>
-                  </td>
-                  <td class="add_button" rowspan="3">
-                    <input type="button" class="btn btn-default" value="Send a messege">
-                  </td>
-                </tr>
-              </table>
-            </li>
-            <li class="content_box">
-              <table>
-                <tr>
-                  <td class="img_block" rowspan="3"><a href="#" class="img"><img src="/app/img/Ivan_Loichuk_bg.jpg" alt=""></a></td>
-                  <td class="info_block" rowspan="3">
-                    <a href="#" class="title"><span>Ivan Loichuk</span></a>
-                    <a href="#"><span>45 friends</span></a>
-                  </td>
-                  <td class="add_button" rowspan="3">
-                    <input type="button" class="btn btn-default" value="Send a messege">
-                  </td>
-                </tr>
-              </table>
-            </li>
-            <li class="content_box">
-              <table>
-                <tr>
-                  <td class="img_block" rowspan="3"><a href="#" class="img"><img src="/app/img/Ivan_Loichuk_bg.jpg" alt=""></a></td>
-                  <td class="info_block" rowspan="3">
-                    <a href="#" class="title"><span>Ivan Loichuk</span></a>
-                    <a href="#"><span>45 friends</span></a>
-                  </td>
-                  <td class="add_button" rowspan="3">
-                    <input type="button" class="btn btn-default" value="Send a messege">
+                    <input type="button" class="btn btn-default" value="Send a messege" *ngIf="showFriends || showFollowers">
+                    <input type="button" class="btn btn-default" value="Accept" (click)="acceptFriendsRequest(userData.id)"  *ngIf="showNewFriends" >
+                    <input type="button" class="btn btn-default" value="Ignore" (click)="rejectFriendRequest(userData.id)" *ngIf="showNewFriends">
                   </td>
                 </tr>
               </table>

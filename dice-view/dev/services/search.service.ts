@@ -14,4 +14,8 @@ export class SearchService {
             return res.json()
         });
     }
+
+    addToFriends(idUser){
+        return this.http.post("/api/friendRequest/" + idUser);
+    }
 }

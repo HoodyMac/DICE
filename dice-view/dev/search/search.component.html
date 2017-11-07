@@ -36,7 +36,7 @@
                             <input type="checkbox" (change)="getUsersData()" formControlName="isOnline" id="online_now">
                             <label for="online_now">online now</label>
                         </div>
-                        <div id="lang_select">
+                 <!--       <div id="lang_select">
                             <select formControlName="programmingLanguages" (ngModelChange)="getUsersData()" id="prg_lang" size="1" class="chosen-select" data-placeholder="Choose language" #choseLang>
                                 <option value="" selected>Any</option>
                                 <option value="Java">Java</option>
@@ -44,7 +44,7 @@
                                 <option value="PHP">PHP</option>
                                 <option value="JavaScript">JavaScript</option>
                             </select>
-                        </div>
+                        </div>  -->
 
                     </form>
                 </div>
@@ -77,8 +77,8 @@
                                                 <span class="work">{{data.work}}</span>
                                             </td>
                                             <td class="add_button" rowspan="3">
-                                                <input type="button" class="btn btn-default" value="Add to friends">
-                                                <a href="#"><span>{{data.friendsCount}} mutual friends</span></a>
+                                                <input type="button" class="btn btn-default" (click)="addUserToFriends(data.id)"  value="Add to friends">
+                                                <a href="#"><span>{{data.friendsCount}} friends</span></a>
                                             </td>
                                             <td class="gallery_block"><a href="">
                                                 <div class="small_gallery">
