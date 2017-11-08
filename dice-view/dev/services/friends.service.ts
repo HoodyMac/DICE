@@ -10,10 +10,6 @@ export class FriendsService {
     }
 
     getUserFriendsData(){
-       /* return this.http.post("/api/friends", userFriendsData).map(res => {
-            return res.json()
-        });
-*/
         return this.http.get("/api/friends").map(res => res.json());
     }
 
