@@ -8,7 +8,6 @@ import {AuthenticationService} from "../common/services/authentication.service";
   styleUrls: ['../app/css/messages.css'],
   providers: [ChatService, FriendsService]
 })
-
 export class MessagesComponent {
 
   public userInfo: any;
