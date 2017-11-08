@@ -13,4 +13,12 @@ export class ChatService {
   createChat(friendId: number): Observable {
     return this.http.post('api/chats/' + friendId).map(res => res.json());
   }
+
+  getMessage(chatId: number): Observable {
+    return this.http.get('api/chats/messages/' + chatId).map(res => res.json());
+  }
+
+  createMessage(message: string, chatId: number): Observable {
+    return this.http.post('api/chats/messages/' + chatId, message).map(res => res.json());
+  }
 }

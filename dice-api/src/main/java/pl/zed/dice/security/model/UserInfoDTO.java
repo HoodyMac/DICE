@@ -9,13 +9,15 @@ public class UserInfoDTO {
     private String lastName;
     private Gender gender;
     private Long userAccountId;
+    private Long userProfileId;
 
-    public UserInfoDTO(String email, String firstName, String lastName, Gender gender, Long userAccountId) {
+    public UserInfoDTO(String email, String firstName, String lastName, Gender gender, Long userAccountId, Long userProfileId) {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
         this.userAccountId = userAccountId;
+        this.userProfileId = userProfileId;
     }
 
     public String getEmail() {
@@ -56,5 +58,13 @@ public class UserInfoDTO {
 
     public void setUserAccountId(Long userAccountId) {
         this.userAccountId = userAccountId;
+    }
+
+    public Long getUserProfileId() {
+        return userProfileId;
+    }
+
+    public void setUserProfileId(Long userProfileId) {
+        this.userProfileId = userProfileId;
     }
 }

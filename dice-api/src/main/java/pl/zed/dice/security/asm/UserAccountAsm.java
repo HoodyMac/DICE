@@ -13,6 +13,7 @@ public class UserAccountAsm {
                 userAccount.getProfile().getFirstname(),
                 userAccount.getProfile().getLastname(),
                 userAccount.getProfile().getGender(),
+                userAccount.getId(),
                 userAccount.getProfile().getId()
         );
     }

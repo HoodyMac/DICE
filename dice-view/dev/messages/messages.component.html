@@ -46,7 +46,7 @@
                     <div class="list-container">
                         <div class="scroll">
                             <ul>
-                                <li *ngFor="let chat of chats">
+                                <li *ngFor="let chat of chats" (click)="selectChat(chat)">
                                     <div class="user-img">
                                         <div class="circle" [style.background-image]="'url(' + (chat.cropImg ? '/api/profile/image/get/' + chat.cropImg : '/app/img/default_user_photo.jpg') + ')'"></div>
                                     </div>
@@ -65,11 +65,11 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-8 col-sm-7 col-xs-6 custom-col-messages-block">
+            <div class="col-md-8 col-sm-7 col-xs-6 custom-col-messages-block" *ngIf="selectedChat !== undefined">
                 <div class="messages-block">
                     <div class="message_header">
                         <div class="username">
-                            <p>Ivan Loichuk</p>
+                            <p>{{ selectedChat.name }}</p>
                         </div>
                         <div class="isOnline">
                             <p>online</p>
@@ -77,47 +77,20 @@
                     </div>
                     <div class="message_body">
                         <div class="scroll">
-                            <div class="message_content">
-                                <div class="user-img">
+                            <div class="message_content" *ngFor="let message of messages">
+                                <div class="user-img" [style.float]="getMessageFloat(message.senderId)">
                                     <a><div class="circle" style="background-image: url(/app/img/Ivan_Loichuk_bg200x200.jpg);"></div></a>
-                                    <p>16:54</p>
+                                    <p>{{ message.createdAt | date:'HH:mm' }}</p>
                                 </div>
-                                <div class="mess-text">
-                                    <p>Hello </p>
-                                </div>
-                            </div>
-                            <div class="message_content">
-                                <div class="user-img" style="float: right;">
-                                    <a><div class="circle" style="background-image: url(/app/img/Ivan_Loichuk_bg200x200.jpg);"></div></a>
-                                    <p>16:54</p>
-                                </div>
-                                <div class="mess-text" style="float: right;">
-                                    <p> Hi! </p>
-                                </div>
-                            </div>
-                            <div class="message_content">
-                                <div class="user-img">
-                                    <a><div class="circle" style="background-image: url(/app/img/Ivan_Loichuk_bg200x200.jpg);"></div></a>
-                                    <p>16:54</p>
-                                </div>
-                                <div class="mess-text">
-                                    <p>Just updated the post with the missing information. </p>
-                                </div>
-                            </div>
-                            <div class="message_content">
-                                <div class="user-img" style="float: right;">
-                                    <a><div class="circle" style="background-image: url(/app/img/Ivan_Loichuk_bg200x200.jpg);"></div></a>
-                                    <p>16:54</p>
-                                </div>
-                                <div class="mess-text" style="float: right;">
-                                    <p>Couldn’t get this to work, but some of the steps were unclear. Can you post the end result? </p>
+                                <div class="mess-text" [style.float]="getMessageFloat(message.senderId)">
+                                    <p>{{ message.content }} </p>
                                 </div>
                             </div>
                         </div>
 
                         <div class="input-text">
-                            <form>
-                                <input type="text" class="form-control" placeholder="Enter your message">
+                            <form #fromCreateMessage="ngForm" (ngSubmit)="createMessage(fromCreateMessage.value); fromCreateMessage.reset()">
+                                <input type="text" class="form-control" placeholder="Enter your message" name="content" ngModel #content="ngModel">
                                 <input  type="submit" class="form-control" value="Send">
                             </form>
                         </div>
