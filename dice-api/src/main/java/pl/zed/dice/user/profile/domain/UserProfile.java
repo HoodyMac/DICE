@@ -47,7 +47,7 @@ public class UserProfile {
 
     private Boolean isOnline;
 
-    @ManyToMany
+    @OneToMany(mappedBy = "requestor")
     List<FriendEntity> friends;
 
     public UserProfile(){

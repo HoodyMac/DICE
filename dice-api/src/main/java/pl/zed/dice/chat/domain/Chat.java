@@ -25,8 +25,8 @@ public class Chat {
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastAction;
 
-//    @OneToMany(cascade = CascadeType.ALL)
-//    private List<Message> messages;
+    @OneToMany(mappedBy = "chat")
+    private List<Message> messages;
 
     @ManyToMany(cascade = CascadeType.ALL)
     private List<UserProfile> participants;

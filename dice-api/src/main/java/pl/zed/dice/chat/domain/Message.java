@@ -1,5 +1,7 @@
 package pl.zed.dice.chat.domain;
 
+import pl.zed.dice.user.profile.domain.UserProfile;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -15,9 +17,21 @@ public class Message {
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
 
-    public Message(String content, Date createdAt) {
+    @ManyToOne
+    @JoinColumn(name = "senderId")
+    private UserProfile sender;
+
+    @ManyToOne
+    private Chat chat;
+
+    public Message() {
+    }
+
+    public Message(String content, Date createdAt, UserProfile sender, Chat chat) {
         this.content = content;
         this.createdAt = createdAt;
+        this.sender = sender;
+        this.chat = chat;
     }
 
     public Long getId() {
@@ -42,5 +56,21 @@ public class Message {
 
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Chat getChat() {
+        return chat;
+    }
+
+    public void setChat(Chat chat) {
+        this.chat = chat;
+    }
+
+    public UserProfile getSender() {
+        return sender;
+    }
+
+    public void setSender(UserProfile sender) {
+        this.sender = sender;
     }
 }
