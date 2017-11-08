@@ -3,7 +3,7 @@ package pl.zed.dice.user.profile.asm;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import pl.zed.dice.security.domain.UserAccount;
-import pl.zed.dice.user.profile.domain.Gender;
+import pl.zed.dice.constant.Gender;
 import pl.zed.dice.user.profile.domain.UserProfile;
 import pl.zed.dice.user.profile.model.FriendDTO;
 import pl.zed.dice.user.profile.model.UserDTO;
@@ -14,7 +14,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 
 @Component
 public class UserAsm {
@@ -44,11 +43,11 @@ public class UserAsm {
 
     public UserProfileSearchResultDTO makeUserProfileSearchResultDTO(UserProfile userProfile){
         return new UserProfileSearchResultDTO(userProfile.getId(), userProfile.getFirstname(), userProfile.getLastname(),
-                userProfile.getCity(), userProfile.getWork(), userProfile.getFriends().size(), userProfile.getCropImage());
+                userProfile.getCity(), userProfile.getWork(), userProfile.getCropImage());
     }
 
     public FriendDTO makeFriendDTO(UserProfile userProfile){
         return new FriendDTO(userProfile.getId(), userProfile.getFirstname(), userProfile.getLastname(),
-                userProfile.getFriends().size(), userProfile.getCropImage());
+                userProfile.getCropImage());
     }
 }

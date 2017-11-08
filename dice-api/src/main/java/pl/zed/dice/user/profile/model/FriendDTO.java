@@ -10,7 +10,7 @@ public class FriendDTO {
 
     public FriendDTO(){}
 
-    public FriendDTO(Long id, String firstName, String lastName, int friendsCount, String cropImage) {
+    public FriendDTO(Long id, String firstName, String lastName, String cropImage) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;

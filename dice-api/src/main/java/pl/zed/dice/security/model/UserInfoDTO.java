@@ -1,6 +1,6 @@
 package pl.zed.dice.security.model;
 
-import pl.zed.dice.user.profile.domain.Gender;
+import pl.zed.dice.constant.Gender;
 
 public class UserInfoDTO {
 

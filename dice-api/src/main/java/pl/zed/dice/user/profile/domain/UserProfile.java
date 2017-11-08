@@ -1,5 +1,6 @@
 package pl.zed.dice.user.profile.domain;
 
+import pl.zed.dice.constant.Gender;
 import pl.zed.dice.user.profile.model.UserProfileDTO;
 
 import javax.persistence.*;

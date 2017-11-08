@@ -1,5 +1,7 @@
 package pl.zed.dice.user.profile.domain;
 
+import pl.zed.dice.constant.FriendRequestStatus;
+
 import javax.persistence.*;
 
 @Entity

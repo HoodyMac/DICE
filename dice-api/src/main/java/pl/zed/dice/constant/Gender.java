@@ -1,4 +1,4 @@
-package pl.zed.dice.user.profile.domain;
+package pl.zed.dice.constant;
 
 public enum Gender {
     FEMALE,

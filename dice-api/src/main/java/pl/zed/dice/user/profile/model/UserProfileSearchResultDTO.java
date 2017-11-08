@@ -9,16 +9,16 @@ public class UserProfileSearchResultDTO {
     private String work;
     private int friendsCount;
     private String cropImage;
+    private String friendShipStatus;
 
     public UserProfileSearchResultDTO(){}
 
-    public UserProfileSearchResultDTO(Long id, String firstName, String lastName, String city, String work, int friendsCount, String cropImage) {
+    public UserProfileSearchResultDTO(Long id, String firstName, String lastName, String city, String work, String cropImage) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.city = city;
         this.work = work;
-        this.friendsCount = friendsCount;
         this.cropImage = cropImage;
     }
 
@@ -76,5 +76,13 @@ public class UserProfileSearchResultDTO {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getFriendShipStatus() {
+        return friendShipStatus;
+    }
+
+    public void setFriendShipStatus(String friendShipStatus) {
+        this.friendShipStatus = friendShipStatus;
     }
 }

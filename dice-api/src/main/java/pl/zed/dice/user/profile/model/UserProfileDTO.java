@@ -19,6 +19,7 @@ public class UserProfileDTO {
     private String education;
     private Boolean isOnline;
     private String email;
+    private Integer friendsCount;
 
     public UserProfileDTO(){}
 
@@ -147,5 +148,13 @@ public class UserProfileDTO {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Integer getFriendsCount() {
+        return friendsCount;
+    }
+
+    public void setFriendsCount(Integer friendsCount) {
+        this.friendsCount = friendsCount;
     }
 }

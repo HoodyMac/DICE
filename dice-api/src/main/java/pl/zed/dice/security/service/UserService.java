@@ -1,7 +1,6 @@
 package pl.zed.dice.security.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,19 +14,16 @@ import pl.zed.dice.security.repository.UserAccountRepository;
 import pl.zed.dice.user.profile.asm.UserAsm;
 import pl.zed.dice.security.domain.UserAccount;
 import pl.zed.dice.user.profile.domain.FriendEntity;
-import pl.zed.dice.user.profile.domain.FriendRequestStatus;
-import pl.zed.dice.user.profile.domain.Gender;
+import pl.zed.dice.constant.FriendRequestStatus;
+import pl.zed.dice.constant.Gender;
 import pl.zed.dice.user.profile.domain.UserProfile;
 import pl.zed.dice.user.profile.model.*;
 import pl.zed.dice.user.profile.repository.FriendShipRepository;
 import pl.zed.dice.user.profile.repository.UserProfileRepository;
 
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -105,6 +101,8 @@ public class UserService {
         UserAccount userAccount = userRepository.findByEmail(email);
         UserProfileDTO userProfileDTO = userAsm.makeUserProfileDTO(userAccount.getProfile());
         userProfileDTO.setEmail(userAccount.getEmail());
+        userProfileDTO.setFriendsCount(countFriends(userAccount.getProfile()));
+
         return userProfileDTO;
     }
 
@@ -147,12 +145,26 @@ public class UserService {
                     userProfileSearchDTO.getFullName().substring(fullName.indexOf(" ")+1));
         }
 
-        userProfileRepository.search(user.getFirstname(), ageFrom, ageTo, gender,
-                userProfileSearchDTO.getOnline(), userProfileSearchDTO.getCity(),
-                userProfileSearchDTO.getProgrammingLanguages(), user.getSurname())
-        .forEach(p -> result.add(userAsm.makeUserProfileSearchResultDTO(p)));
+        userProfileRepository.search(user.getFirstname().toLowerCase(), ageFrom, ageTo, gender,
+                userProfileSearchDTO.getOnline(), userProfileSearchDTO.getCity().toLowerCase(),
+                userProfileSearchDTO.getProgrammingLanguages(), user.getSurname().toLowerCase())
+        .forEach(p -> result.add(filterFriendStatusInSearch(p)));
 
         return result;
+    }
+
+    private UserProfileSearchResultDTO filterFriendStatusInSearch(UserProfile p){
+        String myName = SecurityContextHolder.getContext().getAuthentication().getName();
+        UserProfile me = userRepository.findByEmail(myName).getProfile();
+
+        UserProfileSearchResultDTO resultDTO = userAsm.makeUserProfileSearchResultDTO(p);
+        FriendEntity friendEntity = friendShipRepository.getFriendShip(me, p);
+
+        if(friendEntity != null) {
+            resultDTO.setFriendShipStatus(friendEntity.getStatus().name());
+        }
+        resultDTO.setFriendsCount(countFriends(p));
+        return resultDTO;
     }
 
     private class User{
@@ -231,25 +243,38 @@ public class UserService {
         UserProfile recipient = userRepository.findByEmail(recipientName).getProfile();
         List<FriendDTO> friendDTOS = new ArrayList<>();
 
-        friendShipRepository.getFriends(recipient).forEach(f ->{
-            if(f.getRecipient() == recipient) {
-                friendDTOS.add(userAsm.makeFriendDTO(f.getRequestor()));
-            }else
-                friendDTOS.add(userAsm.makeFriendDTO(f.getRecipient()));
-        });
+        friendShipRepository.getFriends(recipient).forEach(f ->
+            friendDTOS.add(filterOut(f, recipient))
+        );
 
         return friendDTOS;
     }
 
+    private FriendDTO filterOut(FriendEntity f, UserProfile person){
+        if(f.getRecipient() == person) {
+            FriendDTO friendDTO = userAsm.makeFriendDTO(f.getRequestor());
+            friendDTO.setFriendsCount(countFriends(f.getRequestor()));
+            return friendDTO;
+        }else{
+            FriendDTO friendDTO = userAsm.makeFriendDTO(f.getRecipient());
+            friendDTO.setFriendsCount(countFriends(f.getRecipient()));
+            return friendDTO;
+        }
+    }
+
     public List<FriendDTO> getFriends(Long id){
-        UserProfile recipient = userProfileRepository.getOne(id);
+        UserProfile person = userProfileRepository.getOne(id);
         List<FriendDTO> friendDTOS = new ArrayList<>();
 
-        friendShipRepository.getFriends(recipient).forEach(f ->
-                friendDTOS.add(userAsm.makeFriendDTO(f.getRequestor()))
+        friendShipRepository.getFriends(person).forEach(f ->
+            friendDTOS.add(filterOut(f, person))
         );
 
         return friendDTOS;
+    }
+
+    public int countFriends(UserProfile person){
+        return friendShipRepository.getFriends(person).size();
     }
 
     public List<FriendDTO> getFriendRequests(){
@@ -257,8 +282,11 @@ public class UserService {
         UserProfile recipient = userRepository.findByEmail(recipientName).getProfile();
         List<FriendDTO> friendDTOS = new ArrayList<>();
 
-        friendShipRepository.getFriendRequests(recipient).forEach(f ->
-                friendDTOS.add(userAsm.makeFriendDTO(f.getRequestor())));
+        friendShipRepository.getFriendRequests(recipient).forEach(f ->{
+            FriendDTO friendDTO = userAsm.makeFriendDTO(f.getRequestor());
+            friendDTO.setFriendsCount(countFriends(f.getRequestor()));
+            friendDTOS.add(friendDTO);
+        });
 
         return friendDTOS;
     }
