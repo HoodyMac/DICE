@@ -1,5 +1,6 @@
 package pl.zed.dice.chat.service;
 
+import com.google.common.base.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.zed.dice.chat.asm.MessageAsm;
@@ -40,6 +41,10 @@ public class MessageService {
 
     public MessageViewDTO createMessageForChat(MessageWriteDTO messageDto, Long chatId) {
         validateIfChatParticipant(chatId);
+
+        if(Strings.isNullOrEmpty(messageDto.getContent())) {
+            throw new IllegalArgumentException("Message content can't be empty");
+        }
 
         Message message = messageAsm.makeMessage(messageDto, chatId);
         messageRepository.save(message);
