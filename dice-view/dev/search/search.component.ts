@@ -11,7 +11,7 @@ declare var jQuery: any;
 })
 
 export class SearchComponent implements AfterViewInit{
-    //@ViewChild('choseLang') choseLang: ElementRef;
+    @ViewChild('choseLang') choseLang: ElementRef;
     @ViewChild('choseAgeFrom') choseAgeFrom: ElementRef;
     @ViewChild('choseAgeTo') choseAgeTo: ElementRef;
     ageValues: any = new Array();
@@ -20,6 +20,7 @@ export class SearchComponent implements AfterViewInit{
     searchData = [];
     public searchForm: FormGroup;
     public fullname: "";
+    private addToFriendsDone: false;
 
     constructor(private searchService: SearchService,
                 private fb:FormBuilder,
@@ -52,7 +53,7 @@ export class SearchComponent implements AfterViewInit{
     ngAfterViewInit() {
         let mainClass = this;
         let searchForm = this.searchForm;
-        //jQuery(this.choseLang.nativeElement).chosen();
+        jQuery(this.choseLang.nativeElement).chosen();
         jQuery(this.choseAgeFrom.nativeElement).chosen();
         jQuery(this.choseAgeTo.nativeElement).chosen();
 
@@ -66,9 +67,9 @@ export class SearchComponent implements AfterViewInit{
         jQuery(this.choseAgeTo.nativeElement).chosen().change(function () {
             mainClass.getUsersData(searchForm.value);
         });
-    /*    jQuery(this.choseLang.nativeElement).chosen().change(function () {
+        jQuery(this.choseLang.nativeElement).chosen().change(function () {
             mainClass.getUsersData(searchForm.value);
-        });*/
+        });
 
         this.getUsersData();
     }
@@ -77,7 +78,7 @@ export class SearchComponent implements AfterViewInit{
         let searchData = {};
         searchData['ageFrom'] = jQuery(this.choseAgeFrom.nativeElement).val();
         searchData['ageTo'] = jQuery(this.choseAgeTo.nativeElement).val();
-        //searchData['programmingLanguages'] = jQuery(this.choseLang.nativeElement).val();
+        searchData['programmingLanguages'] = jQuery(this.choseLang.nativeElement).val();
         searchData['gender'] =  this.searchForm.controls['gender'].value;
         searchData['city'] = this.searchForm.controls['city'].value;
         searchData['fullName'] = this.searchForm.controls['fullName'].value;
@@ -99,6 +100,7 @@ export class SearchComponent implements AfterViewInit{
         this.searchService.addToFriends(iUser)
             .subscribe(
                 data =>{
+                    this.addToFriendsDone = true;
                     console.log(data);
                 }
             );

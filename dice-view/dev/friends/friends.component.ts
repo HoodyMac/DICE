@@ -12,6 +12,7 @@ export class FriendsComponent {
   showNewFriends:boolean = false;
 
   private userFriendsData: [];
+  private acceptDone: true;
 
   constructor(private friendsService: FriendsService) {
 
@@ -23,6 +24,7 @@ export class FriendsComponent {
     this.friendsService.acceptFriendsRequest(idUser)
         .subscribe(
             data =>{
+              this.acceptDone = true;
               console.log(data);
             }
         );

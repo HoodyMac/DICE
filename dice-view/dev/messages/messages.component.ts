@@ -3,13 +3,13 @@ import {ChatService} from "../services/chat.service";
 import {FriendsService} from "../services/friends.service";
 import {AuthenticationService} from "../common/services/authentication.service";
 
+declare var jQuery: any;
 @Component({
   templateUrl: 'dev/messages/messages.component.html',
   styleUrls: ['../app/css/messages.css'],
   providers: [ChatService, FriendsService]
 })
-export class MessagesComponent {
-
+export class MessagesComponent{
   public userInfo: any;
   public selectedChat: any;
 
@@ -17,10 +17,13 @@ export class MessagesComponent {
   public chats: any[];
   public friends: any[];
 
+  private screenHeight: any;
+
   constructor(
     private chatService: ChatService,
     private friendsService: FriendsService,
     private authenticationService: AuthenticationService) {
+
     this.chatService.getAllChats().subscribe(data => {
       this.chats = data;
       this.chats.sort((a, b) => a.lastAction < b.lastAction);
@@ -29,12 +32,13 @@ export class MessagesComponent {
       data => this.friends = data
     );
 
+    this.screenHeight = (window.screen.height) - 390 + "px";
   };
 
   public createChat(friendId: number) {
     this.chatService.createChat(friendId).subscribe(
       data => this.chats.unshift(data)
-    )
+    );
   }
 
   public selectChat(chat: number) {
@@ -44,17 +48,21 @@ export class MessagesComponent {
       data => {
         this.messages = data;
         this.messages.sort((a, b) => a.createdAt > b.createdAt);
+        jQuery('#scroll').scrollTop(jQuery('#scroll')[0].scrollHeight);
       }
     );
-  }
+}
 
-  public createMessage(message: any) {
-    this.chatService.createMessage(message, this.selectedChat.id).subscribe(
-      data => {
-        this.messages.push(data);
-        this.messages.sort((a, b) => a.createdAt > b.createdAt);
-      }
-    );
+  public createMessage(message: string) {
+    if(message['content'] != null && message['content'].toString().replace(/ /g, "") != ""){
+      this.chatService.createMessage(message, this.selectedChat.id).subscribe(
+          data => {
+            this.messages.push(data);
+            this.messages.sort((a, b) => a.createdAt > b.createdAt);
+            jQuery('#scroll').scrollTop(jQuery('#scroll')[0].scrollHeight);
+          }
+      );
+    }
   }
 
   public getMessageFloat(senderId: number) {

@@ -50,8 +50,8 @@
                   </td>
                   <td class="add_button" rowspan="3">
                     <input type="button" class="btn btn-default" value="Send a messege" *ngIf="showFriends || showFollowers">
-                    <input type="button" class="btn btn-default" value="Accept" (click)="acceptFriendsRequest(userData.id)"  *ngIf="showNewFriends" >
-                    <input type="button" class="btn btn-default" value="Ignore" (click)="rejectFriendRequest(userData.id)" *ngIf="showNewFriends">
+                    <input type="button" class="btn btn-default" value="{{acceptDone ? 'Friend': 'Accept'}}" (click)="acceptFriendsRequest(userData.id)"  *ngIf="showNewFriends">
+                    <input type="button" class="btn btn-default" value="Ignore" (click)="rejectFriendRequest(userData.id)" *ngIf="showNewFriends && !acceptDone">
                   </td>
                 </tr>
               </table>
