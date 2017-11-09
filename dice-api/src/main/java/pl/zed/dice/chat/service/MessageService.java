@@ -63,7 +63,7 @@ public class MessageService {
             }
         }
         if(!isChatParticipant) {
-            throw new SecurityException("Ohuel?");
+            throw new SecurityException("You are not part of this chat");
         }
     }
 }

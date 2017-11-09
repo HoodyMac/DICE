@@ -16,6 +16,6 @@ public class ChatAsm {
     public ChatDTO makeChatDTO(Chat chat) {
         UserProfile currentUserProfile = securityContextService.getCurrentUserProfile();
         UserProfile participantUserProfile = chat.getParticipants().stream().filter(userProfile -> !userProfile.getId().equals(currentUserProfile.getId())).findFirst().get();
-        return new ChatDTO(chat.getId(), participantUserProfile.getFullname(), participantUserProfile.getCropImage(), chat.getLastAction());
+        return new ChatDTO(chat.getId(), participantUserProfile.getFullname(), participantUserProfile.getId(), participantUserProfile.getCropImage(), chat.getLastAction());
     }
 }

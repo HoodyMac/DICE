@@ -36,9 +36,17 @@ export class MessagesComponent{
   };
 
   public createChat(friendId: number) {
-    this.chatService.createChat(friendId).subscribe(
-      data => this.chats.unshift(data)
-    );
+    var chat = this.chats.filter(chat => chat.participantId === friendId);
+    if (chat.length === 1) {
+      this.selectedChat = chat[0];
+    } else {
+      this.chatService.createChat(friendId).subscribe(
+        data => {
+          this.chats.unshift(data);
+          this.selectedChat = data;
+        }
+      );
+    }
   }
 
   public selectChat(chat: number) {
@@ -54,11 +62,10 @@ export class MessagesComponent{
 }
 
   public createMessage(message: string) {
-    if(message['content'] != null && message['content'].toString().replace(/ /g, "") != ""){
+    if(message['content'] !== null && message['content'].toString().replace(/ /g, "") !== ""){
       this.chatService.createMessage(message, this.selectedChat.id).subscribe(
           data => {
             this.messages.push(data);
-            this.messages.sort((a, b) => a.createdAt > b.createdAt);
             jQuery('#scroll').scrollTop(jQuery('#scroll')[0].scrollHeight);
           }
       );

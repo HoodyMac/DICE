@@ -6,12 +6,14 @@ public class ChatDTO {
 
     private Long id;
     private String name;
+    private Long participantId;
     private String cropImg;
     private Date lastAction;
 
-    public ChatDTO(Long id, String name, String cropImg, Date lastAction) {
+    public ChatDTO(Long id, String name, Long participantId, String cropImg, Date lastAction) {
         this.id = id;
         this.name = name;
+        this.participantId = participantId;
         this.cropImg = cropImg;
         this.lastAction = lastAction;
     }
@@ -46,5 +48,13 @@ public class ChatDTO {
 
     public void setLastAction(Date lastAction) {
         this.lastAction = lastAction;
+    }
+
+    public Long getParticipantId() {
+        return participantId;
+    }
+
+    public void setParticipantId(Long participantId) {
+        this.participantId = participantId;
     }
 }

@@ -47,7 +47,7 @@ public class ChatService {
 
         Chat chatWithSameParticipants = chatRepository.findChatByParticipants(currentUserProfile.getId(), participantUserProfile.getId());
         if(chatWithSameParticipants != null) {
-            return chatAsm.makeChatDTO(chatWithSameParticipants);
+            throw new IllegalArgumentException("Chat is already created");
         }
 
         Chat chat = new Chat(ChatType.PM, new Date());
