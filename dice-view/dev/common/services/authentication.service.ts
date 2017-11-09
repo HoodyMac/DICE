@@ -2,12 +2,19 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "./http-client.service";
 import 'rxjs/Rx';
 import {Observable} from "rxjs/Observable";
+import {Subject} from "rxjs/Subject";
 
 @Injectable()
 export class AuthenticationService {
   private userInfo = {};
 
-  constructor(private _http: HttpClient) {}
+  private userInfoObservable: Observable;
+  private userInfoSubject: Subject;
+
+  constructor(private _http: HttpClient) {
+    this.userInfoSubject = new Subject();
+    this.userInfoObservable = this.userInfoSubject.asObservable();
+  }
 
   login(credentials: any): Observable {
     return this._http.post('/auth', credentials)
@@ -17,6 +24,7 @@ export class AuthenticationService {
           localStorage.setItem('token', data.token);
         }
         this.userInfo = data.userInfo;
+        this.userInfoSubject.next(this.userInfo);
       });
   }
 
@@ -29,6 +37,7 @@ export class AuthenticationService {
             localStorage.setItem('token', data.token);
           }
           this.userInfo = data.userInfo;
+          this.userInfoSubject.next(this.userInfo);
           return this.userInfo;
         }
       );
@@ -37,10 +46,15 @@ export class AuthenticationService {
   logout(): void {
     localStorage.removeItem('token');
     this.userInfo = {};
+    this.userInfoSubject.next(this.userInfo);
   }
 
   getUserInfo() {
     return this.userInfo;
+  }
+
+  getUserInfoObservable(): Observable {
+    return this.userInfoObservable
   }
 
   isLoggedIn(): boolean {

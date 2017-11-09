@@ -28,6 +28,8 @@ public class MessageAsm {
     public Message makeMessage(MessageWriteDTO messageWriteDTO, Long chatId) {
         UserProfile currentUserProfile = securityContextService.getCurrentUserProfile();
         Chat chat = chatRepository.getOne(chatId);
-        return new Message(messageWriteDTO.getContent(), new Date(), currentUserProfile, chat);
+        Date now = new Date();
+        chat.setLastAction(now);
+        return new Message(messageWriteDTO.getContent(), now, currentUserProfile, chat);
     }
 }
