@@ -21,4 +21,8 @@ export class ChatService {
   createMessage(message: string, chatId: number): Observable {
     return this.http.post('api/chats/messages/' + chatId, message).map(res => res.json());
   }
+
+  refreshMessages(lastAction: number): Observable {
+    return this.http.get('api/chats//messages/refresh/' + lastAction).map(res => res.json());
+  }
 }

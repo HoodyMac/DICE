@@ -22,7 +22,7 @@ public class MessageAsm {
     private ChatRepository chatRepository;
 
     public MessageViewDTO makeMessageViewDTO(Message message) {
-        return new MessageViewDTO(message.getId(), message.getSender().getId(), message.getContent(), message.getCreatedAt());
+        return new MessageViewDTO(message.getId(), message.getSender().getId(), message.getContent(), message.getCreatedAt(), message.getChat().getId());
     }
 
     public Message makeMessage(MessageWriteDTO messageWriteDTO, Long chatId) {

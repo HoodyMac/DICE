@@ -52,6 +52,14 @@ public class MessageService {
         return messageAsm.makeMessageViewDTO(message);
     }
 
+    public List<MessageViewDTO> refreshMessages(Long lastAction) {
+        Date lastActionAsDate = new Date(lastAction);
+        UserProfile currentUserProfile = securityContextService.getCurrentUserProfile();
+
+        List<Message> newMessages = messageRepository.findMessagesAfterDateForUser(currentUserProfile.getId(), lastActionAsDate);
+        return newMessages.stream().map(message -> messageAsm.makeMessageViewDTO(message)).collect(Collectors.toList());
+    }
+
     private void validateIfChatParticipant(Long chatId) {
         // validate if chat participant
         UserProfile currentUserProfile = securityContextService.getCurrentUserProfile();
