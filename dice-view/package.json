@@ -29,6 +29,7 @@
     "gulp-rename": "^1.2.2",
     "jquery": "^3.2.1",
     "jquery-jcrop": "^0.9.13",
+    "lightbox2": "^2.9.0",
     "ng2-modal": "0.0.25",
     "ng2-translate": "^5.0.0",
     "reflect-metadata": "0.1.2",

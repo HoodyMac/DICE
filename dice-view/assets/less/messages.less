@@ -81,19 +81,46 @@ section.messages {
           .mess-text{ float: left; position: relative; top: 10px; background-color: @msg_msgBoxBg; color:@msg_msgBoxFont; border-radius: 10px; padding: 5px 10px 5px 10px; max-width: 70%;  margin-bottom: 20px;
             p{margin: 0;}
           }
+          .mess-image{ float: left; position: relative; top: 10px;  padding: 5px 10px 5px 10px; max-width: 70%;  margin-bottom: 20px;
+            p{margin: 0;
+              img{ max-width: 100%;}
+            }
+          }
         }
       }
       .input-text{ padding: 15px 15px 15px 15px; border-top: 1px solid @box_border; display: inline-flex; width: 100%;
         form{ width: 100%; display: inline-flex; margin: 0;
-          input[type='text']{ width: 85%; margin-right: 15px; }
-          input[type='submit']{ width: 15%; background-color: @msg_buttonBg; border: none; color: @msg_msgBoxFont;
+          input[type='text']{ width: 85%; margin-right: 10px; }
+          input[type='submit']{ width: 15%; background-color: @msg_buttonBg; border: none; color: @msg_msgBoxFont; margin-left: 10px;
+            &:hover{background-color: @msg_buttonBgHover;}
+          }
+          .upload_item{ list-style: none; display: inline-flex; margin: 0; padding: 0;
+            li{margin: 5px;
+              img{width: 25px; cursor: pointer;}
+            }
+          }
+        }
+
+      }
+      /*------- Modal window ------------------*/
+      modal{
+        modal-header{
+          h2{margin: 5px 1%;}
+        }
+        .prgLang{width: 25%;height: 40px;padding-left: 10px;margin: 1%;border-radius: 5px; }
+        label{width: 100%; margin: 10px 10px 0px 10px;}
+        #code_container{ border-radius: 5px; margin: 1%; width: 98%;}
+        #code_comment{ border-radius: 5px; margin: 1%; width: 98%;}
+        .buttons_section{ width: 98%; text-align: end; margin: 1%;
+          input{ height: 40px; border-radius: 5px; border: none; margin: 5px 5px; background-color: @msg_buttonBg; color: @msg_msgBoxFont;
+            &.cancel{width: 100px;}
+            &.submit{width: 180px;}
             &:hover{background-color: @msg_buttonBgHover;}
           }
         }
 
       }
     }
-
   }
 }
 
@@ -108,6 +135,9 @@ section.messages {
     ul, a{text-align: center;}
     .form-group{width: 75%;  float: left; margin-right: 2%;}
   }
+  section.messages .messages-block .message_body modal{
+    .prgLang{width: 98%}
+  }
 
 
 }
@@ -118,12 +148,28 @@ section.messages {
 }
 
 @media (max-width: 480px){
-  .custom-col-friends-list{width: 80%; margin-left: 10%; margin-right: 10%; }
+  .custom-col-friends-list{width: 100%;}
   .custom-col-messages-block{width: 100%;}
 
   .navbar-collapse{
     .form-group{width: 100%;}
     button{width: 100%;}
+  }
+  section.messages .messages-block .message_body{
+    modal{
+      .buttons_section{
+        input{
+          &.cancel{width: 100%;}
+          &.submit{width: 100%;}
+        }
+      }
+    }
+    .scroll {
+      max-height: 300px!important;
+    }
+  }
+  section.messages .messages-block .message_header .username { width: 65%;
+    p { padding: 10px 15px; }
   }
 
 }
@@ -131,6 +177,11 @@ section.messages {
 @media (max-width: 340px){
   .custom-col-friends-list{width: 100%; margin-left: 0; margin-right: 0; }
   .custom-col-messages-block{width: 100%;}
+
+  section.messages .messages-block .message_body{
+    .scroll { max-height: 300px!important; }
+    .input-text form input[type='submit']{ width: 20%;}
+  }
 }
 
 /*--- END (media) Responsive style -----------------------*/

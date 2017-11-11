@@ -76,7 +76,7 @@
                         </div>
                     </div>
                     <div class="message_body">
-                        <div class="scroll" id="scroll" [ngStyle]="{height: screenHeight}" #scroll>
+                        <div class="scroll" id="scroll" [ngStyle]="{'max-height': screenHeight}" #scroll>
                             <div class="message_content" *ngFor="let message of messages">
                                 <div class="user-img" [style.float]="getMessageFloat(message.senderId)">
                                     <a><div class="circle" style="background-image: url(/app/img/Ivan_Loichuk_bg200x200.jpg);"></div></a>
@@ -85,14 +85,60 @@
                                 <div class="mess-text" [style.float]="getMessageFloat(message.senderId)">
                                     <p>{{ message.content }} </p>
                                 </div>
+                                <div class="mess-image" *ngIf="message.img" [style.float]="getMessageFloat(message.senderId)">
+                                    <p>
+                                        <a href="/app/img/TEEN.jpg" data-lightbox="image" data-title="My caption">
+                                            <img class="ui bordered small image" src="/app/img/TEEN.jpg">
+                                        </a>
+                                    </p>
+                                </div>
+
+                                <section class="code"></section>
                             </div>
                         </div>
 
                         <div class="input-text">
                             <form #fromCreateMessage="ngForm" (ngSubmit)="createMessage(fromCreateMessage.value); fromCreateMessage.reset()">
+                                <ul class="upload_item">
+                                    <li><img src="/app/img/file_upload.png" alt="" width="30"></li>
+                                </ul>
                                 <input type="text" class="form-control" placeholder="Enter your message" name="content" ngModel #content="ngModel">
+                                <ul class="upload_item">
+                                    <li><img src="/app/img/code_upload.png" alt="" (click)="codeUpload.open()" width="35"></li>
+                                    <li><img src="/app/img/photo_upload.png" alt="" id="imgButton" (click)="OpenImgUpload()"  width="30"></li>
+                                </ul>
+                                <input type="file" id="imgupload" style="display:none"/>
                                 <input  type="submit" class="form-control" value="Send">
                             </form>
+                        </div>
+
+                        <!-- Modal windows -->
+                        <div class="row">
+                            <modal #codeUpload modalClass="modal-lg" [closeOnOutsideClick]="true" [closeOnEscape]="true">
+                                <modal-header>
+                                    <h2>Create Snippet</h2>
+                                </modal-header>
+                                <modal-content>
+                                    <form action="">
+                                        <select class="prgLang">
+                                            <option value="Java">Java</option>
+                                            <option value="JavaScript">JavaScript</option>
+                                            <option value="HTML">HTML</option>
+                                            <option value="CSS">CSS</option>
+                                        </select>
+                                        <label for="code_container">Your code</label>
+                                        <textarea name="code_container" id="code_container" cols="100" rows="10"></textarea>
+                                        <label for="code_comment">Comment</label>
+                                        <textarea name="code_comment" id="code_comment" cols="100" rows="5"></textarea>
+                                    </form>
+                                </modal-content>
+                                <modal-footer>
+                                    <div class="buttons_section">
+                                        <input type="reset" class="cancel" value="Cancel" (click)="codeUpload.close()">
+                                        <input type="submit" class="submit" value="Create Snippet">
+                                    </div>
+                                </modal-footer>
+                            </modal>
                         </div>
                     </div>
                 </div>

@@ -19,6 +19,7 @@ export class MessagesComponent{
 
   private screenHeight: any;
 
+
   constructor(
     private chatService: ChatService,
     private friendsService: FriendsService,
@@ -83,5 +84,9 @@ export class MessagesComponent{
     } else {
       return "left";
     }
+  }
+
+  public OpenImgUpload(){
+     $('#imgupload').trigger('click');
   }
 }
