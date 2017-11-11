@@ -6,7 +6,7 @@ import {Subject} from "rxjs/Subject";
 
 @Injectable()
 export class AuthenticationService {
-  private userInfo = {};
+  private userInfo;
 
   private userInfoObservable: Observable;
   private userInfoSubject: Subject;
