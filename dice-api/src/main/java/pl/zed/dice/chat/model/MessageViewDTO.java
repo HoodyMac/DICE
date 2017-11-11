@@ -8,12 +8,14 @@ public class MessageViewDTO {
     private Long senderId;
     private String content;
     private Date createdAt;
+    private Long chatId;
 
-    public MessageViewDTO(Long id, Long senderId, String content, Date createdAt) {
+    public MessageViewDTO(Long id, Long senderId, String content, Date createdAt, Long chatId) {
         this.id = id;
         this.senderId = senderId;
         this.content = content;
         this.createdAt = createdAt;
+        this.chatId = chatId;
     }
 
     public Long getId() {
@@ -46,5 +48,13 @@ public class MessageViewDTO {
 
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Long getChatId() {
+        return chatId;
+    }
+
+    public void setChatId(Long chatId) {
+        this.chatId = chatId;
     }
 }

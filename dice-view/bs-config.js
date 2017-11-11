@@ -13,5 +13,6 @@ module.exports = {
     middleware: {
       10: apiProxy
     }
-  }
+  },
+  ghostMode: false
 };

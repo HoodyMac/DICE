@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@NamedQuery(name = "Message.findMessagesAfterDateForUser", query = "SELECT m FROM Message m JOIN m.chat c JOIN c.participants cp WHERE cp.id = ?1 AND NOT m.sender.id = ?1 AND m.createdAt > ?2")
 public class Message {
 
     @Id

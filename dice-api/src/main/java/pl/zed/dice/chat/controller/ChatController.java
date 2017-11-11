@@ -1,5 +1,6 @@
 package pl.zed.dice.chat.controller;
 
+import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -43,6 +44,12 @@ public class ChatController {
     public ResponseEntity<MessageViewDTO> createMessage(@RequestBody MessageWriteDTO messageDto, @PathVariable("chatId") Long chatId) {
         MessageViewDTO message = messageService.createMessageForChat(messageDto, chatId);
         return ResponseEntity.ok(message);
+    }
+
+    @GetMapping("/messages/refresh/{lastAction}")
+    public ResponseEntity<List<MessageViewDTO>> refreshMessages(@PathVariable("lastAction") Long lastAction) {
+        List<MessageViewDTO> messages = messageService.refreshMessages(lastAction);
+        return ResponseEntity.ok(messages);
     }
 
 }

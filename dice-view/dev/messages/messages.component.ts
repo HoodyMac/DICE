@@ -2,6 +2,7 @@ import {Component} from "@angular/core";
 import {ChatService} from "../services/chat.service";
 import {FriendsService} from "../services/friends.service";
 import {AuthenticationService} from "../common/services/authentication.service";
+import {Observable} from "rxjs/Observable";
 
 declare var jQuery: any;
 @Component({
@@ -24,15 +25,16 @@ export class MessagesComponent{
     private chatService: ChatService,
     private friendsService: FriendsService,
     private authenticationService: AuthenticationService) {
-
-    this.authenticationService.getUserInfoObservable().subscribe(user => this.userInfo = user);
-    this.chatService.getAllChats().subscribe(data => {
-      this.chats = data;
-      this.chats.sort((a, b) => b.lastAction - a.lastAction);
-      if(this.chats.length > 0) {
-        this.selectChat(this.chats[0]);
-      }
-    });
+    this.userInfo = this.authenticationService.getUserInfo();
+    if(this.userInfo === undefined) {
+      this.authenticationService.getUserInfoObservable().subscribe(user => {
+        this.userInfo = user;
+        this.getAllChats();
+      });
+    } else {
+      console.log(this.userInfo);
+      this.getAllChats();
+    }
     this.friendsService.getUserFriendsData().subscribe(
       data => this.friends = data
     );
@@ -63,7 +65,7 @@ export class MessagesComponent{
         jQuery('#scroll').scrollTop(jQuery('#scroll')[0].scrollHeight);
       }
     );
-}
+  }
 
   public createMessage(message: string) {
     if(message['content'] !== null && message['content'].toString().replace(/ /g, "") !== ""){
@@ -80,6 +82,7 @@ export class MessagesComponent{
   }
 
   public getMessageFloat(senderId: number) {
+    // console.log(senderId + ' - ' + this.userInfo.userProfileId);
     if(senderId === this.userInfo.userProfileId) {
       return "right";
     } else {
@@ -89,5 +92,28 @@ export class MessagesComponent{
 
   public OpenFileExplorer(inputName){
      $('#' + inputName).trigger('click');
+  }
+
+  private getAllChats() {
+    this.chatService.getAllChats().subscribe(data => {
+      let that: MessagesComponent = this;
+      that.chats = data;
+      that.chats.sort((a, b) => b.lastAction - a.lastAction);
+      if(that.chats.length > 0) {
+        that.selectChat(this.chats[0]);
+      }
+      Observable.interval(5000).subscribe(() => {
+        that.chatService.refreshMessages(this.selectedChat.lastAction).subscribe(
+          data => {
+            data.forEach(message =>{
+              if(message.chatId === this.selectedChat.id) {
+                that.messages.push(message);
+              }
+            } );
+            that.messages.sort((a, b) => a.createdAt - b.createdAt);
+          }
+        );
+      });
+    });
   }
 }

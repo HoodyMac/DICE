@@ -76,7 +76,7 @@
                         </div>
                     </div>
                     <div class="message_body">
-                        <div class="scroll" id="scroll" [ngStyle]="{'max-height': screenHeight}" #scroll>
+                        <div class="scroll" id="scroll" [ngStyle]="{height: screenHeight}" #scroll>
                             <div class="message_content" *ngFor="let message of messages">
                                 <div class="user-img" [style.float]="getMessageFloat(message.senderId)">
                                     <a><div class="circle" style="background-image: url(/app/img/Ivan_Loichuk_bg200x200.jpg);"></div></a>
