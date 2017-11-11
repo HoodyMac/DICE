@@ -93,6 +93,15 @@
                                     </p>
                                 </div>
 
+                                <div class="mess-file" *ngIf="message.file"  [style.float]="getMessageFloat(message.senderId)">
+                                    <div class="file-img">
+                                        <div [style.background-image]="'url(/app/img/file_icons/default_document.png)'"></div>
+                                    </div>
+                                    <div class="content">
+                                        <p class="filename">ilenam_ilenam.jpg</p>
+                                    </div>
+                                </div>
+
                                 <section class="code"></section>
                             </div>
                         </div>
@@ -100,12 +109,12 @@
                         <div class="input-text">
                             <form #fromCreateMessage="ngForm" (ngSubmit)="createMessage(fromCreateMessage.value); fromCreateMessage.reset()">
                                 <ul class="upload_item">
-                                    <li><img src="/app/img/file_upload.png" alt="" width="30"></li>
+                                    <li><img src="/app/img/file_upload.png" (click)="fileUpload.open()" alt="" width="30"></li>
                                 </ul>
                                 <input type="text" class="form-control" placeholder="Enter your message" name="content" ngModel #content="ngModel">
                                 <ul class="upload_item">
                                     <li><img src="/app/img/code_upload.png" alt="" (click)="codeUpload.open()" width="35"></li>
-                                    <li><img src="/app/img/photo_upload.png" alt="" id="imgButton" (click)="OpenImgUpload()"  width="30"></li>
+                                    <li><img src="/app/img/photo_upload.png" alt="" id="imgButton" (click)="OpenFileExplorer('imgupload')"  width="30"></li>
                                 </ul>
                                 <input type="file" id="imgupload" style="display:none"/>
                                 <input  type="submit" class="form-control" value="Send">
@@ -114,7 +123,7 @@
 
                         <!-- Modal windows -->
                         <div class="row">
-                            <modal #codeUpload modalClass="modal-lg" [closeOnOutsideClick]="true" [closeOnEscape]="true">
+                            <modal #codeUpload modalClass="modal-lg" id="codeModal" [closeOnOutsideClick]="true" [closeOnEscape]="true">
                                 <modal-header>
                                     <h2>Create Snippet</h2>
                                 </modal-header>
@@ -135,6 +144,107 @@
                                 <modal-footer>
                                     <div class="buttons_section">
                                         <input type="reset" class="cancel" value="Cancel" (click)="codeUpload.close()">
+                                        <input type="submit" class="submit" value="Create Snippet">
+                                    </div>
+                                </modal-footer>
+                            </modal>
+                        </div>
+
+                        <div class="row">
+                            <modal #fileUpload modalClass="modal-md" id="fileModal" [closeOnOutsideClick]="true" [closeOnEscape]="true">
+                                <modal-header>
+                                    <h2>Your files</h2>
+                                </modal-header>
+                                <modal-content>
+                                    <form action="">
+                                        <button type="button"  (click)="OpenFileExplorer('fileupload')" class="modal-trigger btn btn-default" translate>Upload new file</button>
+                                        <input type="file" id="fileupload" style="display:none"/>
+                                    </form>
+                                    <div class="scroll" [ngStyle]="{'max-height': screenHeight}">
+                                        <ul>
+                                            <li>
+                                                <div class="file-img">
+                                                    <div [style.background-image]="'url(/app/img/file_icons/default_document.png)'"></div>
+                                                </div>
+                                                <div class="content">
+                                                    <p class="username">file name</p>
+                                                </div>
+                                                <div class="upload_date">
+                                                    <p>2017/25/10</p>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="file-img">
+                                                    <div [style.background-image]="'url(/app/img/file_icons/bin_document.png)'"></div>
+                                                </div>
+                                                <div class="content">
+                                                    <p class="username">file name</p>
+                                                </div>
+                                                <div class="upload_date">
+                                                    <p>2017/25/10</p>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="file-img">
+                                                    <div [style.background-image]="'url(/app/img/file_icons/c_document.png)'"></div>
+                                                </div>
+                                                <div class="content">
+                                                    <p class="username">file name</p>
+                                                </div>
+                                                <div class="upload_date">
+                                                    <p>date</p>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="file-img">
+                                                    <div [style.background-image]="'url(/app/img/file_icons/java_document.png)'"></div>
+                                                </div>
+                                                <div class="content">
+                                                    <p class="username">file name</p>
+                                                </div>
+                                                <div class="upload_date">
+                                                    <p>2017/25/10</p>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="file-img">
+                                                    <div [style.background-image]="'url(/app/img/file_icons/html_document.png)'"></div>
+                                                </div>
+                                                <div class="content">
+                                                    <p class="username">file name</p>
+                                                </div>
+                                                <div class="upload_date">
+                                                    <p>2017/25/10</p>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="file-img">
+                                                    <div [style.background-image]="'url(/app/img/file_icons/css_document.png)'"></div>
+                                                </div>
+                                                <div class="content">
+                                                    <p class="username">file name</p>
+                                                </div>
+                                                <div class="upload_date">
+                                                    <p>2017/25/10</p>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="file-img">
+                                                    <div [style.background-image]="'url(/app/img/file_icons/sql_document.png)'"></div>
+                                                </div>
+                                                <div class="content">
+                                                    <p class="username">file name</p>
+                                                </div>
+                                                <div class="upload_date">
+                                                    <p>2017/25/10</p>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </modal-content>
+                                <modal-footer>
+                                    <div class="buttons_section">
+                                        <input type="reset" class="cancel" value="Cancel" (click)="fileUpload.close()">
                                         <input type="submit" class="submit" value="Create Snippet">
                                     </div>
                                 </modal-footer>

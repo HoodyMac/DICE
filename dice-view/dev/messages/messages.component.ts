@@ -57,6 +57,7 @@ export class MessagesComponent{
     this.selectedChat = chat;
     this.chatService.getMessage(chat.id).subscribe(
       data => {
+
         this.messages = data;
         this.messages.sort((a, b) => a.createdAt - b.createdAt);
         jQuery('#scroll').scrollTop(jQuery('#scroll')[0].scrollHeight);
@@ -86,7 +87,7 @@ export class MessagesComponent{
     }
   }
 
-  public OpenImgUpload(){
-     $('#imgupload').trigger('click');
+  public OpenFileExplorer(inputName){
+     $('#' + inputName).trigger('click');
   }
 }

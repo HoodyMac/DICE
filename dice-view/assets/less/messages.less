@@ -86,6 +86,14 @@ section.messages {
               img{ max-width: 100%;}
             }
           }
+          .mess-file{
+            .file-img{ padding: 0 2% 0 2%;
+              div{width: 50px; padding: 2%; height: 50px; background-position: center; background-size: cover;}
+            }
+            .content{
+              .filename{ width: 80px;font-size: 12px; letter-spacing: 0px;line-height: 13px;}
+            }
+          }
         }
       }
       .input-text{ padding: 15px 15px 15px 15px; border-top: 1px solid @box_border; display: inline-flex; width: 100%;
@@ -104,21 +112,58 @@ section.messages {
       }
       /*------- Modal window ------------------*/
       modal{
-        modal-header{
-          h2{margin: 5px 1%;}
-        }
-        .prgLang{width: 25%;height: 40px;padding-left: 10px;margin: 1%;border-radius: 5px; }
-        label{width: 100%; margin: 10px 10px 0px 10px;}
-        #code_container{ border-radius: 5px; margin: 1%; width: 98%;}
-        #code_comment{ border-radius: 5px; margin: 1%; width: 98%;}
-        .buttons_section{ width: 98%; text-align: end; margin: 1%;
-          input{ height: 40px; border-radius: 5px; border: none; margin: 5px 5px; background-color: @msg_buttonBg; color: @msg_msgBoxFont;
-            &.cancel{width: 100px;}
-            &.submit{width: 180px;}
-            &:hover{background-color: @msg_buttonBgHover;}
+        &#codeModal{
+          modal-header{
+            h2{margin: 5px 1%;}
+          }
+          .prgLang{width: 25%;height: 40px;padding-left: 10px;margin: 1%;border-radius: 5px; }
+          label{width: 100%; margin: 10px 10px 0px 10px;}
+          #code_container{ border-radius: 5px; margin: 1%; width: 98%;}
+          #code_comment{ border-radius: 5px; margin: 1%; width: 98%;}
+          .buttons_section{ width: 98%; text-align: end; margin: 1%;
+            input{ height: 40px; border-radius: 5px; border: none; margin: 5px 5px; background-color: @msg_buttonBg; color: @msg_msgBoxFont;
+              &.cancel{width: 100px;}
+              &.submit{width: 180px;}
+              &:hover{background-color: @msg_buttonBgHover;}
+            }
           }
         }
 
+        &#fileModal{
+          modal-header{
+            h2{margin: 5px 1%;}
+          }
+          form{
+            button{width: 100%;margin: 5px;height: 40px;  background-color: @msg_buttonBg; color: @msg_msgBoxFont;
+              &:hover{background-color: @msg_buttonBgHover;}
+            }
+          }
+          .scroll{ overflow-y: scroll; height: auto;
+            ul{ list-style: none; padding: 5px;
+              li{ border: 1px solid #c1bfbf; display: flex; padding: 5px 0px; margin: 5px 0px;
+                &:hover{ background-color: #eff2f7;  cursor: pointer;}
+                .file-img{ padding: 0 2% 0 2%; float: left;
+                  div{width: 50px; padding: 2%; height: 50px; background-position: center; background-size: cover;}
+                }
+                .content{ width: 70%;
+                  p{}
+                }
+                .upload_date{
+                  p{ width: 26%;padding-top: 13px; text-align: end; color: #aba4a4;}
+                }
+              }
+            }
+          }
+          modal-footer{
+            .buttons_section{ width: 98%; text-align: end; margin: 1%;
+              input{ height: 40px; border-radius: 5px; border: none; margin: 5px 5px; background-color: @msg_buttonBg; color: @msg_msgBoxFont;
+                &.cancel{width: 100px;}
+                &.submit{width: 180px;}
+                &:hover{background-color: @msg_buttonBgHover;}
+              }
+            }
+          }
+        }
       }
     }
   }
