@@ -77,20 +77,11 @@
                                                 <span class="work">{{data.work}}</span>
                                             </td>
                                             <td class="add_button" rowspan="3">
-                                                <input type="button" class="btn btn-default" (click)="addUserToFriends(data.id)"  value="Add to friends">
+                                                <input type="button" class="btn btn-default" id="addToFriends{{data.id}}" *ngIf="data.friendShipStatus == null" (click)="addUserToFriends(data.id)"  value="Add to friends">
+                                                <input type="button" class="btn btn-default" *ngIf="data.friendShipStatus == 'SENT' || data.friendShipStatus == 'REJECTED'" disabled  value="Request send">
+                                                <input type="button" class="btn btn-default" *ngIf="data.friendShipStatus == 'ACCEPTED'" disabled value="Friend">
                                                 <a href="#"><span>{{data.friendsCount}} friends</span></a>
                                             </td>
-                                            <td class="gallery_block"><a href="">
-                                                <div class="small_gallery">
-                                                    <img src="/app/img/Ivan_Loichuk_bg.jpg" alt="">
-                                                    <img src="/app/img/Ivan_Loichuk_bg.jpg" alt="">
-                                                    <img src="/app/img/Ivan_Loichuk_bg.jpg" alt="">
-                                                    <img src="/app/img/Ivan_Loichuk_bg.jpg" alt="">
-                                                </div>
-                                            </a></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="gallery_link"><a href=""><span>All photo</span></a></td>
                                         </tr>
                                     </table>
                                 </li>

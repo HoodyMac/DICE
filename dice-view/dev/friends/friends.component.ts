@@ -1,18 +1,21 @@
-import {Component} from '@angular/core';
+import {Component, AfterViewInit} from '@angular/core';
 import {FriendsService} from "../services/friends.service";
+declare var jQuery: any;
 
 @Component({
   templateUrl: 'dev/friends/friends.component.html',
   styleUrls: ['../app/css/friends.css'],
   providers: [FriendsService]
 })
-export class FriendsComponent {
+export class FriendsComponent implements AfterViewInit {
   showFriends:boolean = true;
   showFollowers:boolean = false;
   showNewFriends:boolean = false;
 
   private userFriendsData: [];
-  private acceptDone: true;
+  private acceptDone;
+  private done;
+  private rejectDone;
 
   constructor(private friendsService: FriendsService) {
 
@@ -20,23 +23,40 @@ export class FriendsComponent {
   }
 
   acceptFriendsRequest(idUser){
-
+    this.acceptDone = "acceptFriend" + idUser;
+    this.done = "done" + idUser;
+    this.rejectDone = "rejectFriend" + idUser;
     this.friendsService.acceptFriendsRequest(idUser)
         .subscribe(
             data =>{
-              this.acceptDone = true;
               console.log(data);
             }
         );
+    console.log(jQuery('#'+this.done).find('hide'));
+    jQuery('#'+this.acceptDone).addClass('hide');
+    jQuery('#'+this.rejectDone).addClass('hide');
+    if(jQuery('#'+this.done).find('hide')){
+        jQuery('#'+this.done).removeClass('hide');
+        jQuery('#'+this.done).addClass('show');
+    }
   }
 
   rejectFriendRequest(idUser){
+      this.acceptDone = "acceptFriend" + idUser;
+      this.done = "done" + idUser;
+      this.rejectDone = "rejectFriend" + idUser;
     this.friendsService.rejectFriendRequest(idUser)
         .subscribe(
             data =>{
               console.log(data);
             }
         );
+      jQuery('#'+this.acceptDone).addClass('hide');
+      jQuery('#'+this.rejectDone).addClass('hide');
+      if(jQuery('#'+this.done).find('hide')){
+          jQuery('#'+this.done).removeClass('hide');
+          jQuery('#'+this.done).addClass('show');
+      }
   }
 
   removeFriend(idUser){
@@ -46,6 +66,7 @@ export class FriendsComponent {
               console.log(data);
             }
         );
+      this.showMyFriends();
   }
 
   showMyFriends(){
