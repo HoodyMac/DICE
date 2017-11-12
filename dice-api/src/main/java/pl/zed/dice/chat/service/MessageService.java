@@ -7,7 +7,7 @@ import pl.zed.dice.chat.asm.MessageAsm;
 import pl.zed.dice.chat.domain.Chat;
 import pl.zed.dice.chat.domain.Message;
 import pl.zed.dice.chat.model.MessageViewDTO;
-import pl.zed.dice.chat.model.MessageWriteDTO;
+import pl.zed.dice.chat.model.MessageCreateDTO;
 import pl.zed.dice.chat.repository.ChatRepository;
 import pl.zed.dice.chat.repository.MessageRepository;
 import pl.zed.dice.security.service.SecurityContextService;
@@ -39,7 +39,7 @@ public class MessageService {
         return messages.stream().map(message -> messageAsm.makeMessageViewDTO(message)).collect(Collectors.toList());
     }
 
-    public MessageViewDTO createMessageForChat(MessageWriteDTO messageDto, Long chatId) {
+    public MessageViewDTO createMessageForChat(MessageCreateDTO messageDto, Long chatId) {
         validateIfChatParticipant(chatId);
 
         if(Strings.isNullOrEmpty(messageDto.getContent())) {

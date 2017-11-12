@@ -1,12 +1,11 @@
 package pl.zed.dice.chat.controller;
 
-import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.zed.dice.chat.model.ChatDTO;
 import pl.zed.dice.chat.model.MessageViewDTO;
-import pl.zed.dice.chat.model.MessageWriteDTO;
+import pl.zed.dice.chat.model.MessageCreateDTO;
 import pl.zed.dice.chat.service.ChatService;
 import pl.zed.dice.chat.service.MessageService;
 
@@ -41,7 +40,7 @@ public class ChatController {
     }
 
     @PostMapping("/messages/{chatId}")
-    public ResponseEntity<MessageViewDTO> createMessage(@RequestBody MessageWriteDTO messageDto, @PathVariable("chatId") Long chatId) {
+    public ResponseEntity<MessageViewDTO> createMessage(@RequestBody MessageCreateDTO messageDto, @PathVariable("chatId") Long chatId) {
         MessageViewDTO message = messageService.createMessageForChat(messageDto, chatId);
         return ResponseEntity.ok(message);
     }
