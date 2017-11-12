@@ -63,7 +63,9 @@ public class UserService {
     public UserProfileDTO getUserProfile(Long id){
         Optional<UserProfile> userProfile = userProfileRepository.findById(id);
         if(userProfile.isPresent()){
-            return userAsm.makeUserProfileDTO(userProfile.get());
+            UserProfileDTO userProfileDTO = userAsm.makeUserProfileDTO(userProfile.get());
+            userProfileDTO.setFriendsCount(countFriends(userProfile.get()));
+            return userProfileDTO;
         }else
             throw new UserNotFoundException(id);
     }

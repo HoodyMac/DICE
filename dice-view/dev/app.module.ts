@@ -22,7 +22,7 @@ import {ChatService} from "./services/chat.service";
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: 'profile', component: ProfileComponent },
+  { path: 'profile/:id', component: ProfileComponent },
   { path: 'search', component: SearchComponent },
   { path: 'friends', component: FriendsComponent },
   { path: 'edit', component: EditComponent },

@@ -10,10 +10,12 @@ import {Router} from "@angular/router";
 export class NavbarComponent {
   private userInfo = {};
   private searchData = {fullName: ""};
+  private profileId;
 
   constructor(
     private authenticationService: AuthenticationService,
     private router: Router) {
+      this.profileId = localStorage.getItem("profileId");
     if(authenticationService.isLoggedIn()) {
       authenticationService.refresh()
         .subscribe(

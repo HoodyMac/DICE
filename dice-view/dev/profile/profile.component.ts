@@ -1,6 +1,6 @@
 import {Component, AfterViewInit, ElementRef, ViewChild} from '@angular/core';
 import {ProfileService} from "../services/profile.service";
-import {Router} from '@angular/router';
+import {Router, ActivatedRoute } from '@angular/router';
 let clicked = true;
 declare var jQuery: any;
 
@@ -13,10 +13,10 @@ declare var jQuery: any;
 export class ProfileComponent implements AfterViewInit{
   @ViewChild('fileInput') inputEl: ElementRef;
 
-  userInfo: any; //userInfo[];
   countModules: any; //count_module[];
   userInfo = {};
   editImgSrc: string = "/app/img/edit_icon_gray.png";
+  profileId: number;
   @ViewChild('cropbox') cropbox: ElementRef;
 
   private jcropApi: any;
@@ -25,9 +25,13 @@ export class ProfileComponent implements AfterViewInit{
 
   constructor(
     private profileService: ProfileService,
-    private _router: Router) {
+    private _router: Router, private route: ActivatedRoute) {
 
-    this.profileService.getUserInfo("me").subscribe(
+    this.route.params.subscribe(params => {
+      this.profileId = params['id'];
+    });
+
+    this.profileService.getUserInfo(this.profileId).subscribe(
       data => {
           this.userInfo = data;
           if(this.jcropApi !== undefined) {

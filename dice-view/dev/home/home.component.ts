@@ -38,13 +38,13 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.authenticationService.isLoggedIn()) {
-      this.route.navigate(['profile']);
+      this.route.navigate(['/profile', localStorage.getItem('profileId')]);
     }
   }
 
   onSignIn(credentials) {
     this.authenticationService.login(credentials).subscribe(
-      () => this.route.navigate(['profile']),
+      () => this.route.navigate(['/profile', localStorage.getItem('profileId')]),
       () => {
         this.showLoginMessage = true;
         setTimeout(function() {

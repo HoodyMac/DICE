@@ -67,8 +67,8 @@ public class UserProfileController {
     }
 
     @PutMapping("/account")
-    public ResponseEntity editUserAccountPassword(@RequestBody UserDTO userDTO){
-        if(userDTO.getPassword() == null) {
+    public ResponseEntity editUserAccountPassword(@RequestBody UserDTO userDTO) {
+        if (userDTO.getPassword() == null) {
             userService.editUserAccountEmail(userDTO);
         } else {
             userService.editUserPassword(userDTO);
@@ -78,12 +78,6 @@ public class UserProfileController {
         final String token = jwtTokenUtil.generateToken(userDetails);
         final UserInfoDTO userInfoDTO = userService.getUserInfo(userDetails.getUsername());
         return ResponseEntity.ok(new JwtAuthenticationResponse(token, userInfoDTO));
-    }
-
-    @GetMapping("/me")
-    public UserProfileDTO getMySelf(){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        return userService.getMyProfile(auth.getName());
     }
 
     @PostMapping("/search")

@@ -12,13 +12,13 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-                            <a class="navbar-brand" href="#"><img src="/app/img/logotype4.png" class="logotype"></a>
+                            <a class="navbar-brand" [routerLink]="['/profile', profileId]"><img src="/app/img/logotype4.png" class="logotype"></a>
                         </div>
 
                         <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav">
-                                <li class="active"><a [routerLink]="['/profile']" translate>HEADER.home <span class="sr-only">(current)</span></a></li>
+                                <li class="active"><a [routerLink]="['/profile', profileId]" translate>HEADER.home <span class="sr-only">(current)</span></a></li>
                                 <li><a [routerLink]="['/friends']" translate>HEADER.friends</a></li>
                                 <li><a [routerLink]="['/messages']" translate>HEADER.messages</a></li>
                                 <li><a [routerLink]="['/forum']" translate>HEADER.forum</a></li>

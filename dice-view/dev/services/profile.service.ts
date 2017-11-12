@@ -18,29 +18,10 @@ export class ProfileService {
     return this.http.get(url).map(res => res.json());
   }
 
-  getUserInfo(id: any) {
-    /**
-     {
-        originalImgSrc: string;
-        cropImgSrc: string;
-        username:string;
-        city:string;
-        education:string;
-        work:string;
-        age:string;
-        prgLanguages:string;
-        phoneNumber:string;
-        isOnline:boolean;
-    }
-     */
-    if (id != "me") {
-      return this.http.get("/api/user/" + id).map(res => {
-        return res.json();
-      });
-    } else
-      return this.http.get("/api/me").map(res => {
-        return res.json();
-      });
+  getUserInfo(id: number) {
+    return this.http.get("/api/profile/" + id).map(res => {
+      return res.json();
+    });
   }
 
   postCordsImageCrop(cropImgData: any) {
