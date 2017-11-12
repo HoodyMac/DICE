@@ -17,9 +17,14 @@ public class ChatAsm {
     public ChatDTO makeChatDTO(Chat chat) {
         UserProfile currentUserProfile = securityContextService.getCurrentUserProfile();
         UserProfile participantUserProfile = chat.getParticipants().stream().filter(userProfile -> !userProfile.getId().equals(currentUserProfile.getId())).findFirst().get();
-        Message lastMessage = chat.getMessages().get(chat.getMessages().size()-1);
+        if(chat.getMessages().size() > 0) {
+            Message lastMessage = chat.getMessages().get(chat.getMessages().size() - 1);
+            return new ChatDTO(chat.getId(), participantUserProfile.getFullname(),
+                    participantUserProfile.getId(), participantUserProfile.getCropImage(),
+                    chat.getLastAction(), lastMessage.getContent(), lastMessage.getSender().getCropImage());
+        }
         return new ChatDTO(chat.getId(), participantUserProfile.getFullname(),
                 participantUserProfile.getId(), participantUserProfile.getCropImage(),
-                chat.getLastAction(), lastMessage.getContent(), lastMessage.getSender().getCropImage());
+                chat.getLastAction(), null, null);
     }
 }
