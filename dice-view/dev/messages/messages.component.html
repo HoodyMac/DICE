@@ -53,7 +53,10 @@
 
                                     <div class="content">
                                         <p class="username">{{ chat.name }}</p>
-                                        <p class="last-message">Last message.......</p>
+                                        <span>
+                                            <img height="25" width="25" [src]="chat.lastMessageSenderPhoto ? '/api/profile/image/get/' + chat.lastMessageSenderPhoto : '/app/img/default_user_photo.jpg'" alt="" />
+                                            {{chat.lastMessage.length > 15? chat.lastMessage.substring(0, 15)+'...' : chat.lastMessage}}
+                                        </span>
                                     </div>
                                     <div class="last-modify">
                                         <p>{{ chat.lastAction | date:'dd.MM' }}</p>

@@ -34,7 +34,9 @@ public class ChatService {
     public List<ChatDTO> getAll() {
         Long currentUserProfileId = securityContextService.getCurrentUserProfile().getId();
         List<Chat> chats = chatRepository.findChatWithParticipant(currentUserProfileId);
-        return chats.stream().map(chat -> chatAsm.makeChatDTO(chat)).collect(Collectors.toList());
+        return chats.stream()
+                .map(chat -> chatAsm.makeChatDTO(chat))
+                .collect(Collectors.toList());
     }
 
     public ChatDTO create(Long participantId) {

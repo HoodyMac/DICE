@@ -92,4 +92,12 @@ public class Chat {
     public void setParticipants(List<UserProfile> participants) {
         this.participants = participants;
     }
+
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
+    }
 }
