@@ -1,6 +1,6 @@
 package pl.zed.dice.chat.model;
 
-public class MessageWriteDTO {
+public class MessageCreateDTO {
 
     private String content;
 

@@ -4,6 +4,7 @@ import pl.zed.dice.user.profile.domain.UserProfile;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @NamedQuery(name = "Message.findMessagesAfterDateForUser", query = "SELECT m FROM Message m JOIN m.chat c JOIN c.participants cp WHERE cp.id = ?1 AND NOT m.sender.id = ?1 AND m.createdAt > ?2")
@@ -24,6 +25,9 @@ public class Message {
 
     @ManyToOne
     private Chat chat;
+
+    @OneToMany(mappedBy = "message", cascade = CascadeType.ALL)
+    private List<Attachment> attachments;
 
     public Message() {
     }
@@ -73,5 +77,13 @@ public class Message {
 
     public void setSender(UserProfile sender) {
         this.sender = sender;
+    }
+
+    public List<Attachment> getAttachments() {
+        return attachments;
+    }
+
+    public void setAttachments(List<Attachment> attachments) {
+        this.attachments = attachments;
     }
 }

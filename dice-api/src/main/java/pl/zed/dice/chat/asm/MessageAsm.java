@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import pl.zed.dice.chat.domain.Chat;
 import pl.zed.dice.chat.domain.Message;
 import pl.zed.dice.chat.model.MessageViewDTO;
-import pl.zed.dice.chat.model.MessageWriteDTO;
+import pl.zed.dice.chat.model.MessageCreateDTO;
 import pl.zed.dice.chat.repository.ChatRepository;
 import pl.zed.dice.security.service.SecurityContextService;
 import pl.zed.dice.user.profile.domain.UserProfile;
@@ -25,11 +25,11 @@ public class MessageAsm {
         return new MessageViewDTO(message.getId(), message.getSender().getId(), message.getContent(), message.getCreatedAt(), message.getChat().getId());
     }
 
-    public Message makeMessage(MessageWriteDTO messageWriteDTO, Long chatId) {
+    public Message makeMessage(MessageCreateDTO messageCreateDTO, Long chatId) {
         UserProfile currentUserProfile = securityContextService.getCurrentUserProfile();
         Chat chat = chatRepository.getOne(chatId);
         Date now = new Date();
         chat.setLastAction(now);
-        return new Message(messageWriteDTO.getContent(), now, currentUserProfile, chat);
+        return new Message(messageCreateDTO.getContent(), now, currentUserProfile, chat);
     }
 }
