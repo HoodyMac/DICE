@@ -94,7 +94,7 @@
                             <div class="label_info city" *ngIf="userInfo.city" translate>PROFILE.cityLabel</div>
                             <div class="value" *ngIf="userInfo.city">{{userInfo.city}}</div>
                             <div class="edit_user_info">
-                                <a (click)="editProfile()" id="link_edit_icon" title="Edit profile"><img [src]="editImgSrc" (mouseover)="onMouseOver()" (mouseout)="onMouseOut()" id="edit_icon" alt="Edit profile" title="Edit profile"></a>
+                                <a (click)="editProfile()" id="link_edit_icon" title="Edit profile" *ngIf="isMe"><img [src]="editImgSrc" (mouseover)="onMouseOver()" (mouseout)="onMouseOut()" id="edit_icon" alt="Edit profile" title="Edit profile"></a>
                             </div>
                         </div>
                         <div class="profile_info_row" *ngIf="userInfo.education">

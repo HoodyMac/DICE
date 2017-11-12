@@ -16,7 +16,8 @@ export class ProfileComponent implements AfterViewInit{
   countModules: any; //count_module[];
   userInfo = {};
   editImgSrc: string = "/app/img/edit_icon_gray.png";
-  profileId: number;
+  profileId;
+  isMe: boolean;
   @ViewChild('cropbox') cropbox: ElementRef;
 
   private jcropApi: any;
@@ -30,6 +31,8 @@ export class ProfileComponent implements AfterViewInit{
     this.route.params.subscribe(params => {
       this.profileId = params['id'];
     });
+
+    this.isMe = this.profileId == localStorage.getItem("profileId")? true : false;
 
     this.profileService.getUserInfo(this.profileId).subscribe(
       data => {

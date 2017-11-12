@@ -99,15 +99,6 @@ public class UserService {
         return userAccountAsm.convertAccountToUserInfoDTO(userAccount);
     }
 
-    public UserProfileDTO getMyProfile(String email){
-        UserAccount userAccount = userRepository.findByEmail(email);
-        UserProfileDTO userProfileDTO = userAsm.makeUserProfileDTO(userAccount.getProfile());
-        userProfileDTO.setEmail(userAccount.getEmail());
-        userProfileDTO.setFriendsCount(countFriends(userAccount.getProfile()));
-
-        return userProfileDTO;
-    }
-
     public List<UserProfileSearchResultDTO> search(UserProfileSearchDTO userProfileSearchDTO){
         List<UserProfileSearchResultDTO> result = new ArrayList<>();
 
@@ -156,8 +147,7 @@ public class UserService {
     }
 
     private UserProfileSearchResultDTO filterFriendStatusInSearch(UserProfile p){
-        String myName = SecurityContextHolder.getContext().getAuthentication().getName();
-        UserProfile me = userRepository.findByEmail(myName).getProfile();
+        UserProfile me = securityContextService.getCurrentUserProfile();
 
         UserProfileSearchResultDTO resultDTO = userAsm.makeUserProfileSearchResultDTO(p);
         FriendEntity friendEntity = friendShipRepository.getFriendShip(me, p);
@@ -188,8 +178,7 @@ public class UserService {
     }
 
     public void sendFriendRequest(Long id){
-        String requestorName = SecurityContextHolder.getContext().getAuthentication().getName();
-        UserProfile requestor = userRepository.findByEmail(requestorName).getProfile();
+        UserProfile requestor = securityContextService.getCurrentUserProfile();
         UserProfile recipient = userProfileRepository.getOne(id);
 
         if(friendShipRepository.getFriendShip(requestor, recipient) == null &&
@@ -199,8 +188,7 @@ public class UserService {
     }
 
     public void acceptFriendRequest(Long id){
-        String recipientName = SecurityContextHolder.getContext().getAuthentication().getName();
-        UserProfile recipient = userRepository.findByEmail(recipientName).getProfile();
+        UserProfile recipient = securityContextService.getCurrentUserProfile();
         UserProfile requestor = userProfileRepository.getOne(id);
 
         FriendEntity friendEntity = friendShipRepository.getFriendShip(requestor, recipient);
@@ -214,8 +202,7 @@ public class UserService {
     }
 
     public void rejectFriendRequest(Long id){
-        String recipientName = SecurityContextHolder.getContext().getAuthentication().getName();
-        UserProfile recipient = userRepository.findByEmail(recipientName).getProfile();
+        UserProfile recipient = securityContextService.getCurrentUserProfile();
         UserProfile requestor = userProfileRepository.getOne(id);
 
         FriendEntity friendEntity = friendShipRepository.getFriendShip(requestor, recipient);
@@ -229,8 +216,7 @@ public class UserService {
     }
 
     public void removeFriend(Long id){
-        String recipientName = SecurityContextHolder.getContext().getAuthentication().getName();
-        UserProfile recipient = userRepository.findByEmail(recipientName).getProfile();
+        UserProfile recipient = securityContextService.getCurrentUserProfile();
         UserProfile requestor = userProfileRepository.getOne(id);
 
         FriendEntity friendEntity = friendShipRepository.getFriendShip(requestor, recipient);
@@ -242,8 +228,7 @@ public class UserService {
     }
 
     public List<FriendDTO> getMyFriends(){
-        String recipientName = SecurityContextHolder.getContext().getAuthentication().getName();
-        UserProfile recipient = userRepository.findByEmail(recipientName).getProfile();
+        UserProfile recipient = securityContextService.getCurrentUserProfile();;
         List<FriendDTO> friendDTOS = new ArrayList<>();
 
         friendShipRepository.getFriends(recipient).forEach(f ->
