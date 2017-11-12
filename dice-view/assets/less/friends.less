@@ -1,5 +1,12 @@
 @import "colors";
 
+.show{
+  display: none;
+}
+.hide{
+  display: block;
+}
+
 section.friends{
   .friends-header{ width: 100%; border: 1px solid @box_border; background-color: @box_bg; border-radius: 2px;
     .menu{display: inline-block; padding: 1% 2% 1% 2%;
@@ -56,9 +63,16 @@ section.friends{
               &.work{position: relative; bottom: 7px; color: @search_font_info; }
             }
           }
-          .add_button{text-align: center; vertical-align: middle; width: 40%;
+          .add_button{text-align: center; vertical-align: middle; width: 35%;
             input{width: 90%; margin: 1% 5%;}
             a{color: @font_value;}
+          }
+          .controlBlock{vertical-align: top; padding: 5px 3px 0 0px;
+            ul{width: auto; float: none; padding: 0; border-radius: 2px; margin-top: 0;  margin-bottom: 0; list-style: none;
+              li{background-color: inherit; border: none; margin: 0; width: auto; float: none;
+                a{cursor: pointer;}
+              }
+            }
           }
           .mutual_friends{
             .span{color: #000000;}

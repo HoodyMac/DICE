@@ -20,7 +20,7 @@ export class SearchComponent implements AfterViewInit{
     searchData = [];
     public searchForm: FormGroup;
     public fullname: "";
-    private addToFriendsDone: false;
+    private buttonDisabled;
 
     constructor(private searchService: SearchService,
                 private fb:FormBuilder,
@@ -96,13 +96,14 @@ export class SearchComponent implements AfterViewInit{
     }
 
     addUserToFriends(iUser){
-
+        this.buttonDisabled = "addToFriends"+iUser;
         this.searchService.addToFriends(iUser)
             .subscribe(
                 data =>{
-                    this.addToFriendsDone = true;
+                    data.friendShipStatus = 'SENT';
                     console.log(data);
                 }
             );
+        jQuery('#'+this.buttonDisabled).attr('disabled', 'disabled');
     }
 }

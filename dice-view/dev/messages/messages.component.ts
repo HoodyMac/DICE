@@ -111,6 +111,7 @@ export class MessagesComponent{
               }
             } );
             that.messages.sort((a, b) => a.createdAt - b.createdAt);
+            jQuery('#scroll').scrollTop(jQuery('#scroll')[0].scrollHeight);
           }
         );
       });

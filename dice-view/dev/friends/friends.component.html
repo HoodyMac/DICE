@@ -28,9 +28,9 @@
             <div>
               <a [routerLink]="['/profile']" class="active username">UserName</a>
               <img src="/app/img/arrow.png" alt="">
-              <a href="#" class="nav-friends {{showFriends ? 'nav_show' : 'nav_hide'}}">Friends</a>
-              <a href="#" class="nav-followers {{showNewFriends ? 'nav_show' : 'nav_hide'}}">New friends</a>
-              <a href="#" class="nav-followers {{showFollowers ? 'nav_show' : 'nav_hide'}}">Followers</a>
+              <a class="nav-friends {{showFriends ? 'nav_show' : 'nav_hide'}}">Friends</a>
+              <a class="nav-followers {{showNewFriends ? 'nav_show' : 'nav_hide'}}">New friends</a>
+              <a  class="nav-followers {{showFollowers ? 'nav_show' : 'nav_hide'}}">Followers</a>
             </div>
           </div>
           <form>
@@ -49,9 +49,19 @@
                     <a href="#"><span>{{userData.friendsCount}} friends</span></a>
                   </td>
                   <td class="add_button" rowspan="3">
-                    <input type="button" class="btn btn-default" value="Send a messege" *ngIf="showFriends || showFollowers">
-                    <input type="button" class="btn btn-default" value="{{acceptDone ? 'Friend': 'Accept'}}" (click)="acceptFriendsRequest(userData.id)"  *ngIf="showNewFriends">
-                    <input type="button" class="btn btn-default" value="Ignore" (click)="rejectFriendRequest(userData.id)" *ngIf="showNewFriends && !acceptDone">
+                    <input [routerLink]="['/messages']" type="button" class="btn btn-default" value="Send a messege" *ngIf="showFriends || showFollowers && !showNewFriends">
+                    <input type="button" id="acceptFriend{{userData.id}}" class="btn btn-default" value="Accept" *ngIf="showNewFriends" (click)="acceptFriendsRequest(userData.id)">
+                    <input type="button" id="rejectFriend{{userData.id}}" class="btn btn-default" value="Reject" *ngIf="showNewFriends" (click)="rejectFriendRequest(userData.id)">
+                    <input type="button" id="done{{userData.id}}" class="btn btn-default hide" value="Done" disabled>
+                  </td>
+                  <td class="controlBlock">
+                    <div class="dropdown">
+                      <a alt="More options"  title="More options" class=" dropdown-toggle" id="moreOption" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></a>
+
+                      <ul class="dropdown-menu" aria-labelledby="moreOption">
+                        <li><a (click)="removeFriend(userData.id)">Delete friend</a></li>
+                      </ul>
+                    </div>
                   </td>
                 </tr>
               </table>
