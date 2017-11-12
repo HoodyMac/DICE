@@ -190,7 +190,8 @@ public class UserService {
         UserProfile requestor = userRepository.findByEmail(requestorName).getProfile();
         UserProfile recipient = userProfileRepository.getOne(id);
 
-        if(friendShipRepository.getFriendShip(requestor, recipient) == null) {
+        if(friendShipRepository.getFriendShip(requestor, recipient) == null &&
+                requestor != recipient) {
             friendShipRepository.save(new FriendEntity(requestor, recipient, FriendRequestStatus.SENT));
         }
     }
