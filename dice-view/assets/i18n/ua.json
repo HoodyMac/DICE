@@ -77,6 +77,7 @@
     "editMessage": "Ваші дані були змінені.",
     "editEmailMessage": "Електронний адрес було змінено.",
     "editPassMessage": "Пароль було змінено.",
+    "passwordConfirmAlert": "Паролі не співпадають",
 
     "basicInfo": "Основне",
     "general": "Загальне",

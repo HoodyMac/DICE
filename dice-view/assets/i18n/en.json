@@ -76,6 +76,7 @@
     "editMessage": "Your data has been changed correctly =)",
     "editEmailMessage": "Your email has been changed correctly.",
     "editPassMessage": "Your password has been changed correctly.",
+    "passwordConfirmAlert": "Confirm password don't match",
 
     "basicInfo": "Basic info",
     "general": "General",

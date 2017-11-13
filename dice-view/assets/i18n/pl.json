@@ -76,6 +76,7 @@
     "editMessage": "Twoje dane zostały poprawnie zmienione.",
     "editEmailMessage": "Twój email został poprawnie zmieniony.",
     "editPassMessage": "Twoje hasło zostało poprawnie zmienione.",
+    "passwordConfirmAlert": "Hasła nie są identyczne",
 
     "basicInfo": "Podstawowe",
     "general": "Ogólne",
