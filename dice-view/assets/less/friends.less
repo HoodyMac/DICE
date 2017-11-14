@@ -53,9 +53,9 @@ section.friends{
             img{width: 100%; padding: 5% 5%;}
           }
           .info_block{ height: 100%; width: 35%; vertical-align: text-top; padding-left: 2%; padding-top: 2%;
-            a{display: block; font-size: 16px;
-              &.title{font-size: 20px;
-                &:hover{text-decoration: none;}
+            a{display: block; font-size: 14px; color: #474748;
+              &.title{  font-size: 16px;
+                &:hover{text-decoration: none; color: #000000;}
               }
             }
             span{display: block;
@@ -90,19 +90,43 @@ section.friends{
 }
 
 /*--- (media) Responsive style -----------------------*/
+@media (max-width: 1200px){
+  section.friends .friends-content ul li { width: 98%; }
+  section.friends .friends-content ul .content_box table{
+    .info_block a.title { font-size: 20px; }
+    .controlBlock{padding: 15px 3px 0 0px; }
+  }
+}
 
 @media (max-width: 990px){
   section.friends .friends-content ul li { width: 98%; }
+  section.friends .friends-content ul .content_box table .info_block a.title {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 720px) {
+  section.friends .friends-content ul .content_box table .add_button input {padding: 5px 0; }
+  .dropdown-menu{left: -145px;}
 }
 
 @media (max-width: 620px) {
-  .custom-col-filter{width: 70%; margin-left: 15%; margin-right: 15%; }
+  .custom-col-filter{width: 100%;}
   .custom-col-results{width: 100%; margin-top: 5%;}
 }
 
 @media (max-width: 480px){
-  .custom-col-filter{width: 80%; margin-left: 10%; margin-right: 10%; }
+  .custom-col-filter{width: 100%; }
   .custom-col-results{width: 100%;}
+  section.friends .friends-content ul .content_box table{
+    .add_button input {font-size: 12px;}
+    .info_block a {
+      &.title{font-size: 12px;}
+      font-size: 12px;
+    }
+    .controlBlock{padding: 5px 3px 0 0; }
+
+  }
 
 }
 
