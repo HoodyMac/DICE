@@ -21,7 +21,7 @@
                                 </form>
                                 <div class="list-friends">
                                     <div class="scroll">
-                                        <ul>
+                                        <ul (click)="newConversationModal.close()">
                                             <li *ngFor="let friend of friends" (click)="createChat(friend.id)">
                                                 <div class="user-img">
                                                     <div class="circle" [style.background-image]="'url(' + (friend.cropImage ? '/api/profile/image/get/' + friend.cropImage : '/app/img/default_user_photo.jpg') + ')'"></div>
@@ -44,7 +44,7 @@
                         </modal>
                     </div>
                     <div class="list-container">
-                        <div class="scroll">
+                        <div class="scroll" [ngStyle]="{'max-height': (screenHeight+'px')}">
                             <ul>
                                 <li *ngFor="let chat of chats" (click)="selectChat(chat)">
                                     <div class="user-img">
@@ -79,7 +79,7 @@
                         </div>
                     </div>
                     <div class="message_body">
-                        <div class="scroll" id="scroll" [ngStyle]="{height: screenHeight}" #scroll>
+                        <div class="scroll" id="scroll" [ngStyle]="{height: (screenHeight-8+'px')}" #scroll>
                             <div class="message_content" *ngFor="let message of messages">
                                 <div class="user-img" [style.float]="getMessageFloat(message.senderId)">
                                     <a><div class="circle" style="background-image: url(/app/img/Ivan_Loichuk_bg200x200.jpg);"></div></a>

@@ -22,7 +22,6 @@ export class EditComponent implements AfterViewInit{
     showEditPassMessage: boolean = false;
     showEditEmailMessage: boolean = false;
     progLang: Object;
-    userId: Number;
     public passwordData: FormGroup;
 
     constructor(
@@ -30,13 +29,7 @@ export class EditComponent implements AfterViewInit{
         private activatedRoute: ActivatedRoute,
         private fb:FormBuilder) {
 
-        this.activatedRoute.params.subscribe(
-            data =>{
-                this.userId = data['user'];
-            }
-        );
-
-        this.editService.getUserBasicInfo(this.userId).subscribe(value => {
+        this.editService.getUserBasicInfo(localStorage.getItem('profileId')).subscribe(value => {
                 this.userBasicInfo = value;
                 console.log(this.userBasicInfo);
             },

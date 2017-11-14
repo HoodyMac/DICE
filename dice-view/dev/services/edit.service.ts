@@ -10,20 +10,7 @@ export class EditService{
         console.log('PostService Initialized...');
     }
     getUserBasicInfo(id){
-        /**
-         {
-            firstName: string;
-            lastName: string;
-            gender:string;
-            birthday:string;
-            city:string;
-            education:string;
-            work:string;
-            prgLanguages:string;
-
-        }
-         */
-        return this.http.get("/api/me").map(res => res.json());
+        return this.http.get("/api/profile/"+id).map(res => res.json());
     }
 
     setUserBasicInfo(editUserInfo: Object){

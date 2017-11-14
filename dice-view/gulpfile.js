@@ -81,7 +81,7 @@ gulp.task('clear', function () {
     return cache.clearAll();
 });
 
-gulp.task('watch', ['build-html','build-ts' , 'build-img', 'css-min' ] ,function () {
+gulp.task('watch', ['build-html','build-ts' , 'build-img', 'build-less' ] ,function () {
     gulp.watch(appDev + '**/*.ts', ['build-ts']);
     gulp.watch(assetsDev + 'img/*', ['build-img']);
     gulp.watch(appDev + '**/*.html', ['build-html'], browserSync.reload);

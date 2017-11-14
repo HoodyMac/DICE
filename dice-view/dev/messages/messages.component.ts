@@ -38,7 +38,7 @@ export class MessagesComponent{
     this.friendsService.getUserFriendsData().subscribe(
       data => this.friends = data
     );
-    this.screenHeight = (window.screen.height) - 390 + "px";
+    this.screenHeight = (window.screen.height) - 360;
   };
 
   public createChat(friendId: number) {
