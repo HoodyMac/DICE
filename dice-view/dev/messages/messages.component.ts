@@ -11,6 +11,12 @@ declare var jQuery: any;
   providers: [ChatService, FriendsService]
 })
 export class MessagesComponent{
+  public viewOptions = {theme: 'vs', readOnly: true};
+  public presentedAttachment;
+
+  public editorOptions = {theme: 'vs'};
+  public editedCodeAttachment = {};
+
   public userInfo: any;
   public selectedChat: any;
 
@@ -57,7 +63,7 @@ export class MessagesComponent{
 
   public selectChat(chat: any) {
     this.selectedChat = chat;
-    this.chatService.getMessage(chat.id).subscribe(
+    this.chatService.getMessages(chat.id).subscribe(
       data => {
 
         this.messages = data;
@@ -67,8 +73,11 @@ export class MessagesComponent{
     );
   }
 
-  public createMessage(message: string) {
+  public createMessage(message) {
     if(message['content'] !== null && message['content'].toString().replace(/ /g, "") !== ""){
+      if(this.editedCodeAttachment !== {}) {
+        message.code = this.editedCodeAttachment;
+      }
       this.chatService.createMessage(message, this.selectedChat.id).subscribe(
           data => {
             this.messages.push(data);
@@ -92,6 +101,22 @@ export class MessagesComponent{
 
   public OpenFileExplorer(inputName){
      $('#' + inputName).trigger('click');
+  }
+
+  public viewAttachment(attachment: any) {
+    this.viewOptions.language = attachment.language.toLowerCase();
+    this.viewOptions.value = attachment.code;
+    this.presentedAttachment = attachment;
+  }
+
+  public languageSelect(language: string) {
+    this.editorOptions.language = language.toLowerCase();
+    this.editedCodeAttachment.language = language;
+  }
+
+  public clearCodeAttachment() {
+    this.editedCodeAttachment = {};
+    this.editorOptions = {theme: 'vs'};
   }
 
   private getAllChats() {

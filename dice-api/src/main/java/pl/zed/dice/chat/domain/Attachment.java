@@ -18,6 +18,10 @@ public abstract class Attachment {
     public Attachment() {
     }
 
+    public Attachment(AttachmentType type) {
+        this.type = type;
+    }
+
     public Attachment(AttachmentType type, Message message) {
         this.type = type;
         this.message = message;

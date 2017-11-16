@@ -19,6 +19,7 @@ import {TranslateModule, TranslateStaticLoader, TranslateLoader} from "ng2-trans
 import {ModalModule} from "ng2-modal"
 import {MessagesComponent} from "./messages/messages.component";
 import {ChatService} from "./services/chat.service";
+import {MonacoEditorModule} from 'ngx-monaco-editor';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -44,7 +45,8 @@ const appRoutes: Routes = [
       useFactory: (http: Http) => new TranslateStaticLoader(http, '/assets/i18n', '.json'),
       deps: [Http]
     }),
-    ModalModule
+    ModalModule,
+    MonacoEditorModule
   ],
   declarations: [
     AppComponent,

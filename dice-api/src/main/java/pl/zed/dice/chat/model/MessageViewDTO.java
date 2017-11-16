@@ -1,6 +1,7 @@
 package pl.zed.dice.chat.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class MessageViewDTO {
 
@@ -9,13 +10,15 @@ public class MessageViewDTO {
     private String content;
     private Date createdAt;
     private Long chatId;
+    private List<AttachmentViewDTO> attachments;
 
-    public MessageViewDTO(Long id, Long senderId, String content, Date createdAt, Long chatId) {
+    public MessageViewDTO(Long id, Long senderId, String content, Date createdAt, Long chatId, List<AttachmentViewDTO> attachments) {
         this.id = id;
         this.senderId = senderId;
         this.content = content;
         this.createdAt = createdAt;
         this.chatId = chatId;
+        this.attachments = attachments;
     }
 
     public Long getId() {
@@ -56,5 +59,13 @@ public class MessageViewDTO {
 
     public void setChatId(Long chatId) {
         this.chatId = chatId;
+    }
+
+    public List<AttachmentViewDTO> getAttachments() {
+        return attachments;
+    }
+
+    public void setAttachments(List<AttachmentViewDTO> attachments) {
+        this.attachments = attachments;
     }
 }

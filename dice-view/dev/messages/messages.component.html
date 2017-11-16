@@ -87,25 +87,31 @@
                                 </div>
                                 <div class="mess-text" [style.float]="getMessageFloat(message.senderId)">
                                     <p>{{ message.content }} </p>
-                                </div>
-                                <div class="mess-image" *ngIf="message.img" [style.float]="getMessageFloat(message.senderId)">
-                                    <p>
+                                  <div *ngFor="let attachment of message.attachments">
+                                    <div class="mess-image" *ngIf="attachment.type === 'IMAGE'" [style.float]="getMessageFloat(message.senderId)">
+                                      <p>
                                         <a href="/app/img/TEEN.jpg" data-lightbox="image" data-title="My caption">
-                                            <img class="ui bordered small image" src="/app/img/TEEN.jpg">
+                                          <img class="ui bordered small image" src="/app/img/TEEN.jpg">
                                         </a>
-                                    </p>
-                                </div>
+                                      </p>
+                                    </div>
 
-                                <div class="mess-file" *ngIf="message.file"  [style.float]="getMessageFloat(message.senderId)">
-                                    <div class="file-img">
+                                    <div class="mess-file" *ngIf="attachment.type === 'FILE'"  [style.float]="getMessageFloat(message.senderId)">
+                                      <div class="file-img">
                                         <div [style.background-image]="'url(/app/img/file_icons/default_document.png)'"></div>
-                                    </div>
-                                    <div class="content">
+                                      </div>
+                                      <div class="content">
                                         <p class="filename">ilenam_ilenam.jpg</p>
+                                      </div>
                                     </div>
-                                </div>
 
-                                <section class="code"></section>
+                                    <div class="mess-file" *ngIf="attachment.type === 'CODE'"  [style.float]="getMessageFloat(message.senderId)">
+                                      <div class="file-img">
+                                        <i class="fa fa-code fa-lg" aria-hidden="true" (click)="viewAttachment(attachment); codeView.open()"></i>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
                             </div>
                         </div>
 
@@ -126,28 +132,47 @@
 
                         <!-- Modal windows -->
                         <div class="row">
+                          <modal #codeView modalClass="modal-lg" id="codeViewModal" [closeOnOutsideClick]="true" [closeOnEscape]="true">
+                            <modal-header>
+                              <h2 *ngIf="codeView.isOpened">{{presentedAttachment.language}} code</h2>
+                            </modal-header>
+                            <modal-content>
+                              <!--<label>Your code</label>-->
+                              <ngx-monaco-editor *ngIf="codeView.isOpened" [options]="viewOptions" style="height: 70%"></ngx-monaco-editor>
+                              <label for="code_comment">Comment</label>
+                              <p *ngIf="codeView.isOpened">{{presentedAttachment.comment}}</p>
+                            </modal-content>
+                            <modal-footer>
+                              <div class="buttons_section">
+                                <input type="reset" class="submit" value="Ok" (click)="codeView.close()">
+                              </div>
+                            </modal-footer>
+                          </modal>
+                        </div>
+
+                        <div class="row">
                             <modal #codeUpload modalClass="modal-lg" id="codeModal" [closeOnOutsideClick]="true" [closeOnEscape]="true">
                                 <modal-header>
                                     <h2>Create Snippet</h2>
                                 </modal-header>
                                 <modal-content>
-                                    <form action="">
-                                        <select class="prgLang">
-                                            <option value="Java">Java</option>
-                                            <option value="JavaScript">JavaScript</option>
-                                            <option value="HTML">HTML</option>
-                                            <option value="CSS">CSS</option>
-                                        </select>
-                                        <label for="code_container">Your code</label>
-                                        <textarea name="code_container" id="code_container" cols="100" rows="10"></textarea>
-                                        <label for="code_comment">Comment</label>
-                                        <textarea name="code_comment" id="code_comment" cols="100" rows="5"></textarea>
-                                    </form>
+                                  <select class="prgLang" (change)="languageSelect($event.target.value)">
+                                    <option disabled hidden value="">-- select --</option>
+                                    <option value="Java">Java</option>
+                                    <option value="JavaScript">JavaScript</option>
+                                    <option value="HTML">HTML</option>
+                                    <option value="CSS">CSS</option>
+                                  </select>
+                                  <label>Your code</label>
+                                  <ngx-monaco-editor *ngIf="codeUpload.isOpened && !!editedCodeAttachment.language" [options]="editorOptions" [(ngModel)]="editedCodeAttachment.code" style="height: 50%"></ngx-monaco-editor>
+                                  <p *ngIf="!editedCodeAttachment.language">Select programming language</p>
+                                  <label for="code_comment">Comment</label>
+                                  <textarea name="code_comment" id="code_comment" cols="100" rows="5" [(ngModel)]="editedCodeAttachment.comment"></textarea>
                                 </modal-content>
                                 <modal-footer>
                                     <div class="buttons_section">
-                                        <input type="reset" class="cancel" value="Cancel" (click)="codeUpload.close()">
-                                        <input type="submit" class="submit" value="Create Snippet">
+                                        <input type="reset" class="cancel" value="Cancel" (click)="clearCodeAttachment(); codeUpload.close()">
+                                        <input type="submit" class="submit" value="Save" (click)="codeUpload.close()">
                                     </div>
                                 </modal-footer>
                             </modal>

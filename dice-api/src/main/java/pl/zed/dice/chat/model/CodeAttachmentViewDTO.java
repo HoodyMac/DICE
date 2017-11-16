@@ -1,30 +1,15 @@
-package pl.zed.dice.chat.domain;
+package pl.zed.dice.chat.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import pl.zed.dice.chat.domain.AttachmentType;
 
-@Entity
-public class CodeAttachment extends Attachment {
+public class CodeAttachmentViewDTO extends AttachmentViewDTO {
 
     private String language;
-
-    @Column(length = 8192)
     private String code;
-
     private String comment;
 
-    public CodeAttachment() {
-    }
-
-    public CodeAttachment(String language, String code, String comment) {
-        super(AttachmentType.CODE);
-        this.language = language;
-        this.code = code;
-        this.comment = comment;
-    }
-
-    public CodeAttachment(String language, String code, String comment, Message message) {
-        super(AttachmentType.CODE, message);
+    public CodeAttachmentViewDTO(String language, String code, String comment) {
+        super(AttachmentType.CODE.name());
         this.language = language;
         this.code = code;
         this.comment = comment;

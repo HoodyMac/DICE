@@ -11,7 +11,6 @@ import java.util.List;
         @NamedQuery(name = "Chat.findChatByParticipants", query = "SELECT c FROM Chat c JOIN c.participants cp WHERE cp.id IN (?1, ?2) GROUP BY c.id HAVING COUNT(c.id) = 2"),
         @NamedQuery(name = "Chat.findChatWithParticipant", query = "SELECT c FROM Chat c JOIN c.participants cp WHERE cp.id = ?1")
 })
-
 public class Chat {
 
     @Id
@@ -76,14 +75,6 @@ public class Chat {
     public void setLastAction(Date lastAction) {
         this.lastAction = lastAction;
     }
-
-//    public List<Message> getMessages() {
-//        return messages;
-//    }
-//
-//    public void setMessages(List<Message> messages) {
-//        this.messages = messages;
-//    }
 
     public List<UserProfile> getParticipants() {
         return participants;

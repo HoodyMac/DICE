@@ -112,6 +112,19 @@ section.messages {
       }
       /*------- Modal window ------------------*/
       modal{
+        &#codeViewModal{
+          modal-header{
+            h2{margin: 5px 1%;}
+          }
+          label{width: 100%; margin: 10px 10px 0px 10px;}
+          .buttons_section{ width: 98%; text-align: end; margin: 1%;
+            input{ height: 40px; border-radius: 5px; border: none; margin: 5px 5px; background-color: @msg_buttonBg; color: @msg_msgBoxFont;
+              &.submit{width: 180px;}
+              &:hover{background-color: @msg_buttonBgHover;}
+            }
+          }
+        }
+
         &#codeModal{
           modal-header{
             h2{margin: 5px 1%;}

@@ -14,7 +14,7 @@ export class ChatService {
     return this.http.post('api/chats/' + friendId).map(res => res.json());
   }
 
-  getMessage(chatId: number): Observable {
+  getMessages(chatId: number): Observable {
     return this.http.get('api/chats/messages/' + chatId).map(res => res.json());
   }
 

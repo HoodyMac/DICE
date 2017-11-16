@@ -24,7 +24,9 @@ export class AppComponent {
         const isLoggedIn: boolean = this.authenticationService.isLoggedIn();
         const isAtHomePage: boolean = this.router.url === '/home';
         if(isLoggedIn && isAtHomePage) {
-          this.router.navigate(['profile']);
+          this.authenticationService.getUserInfoObservable().subscribe(
+            data => this.router.navigate(['profile', data.userProfileId])
+          );
         } else if(!(isLoggedIn || isAtHomePage)) {
           this.router.navigate(['home']);
         }
