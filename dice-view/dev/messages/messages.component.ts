@@ -16,6 +16,7 @@ export class MessagesComponent{
   public presentedAttachment;
 
   public editorOptions = {theme: 'vs'};
+  public editedCodeBeforSend = {};
   public editedCodeAttachment = {};
 
   public userInfo: any;
@@ -56,7 +57,7 @@ export class MessagesComponent{
     this.friendsService.getUserFriendsData().subscribe(
       data => this.friends = data
     );
-    this.screenHeight = (window.screen.height) - 450;
+    this.screenHeight = (window.screen.height) - 380;
 
     if(this.redirectFromProfileId != null){
       this.createChat(this.redirectFromProfileId);
@@ -100,12 +101,12 @@ export class MessagesComponent{
             var currentChatIndex = this.chats.indexOf(this.selectedChat);
             this.chats[currentChatIndex].lastAction = data.createdAt;
             this.chats.sort((a, b) => a.lastAction < b.lastAction);
-            jQuery('#scroll').scrollTop(jQuery('#scroll')[0].scrollHeight);
             this.isUploadCode = false;
+            this.editedCodeAttachment = {};
           }
       );
-
     }
+    jQuery('#scroll').scrollTop(jQuery('#scroll')[0].scrollHeight);
   }
 
   public getMessageFloat(senderId: number) {
@@ -129,16 +130,17 @@ export class MessagesComponent{
 
   public languageSelect(language: string) {
     this.editorOptions.language = language.toLowerCase();
-    this.editedCodeAttachment.language = language;
+    this.editedCodeBeforSend.language = language;
   }
 
   public clearCodeAttachment() {
-    this.editedCodeAttachment = {};
+    this.editedCodeBeforSend = {};
     this.editorOptions = {theme: 'vs'};
   }
 
   public saveCodeSnippet(){
       this.isUploadCode = true;
+      this.editedCodeAttachment = this.editedCodeBeforSend;
   }
   private getAllChats() {
     this.chatService.getAllChats().subscribe(data => {
