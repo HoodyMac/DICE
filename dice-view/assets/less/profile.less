@@ -1,5 +1,6 @@
 @import "colors";
 
+.separator{width: 100%; border-top: 1px solid @userInfo_border;}
 section.user_info{padding-bottom: 50px;
     .profile_image{border: 1px solid @userInfo_border; border-radius: 2px; background-color: @box_bg;
         .img{ border-radius: 2px;
@@ -46,7 +47,6 @@ section.user_info{padding-bottom: 50px;
             .userName{ font-size: 26px; float: left; width: 75%; margin: 0; padding: 2% 2% 2% 5%;}
             .isOnline{float: right; padding: 3% 3% 2% 2%; margin: 0 auto; color: #aba4a4;}
         }
-        .separator{width: 100%; border-top: 1px solid @userInfo_border;}
         .profile_info{
             .profile_info_row{ display: flex; padding: 1% 0 1% 5%;
                 &:first-child{padding-top: 2%;}
@@ -69,6 +69,130 @@ section.user_info{padding-bottom: 50px;
                 }
             }
             .value_module{ color: @userInfo_fontLabel;}
+        }
+    }
+
+    .posts_container{ width: 100%;
+        .post_block{ margin-bottom: 15px;border: 1px solid; border-radius: 2px; margin-top: 2%; border-color: @userInfo_border; width: 100%; background-color: @box_bg;
+            .header{
+                ul{ width: 100%; padding: 0; margin: 0;
+                    li{ display: inline-flex; width: 100%; border-radius: 2px;
+                        .user-img{ padding: 1% 25px; width: 10%;
+                            .circle{ width: 50px; padding: 2%; height:50px; border-radius: 50%; background-position: center; background-size: cover;}
+                        }
+                        .content{ width: 85%;
+                            p{
+                                &.username{ padding: 15px 0px 0px 5px; font-size: 16px; margin: 0;  color: #2A5885;
+                                    &{color: #1b3654; cursor: pointer;}
+                                }
+                                &.date{ padding: 0px 0px 0px 5px; margin: 0;}
+                            }
+                        }
+                        .post_edit {
+                            ul{width: 160px; float: none; padding: 0; border-radius: 2px; margin-top: 0;  margin-bottom: 0; list-style: none;
+                                li{background-color: inherit; border: none; margin: 0; width: 100%; float: none;
+                                    a{cursor: pointer; width: 100%;}
+                                }
+                            }
+                            span { font-size: 20px; color: cornflowerblue; padding: 10px; cursor: pointer;
+                                &:hover{ color: #1643ed; }
+                            }
+                        }
+                    }
+                }
+            }
+            .main_content{
+                .text_block{
+                    p{ padding: 10px 25px; color: #000; font-size: 14px;}
+                }
+                .img_block{width: 100%;text-align: center;
+                    img{ padding: 10px 25px; width: 65%;}
+                }
+                .file_block{
+
+                }
+                .code_block{
+
+                }
+            }
+            .social_module{ display: inline-flex; padding: 0px 15px;
+                .likes{ display: inline-flex; padding: 10px;
+                    span{font-size: 25px; color: #708bd4; cursor: pointer;
+                        &:hover{ color: #3638d4;}
+                    }
+                    p{padding: 0px 5px; margin: 0;}
+                }
+                .comments{ display: inline-flex; padding: 10px;
+                    span{font-size: 25px; color: #708bd4; cursor: pointer;
+                        &:hover{ color: #3638d4;}
+                    }
+                    p{padding: 0px 5px; margin: 0;}
+                }
+            }
+            .comments_module{
+                .show_comments{
+                    button{background-color: #d9ddec; width: 100%; height: 35px; border: none;
+                        &:hover{background-color: #cfd3e2;}
+                    }
+                }
+                .comment_block{
+                    ul{ width: 100%; padding: 0; margin: 0;
+                        li{ display: inline-flex; width: 100%; border-radius: 2px; border-bottom: 1px solid @userInfo_border;
+                            &:last-child{ border: none;}
+                            .user-img{ padding: 10px 0px 10px 25px; width: 8%;
+                                .circle{ width: 35px; padding: 2%; height:35px; border-radius: 50%; background-position: center; background-size: cover;}
+                            }
+                            .content{ width: 75%;
+                                a{ color: #2A5885; font-size: 14px;
+                                    .username{ padding: 5px 0 0 5px; margin: 0;}
+                                    &:hover{text-decoration: none; color: #1b3654;}
+                                }
+                                p{
+                                    &.text{padding: 0px 5px; margin: 0;}
+                                }
+                            }
+                            .content{
+                                p{margin: 0;}
+                            }
+                            .comments_edit {display: inline-flex; width: 17%;
+                                span{ font-size: 20px; color: cornflowerblue; margin: 15px 10px; cursor: pointer;
+                                    &:hover{ color: #1643ed; }
+                                }
+                                .date{ padding: 17px 0px 0px 5px; margin: 0;width: 65%;}
+                                ul{width: 160px; float: none; padding: 0; border-radius: 2px; margin-top: 0;  margin-bottom: 0; list-style: none;
+                                    li{background-color: inherit; border: none; margin: 0; width: 100%; float: none;
+                                        a{cursor: pointer; width: 100%;}
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .input-text{ padding: 15px 25px 15px 25px;; border-top: 1px solid @box_border; display: inline-flex; width: 100%;
+                    form{ width: 100%; display: inline-flex; margin: 0;
+                        .user-img{ width: 8%;
+                            .circle{ width: 35px; padding: 2%; height:35px; border-radius: 50%; background-position: center; background-size: cover;}
+                        }
+                        input[type='text']{ width: 85%; margin-right: 10px; }
+                        input[type='submit']{ width: 15%; background-color: @msg_buttonBg; border: none; color: @msg_msgBoxFont; margin-left: 10px;
+                            &:hover{background-color: @msg_buttonBgHover;}
+                        }
+                        .upload_item{ list-style: none; display: inline-flex; margin: 0; padding: 0;
+                            li{margin: 5px;
+                                img{width: 25px; cursor: pointer;
+                                    &:hover{color: #3b3b3b;}
+                                }
+                                span, i{font-size: 20px; color: #000; cursor: pointer;
+                                    &:hover{color: #3b3b3b; }
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+
         }
     }
 
@@ -124,12 +248,20 @@ section.user_info{padding-bottom: 50px;
 
 @media (max-width: 768px){ }
 
+@media (max-width: 720px){
+    .dropdown-menu{left: -145px;}
+}
+
 @media (max-width: 620px) {
     .custom-col-image{width: 70%; margin-left: 15%; margin-right: 15%; }
     .custom-col-info{width: 100%; margin-top: 5%;}
 }
 
-@media (max-width: 480px){ }
+@media (max-width: 480px){
+    .post_edit{padding: 5px 3px 0 0; }
+    .comments_edit{padding: 5px 3px 0 0; }
+
+}
 
 @media (max-width: 340px){
     .custom-col-image{width: 100%; margin-left: 0; margin-right: 0; }
