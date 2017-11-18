@@ -105,15 +105,22 @@ section.user_info{padding-bottom: 50px;
                 .text_block{
                     p{ padding: 10px 25px; color: #000; font-size: 14px;}
                 }
-                .img_block{width: 100%;text-align: center;
+                .img_block{width: 100%; text-align: center;
                     img{ padding: 10px 25px; width: 65%;}
                 }
-                .file_block{
-
+                .files{display: inline-flex; text-align: center; width: 100%; margin: 10px;
+                    .file_block{ text-align: center;
+                        span, i{font-size: 60px; cursor: pointer;
+                            &:hover{color: #3b3b3b; }
+                        }
+                    }
+                    .code_block{text-align: center;
+                        span, i{font-size: 60px;  cursor: pointer;
+                            &:hover{color: #3b3b3b; }
+                        }
+                    }
                 }
-                .code_block{
 
-                }
             }
             .social_module{ display: inline-flex; padding: 0px 15px;
                 .likes{ display: inline-flex; padding: 10px;

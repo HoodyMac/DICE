@@ -77,7 +77,6 @@ section.messages {
             p{ margin: 0;}
             .circle{ width: 40px; padding: 2%; height: 40px; border-radius: 50%; background-position: center; background-size: cover;}
           }
-          .send-time{ }
           .mess-text{ float: left; position: relative; top: 10px; background-color: @msg_msgBoxBg; color:@msg_msgBoxFont; border-radius: 10px; padding: 5px 10px 5px 10px; max-width: 70%;  margin-bottom: 20px;
             p{margin: 0;}
           }
@@ -89,6 +88,7 @@ section.messages {
           .mess-file{
             .file-img{ padding: 0 2% 0 2%;
               div{width: 50px; padding: 2%; height: 50px; background-position: center; background-size: cover;}
+              i{padding: 10px 10px 5px 10px;}
             }
             .content{
               .filename{ width: 80px;font-size: 12px; letter-spacing: 0px;line-height: 13px;}
@@ -96,7 +96,12 @@ section.messages {
           }
         }
       }
-      .input-text{ padding: 15px 15px 15px 15px; border-top: 1px solid @box_border; display: inline-flex; width: 100%;
+      .input-text{ padding: 15px 15px 15px 15px; border-top: 1px solid @box_border; display: table; width: 100%;
+        .upload_files{ width: 100%;
+          span, i{font-size: 25px; color: #000; cursor: pointer; padding: 5px;
+            &:hover{color: #3b3b3b; }
+          }
+        }
         form{ width: 100%; display: inline-flex; margin: 0;
           input[type='text']{ width: 85%; margin-right: 10px; }
           input[type='submit']{ width: 15%; background-color: @msg_buttonBg; border: none; color: @msg_msgBoxFont; margin-left: 10px;
@@ -105,6 +110,9 @@ section.messages {
           .upload_item{ list-style: none; display: inline-flex; margin: 0; padding: 0;
             li{margin: 5px;
               img{width: 25px; cursor: pointer;}
+              span, i{font-size: 20px; color: #000; cursor: pointer;
+                &:hover{color: #3b3b3b; }
+              }
             }
           }
         }
