@@ -9,7 +9,9 @@
                     </div>
                     <div class="change_photo">
                         <button type="button"  *ngIf="isMe" (click)="imgCropViewModal.open()" class="modal-trigger btn btn-default" data-modal="modal-change-photo" translate>PROFILE.changePhoto</button><!-- Trigger Modal. -->
-                        <button type="button" [routerLink]="['/messages']" class="btn btn-default" *ngIf="!isMe">Send a messege</button>
+                        <button type="button" (click)="goToMessagePage()" class="btn btn-default" *ngIf="!isMe && userInfo.friendShipStatus == 'ACCEPTED'">Send a messege</button>
+                        <button type="button" (click)="addToFriends()" class="btn btn-default" *ngIf="!isMe && userInfo.friendShipStatus == null">Add to friends</button>
+                        <button type="button" (click)="cancelFriendRequest()" class="btn btn-default" *ngIf="!isMe && userInfo.friendShipStatus != 'ACCEPTED'">Cancel friend request</button>
                         <!-- Modal view profile image -->
                         <div class="row">
                             <modal #imgCropViewModal modalClass="modal-lg" [closeOnOutsideClick]="true" [closeOnEscape]="true">

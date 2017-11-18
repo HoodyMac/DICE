@@ -57,7 +57,7 @@ export class AuthenticationService {
   }
 
   getUserInfoObservable(): Observable {
-    return this.userInfoObservable
+    return this.userInfoObservable;
   }
 
   isLoggedIn(): boolean {

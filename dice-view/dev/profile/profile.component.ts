@@ -1,13 +1,16 @@
 import {Component, AfterViewInit, ElementRef, ViewChild} from '@angular/core';
 import {ProfileService} from "../services/profile.service";
 import {Router, ActivatedRoute } from '@angular/router';
+import {SearchService} from '../services/search.service';
+import {FriendsService} from '../services/friends.service';
+
 let clicked = true;
 declare var jQuery: any;
 
 @Component({
   templateUrl: 'dev/profile/profile.component.html',
   styleUrls: ['../app/css/profile.css'],
-  providers: [ProfileService]
+  providers: [ProfileService, SearchService, FriendsService]
 })
 
 export class ProfileComponent implements AfterViewInit{
@@ -26,7 +29,8 @@ export class ProfileComponent implements AfterViewInit{
 
   constructor(
     private profileService: ProfileService,
-    private _router: Router, private route: ActivatedRoute) {
+    private _router: Router, private route: ActivatedRoute, private _searchService: SearchService,
+    private _friendService: FriendsService) {
 
     this.route.params.subscribe(params => {
       this.profileId = params['id'];
@@ -56,6 +60,17 @@ export class ProfileComponent implements AfterViewInit{
 
   };
 
+  goToMessagePage(){
+    this._router.navigate(['/messages', {redirectToChat: this.profileId}]);
+  }
+
+  addToFriends(){
+    this._searchService.addToFriends(this.profileId);
+  }
+
+  cancelFriendRequest(){
+    this._friendService.removeFriend(this.profileId);
+  }
 
   ngAfterViewInit() {
     var that = this;

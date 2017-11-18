@@ -49,7 +49,7 @@
                     <a href="#"><span>{{userData.friendsCount}} friends</span></a>
                   </td>
                   <td class="add_button" rowspan="3">
-                    <input [routerLink]="['/messages']" type="button" class="btn btn-default" value="Send a messege" *ngIf="showFriends || showFollowers && !showNewFriends">
+                    <input (click)="goToMessagePage(userData.id)" type="button" class="btn btn-default" value="Send a messege" *ngIf="showFriends || showFollowers && !showNewFriends">
                     <input type="button" id="acceptFriend{{userData.id}}" class="btn btn-default" value="Accept" *ngIf="showNewFriends" (click)="acceptFriendsRequest(userData.id)">
                     <input type="button" id="rejectFriend{{userData.id}}" class="btn btn-default" value="Reject" *ngIf="showNewFriends" (click)="rejectFriendRequest(userData.id)">
                     <input type="button" id="done{{userData.id}}" class="btn btn-default hide" value="Done" disabled>

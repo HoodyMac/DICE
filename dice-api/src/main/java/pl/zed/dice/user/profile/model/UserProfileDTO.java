@@ -20,6 +20,7 @@ public class UserProfileDTO {
     private Boolean isOnline;
     private String email;
     private Integer friendsCount;
+    private String friendShipStatus;
 
     public UserProfileDTO(){}
 
@@ -156,5 +157,13 @@ public class UserProfileDTO {
 
     public void setFriendsCount(Integer friendsCount) {
         this.friendsCount = friendsCount;
+    }
+
+    public String getFriendShipStatus() {
+        return friendShipStatus;
+    }
+
+    public void setFriendShipStatus(String friendShipStatus) {
+        this.friendShipStatus = friendShipStatus;
     }
 }

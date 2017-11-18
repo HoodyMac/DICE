@@ -1,5 +1,6 @@
 import {Component, AfterViewInit} from '@angular/core';
 import {FriendsService} from "../services/friends.service";
+import {Router} from '@angular/router';
 declare var jQuery: any;
 
 @Component({
@@ -17,7 +18,7 @@ export class FriendsComponent implements AfterViewInit {
   private done;
   private rejectDone;
 
-  constructor(private friendsService: FriendsService) {
+  constructor(private friendsService: FriendsService, private _router: Router) {
 
     this.showMyFriends();
   }
@@ -39,6 +40,10 @@ export class FriendsComponent implements AfterViewInit {
         jQuery('#'+this.done).removeClass('hide');
         jQuery('#'+this.done).addClass('show');
     }
+  }
+
+  goToMessagePage(id){
+    this._router.navigate(['/messages', {redirectToChat: id}]);
   }
 
   rejectFriendRequest(idUser){

@@ -3,6 +3,7 @@ import {ChatService} from "../services/chat.service";
 import {FriendsService} from "../services/friends.service";
 import {AuthenticationService} from "../common/services/authentication.service";
 import {Observable} from "rxjs/Observable";
+import {ActivatedRoute } from '@angular/router';
 
 declare var jQuery: any;
 @Component({
@@ -29,11 +30,19 @@ export class MessagesComponent{
   private isUploadFile: false;
   private isUploadPhoto: false;
 
+  private isChatCreated = false;
+  private redirectFromProfileId;
 
   constructor(
     private chatService: ChatService,
     private friendsService: FriendsService,
-    private authenticationService: AuthenticationService) {
+    private authenticationService: AuthenticationService,
+    private route: ActivatedRoute) {
+      
+    this.route.params.subscribe(params => {
+      this.redirectFromProfileId = params['redirectToChat'];
+    });
+
     this.userInfo = this.authenticationService.getUserInfo();
     if(this.userInfo === undefined) {
       this.authenticationService.getUserInfoObservable().subscribe(user => {
@@ -48,13 +57,17 @@ export class MessagesComponent{
       data => this.friends = data
     );
     this.screenHeight = (window.screen.height) - 450;
+
+    if(this.redirectFromProfileId != null){
+      this.createChat(this.redirectFromProfileId);
+    }
   };
 
   public createChat(friendId: number) {
     var chat = this.chats.filter(chat => chat.participantId === friendId);
     if (chat.length === 1) {
       this.selectChat(chat[0]);
-    } else {
+    }else {
       this.chatService.createChat(friendId).subscribe(
         data => {
           this.chats.unshift(data);
