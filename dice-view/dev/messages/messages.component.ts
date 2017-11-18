@@ -25,6 +25,9 @@ export class MessagesComponent{
   public friends: any[];
 
   private screenHeight: any;
+  private isUploadCode: false;
+  private isUploadFile: false;
+  private isUploadPhoto: false;
 
 
   constructor(
@@ -44,7 +47,7 @@ export class MessagesComponent{
     this.friendsService.getUserFriendsData().subscribe(
       data => this.friends = data
     );
-    this.screenHeight = (window.screen.height) - 360;
+    this.screenHeight = (window.screen.height) - 450;
   };
 
   public createChat(friendId: number) {
@@ -85,8 +88,10 @@ export class MessagesComponent{
             this.chats[currentChatIndex].lastAction = data.createdAt;
             this.chats.sort((a, b) => a.lastAction < b.lastAction);
             jQuery('#scroll').scrollTop(jQuery('#scroll')[0].scrollHeight);
+            this.isUploadCode = false;
           }
       );
+
     }
   }
 
@@ -119,6 +124,9 @@ export class MessagesComponent{
     this.editorOptions = {theme: 'vs'};
   }
 
+  public saveCodeSnippet(){
+      this.isUploadCode = true;
+  }
   private getAllChats() {
     this.chatService.getAllChats().subscribe(data => {
       let that: MessagesComponent = this;

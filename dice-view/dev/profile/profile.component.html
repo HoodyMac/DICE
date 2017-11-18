@@ -232,6 +232,108 @@
                             </div>
                         </div>
                     </div>
+                    <!-- NEXT POST -->
+                    <div class="post_block">
+                        <div class="header">
+                            <ul>
+                                <li>
+                                    <div class="user-img">
+                                        <div class="circle" [style.background-image]="'url(/app/img/TEEN.jpg)'"></div>
+                                    </div>
+
+                                    <div class="content">
+                                        <p class="username">Ivan Loichuk</p>
+                                        <p class="date">12:35 am</p>
+                                    </div>
+                                    <div class="post_edit">
+                                        <div class="dropdown">
+                                            <a alt="More options"  title="More options" class=" dropdown-toggle" id="editPost" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></a>
+
+                                            <ul class="dropdown-menu" aria-labelledby="editPost">
+                                                <li><a>Edit post</a></li>
+                                                <li><a>Delete post</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="separator"></div>
+                        <div class="main_content">
+                            <div class="text_block">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, </p>
+                            </div>
+                            <div class="img_block">
+                                 <img src="/app/img/MEM1.jpg" alt="">
+                            </div>
+                            <div class="files">
+                                <div class="file_block">
+                                    <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+                                    <p>file name</p>
+                                </div>
+                                <div class="code_block">
+                                    <i class="fa fa-file-code-o"></i>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="social_module">
+                            <div class="likes">
+                                <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+                                <p>8156</p>
+                            </div>
+                            <div class="comments">
+                                <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+                                <p>52</p>
+                            </div>
+                        </div>
+                        <div class="comments_module">
+                            <div class="show_comments">
+                                <button>Show comments</button>
+                            </div>
+
+                            <div class="comment_block">
+                                <ul>
+                                    <li>
+                                        <div class="user-img">
+                                            <div class="circle" [style.background-image]="'url(/app/img/TEEN.jpg)'"></div>
+                                        </div>
+
+                                        <div class="content">
+                                            <a [routerLink]="['/profile']"><p class="username">Ivan Loichuk</p></a>
+                                            <p class="text">LOL JEBAC ORU</p>
+                                        </div>
+                                        <div class="comments_edit">
+                                            <p class="date">12:35 am</p>
+                                            <div class="dropdown">
+                                                <a alt="More options"  title="More options" class=" dropdown-toggle" id="editComment" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></a>
+
+                                                <ul class="dropdown-menu" aria-labelledby="editComment">
+                                                    <li><a>Delete comment</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="input-text">
+                                <form #fromCreateMessage="ngForm" (ngSubmit)="createMessage(fromCreateMessage.value); fromCreateMessage.reset()">
+                                    <div class="user-img">
+                                        <div class="circle" [style.background-image]="'url(/app/img/TEEN.jpg)'"></div>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="Enter your comment" name="content" ngModel #content="ngModel">
+                                    <ul class="upload_item">
+                                        <li><i class="fa fa-code fa-lg"></i></li>
+                                        <li> <span class="glyphicon glyphicon-picture" aria-hidden="true"></span></li>
+                                        <li><span class="glyphicon glyphicon-file" aria-hidden="true"></span></li>
+                                    </ul>
+                                    <input type="file" id="imgupload" style="display:none"/>
+                                    <input  type="submit" class="form-control" value="Send">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
