@@ -54,11 +54,7 @@ export class MessagesComponent{
       data => this.friends = data
     );
     this.screenHeight = (window.screen.height) - 360;
-
-    if(this.redirectFromProfileId != null){
-      this.createChat(this.redirectFromProfileId);
-    }
-  };
+  }
 
   public createChat(friendId: number) {
     var chat = this.chats.filter(chat => chat.participantId === friendId);
@@ -137,7 +133,13 @@ export class MessagesComponent{
       let that: MessagesComponent = this;
       that.chats = data;
       that.chats.sort((a, b) => b.lastAction - a.lastAction);
-      if(that.chats.length > 0) {
+      if(this.redirectFromProfileId != null){
+        var chat = this.chats.filter(chat => chat.participantId == this.redirectFromProfileId);
+        if(chat.length != 0){
+          this.isChatCreated = true;
+          this.selectChat(chat[0]);
+        }
+      }else if(that.chats.length > 0) {
         that.selectChat(this.chats[0]);
       }
       Observable.interval(5000).subscribe(() => {
