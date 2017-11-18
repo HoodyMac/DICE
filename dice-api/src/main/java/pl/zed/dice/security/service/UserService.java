@@ -62,9 +62,16 @@ public class UserService {
 
     public UserProfileDTO getUserProfile(Long id){
         Optional<UserProfile> userProfile = userProfileRepository.findById(id);
+        UserProfile me = securityContextService.getCurrentUserProfile();
         if(userProfile.isPresent()){
             UserProfileDTO userProfileDTO = userAsm.makeUserProfileDTO(userProfile.get());
             userProfileDTO.setFriendsCount(countFriends(userProfile.get()));
+            if(userProfile.get() != me){
+                FriendEntity friendship = friendShipRepository.getFriendShip(userProfile.get(), me);
+                if(friendship != null) {
+                    userProfileDTO.setFriendShipStatus(friendship.getStatus().toString());
+                }
+            }
             return userProfileDTO;
         }else
             throw new UserNotFoundException(id);
@@ -163,16 +170,16 @@ public class UserService {
         private String firstname;
         private String surname;
 
-        public User(String firstname, String surname) {
+        private User(String firstname, String surname) {
             this.firstname = firstname;
             this.surname = surname;
         }
 
-        public String getFirstname() {
+        private String getFirstname() {
             return firstname;
         }
 
-        public String getSurname() {
+        private String getSurname() {
             return surname;
         }
     }
@@ -261,7 +268,7 @@ public class UserService {
         return friendDTOS;
     }
 
-    public int countFriends(UserProfile person){
+    private int countFriends(UserProfile person){
         return friendShipRepository.getFriends(person).size();
     }
 

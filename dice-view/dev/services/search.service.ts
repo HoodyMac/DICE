@@ -16,6 +16,6 @@ export class SearchService {
     }
 
     addToFriends(idUser){
-        return this.http.post("/api/friendRequest/" + idUser);
+        return this.http.post("/api/friendRequest/" + idUser, null);
     }
 }
