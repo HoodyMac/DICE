@@ -2,7 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from "../common/services/authentication.service";
 import {RegistrationService} from "../services/registration.service";
 import {Validators, FormGroup, FormBuilder,} from "@angular/forms";
-import {Router} from "@angular/router";
+import {Router, NavigationEnd, ActivatedRoute} from "@angular/router";
+import { Title } from '@angular/platform-browser';
+import {TranslateService} from "ng2-translate";
 
 
 @Component({
@@ -24,7 +26,14 @@ export class HomeComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private registrationService: RegistrationService,
     private route: Router,
-    private fb:FormBuilder) {
+    private fb:FormBuilder,
+    private titleService: Title,
+    private translate: TranslateService) {
+
+      translate.get('PAGE_TITLES.HOME').subscribe((res: string) => {
+          this.titleService.setTitle(res);
+      });
+
       this.form = this.fb.group({
         firstname: ['', Validators.compose([ Validators.required, Validators.maxLength(60)])],
         lastname: ['',Validators.compose([ Validators.required, Validators.maxLength(60)])],

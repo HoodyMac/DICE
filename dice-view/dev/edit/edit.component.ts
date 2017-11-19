@@ -3,6 +3,8 @@ import {EditService} from "../services/edit.service";
 import {AuthenticationService} from "../common/services/authentication.service";
 import {ActivatedRoute} from '@angular/router';
 import {FormGroup, FormBuilder} from "@angular/forms";
+import {TranslateService} from "ng2-translate";
+import {Title} from "@angular/platform-browser";
 let clicked = true;
 declare var jQuery: any;
 
@@ -26,8 +28,13 @@ export class EditComponent implements AfterViewInit{
 
     constructor(
         private editService: EditService,
-        private activatedRoute: ActivatedRoute,
-        private fb:FormBuilder) {
+        private fb:FormBuilder,
+        private titleService: Title,
+        private translate: TranslateService) {
+
+        translate.get('PAGE_TITLES.EDIT').subscribe((res: string) => {
+            this.titleService.setTitle(res);
+        });
 
         this.editService.getUserBasicInfo(localStorage.getItem('profileId')).subscribe(value => {
                 this.userBasicInfo = value;

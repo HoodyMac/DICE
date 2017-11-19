@@ -1,4 +1,13 @@
 {
+  "PAGE_TITLES":{
+    "HOME": "DICE - соціальна мережа",
+    "FRIENDS":"DICE Друзі",
+    "MESSAGES":"DICE Діалоги",
+    "PROFILE":"{{username}} - DICE",
+    "SEARCH":"Пошук людей за запитом",
+    "EDIT":"Мої налаштування"
+  },
+
   "HOME": {
 
     "HOME": "Головна",

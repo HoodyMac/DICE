@@ -2,6 +2,8 @@ import {Component, AfterViewInit, ElementRef, ViewChild} from '@angular/core';
 import {SearchService} from '../services/search.service'
 import {FormGroup, FormBuilder, NgForm} from "@angular/forms";
 import {ActivatedRoute} from '@angular/router';
+import {TranslateService} from "ng2-translate";
+import {Title} from "@angular/platform-browser";
 declare var jQuery: any;
 
 @Component({
@@ -24,7 +26,13 @@ export class SearchComponent implements AfterViewInit{
 
     constructor(private searchService: SearchService,
                 private fb:FormBuilder,
-                private activatedRoute: ActivatedRoute) {
+                private activatedRoute: ActivatedRoute,
+                private titleService: Title,
+                private translate: TranslateService) {
+
+        translate.get('PAGE_TITLES.SEARCH').subscribe((res: string) => {
+            this.titleService.setTitle(res);
+        });
 
         this.activatedRoute.params.subscribe(
             data =>{

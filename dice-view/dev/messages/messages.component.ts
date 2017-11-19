@@ -4,6 +4,8 @@ import {FriendsService} from "../services/friends.service";
 import {AuthenticationService} from "../common/services/authentication.service";
 import {Observable} from "rxjs/Observable";
 import {ActivatedRoute } from '@angular/router';
+import {TranslateService} from "ng2-translate";
+import {Title} from "@angular/platform-browser";
 
 declare var jQuery: any;
 @Component({
@@ -38,7 +40,13 @@ export class MessagesComponent{
     private chatService: ChatService,
     private friendsService: FriendsService,
     private authenticationService: AuthenticationService,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private titleService: Title,
+    private translate: TranslateService) {
+
+    translate.get('PAGE_TITLES.MESSAGES').subscribe((res: string) => {
+      this.titleService.setTitle(res);
+    });
       
     this.route.params.subscribe(params => {
       this.redirectFromProfileId = params['redirectToChat'];
