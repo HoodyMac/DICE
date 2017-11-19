@@ -25,6 +25,7 @@ export class AuthenticationService {
         }
         this.userInfo = data.userInfo;
         this.userInfoSubject.next(this.userInfo);
+        return this.userInfo;
       });
   }
 
@@ -38,7 +39,7 @@ export class AuthenticationService {
           }
           this.userInfo = data.userInfo;
           this.userInfoSubject.next(this.userInfo);
-          return this.userInfo;
+          return data.userInfo;
         }
       );
   }
