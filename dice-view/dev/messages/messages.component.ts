@@ -3,7 +3,7 @@ import {ChatService} from "../services/chat.service";
 import {FriendsService} from "../services/friends.service";
 import {AuthenticationService} from "../common/services/authentication.service";
 import {Observable} from "rxjs/Observable";
-import {ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {TranslateService} from "ng2-translate";
 import {Title} from "@angular/platform-browser";
 
@@ -42,6 +42,7 @@ export class MessagesComponent{
     private authenticationService: AuthenticationService,
     private route: ActivatedRoute,
     private titleService: Title,
+    private router: Router,
     private translate: TranslateService) {
 
     translate.get('PAGE_TITLES.MESSAGES').subscribe((res: string) => {
@@ -160,6 +161,11 @@ export class MessagesComponent{
       this.isUploadCode = true;
       this.editedCodeAttachment = this.editedCodeBeforSend;
   }
+
+  public gotoProfile(id: number) {
+    this.router.navigate(['/profile', id]);
+  }
+
   private getAllChats() {
     this.chatService.getAllChats().subscribe(data => {
       let that: MessagesComponent = this;
