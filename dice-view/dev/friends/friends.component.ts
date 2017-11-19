@@ -1,8 +1,9 @@
 import {Component, AfterViewInit} from '@angular/core';
 import {FriendsService} from "../services/friends.service";
-import {Router} from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
 import {Title} from "@angular/platform-browser";
 import {TranslateService} from "ng2-translate";
+import {AuthenticationService} from "../common/services/authentication.service";
 declare var jQuery: any;
 
 @Component({
@@ -19,17 +20,49 @@ export class FriendsComponent implements AfterViewInit {
   private acceptDone;
   private done;
   private rejectDone;
+  private profileId = true;
+  private userName = '';
 
   constructor(private friendsService: FriendsService,
               private _router: Router,
               private titleService: Title,
-              private translate: TranslateService) {
+              private translate: TranslateService,
+              private _activeRoute: ActivatedRoute,
+              private authService: AuthenticationService) {
 
       translate.get('PAGE_TITLES.FRIENDS').subscribe((res: string) => {
           this.titleService.setTitle(res);
       });
 
-      this.showMyFriends();
+      this._activeRoute.params.subscribe(params =>{
+        this.profileId = params['profileId'];
+      });
+
+      var currentUser = this.authService.getUserInfo();
+      if(currentUser === undefined) {
+        this.authService.getUserInfoObservable().subscribe(
+          data => {
+            this.userName = data.firstName + ' ' + data.lastName;
+          }
+        );
+      }else
+      this.userName = currentUser.firstName + ' ' + currentUser.lastName;
+
+      this.showProfileFriends(this.profileId);
+  }
+
+  goToProfile(){
+    this._router.navigate(['/profile/'+this.profileId]);
+  }
+
+  getFriendsOfFriend(id, friendName){
+    this.friendsService.getFriendsByProfileId(id).subscribe(
+      data => {
+        this.userFriendsData = data;
+        this.userName = friendName;
+        this.profileId = id;
+      }
+    );
   }
 
   acceptFriendsRequest(idUser){
@@ -49,6 +82,18 @@ export class FriendsComponent implements AfterViewInit {
         jQuery('#'+this.done).removeClass('hide');
         jQuery('#'+this.done).addClass('show');
     }
+  }
+
+  showProfileFriends(id){
+    this.showFriends = true;
+    this.showFollowers = false;
+    this.showNewFriends = false;
+
+    this.friendsService.getFriendsByProfileId(id).subscribe(
+      data =>{
+        this.userFriendsData = data;
+      }
+    );
   }
 
   goToMessagePage(id){
@@ -73,26 +118,12 @@ export class FriendsComponent implements AfterViewInit {
       }
   }
 
-  removeFriend(idUser){
-    this.friendsService.removeFriend(idUser)
+  removeFriend(user){
+    this.friendsService.removeFriend(user.id)
         .subscribe(
             data =>{
-              console.log(data);
-            }
-        );
-      this.showMyFriends();
-  }
-
-  showMyFriends(){
-    this.showFriends = true;
-    this.showFollowers = false;
-    this.showNewFriends = false;
-
-    this.friendsService.getUserFriendsData()
-        .subscribe(
-            data =>{
-              this.userFriendsData = data;
-              console.log(this.userFriendsData);
+              let index = this.userFriendsData.indexOf(user);
+              this.userFriendsData.splice(index, 1);
             }
         );
   }

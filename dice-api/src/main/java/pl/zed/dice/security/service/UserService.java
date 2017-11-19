@@ -148,7 +148,10 @@ public class UserService {
         userProfileRepository.search(user.getFirstname().toLowerCase(), ageFrom, ageTo, gender,
                 userProfileSearchDTO.getOnline(), userProfileSearchDTO.getCity().toLowerCase(),
                 userProfileSearchDTO.getProgrammingLanguages(), user.getSurname().toLowerCase())
-        .forEach(p -> result.add(filterFriendStatusInSearch(p)));
+        .forEach(p -> {
+            if(!p.getId().equals(securityContextService.getCurrentUserProfile().getId())){
+            result.add(filterFriendStatusInSearch(p));
+        }});
 
         return result;
     }
@@ -232,17 +235,6 @@ public class UserService {
             friendShipRepository.delete(friendEntity);
         }else
             throw new FriendShipDoesNotExist();
-    }
-
-    public List<FriendDTO> getMyFriends(){
-        UserProfile recipient = securityContextService.getCurrentUserProfile();;
-        List<FriendDTO> friendDTOS = new ArrayList<>();
-
-        friendShipRepository.getFriends(recipient).forEach(f ->
-            friendDTOS.add(filterOut(f, recipient))
-        );
-
-        return friendDTOS;
     }
 
     private FriendDTO filterOut(FriendEntity f, UserProfile person){

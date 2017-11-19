@@ -47,8 +47,6 @@ export class ProfileComponent implements AfterViewInit{
       this.isMe = this.profileId == currentUser.userProfileId;
     }
 
-
-
     this.profileService.getUserInfo(this.profileId).subscribe(
       data => {
           this.userInfo = data;
@@ -77,6 +75,10 @@ export class ProfileComponent implements AfterViewInit{
 
   addToFriends(){
     this._searchService.addToFriends(this.profileId).subscribe();
+  }
+
+  goToFriendsPage(){
+    this._router.navigate(['/friends', {profileId: this.profileId}]);
   }
 
   cancelFriendRequest(){

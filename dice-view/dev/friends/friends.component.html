@@ -26,7 +26,7 @@
         <div class="friends-header">
           <div class="menu" id="">
             <div>
-              <a [routerLink]="['/profile']" class="active username">UserName</a>
+              <a (click)="goToProfile()" class="active username" >{{userName}}</a>
               <img src="/app/img/arrow.png" alt="">
               <a class="nav-friends {{showFriends ? 'nav_show' : 'nav_hide'}}">Friends</a>
               <a class="nav-followers {{showNewFriends ? 'nav_show' : 'nav_hide'}}">New friends</a>
@@ -46,7 +46,7 @@
                   <td class="img_block" rowspan="3"><a href="#" class="img"><img src="{{userData.cropImage ? '/api/profile/image/get/' + userData.cropImage : '/app/img/default_user_photo.jpg'}}" alt=""></a></td>
                   <td class="info_block" rowspan="3">
                     <a [routerLink]="['/profile', userData.id]" class="title"><span>{{userData.firstName}}  {{userData.lastName}}</span></a>
-                    <a href="#"><span>{{userData.friendsCount}} friends</span></a>
+                    <a (click)="getFriendsOfFriend(userData.id, userData.firstName + ' ' + userData.lastName)"><span>{{userData.friendsCount}} friends</span></a>
                   </td>
                   <td class="add_button" rowspan="3">
                     <input (click)="goToMessagePage(userData.id)" type="button" class="btn btn-default" value="Send a messege" *ngIf="showFriends || showFollowers && !showNewFriends">
@@ -59,7 +59,7 @@
                       <a alt="More options"  title="More options" class=" dropdown-toggle" id="moreOption" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></a>
 
                       <ul class="dropdown-menu" aria-labelledby="moreOption">
-                        <li><a (click)="removeFriend(userData.id)">Delete friend</a></li>
+                        <li><a (click)="removeFriend(userData)">Delete friend</a></li>
                       </ul>
                     </div>
                   </td>

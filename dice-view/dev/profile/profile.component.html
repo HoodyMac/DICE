@@ -123,8 +123,8 @@
                         <span class="value_module">(1)</span>
                     </div>
                     <div class="page_count">
-                        <a href="#"><span class="label_module" translate>PROFILE.friends</span></a>
-                        <span class="value_module">{{userInfo.friendsCount}}</span>
+                        <a (click)="goToFriendsPage()"><span class="label_module" translate>PROFILE.friends</span></a>
+                        <span (click)="goToFriendsPage()" class="value_module">{{userInfo.friendsCount}}</span>
                     </div>
                     <div class="page_count">
                         <a href="#"><span class="label_module" translate>PROFILE.posts</span></a>
