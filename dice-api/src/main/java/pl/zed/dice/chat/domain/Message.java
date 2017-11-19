@@ -14,6 +14,7 @@ public class Message {
     @GeneratedValue
     private Long id;
 
+    @Column(length = 1024)
     private String content;
 
     @Temporal(TemporalType.TIMESTAMP)
