@@ -159,7 +159,6 @@ export class MessagesComponent{
       if(this.redirectFromProfileId != null){
         var chat = this.chats.filter(chat => chat.participantId == this.redirectFromProfileId);
         if(chat.length != 0){
-          this.isChatCreated = true;
           this.selectChat(chat[0]);
         }
       }else if(that.chats.length > 0) {
