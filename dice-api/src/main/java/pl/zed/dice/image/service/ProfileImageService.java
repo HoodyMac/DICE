@@ -1,5 +1,6 @@
 package pl.zed.dice.image.service;
 
+import com.google.common.base.Strings;
 import com.google.common.io.Files;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class ProfileImageService {
@@ -79,7 +81,7 @@ public class ProfileImageService {
         currentUserProfile.setOrigImage(token);
         userProfileRepository.save(currentUserProfile);
 
-        if (userProfileRepository.findByOrigImageOrCropImage(imageToDeleteFileName).equals(0)) {
+        if (!Objects.isNull(imageToDeleteFileName) && userProfileRepository.findByOrigImageOrCropImage(imageToDeleteFileName).equals(0)) {
             storageService.delete(imageToDeleteFileName);
         }
 
@@ -110,7 +112,8 @@ public class ProfileImageService {
         currentUserProfile.setCropImage(token);
         userProfileRepository.save(currentUserProfile);
 
-        if (userProfileRepository.findByOrigImageOrCropImage(imageToDeleteFileName).equals(0)) {
+        if (!Objects.isNull(imageToDeleteFileName)
+                && userProfileRepository.findByOrigImageOrCropImage(imageToDeleteFileName).equals(0)) {
             storageService.delete(imageToDeleteFileName);
         }
 
@@ -137,16 +140,16 @@ public class ProfileImageService {
         return token;
     }
 
-    private BufferedImage getScaledImage(BufferedImage src, int w, int h){
+    private BufferedImage getScaledImage(BufferedImage src, int w, int h) {
         int finalw = w;
         int finalh = h;
         double factor = 1.0d;
-        if(src.getWidth() > src.getHeight()){
-            factor = ((double)src.getHeight()/(double)src.getWidth());
-            finalh = (int)(finalw * factor);
-        }else{
-            factor = ((double)src.getWidth()/(double)src.getHeight());
-            finalw = (int)(finalh * factor);
+        if (src.getWidth() > src.getHeight()) {
+            factor = ((double) src.getHeight() / (double) src.getWidth());
+            finalh = (int) (finalw * factor);
+        } else {
+            factor = ((double) src.getWidth() / (double) src.getHeight());
+            finalw = (int) (finalh * factor);
         }
 
         BufferedImage resizedImg = new BufferedImage(finalw, finalh, BufferedImage.TRANSLUCENT);
