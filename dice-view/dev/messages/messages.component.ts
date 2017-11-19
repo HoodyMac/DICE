@@ -192,8 +192,8 @@ export class MessagesComponent{
               let lastIndex = this.messages.length - 1;
               this.selectedChat.lastAction = this.messages[lastIndex].createdAt;
               this.selectedChat.lastMessage = this.messages[lastIndex].content;
+              jQuery('#scroll').scrollTop(jQuery('#scroll')[0].scrollHeight);
             }
-            jQuery('#scroll').scrollTop(jQuery('#scroll')[0].scrollHeight);
           }
         );
       });
