@@ -5,6 +5,7 @@ import {SearchService} from '../services/search.service';
 import {FriendsService} from '../services/friends.service';
 import {TranslateService} from "ng2-translate";
 import {Title} from "@angular/platform-browser";
+import {AuthenticationService} from "../common/services/authentication.service";
 
 let clicked = true;
 declare var jQuery: any;
@@ -31,6 +32,7 @@ export class ProfileComponent implements AfterViewInit{
 
   constructor(
     private profileService: ProfileService,
+    private authenticationService: AuthenticationService,
     private _router: Router, private route: ActivatedRoute, private _searchService: SearchService,
     private _friendService: FriendsService,
     private titleService: Title,
@@ -41,7 +43,9 @@ export class ProfileComponent implements AfterViewInit{
       this.profileId = params['id'];
     });
 
-    this.isMe = this.profileId == localStorage.getItem("profileId")? true : false;
+    authenticationService.getUserInfoObservable().subscribe(
+      data => this.isMe = this.profileId == data.userProfileId
+    );
 
     this.profileService.getUserInfo(this.profileId).subscribe(
       data => {
