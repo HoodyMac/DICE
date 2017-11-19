@@ -3,6 +3,7 @@ import {ProfileService} from "../services/profile.service";
 import {Router, ActivatedRoute } from '@angular/router';
 import {SearchService} from '../services/search.service';
 import {FriendsService} from '../services/friends.service';
+import {AuthenticationService} from "../common/services/authentication.service";
 
 let clicked = true;
 declare var jQuery: any;
@@ -29,6 +30,7 @@ export class ProfileComponent implements AfterViewInit{
 
   constructor(
     private profileService: ProfileService,
+    private authenticationService: AuthenticationService,
     private _router: Router, private route: ActivatedRoute, private _searchService: SearchService,
     private _friendService: FriendsService) {
 
@@ -36,7 +38,16 @@ export class ProfileComponent implements AfterViewInit{
       this.profileId = params['id'];
     });
 
-    this.isMe = this.profileId == localStorage.getItem("profileId")? true : false;
+    var currentUser = this.authenticationService.getUserInfo();
+    if(currentUser === undefined) {
+      this.authenticationService.getUserInfoObservable().subscribe(
+        data => this.isMe = this.profileId == data.userProfileId
+      );
+    } else {
+      this.isMe = this.profileId == currentUser.userProfileId;
+    }
+
+
 
     this.profileService.getUserInfo(this.profileId).subscribe(
       data => {

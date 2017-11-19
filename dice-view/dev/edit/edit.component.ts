@@ -27,6 +27,7 @@ export class EditComponent implements AfterViewInit {
   public passwordData: FormGroup;
 
     constructor(
+        private authenticationService: AuthenticationService,
         private editService: EditService,
         private router: Router,
         private fb:FormBuilder,
@@ -37,14 +38,16 @@ export class EditComponent implements AfterViewInit {
             this.titleService.setTitle(res);
         });
 
-        this.editService.getUserBasicInfo(localStorage.getItem('profileId')).subscribe(value => {
-                this.userBasicInfo = value;
+        this.authenticationService.getUserInfoObservable().subscribe(user => {
+          this.editService.getUserBasicInfo(user.userProfileId).subscribe(value => {
+              this.userBasicInfo = value;
 
             },
             err => {
-                console.log('Something went wrong!');
+              console.log('Something went wrong!');
             }
-        );
+          );
+        });
 
     this.passwordData = this.fb.group({
       password: [''],

@@ -11,7 +11,7 @@
                         <button type="button"  *ngIf="isMe" (click)="imgCropViewModal.open()" class="modal-trigger btn btn-default" data-modal="modal-change-photo" translate>PROFILE.changePhoto</button><!-- Trigger Modal. -->
                         <button type="button" (click)="goToMessagePage()" class="btn btn-default" *ngIf="!isMe && userInfo.friendShipStatus == 'ACCEPTED'">Send a messege</button>
                         <button type="button" (click)="addToFriends()" class="btn btn-default" *ngIf="!isMe && userInfo.friendShipStatus == null">Add to friends</button>
-                        <button type="button" (click)="cancelFriendRequest()" class="btn btn-default" *ngIf="!isMe && userInfo.friendShipStatus != 'ACCEPTED'">Cancel friend request</button>
+                        <button type="button" (click)="cancelFriendRequest()" class="btn btn-default" *ngIf="!isMe && userInfo.friendShipStatus != 'ACCEPTED' && userInfo.friendShipStatus != null">Cancel friend request</button>
                         <!-- Modal view profile image -->
                         <div class="row">
                             <modal #imgCropViewModal modalClass="modal-lg" [closeOnOutsideClick]="true" [closeOnEscape]="true">
@@ -201,7 +201,7 @@
 
                                         <div class="content">
                                             <a [routerLink]="['/profile']"><p class="username">Ivan Loichuk</p></a>
-                                            <p class="text">LOL JEBAC ORU</p>
+                                            <p class="text">LOL ORU</p>
                                         </div>
                                         <div class="comments_edit">
                                             <p class="date">12:35 am</p>
@@ -303,7 +303,7 @@
 
                                         <div class="content">
                                             <a [routerLink]="['/profile']"><p class="username">Ivan Loichuk</p></a>
-                                            <p class="text">LOL JEBAC ORU</p>
+                                            <p class="text">LOL ORU</p>
                                         </div>
                                         <div class="comments_edit">
                                             <p class="date">12:35 am</p>
