@@ -109,7 +109,6 @@ export class SearchComponent implements AfterViewInit{
             .subscribe(
                 data =>{
                     data.friendShipStatus = 'SENT';
-                    console.log(data);
                 }
             );
         jQuery('#'+this.buttonDisabled).attr('disabled', 'disabled');

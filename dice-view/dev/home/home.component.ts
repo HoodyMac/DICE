@@ -13,11 +13,9 @@ import {TranslateService} from "ng2-translate";
   styleUrls: ['../app/css/home.css']
 })
 
-export class HomeComponent implements OnInit {
+export class HomeComponent {
   public form: FormGroup;
 
-  public showRegistrationMessage: boolean = false;
-  public registrationMessage: string;
   public errorMessage: string;
   public showErrorMessage: boolean = false;
   public showLoginMessage: boolean = false;
@@ -45,15 +43,9 @@ export class HomeComponent implements OnInit {
       });
   }
 
-  ngOnInit(): void {
-    if(this.authenticationService.isLoggedIn()) {
-      this.route.navigate(['/profile', localStorage.getItem('profileId')]);
-    }
-  }
-
   onSignIn(credentials) {
     this.authenticationService.login(credentials).subscribe(
-      () => this.route.navigate(['/profile', localStorage.getItem('profileId')]),
+      data => this.route.navigate(['/profile', data.userProfileId]),
       () => {
         this.showLoginMessage = true;
         setTimeout(function() {
@@ -66,13 +58,12 @@ export class HomeComponent implements OnInit {
   onSignUp(credentials){
     this.registrationService.doSignUp(credentials)
       .subscribe(
-        () => {
-          this.showRegistrationMessage = true;
-          setTimeout(function() {
-            this.showRegistrationMessage = false;
-          }.bind(this), 5000);
-        },
-        error =>{
+        () => this.onSignIn({
+          email: credentials.email,
+          password: credentials.password
+        }),
+        error => {
+          console.log(error);
           this.errorMessage = error._body;
           this.showErrorMessage = true;
           setTimeout(function() {

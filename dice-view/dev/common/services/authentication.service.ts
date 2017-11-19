@@ -22,10 +22,10 @@ export class AuthenticationService {
         const data = res.json();
         if(data) {
           localStorage.setItem('token', data.token);
-          localStorage.setItem('profileId', data.userInfo.userProfileId);
         }
         this.userInfo = data.userInfo;
         this.userInfoSubject.next(this.userInfo);
+        return this.userInfo;
       });
   }
 
@@ -36,18 +36,16 @@ export class AuthenticationService {
           const data = res.json();
           if(data) {
             localStorage.setItem('token', data.token);
-            localStorage.setItem('profileId', data.userInfo.userProfileId);
           }
           this.userInfo = data.userInfo;
           this.userInfoSubject.next(this.userInfo);
-          return this.userInfo;
+          return data.userInfo;
         }
       );
   }
 
   logout(): void {
     localStorage.removeItem('token');
-    localStorage.removeItem('profileId');
     this.userInfo = {};
     this.userInfoSubject.next(this.userInfo);
   }

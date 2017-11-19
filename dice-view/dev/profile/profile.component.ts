@@ -57,15 +57,6 @@ export class ProfileComponent implements AfterViewInit{
           console.log('Something went wrong!');
         }
     );
-
-    // this.profileService.getModule("server_url").subscribe(module => {
-    //       this.countModules = module;
-    //     },
-    //     err => {
-    //       console.log('Something went wrong!');
-    //     }
-    // );
-
   };
 
   goToMessagePage(){
@@ -124,7 +115,6 @@ export class ProfileComponent implements AfterViewInit{
          setTimeout(function() {
            this.viewImageChangeMessage = false;
          }.bind(this), 6000);
-         console.log(data);
        }
      );
   };
