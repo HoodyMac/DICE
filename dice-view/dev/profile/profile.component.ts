@@ -65,11 +65,11 @@ export class ProfileComponent implements AfterViewInit{
   }
 
   addToFriends(){
-    this._searchService.addToFriends(this.profileId);
+    this._searchService.addToFriends(this.profileId).subscribe();
   }
 
   cancelFriendRequest(){
-    this._friendService.removeFriend(this.profileId);
+    this._friendService.removeFriend(this.profileId).subscribe();
   }
 
   ngAfterViewInit() {

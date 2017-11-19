@@ -56,23 +56,10 @@ export class MessagesComponent{
       data => this.friends = data
     );
     this.screenHeight = (window.screen.height) - 380;
-
-    if(this.redirectFromProfileId){
-      this.handleChatCreationFromRedirect(this.redirectFromProfileId);
-    }
-  }
-
-  private handleChatCreationFromRedirect(profileId){
-    this.chatService.createChat(this.redirectFromProfileId).subscribe(
-      data =>{
-        this.chats.unshift(data);
-        this.selectChat(data);
-      }
-    );
   }
 
   public createChat(friendId: number) {
-    var chat = this.chats.filter(chat => chat.participantId === friendId);
+    var chat = this.chats.filter(chat => chat.participantId == friendId);
     if (chat.length === 1) {
       this.selectChat(chat[0]);
     }else {
@@ -156,11 +143,8 @@ export class MessagesComponent{
       let that: MessagesComponent = this;
       that.chats = data;
       that.chats.sort((a, b) => b.lastAction - a.lastAction);
-      if(this.redirectFromProfileId != null){
-        var chat = this.chats.filter(chat => chat.participantId == this.redirectFromProfileId);
-        if(chat.length != 0){
-          this.selectChat(chat[0]);
-        }
+      if(this.redirectFromProfileId){
+        this.createChat(this.redirectFromProfileId);
       }else if(that.chats.length > 0) {
         that.selectChat(this.chats[0]);
       }
