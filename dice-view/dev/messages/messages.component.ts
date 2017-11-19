@@ -33,7 +33,6 @@ export class MessagesComponent{
   private isUploadFile: false;
   private isUploadPhoto: false;
 
-  private isChatCreated = false;
   private redirectFromProfileId;
 
   constructor(
@@ -47,7 +46,7 @@ export class MessagesComponent{
     translate.get('PAGE_TITLES.MESSAGES').subscribe((res: string) => {
       this.titleService.setTitle(res);
     });
-      
+
     this.route.params.subscribe(params => {
       this.redirectFromProfileId = params['redirectToChat'];
     });
@@ -59,13 +58,25 @@ export class MessagesComponent{
         this.getAllChats();
       });
     } else {
-      console.log(this.userInfo);
       this.getAllChats();
     }
     this.friendsService.getUserFriendsData().subscribe(
       data => this.friends = data
     );
     this.screenHeight = (window.screen.height) - 380;
+
+    if(this.redirectFromProfileId){
+      this.handleChatCreationFromRedirect(this.redirectFromProfileId);
+    }
+  }
+
+  private handleChatCreationFromRedirect(profileId){
+    this.chatService.createChat(this.redirectFromProfileId).subscribe(
+      data =>{
+        this.chats.unshift(data);
+        this.selectChat(data);
+      }
+    );
   }
 
   public createChat(friendId: number) {
@@ -107,6 +118,8 @@ export class MessagesComponent{
             this.chats.sort((a, b) => a.lastAction < b.lastAction);
             this.isUploadCode = false;
             this.editedCodeAttachment = {};
+            this.selectedChat.lastAction = data.createdAt;
+            this.selectedChat.lastMessage = data.content;
           }
       );
     }
@@ -154,7 +167,6 @@ export class MessagesComponent{
       if(this.redirectFromProfileId != null){
         var chat = this.chats.filter(chat => chat.participantId == this.redirectFromProfileId);
         if(chat.length != 0){
-          this.isChatCreated = true;
           this.selectChat(chat[0]);
         }
       }else if(that.chats.length > 0) {
@@ -169,6 +181,11 @@ export class MessagesComponent{
               }
             } );
             that.messages.sort((a, b) => a.createdAt - b.createdAt);
+            if(data.length !== 0) {
+              let lastIndex = this.messages.length - 1;
+              this.selectedChat.lastAction = this.messages[lastIndex].createdAt;
+              this.selectedChat.lastMessage = this.messages[lastIndex].content;
+            }
             jQuery('#scroll').scrollTop(jQuery('#scroll')[0].scrollHeight);
           }
         );
