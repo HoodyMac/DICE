@@ -43,9 +43,16 @@ export class ProfileComponent implements AfterViewInit{
       this.profileId = params['id'];
     });
 
-    authenticationService.getUserInfoObservable().subscribe(
-      data => this.isMe = this.profileId == data.userProfileId
-    );
+    var currentUser = this.authenticationService.getUserInfo();
+    if(currentUser === undefined) {
+      this.authenticationService.getUserInfoObservable().subscribe(
+        data => this.isMe = this.profileId == data.userProfileId
+      );
+    } else {
+      this.isMe = this.profileId == currentUser.userProfileId;
+    }
+
+
 
     this.profileService.getUserInfo(this.profileId).subscribe(
       data => {
