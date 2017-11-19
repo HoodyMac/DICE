@@ -8,6 +8,9 @@ import pl.zed.dice.chat.model.ChatDTO;
 import pl.zed.dice.security.service.SecurityContextService;
 import pl.zed.dice.user.profile.domain.UserProfile;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Component
 public class ChatAsm {
 
@@ -17,6 +20,9 @@ public class ChatAsm {
     public ChatDTO makeChatDTO(Chat chat) {
         UserProfile currentUserProfile = securityContextService.getCurrentUserProfile();
         UserProfile participantUserProfile = chat.getParticipants().stream().filter(userProfile -> !userProfile.getId().equals(currentUserProfile.getId())).findFirst().get();
+        Map<Long, String> participantsCroppedImages = new HashMap<>();
+        chat.getParticipants().forEach(userProfile -> participantsCroppedImages.put(userProfile.getId(), userProfile.getCropImage()));
+
         String lastMessageText = "Started chat with you";
         String lastMessageSenderPhoto = null;
         if(chat.getMessages() != null && chat.getMessages().size() > 0) {
@@ -26,6 +32,6 @@ public class ChatAsm {
         }
         return new ChatDTO(chat.getId(), participantUserProfile.getFullname(),
                 participantUserProfile.getId(), participantUserProfile.getCropImage(),
-                chat.getLastAction(), lastMessageText, lastMessageSenderPhoto);
+                chat.getLastAction(), lastMessageText, lastMessageSenderPhoto, participantsCroppedImages);
     }
 }

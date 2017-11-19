@@ -1,6 +1,7 @@
 package pl.zed.dice.chat.model;
 
 import java.util.Date;
+import java.util.Map;
 
 public class ChatDTO {
 
@@ -11,8 +12,9 @@ public class ChatDTO {
     private Date lastAction;
     private String lastMessage;
     private String lastMessageSenderPhoto;
+    private Map<Long, String> participantsCroppedImage;
 
-    public ChatDTO(Long id, String name, Long participantId, String cropImg, Date lastAction, String lastMessage, String lastMessageSenderPhoto) {
+    public ChatDTO(Long id, String name, Long participantId, String cropImg, Date lastAction, String lastMessage, String lastMessageSenderPhoto, Map<Long, String> participantsCroppedImage) {
         this.id = id;
         this.name = name;
         this.participantId = participantId;
@@ -20,6 +22,7 @@ public class ChatDTO {
         this.lastAction = lastAction;
         this.lastMessage = lastMessage;
         this.lastMessageSenderPhoto = lastMessageSenderPhoto;
+        this.participantsCroppedImage = participantsCroppedImage;
     }
 
     public Long getId() {
@@ -76,5 +79,13 @@ public class ChatDTO {
 
     public void setLastMessageSenderPhoto(String lastMessageSenderPhoto) {
         this.lastMessageSenderPhoto = lastMessageSenderPhoto;
+    }
+
+    public Map<Long, String> getParticipantsCroppedImage() {
+        return participantsCroppedImage;
+    }
+
+    public void setParticipantsCroppedImage(Map<Long, String> participantsCroppedImage) {
+        this.participantsCroppedImage = participantsCroppedImage;
     }
 }
