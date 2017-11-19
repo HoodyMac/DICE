@@ -19,7 +19,7 @@ export class MessagesComponent{
   public presentedAttachment;
 
   public editorOptions = {theme: 'vs'};
-  public editedCodeBeforSend = {};
+  public editedCodeBeforeSend = {};
   public editedCodeAttachment = {};
 
   public userInfo: any;
@@ -136,17 +136,16 @@ export class MessagesComponent{
 
   public languageSelect(language: string) {
     this.editorOptions.language = language.toLowerCase();
-    this.editedCodeBeforSend.language = language;
   }
 
   public clearCodeAttachment() {
-    this.editedCodeBeforSend = {};
+    this.editedCodeBeforeSend = {};
     this.editorOptions = {theme: 'vs'};
   }
 
   public saveCodeSnippet(){
       this.isUploadCode = true;
-      this.editedCodeAttachment = this.editedCodeBeforSend;
+      this.editedCodeAttachment = this.editedCodeBeforeSend;
   }
 
   public gotoProfile(id: number) {
