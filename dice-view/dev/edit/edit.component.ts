@@ -38,16 +38,27 @@ export class EditComponent implements AfterViewInit {
             this.titleService.setTitle(res);
         });
 
-        this.authenticationService.getUserInfoObservable().subscribe(user => {
-          this.editService.getUserBasicInfo(user.userProfileId).subscribe(value => {
-              this.userBasicInfo = value;
+        var userInfo = this.authenticationService.getUserInfo();
+        if(userInfo === undefined) {
+          this.authenticationService.getUserInfoObservable().subscribe(user => {
+            this.editService.getUserBasicInfo(user.userProfileId).subscribe(value => {
+                this.userBasicInfo = value;
 
+              },
+              err => {
+                console.log('Something went wrong!');
+              }
+            );
+          });
+        } else {
+          this.editService.getUserBasicInfo(userInfo.userProfileId).subscribe(value => {
+              this.userBasicInfo = value;
             },
             err => {
               console.log('Something went wrong!');
             }
           );
-        });
+        }
 
     this.passwordData = this.fb.group({
       password: [''],

@@ -164,7 +164,7 @@
                                     <h2>Create Snippet</h2>
                                 </modal-header>
                                 <modal-content>
-                                  <select class="prgLang" (change)="languageSelect($event.target.value)">
+                                  <select class="prgLang" [(ngModel)]="editedCodeBeforeSend.language" (change)="languageSelect($event.target.value)">
                                     <option disabled hidden value="">Choose a programming language</option>
                                     <option value="Java">Java</option>
                                     <option value="JavaScript">JavaScript</option>
@@ -172,10 +172,10 @@
                                     <option value="CSS">CSS</option>
                                   </select>
                                   <label>Your code</label>
-                                  <ngx-monaco-editor *ngIf="codeUpload.isOpened && !!editedCodeBeforSend.language" [options]="editorOptions" [(ngModel)]="editedCodeBeforSend.code" style="height: 50%"></ngx-monaco-editor>
-                                  <p *ngIf="!editedCodeBeforSend.language">Select programming language</p>
+                                  <ngx-monaco-editor *ngIf="codeUpload.isOpened && !!editorOptions.language" [options]="editorOptions" [(ngModel)]="editedCodeBeforeSend.code" style="height: 50%"></ngx-monaco-editor>
+                                  <p *ngIf="!editorOptions.language ">Select programming language</p>
                                   <label for="code_comment">Comment</label>
-                                  <textarea name="code_comment" id="code_comment" cols="100" rows="5" [(ngModel)]="editedCodeBeforSend.comment"></textarea>
+                                  <textarea name="code_comment" id="code_comment" cols="100" rows="5" [(ngModel)]="editedCodeBeforeSend.comment"></textarea>
                                 </modal-content>
                                 <modal-footer>
                                     <div class="buttons_section">
