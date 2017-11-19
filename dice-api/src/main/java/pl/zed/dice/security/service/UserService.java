@@ -254,9 +254,16 @@ public class UserService {
         List<FriendDTO> friendDTOS = new ArrayList<>();
 
         friendShipRepository.getFriends(person).forEach(f ->
-            friendDTOS.add(filterOut(f, person))
-        );
+            friendDTOS.add(filterOut(f, person)));
 
+        return friendDTOS;
+    }
+
+    public List<FriendDTO> getMyFriends(){
+        UserProfile recipient = securityContextService.getCurrentUserProfile();
+        List<FriendDTO> friendDTOS = new ArrayList<>();
+
+        friendShipRepository.getFriends(recipient).forEach(f ->friendDTOS.add(filterOut(f, recipient)));
         return friendDTOS;
     }
 

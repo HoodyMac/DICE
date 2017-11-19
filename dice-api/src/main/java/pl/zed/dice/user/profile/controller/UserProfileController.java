@@ -105,9 +105,12 @@ public class UserProfileController {
         userService.removeFriend(id);
     }
 
-    @GetMapping("/friends/{id}")
-    public List<FriendDTO> getFriends(@PathVariable Long id){
-        return userService.getFriends(id);
+    @GetMapping({"/friends","/friends/{id}"})
+    public List<FriendDTO> getFriends(@PathVariable Optional<Long> id) {
+        if (id.isPresent()) {
+            return userService.getFriends(id.get());
+        }else
+            return userService.getMyFriends();
     }
 
     @GetMapping("/friendRequests")

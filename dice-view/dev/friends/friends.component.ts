@@ -21,6 +21,7 @@ export class FriendsComponent implements AfterViewInit {
   private done;
   private rejectDone;
   private profileId = true;
+  private myId;
   private userName = '';
 
   constructor(private friendsService: FriendsService,
@@ -49,6 +50,18 @@ export class FriendsComponent implements AfterViewInit {
       this.userName = currentUser.firstName + ' ' + currentUser.lastName;
 
       this.showProfileFriends(this.profileId);
+  }
+
+  showMyFriends(){
+    this.showFriends = true;
+    this.showFollowers = false;
+    this.showNewFriends = false;
+
+    this.friendsService.getMyFriends().subscribe(
+      data => {
+        this.userFriendsData = data;
+      }
+    );
   }
 
   goToProfile(){

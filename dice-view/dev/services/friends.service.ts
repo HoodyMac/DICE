@@ -11,6 +11,10 @@ export class FriendsService {
         return this.http.get("/api/friends").map(res => res.json());
     }
 
+    getMyFriends(){
+        return this.http.get("/api/friends").map(res => res.json());
+    }
+
     getFriendsByProfileId(id){
         return this.http.get("/api/friends/" + id).map(res => res.json());
     }
