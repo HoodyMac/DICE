@@ -1,9 +1,11 @@
 import {Component, AfterViewInit, ElementRef, ViewChild} from '@angular/core';
 import {ProfileService} from "../services/profile.service";
-import {Router, ActivatedRoute } from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
 import {SearchService} from '../services/search.service';
 import {FriendsService} from '../services/friends.service';
 import {AuthenticationService} from "../common/services/authentication.service";
+import {TranslateService} from "ng2-translate";
+import {Title} from "@angular/platform-browser";
 
 let clicked = true;
 declare var jQuery: any;
@@ -14,7 +16,7 @@ declare var jQuery: any;
   providers: [ProfileService, SearchService, FriendsService]
 })
 
-export class ProfileComponent implements AfterViewInit{
+export class ProfileComponent implements AfterViewInit {
   @ViewChild('fileInput') inputEl: ElementRef;
 
   countModules: any; //count_module[];
@@ -28,18 +30,19 @@ export class ProfileComponent implements AfterViewInit{
   viewImageChangeMessage: boolean = false;
 
 
-  constructor(
-    private profileService: ProfileService,
-    private authenticationService: AuthenticationService,
-    private _router: Router, private route: ActivatedRoute, private _searchService: SearchService,
-    private _friendService: FriendsService) {
+  constructor(private profileService: ProfileService,
+              private authenticationService: AuthenticationService,
+              private _router: Router, private route: ActivatedRoute, private _searchService: SearchService,
+              private _friendService: FriendsService,
+              private titleService: Title,
+              private translate: TranslateService) {
 
     this.route.params.subscribe(params => {
       this.profileId = params['id'];
     });
 
     var currentUser = this.authenticationService.getUserInfo();
-    if(currentUser === undefined) {
+    if (currentUser === undefined) {
       this.authenticationService.getUserInfoObservable().subscribe(
         data => this.isMe = this.profileId == data.userProfileId
       );
@@ -49,31 +52,25 @@ export class ProfileComponent implements AfterViewInit{
 
     this.profileService.getUserInfo(this.profileId).subscribe(
       data => {
-          this.userInfo = data;
-          if(this.jcropApi !== undefined) {
-            this.jcropApi.setImage('/api/profile/image/get/' + this.userInfo.originalImgSrc);
-          }
-        },
-        err => {
-          console.log('Something went wrong!');
+        this.userInfo = data;
+        if (this.jcropApi !== undefined) {
+          this.jcropApi.setImage('/api/profile/image/get/' + this.userInfo.originalImgSrc);
         }
+        translate.get('PAGE_TITLES.PROFILE', {username: this.userInfo.firstname + " " + this.userInfo.lastname}).subscribe((res: string) => {
+          this.titleService.setTitle(res);
+        });
+      },
+      err => {
+        console.log('Something went wrong!');
+      }
     );
-
-    // this.profileService.getModule("server_url").subscribe(module => {
-    //       this.countModules = module;
-    //     },
-    //     err => {
-    //       console.log('Something went wrong!');
-    //     }
-    // );
-
   };
 
-  goToMessagePage(){
+  goToMessagePage() {
     this._router.navigate(['/messages', {redirectToChat: this.profileId}]);
   }
 
-  addToFriends(){
+  addToFriends() {
     this._searchService.addToFriends(this.profileId).subscribe();
   }
 
@@ -87,22 +84,21 @@ export class ProfileComponent implements AfterViewInit{
 
   ngAfterViewInit() {
     var that = this;
-    if( jQuery(this.cropbox.nativeElement).length > 0){
+    if (jQuery(this.cropbox.nativeElement).length > 0) {
       jQuery(this.cropbox.nativeElement).Jcrop({
         aspectRatio: 1,
         onSelect: updateCoords
-      }, function() {
+      }, function () {
         that.jcropApi = this;
       });
     }
 
-    function updateCoords(c)
-    {
+    function updateCoords(c) {
       jQuery('#x').val(c.x);
       jQuery('#y').val(c.y);
       jQuery('#w').val(c.w);
       jQuery('#h').val(c.h);
-    };
+    }
   }
 
   // change image src for edit icon
@@ -115,23 +111,22 @@ export class ProfileComponent implements AfterViewInit{
   }
 
 
-  cropImageAndSave(x, y, w, h){
+  cropImageAndSave(x, y, w, h) {
     let imgCropData = {
-      "x" : x,
-      "y" : y,
-      "w" : w,
-      "h" : h
+      "x": x,
+      "y": y,
+      "w": w,
+      "h": h
     };
-     this.profileService.postCordsImageCrop(imgCropData).subscribe(
-       (data) => {
-         this.userInfo.cropImgSrc = data.newImageFileName;
-         this.viewImageChangeMessage = true;
-         setTimeout(function() {
-           this.viewImageChangeMessage = false;
-         }.bind(this), 6000);
-         console.log(data);
-       }
-     );
+    this.profileService.postCordsImageCrop(imgCropData).subscribe(
+      (data) => {
+        this.userInfo.cropImgSrc = data.newImageFileName;
+        this.viewImageChangeMessage = true;
+        setTimeout(function () {
+          this.viewImageChangeMessage = false;
+        }.bind(this), 6000);
+      }
+    );
   };
 
   upload() {
@@ -152,7 +147,7 @@ export class ProfileComponent implements AfterViewInit{
     }
   }
 
-  editProfile(){
+  editProfile() {
     this._router.navigate(['/edit']);
   }
 }
