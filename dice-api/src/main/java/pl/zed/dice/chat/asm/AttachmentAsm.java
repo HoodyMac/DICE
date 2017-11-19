@@ -26,7 +26,6 @@ public class AttachmentAsm {
     public AttachmentViewDTO makeAttachmentViewDto(Attachment attachment) {
         if (attachment.getType().equals(AttachmentType.CODE)) {
             CodeAttachment codeAttachment = (CodeAttachment) attachment;
-            System.out.println(codeAttachment.getCode());
             return new CodeAttachmentViewDTO(codeAttachment.getLanguage(), codeAttachment.getCode(), codeAttachment.getComment());
         }
         return null;

@@ -8,6 +8,7 @@ import {TranslateService} from "ng2-translate";
 import {Title} from "@angular/platform-browser";
 
 declare var jQuery: any;
+
 @Component({
   templateUrl: 'dev/messages/messages.component.html',
   styleUrls: ['../app/css/messages.css'],
