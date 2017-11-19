@@ -31,7 +31,6 @@ export class MessagesComponent{
   private isUploadFile: false;
   private isUploadPhoto: false;
 
-  private isChatCreated = false;
   private redirectFromProfileId;
 
   constructor(
@@ -58,6 +57,19 @@ export class MessagesComponent{
       data => this.friends = data
     );
     this.screenHeight = (window.screen.height) - 380;
+
+    if(this.redirectFromProfileId){
+      this.handleChatCreationFromRedirect(this.redirectFromProfileId);
+    }
+  }
+
+  private handleChatCreationFromRedirect(profileId){
+    this.chatService.createChat(this.redirectFromProfileId).subscribe(
+      data =>{
+        this.chats.unshift(data);
+        this.selectChat(data);
+      }
+    );
   }
 
   public createChat(friendId: number) {
