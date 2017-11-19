@@ -5,9 +5,7 @@ import {HttpClient} from "../common/services/http-client.service";
 @Injectable()
 export class SearchService {
 
-    constructor(private http: HttpClient) {
-        console.log('PostService Initialized...');
-    }
+    constructor(private http: HttpClient) {}
 
     getUserSearchData(userSearchData){
         return this.http.post("/api/search", userSearchData).map(res => {

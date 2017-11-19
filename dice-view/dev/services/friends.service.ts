@@ -5,9 +5,7 @@ import {HttpClient} from "../common/services/http-client.service";
 @Injectable()
 export class FriendsService {
 
-    constructor(private http: HttpClient) {
-        console.log('PostService Initialized...');
-    }
+    constructor(private http: HttpClient) {}
 
     getUserFriendsData(){
         return this.http.get("/api/friends").map(res => res.json());

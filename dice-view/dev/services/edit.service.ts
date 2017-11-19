@@ -6,9 +6,7 @@ import {AuthenticationService} from "../common/services/authentication.service";
 @Injectable()
 export class EditService{
 
-    constructor(private http: HttpClient, private authenticationService: AuthenticationService){
-        console.log('PostService Initialized...');
-    }
+    constructor(private http: HttpClient, private authenticationService: AuthenticationService){}
     getUserBasicInfo(id){
         return this.http.get("/api/profile/"+id).map(res => res.json());
     }
