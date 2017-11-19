@@ -127,13 +127,13 @@
                                 <i class="fa fa-picture-o" aria-hidden="true" *ngIf="isUploadPhoto"></i>
                             </div>
                             <form #fromCreateMessage="ngForm" (ngSubmit)="createMessage(fromCreateMessage.value); fromCreateMessage.reset()">
-                                <input type="text" class="form-control" placeholder="Enter your message" name="content" ngModel #content="ngModel">
+                                <input type="text" class="form-control" placeholder="Enter your message" name="content" ngModel #content="ngModel" maxlength="1024">
                                 <ul class="upload_item">
                                     <li><i class="fa fa-code fa-lg" (click)="codeUpload.open()"></i></li>
                                     <li> <span class="glyphicon glyphicon-picture" (click)="OpenFileExplorer('imgupload')" aria-hidden="true"></span></li>
                                     <li><span class="glyphicon glyphicon-file" (click)="fileUpload.open()" aria-hidden="true"></span></li>
                                 </ul>
-                                <input type="file" id="imgupload" style="display:none"/>
+                                <input type="file" id="imgupload" style=" display:none"/>
                                 <input  type="submit" class="form-control" value="Send">
                             </form>
                         </div>
@@ -165,7 +165,7 @@
                                 </modal-header>
                                 <modal-content>
                                   <select class="prgLang" (change)="languageSelect($event.target.value)">
-                                    <option disabled hidden value="">-- select --</option>
+                                    <option disabled hidden value="">Choose a programming language</option>
                                     <option value="Java">Java</option>
                                     <option value="JavaScript">JavaScript</option>
                                     <option value="HTML">HTML</option>
