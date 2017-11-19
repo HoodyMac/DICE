@@ -4,7 +4,7 @@
             <div class="col-md-4 col-sm-5 col-xs-6 custom-col-friends-list">
                 <div class="friends-list">
                     <div class="search-friends">
-                        <button type="button"  (click)="newConversationModal.open()" class="modal-trigger btn btn-default">New conversation</button>
+                        <button type="button" (click)="newConversationModal.open()" class="modal-trigger btn btn-default">New conversation</button>
                         <form>
                             <input type="text" class="form-control" placeholder="Search">
                         </form>
@@ -72,7 +72,7 @@
                 <div class="messages-block">
                     <div class="message_header">
                         <div class="username">
-                            <p>{{ selectedChat.name }}</p>
+                          <a (click)="gotoProfile(selectedChat.participantId)"><p>{{ selectedChat.name }}</p></a>
                         </div>
                         <div class="isOnline">
                             <p>online</p>
@@ -82,7 +82,12 @@
                         <div class="scroll" id="scroll" [ngStyle]="{height: (screenHeight-8+'px')}" #scroll>
                             <div class="message_content" *ngFor="let message of messages">
                                 <div class="user-img" [style.float]="getMessageFloat(message.senderId)">
-                                    <a><div class="circle" style="background-image: url(/app/img/Ivan_Loichuk_bg200x200.jpg);"></div></a>
+                                    <a (click)="gotoProfile(message.senderId)">
+                                      <div
+                                        class="circle"
+                                        [style.background-image]="'url(' + (selectedChat.participantsCroppedImage[message.senderId] ? '/api/profile/image/get/' + selectedChat.participantsCroppedImage[message.senderId] : '/app/img/default_user_photo.jpg') + ')'">
+                                      </div>
+                                    </a>
                                     <p>{{ message.createdAt | date:'HH:mm' }}</p>
                                 </div>
                                 <div class="mess-text" [style.float]="getMessageFloat(message.senderId)">

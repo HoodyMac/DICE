@@ -3,6 +3,8 @@ import {ProfileService} from "../services/profile.service";
 import {Router, ActivatedRoute } from '@angular/router';
 import {SearchService} from '../services/search.service';
 import {FriendsService} from '../services/friends.service';
+import {TranslateService} from "ng2-translate";
+import {Title} from "@angular/platform-browser";
 
 let clicked = true;
 declare var jQuery: any;
@@ -30,7 +32,10 @@ export class ProfileComponent implements AfterViewInit{
   constructor(
     private profileService: ProfileService,
     private _router: Router, private route: ActivatedRoute, private _searchService: SearchService,
-    private _friendService: FriendsService) {
+    private _friendService: FriendsService,
+    private titleService: Title,
+    private translate: TranslateService) {
+
 
     this.route.params.subscribe(params => {
       this.profileId = params['id'];
@@ -44,20 +49,14 @@ export class ProfileComponent implements AfterViewInit{
           if(this.jcropApi !== undefined) {
             this.jcropApi.setImage('/api/profile/image/get/' + this.userInfo.originalImgSrc);
           }
+          translate.get('PAGE_TITLES.PROFILE', {username: this.userInfo.firstname + " " + this.userInfo.lastname } ).subscribe((res: string) => {
+            this.titleService.setTitle(res);
+          });
         },
         err => {
           console.log('Something went wrong!');
         }
     );
-
-    // this.profileService.getModule("server_url").subscribe(module => {
-    //       this.countModules = module;
-    //     },
-    //     err => {
-    //       console.log('Something went wrong!');
-    //     }
-    // );
-
   };
 
   goToMessagePage(){
@@ -116,7 +115,6 @@ export class ProfileComponent implements AfterViewInit{
          setTimeout(function() {
            this.viewImageChangeMessage = false;
          }.bind(this), 6000);
-         console.log(data);
        }
      );
   };

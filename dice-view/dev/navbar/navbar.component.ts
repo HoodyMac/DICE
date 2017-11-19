@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {AuthenticationService} from "../common/services/authentication.service";
 import {Router} from "@angular/router";
+import {userInfo} from "os";
 
 @Component({
   selector: 'dice-nav',
@@ -10,12 +11,10 @@ import {Router} from "@angular/router";
 export class NavbarComponent {
   private userInfo = {};
   private searchData = {fullName: ""};
-  private profileId;
 
   constructor(
     private authenticationService: AuthenticationService,
     private router: Router) {
-      this.profileId = localStorage.getItem("profileId");
     if(authenticationService.isLoggedIn()) {
       authenticationService.refresh()
         .subscribe(
@@ -32,8 +31,11 @@ export class NavbarComponent {
     this.router.navigate(['home']);
   }
 
-  goSearch(param){
+  public goSearch(param){
     this.router.navigate(['/search', { fullname: param }] );
   }
-}
 
+  public gotoMyProfile() {
+    this.router.navigate(['/profile', this.userInfo.userProfileId]);
+  }
+}

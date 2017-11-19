@@ -1,4 +1,13 @@
 {
+  "PAGE_TITLES":{
+    "HOME": "DICE - social networking website",
+    "FRIENDS":"DICE Friends",
+    "MESSAGES":"DICE Messages",
+    "PROFILE":"{{username}} - DICE",
+    "SEARCH":"Search people",
+    "EDIT":"Edit your profile"
+  },
+
   "HOME": {
 
     "HOME": "home",

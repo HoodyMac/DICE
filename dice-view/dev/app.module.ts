@@ -22,7 +22,7 @@ import {ChatService} from "./services/chat.service";
 import {MonacoEditorModule} from 'ngx-monaco-editor';
 
 const appRoutes: Routes = [
-  { path: 'home', component: HomeComponent },
+  { path: 'home', component: HomeComponent},
   { path: 'profile/:id', component: ProfileComponent },
   { path: 'search', component: SearchComponent },
   { path: 'friends', component: FriendsComponent },

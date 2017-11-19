@@ -1,6 +1,8 @@
 import {Component, AfterViewInit} from '@angular/core';
 import {FriendsService} from "../services/friends.service";
 import {Router} from '@angular/router';
+import {Title} from "@angular/platform-browser";
+import {TranslateService} from "ng2-translate";
 declare var jQuery: any;
 
 @Component({
@@ -18,9 +20,16 @@ export class FriendsComponent implements AfterViewInit {
   private done;
   private rejectDone;
 
-  constructor(private friendsService: FriendsService, private _router: Router) {
+  constructor(private friendsService: FriendsService,
+              private _router: Router,
+              private titleService: Title,
+              private translate: TranslateService) {
 
-    this.showMyFriends();
+      translate.get('PAGE_TITLES.FRIENDS').subscribe((res: string) => {
+          this.titleService.setTitle(res);
+      });
+
+      this.showMyFriends();
   }
 
   acceptFriendsRequest(idUser){
