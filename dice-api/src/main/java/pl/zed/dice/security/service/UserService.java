@@ -1,5 +1,6 @@
 package pl.zed.dice.security.service;
 
+import com.google.common.base.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -145,9 +146,9 @@ public class UserService {
                     userProfileSearchDTO.getFullName().substring(fullName.indexOf(" ")+1));
         }
 
-        userProfileRepository.search(user.getFirstname().toLowerCase(), ageFrom, ageTo, gender,
-                userProfileSearchDTO.getOnline(), userProfileSearchDTO.getCity().toLowerCase(),
-                userProfileSearchDTO.getProgrammingLanguages(), user.getSurname().toLowerCase())
+        userProfileRepository.search(Strings.nullToEmpty(user.getFirstname()).toLowerCase(), ageFrom, ageTo, gender,
+                userProfileSearchDTO.getOnline(), Strings.nullToEmpty(userProfileSearchDTO.getCity()).toLowerCase(),
+                userProfileSearchDTO.getProgrammingLanguages(), Strings.nullToEmpty(user.getSurname()).toLowerCase())
         .forEach(p -> {
             if(!p.getId().equals(securityContextService.getCurrentUserProfile().getId())){
             result.add(filterFriendStatusInSearch(p));
