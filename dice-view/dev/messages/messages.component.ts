@@ -164,22 +164,24 @@ export class MessagesComponent{
         that.selectChat(this.chats[0]);
       }
       Observable.interval(5000).subscribe(() => {
-        that.chatService.refreshMessages(this.selectedChat.lastAction).subscribe(
-          data => {
-            data.forEach(message =>{
-              if(message.chatId === this.selectedChat.id) {
-                that.messages.push(message);
+        if(this.selectedChat !== undefined) {
+          that.chatService.refreshMessages(this.selectedChat.lastAction).subscribe(
+            data => {
+              data.forEach(message =>{
+                if(message.chatId === this.selectedChat.id) {
+                  that.messages.push(message);
+                }
+              } );
+              that.messages.sort((a, b) => a.createdAt - b.createdAt);
+              if(data.length !== 0) {
+                let lastIndex = this.messages.length - 1;
+                this.selectedChat.lastAction = this.messages[lastIndex].createdAt;
+                this.selectedChat.lastMessage = this.messages[lastIndex].content;
+                jQuery('#scroll').scrollTop(jQuery('#scroll')[0].scrollHeight);
               }
-            } );
-            that.messages.sort((a, b) => a.createdAt - b.createdAt);
-            if(data.length !== 0) {
-              let lastIndex = this.messages.length - 1;
-              this.selectedChat.lastAction = this.messages[lastIndex].createdAt;
-              this.selectedChat.lastMessage = this.messages[lastIndex].content;
-              jQuery('#scroll').scrollTop(jQuery('#scroll')[0].scrollHeight);
             }
-          }
-        );
+          );
+        }
       });
     });
   }
