@@ -62,13 +62,60 @@ section.user_info{padding-bottom: 50px;
     .counts_module{ border: 1px solid; border-radius: 2px; margin-top: 2%; border-color: @userInfo_border; display: inline-flex; width: 100%; background-color: @box_bg;
         .page_count{ padding: 1% 2% 1% 2%; text-align: center; display: grid; border-right: 1px solid @userInfo_border; width: 25%;
             &:last-child{border: none;}
-            a{color: @userInfo_fontValue; font-size: 16px; text-decoration: none;
+            a{color: @userInfo_fontValue; font-size: 16px; text-decoration: none; cursor: pointer;
                 &:hover{color: @userInfo_fontLabelHover;}
-                .label_module{
+                .label_module{ }
+            }
+            .value_module{ color: @userInfo_fontLabel;
+                i{font-size: 16px;}
+            }
 
+            modal{
+                modal-header{ text-align: start;
+                    h2{ margin-left: 10px;}
+                }
+                modal-content{
+                    textarea{width: 98%; border-radius: 5px; padding: 10px; height: 170px;}
+                    .post_attachment{ text-align: start; display: flex;
+                        .upload_image{ position: relative;
+                            img{ height: 160px; margin: 20px 10px; opacity: 1; display: block; transition: .5s ease; backface-visibility: hidden; }
+                            .trash_button { transition: .5s ease; opacity: 0; position: absolute; text-align: end; -ms-transform: translate(-50%, -50%); transform: translate(0%, -100%); width: 100%; height: 100%;
+                                &:hover{ opacity: 1;}
+                                i{ color: @profile_trashBtnBg; font-size: 25px; margin: 30px 20px;cursor: pointer;
+                                    &:hover{ color: @profile_trashBtnHover ;}
+                                }
+                            }
+                        }
+                        .files{ padding: 20px 0px 0px 20px; width: 100%;
+                            .code_group{ width: 100%; height: 45px; position: relative; padding: 5px;
+                                &:hover{ background-color: @profile_listHover;}
+                                i{font-size: 35px; vertical-align: bottom; margin-bottom: 8px; color: @profile_fileBg;}
+                                span{vertical-align: super; position: relative; padding: 5px 5px;  bottom: 5px;}
+                                .trash_button { transition: .5s ease; opacity: 0; position: absolute; text-align: end; -ms-transform: translate(-50%, -50%); transform: translate(0%, -100%); width: 100%; height: 100%;
+                                    &:hover{ opacity: 1;}
+                                    i{ color: @profile_trashBtnBg; font-size: 25px; margin: 10px 20px; cursor: pointer;
+                                        &:hover{ color: @profile_trashBtnHover;}
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                }
+                modal-footer{  display: flex;
+                    .upload_components{ width: 50%; display: inline; text-align: start; padding: 8px 8px;
+                        span, i{font-size: 25px; color: @profile_iconsBg; cursor: pointer; padding: 5px;
+                            &:hover{color: @profile_iconsHover; }
+                        }
+                    }
+                    .buttons_section{ width: 50%; text-align: end; display: inline;
+                        input{ height: 40px; border-radius: 5px; border: none; margin: 5px 5px; background-color: @msg_buttonBg; color: @msg_msgBoxFont;
+                            &.submit{width: 180px;}
+                            &:hover{background-color: @msg_buttonBgHover;}
+                        }
+                    }
                 }
             }
-            .value_module{ color: @userInfo_fontLabel;}
         }
     }
 

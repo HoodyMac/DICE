@@ -140,6 +140,7 @@
     "newMessages":"Nowe wiadomości",
     "friends":"Znajomi",
     "posts":"Publikacje",
-    "forum":"Forum"
+    "forum":"Forum",
+    "createPost": "Create a post"
   }
 }

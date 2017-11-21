@@ -141,7 +141,8 @@
     "newMessages":"New messages",
     "friends":"Friends",
     "posts":"Posts",
-    "forum":"Forum"
+    "forum":"Forum",
+    "createPost": "Create a post"
   }
 
 }

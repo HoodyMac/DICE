@@ -141,6 +141,7 @@
     "newMessages":"Повідомлення",
     "friends":"Друзі",
     "posts":"Публікації",
-    "forum":"Форум"
+    "forum":"Форум",
+    "createPost": "Create a post"
   }
 }

@@ -141,6 +141,7 @@
     "newMessages":"Cообщения",
     "friends":"Друзья",
     "posts":"Публикации",
-    "forum":"Форум"
+    "forum":"Форум",
+    "createPost": "Create a post"
   }
 }
