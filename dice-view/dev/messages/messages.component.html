@@ -44,9 +44,9 @@
                         </modal>
                     </div>
                     <div class="list-container">
-                        <div class="scroll" [ngStyle]="{'max-height': (screenHeight+'px')}">
+                        <div class="scroll" [ngStyle]="{'max-height': (screenHeight+'px')}" >
                             <ul>
-                                <li *ngFor="let chat of chats" (click)="selectChat(chat)">
+                                <li *ngFor="let chat of chats" (click)="selectChat(chat)" [ngClass]="activeChat == chat.id ? 'active': ''">
                                     <div class="user-img">
                                         <div class="circle" [style.background-image]="'url(' + (chat.cropImg ? '/api/profile/image/get/' + chat.cropImg : '/app/img/default_user_photo.jpg') + ')'"></div>
                                     </div>

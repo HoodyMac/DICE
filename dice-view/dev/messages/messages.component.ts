@@ -35,6 +35,7 @@ export class MessagesComponent{
   private isUploadPhoto: false;
 
   private redirectFromProfileId;
+  private activeChat: "";
 
   constructor(
     private chatService: ChatService,
@@ -84,12 +85,14 @@ export class MessagesComponent{
 
   public selectChat(chat: any) {
     this.selectedChat = chat;
+    console.log(this.selectedChat);
     this.chatService.getMessages(chat.id).subscribe(
       data => {
 
         this.messages = data;
         this.messages.sort((a, b) => a.createdAt - b.createdAt);
         jQuery('#scroll').scrollTop(jQuery('#scroll')[0].scrollHeight);
+        this.activeChat = this.selectedChat.id;
       }
     );
   }

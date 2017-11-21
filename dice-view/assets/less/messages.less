@@ -15,6 +15,7 @@ section.messages {
        .scroll{ overflow-y: scroll;
          ul{ width: 100%; padding: 0;
            li{ display: inline-flex; width: 96%; border-radius: 2px; border: 1px solid @msg_liBg; margin: 2px 2%;
+             &.active{background-color: @msg_liBgHover; color: @msg_liColor;}
              &:hover{ background-color: @msg_liBgHover; color: @msg_liColor; cursor: pointer;}
              .user-img{ padding: 2%;
                .circle{ width: 60px; padding: 2%; height: 60px; border-radius: 50%; background-position: center; background-size: cover;}
