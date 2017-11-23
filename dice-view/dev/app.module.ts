@@ -20,6 +20,7 @@ import {ModalModule} from "ng2-modal"
 import {MessagesComponent} from "./messages/messages.component";
 import {ChatService} from "./services/chat.service";
 import {MonacoEditorModule} from 'ngx-monaco-editor';
+import {ForumListComponent} from "./forum-list/forum-list.component";
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent},
@@ -28,7 +29,8 @@ const appRoutes: Routes = [
   { path: 'friends', component: FriendsComponent },
   { path: 'edit', component: EditComponent },
   { path: 'messages', component: MessagesComponent },
-  { path: '', redirectTo: '/home', pathMatch: 'full'}
+  { path: '', redirectTo: '/home', pathMatch: 'full'},
+  { path: 'forum-list', component: ForumListComponent}
 ];
 
 @NgModule({
@@ -58,7 +60,8 @@ const appRoutes: Routes = [
     NavbarComponent,
     FooterComponent,
     PasswordMatcher,
-    MessagesComponent
+    MessagesComponent,
+    ForumListComponent
   ],
   providers: [HttpClient, AuthenticationService, RegistrationService, ChatService],
   bootstrap: [AppComponent]
