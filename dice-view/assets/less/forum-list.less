@@ -1,16 +1,20 @@
 @import "colors";
 
 section.forum-list{padding-bottom: 50px;
-   .forum{ border: 1px solid @userInfo_border; border-radius: 2px; background-color: @box_bg;
-      .forum_top{width: 100%; display: inline-flex; padding: 0px 10px;
-          .title{ width: 75%; font-size: 25px; padding: 15px 10px; margin: 0;}
-          .ask_button{ width: 25%; text-align: end;
-            button{ height: 35px; margin: 15px; background-color: @fList_buttonBg; color: @fList_buttonFont; border-color: @fList_buttonBorder;
-              &:hover{ background-color: @fList_buttonHover;}
-            }
-          }
-
+  .forum_top{ border: 1px solid @userInfo_border; border-radius: 2px; background-color: @box_bg; margin-bottom: 10px;
+    .forum_title{width: 100%; display: inline-flex; padding: 0px 10px;
+      .title{ width: 75%; font-size: 25px; padding: 15px 10px; margin: 0;}
+      .ask_button{ width: 25%; text-align: end;
+        button{ height: 35px; margin: 15px; background-color: @fList_buttonBg; color: @fList_buttonFont; border-color: @fList_buttonBorder;
+          &:hover{ background-color: @fList_buttonHover;}
+        }
       }
+    }
+    form{ padding: 1% 2% 1% 2%;;
+      input{display: inline-block; width: 100%;}
+    }
+  }
+   .forum{ border: 1px solid @userInfo_border; border-radius: 2px; background-color: @box_bg;
       .forum_content{width: 100%; display: table; padding: 15px 15px;
         .post_block{ width: 100%; border-bottom: 1px solid;
           .top{ display: flex;
@@ -53,5 +57,55 @@ section.forum-list{padding-bottom: 50px;
    }
   .search{ background: @box_bg; border-radius: 2px; box-shadow: 0 1px 0 0 @userInfo_border, 0 0 0 1px @userInfo_border; height: 300px;
 
+  }
+
+  modal{
+    modal-header{ text-align: start;
+      h2{ margin-left: 10px;}
+    }
+    modal-content{
+      .form_group{ padding: 10px;
+        textarea{width: 100%; border-radius: 5px; padding: 10px; height: 170px;}
+      }
+
+      .post_attachment{ text-align: start; display: flex;
+        .upload_image{ position: relative;
+          img{ height: 160px; margin: 20px 10px; opacity: 1; display: block; transition: .5s ease; backface-visibility: hidden; }
+          .trash_button { transition: .5s ease; opacity: 0; position: absolute; text-align: end; -ms-transform: translate(-50%, -50%); transform: translate(0%, -100%); width: 100%; height: 100%;
+            &:hover{ opacity: 1;}
+            i{ color: @profile_trashBtnBg; font-size: 25px; margin: 30px 20px;cursor: pointer;
+              &:hover{ color: @profile_trashBtnHover ;}
+            }
+          }
+        }
+        .files{ padding: 20px 0px 0px 20px; width: 100%;
+          .code_group{ width: 100%; height: 45px; position: relative; padding: 5px;
+            &:hover{ background-color: @profile_listHover;}
+            i{font-size: 35px; vertical-align: bottom; margin-bottom: 8px; color: @profile_fileBg;}
+            span{vertical-align: super; position: relative; padding: 5px 5px;  bottom: 5px;}
+            .trash_button { transition: .5s ease; opacity: 0; position: absolute; text-align: end; -ms-transform: translate(-50%, -50%); transform: translate(0%, -100%); width: 100%; height: 100%;
+              &:hover{ opacity: 1;}
+              i{ color: @profile_trashBtnBg; font-size: 25px; margin: 10px 20px; cursor: pointer;
+                &:hover{ color: @profile_trashBtnHover;}
+              }
+            }
+          }
+        }
+
+      }
+    }
+    modal-footer{  display: flex;
+      .upload_components{ width: 50%; display: inline; text-align: start; padding: 8px 8px;
+        span, i{font-size: 25px; color: @profile_iconsBg; cursor: pointer; padding: 5px;
+          &:hover{color: @profile_iconsHover; }
+        }
+      }
+      .buttons_section{ width: 50%; text-align: end; display: inline;
+        input{ height: 40px; border-radius: 5px; border: none; margin: 5px 5px; background-color: @msg_buttonBg; color: @msg_msgBoxFont;
+          &.submit{width: 180px;}
+          &:hover{background-color: @msg_buttonBgHover;}
+        }
+      }
+    }
   }
 }
