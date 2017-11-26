@@ -19,7 +19,11 @@ export class ChatService {
   }
 
   createMessage(message: string, chatId: number): Observable {
-    return this.http.post('api/chats/messages/' + chatId, message).map(res => res.json());
+    return this.http.postWithOptions('api/chats/messages/' + chatId, message, {
+      headers: {
+        'Authorization': localStorage.getItem('token')
+      }
+    }).map(res => res.json());
   }
 
   refreshMessages(lastAction: number): Observable {

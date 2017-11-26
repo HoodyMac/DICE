@@ -102,12 +102,14 @@
                                     </div>
 
                                     <div class="mess-file" *ngIf="attachment.type === 'FILE'"  [style.float]="getMessageFloat(message.senderId)">
-                                      <div class="file-img">
-                                        <div [style.background-image]="'url(/app/img/file_icons/default_document.png)'"></div>
-                                      </div>
-                                      <div class="content">
-                                        <p class="filename">ilenam_ilenam.jpg</p>
-                                      </div>
+                                      <a href="/api/chats/file/{{attachment.token}}/{{attachment.originalFilename}}">
+                                        <div class="file-img">
+                                          <div [style.background-image]="'url(/app/img/file_icons/default_document.png)'"></div>
+                                        </div>
+                                        <div class="content">
+                                          <p class="filename">{{ attachment.originalFilename }}</p>
+                                        </div>
+                                      </a>
                                     </div>
 
                                     <div class="mess-file" *ngIf="attachment.type === 'CODE' && attachment.code != null"  [style.float]="getMessageFloat(message.senderId)">
@@ -126,7 +128,7 @@
                                 <i class="fa fa-file" aria-hidden="true" *ngIf="isUploadFile"></i>
                                 <i class="fa fa-picture-o" aria-hidden="true" *ngIf="isUploadPhoto"></i>
                             </div>
-                            <form #fromCreateMessage="ngForm" (ngSubmit)="createMessage(fromCreateMessage.value); fromCreateMessage.reset()">
+                            <form #fromCreateMessage="ngForm" (ngSubmit)="$event.preventDefault(); createMessage(fromCreateMessage.value); fromCreateMessage.reset()">
                                 <input type="text" class="form-control" placeholder="Enter your message" name="content" ngModel #content="ngModel" maxlength="1024">
                                 <ul class="upload_item">
                                     <li><i class="fa fa-code fa-lg" (click)="codeUpload.open()"></i></li>
@@ -194,7 +196,7 @@
                                 <modal-content>
                                     <form action="">
                                         <button type="button"  (click)="OpenFileExplorer('fileupload')" class="modal-trigger btn btn-default" translate>Upload new file</button>
-                                        <input type="file" id="fileupload" style="display:none"/>
+                                        <input type="file" id="fileupload" style="display:none" (change)="selectFile(); fileUpload.close()" [multiple]="true" #fileInput/>
                                     </form>
                                     <div class="scroll" [ngStyle]="{'max-height': screenHeight}">
                                         <ul>

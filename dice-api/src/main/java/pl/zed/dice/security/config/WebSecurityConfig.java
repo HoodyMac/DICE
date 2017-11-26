@@ -56,7 +56,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
                 // allow authentication requests
-                .antMatchers("/auth/**", "/auth/refresh", "/api/user/save", "/api/profile/image/get/**").permitAll()
+                .antMatchers(
+                        "/auth/**",
+                        "/auth/refresh",
+                        "/api/user/save",
+                        "/api/profile/image/get/**",
+                        "/api/chats/file/**").permitAll()
 //                .antMatchers("/auth/**", "/api/**").permitAll() // delete this line when done with tests :)
                 .anyRequest().authenticated();
 

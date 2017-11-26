@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, ElementRef, ViewChild} from "@angular/core";
 import {ChatService} from "../services/chat.service";
 import {FriendsService} from "../services/friends.service";
 import {AuthenticationService} from "../common/services/authentication.service";
@@ -15,6 +15,8 @@ declare var jQuery: any;
   providers: [ChatService, FriendsService]
 })
 export class MessagesComponent{
+  @ViewChild('fileInput') inputEl: ElementRef;
+
   public viewOptions = {theme: 'vs', readOnly: true};
   public presentedAttachment;
 
@@ -25,14 +27,16 @@ export class MessagesComponent{
   public userInfo: any;
   public selectedChat: any;
 
-  public messages: any[];
-  public chats: any[];
-  public friends: any[];
+  public messages: any[] = [];
+  public chats: any[] = [];
+  public friends: any[] = [];
 
   private screenHeight: any;
   private isUploadCode: false;
   private isUploadFile: false;
   private isUploadPhoto: false;
+
+  private files: any[] = [];
 
   private redirectFromProfileId;
   private activeChat: "";
@@ -85,7 +89,6 @@ export class MessagesComponent{
 
   public selectChat(chat: any) {
     this.selectedChat = chat;
-    console.log(this.selectedChat);
     this.chatService.getMessages(chat.id).subscribe(
       data => {
 
@@ -102,8 +105,15 @@ export class MessagesComponent{
       if(this.editedCodeAttachment !== {}) {
         message.code = this.editedCodeAttachment;
       }
-      this.chatService.createMessage(message, this.selectedChat.id).subscribe(
-          data => {
+      let formData = new FormData();
+      if (this.files.length > 0) { // a file was selected
+        for (let i = 0; i < this.files.length; i++) {
+          formData.append('files[]', this.files[i]);
+        }
+      }
+      formData.append('message', JSON.stringify(message));
+      this.chatService.createMessage(formData, this.selectedChat.id).subscribe(
+        data => {
             this.messages.push(data);
             var currentChatIndex = this.chats.indexOf(this.selectedChat);
             this.chats[currentChatIndex].lastAction = data.createdAt;
@@ -118,8 +128,17 @@ export class MessagesComponent{
     jQuery('#scroll').scrollTop(jQuery('#scroll')[0].scrollHeight);
   }
 
+  public selectFile() {
+    let inputEl: HTMLInputElement = this.inputEl.nativeElement;
+    let fileCount: number = inputEl.files.length;
+    if (fileCount > 0) {
+      for (let i = 0; i < fileCount; i++) {
+        this.files.push(inputEl.files.item(i));
+      }
+    }
+  }
+
   public getMessageFloat(senderId: number) {
-    // console.log(senderId + ' - ' + this.userInfo.userProfileId);
     if(senderId === this.userInfo.userProfileId) {
       return "right";
     } else {

@@ -42,7 +42,6 @@ public class ProfileImageController {
     @GetMapping("/get/{filename:.+}")
     @ResponseBody
     public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
-
         Resource file = storageService.loadAsResource(filename);
         return ResponseEntity
                 .ok()
