@@ -1,0 +1,217 @@
+@import "colors";
+
+section.forum-post{padding-bottom: 50px;
+  .post_top{ border: 1px solid @userInfo_border; border-radius: 2px; background-color: @box_bg; margin-bottom: 10px;
+    .post_title{width: 100%; display: inline-flex; padding: 0 10px; color: #141823;
+      div{ width: 75%;
+        .title{ width: 100%; font-size: 25px; padding: 15px 10px; margin: 0;}
+        .breadcrumb{ background-color: inherit!important; padding: 0; margin: 0;
+          ul{ list-style: none; display: inline-flex; padding: 0 10px;
+            li{ padding: 5px 5px; cursor: pointer; font-size: 14px; color: gray;
+              &:hover{ color: #2A5885;}
+              i{font-size: 20px;}
+            }
+          }
+        }
+      }
+
+
+      .ask_button{ width: 25%; text-align: end;
+        button{ height: 35px; margin: 15px; background-color: @fList_buttonBg; color: @fList_buttonFont; border-color: @fList_buttonBorder;
+          &:hover{ background-color: @fList_buttonHover;}
+        }
+      }
+    }
+  }
+  .post_content{ border: 1px solid @userInfo_border; border-radius: 2px; background-color: @box_bg;
+    .post_block{
+      .main_content{
+        .text_block{
+          p{ padding: 10px 25px; color: #000; font-size: 14px;}
+        }
+        .img_block{width: 100%; text-align: center;
+          img{ padding: 10px 25px; width: 65%;}
+        }
+        label{ padding: 10px 0 5px 25px; font-size: 16px;}
+        .files{ padding: 20px 20px 0 20px; width: 100%;
+          .code_group{ width: 100%; height: 45px; position: relative; padding: 5px;
+            &:hover{ background-color: @profile_listHover;}
+            i{font-size: 35px; vertical-align: bottom; margin-bottom: 8px; color: @profile_fileBg;}
+            span{vertical-align: super; position: relative; padding: 5px 5px;  bottom: 5px;}
+          }
+        }
+
+      }
+      .social_module{ padding: 0 15px; width: 100%; text-align: end;
+        .likes{ display: inline-flex; padding: 10px;
+          span{font-size: 25px; color: #708bd4; cursor: pointer;
+            &:hover{ color: #3638d4;}
+          }
+          p{padding: 0 5px; margin: 0;}
+        }
+      }
+      .comments_module{
+        .input-text{ padding: 15px 25px 15px 25px;; border-top: 1px solid @box_border; display: inline-flex; width: 100%;
+          form{ width: 100%; display: inline-flex; margin: 0;
+            .user-img{ width: 8%;
+              .circle{ width: 35px; padding: 2%; height:35px; border-radius: 50%; background-position: center; background-size: cover;}
+            }
+            input[type='text']{ width: 85%; margin-right: 10px; }
+            input[type='submit']{ width: 15%; background-color: @msg_buttonBg; border: none; color: @msg_msgBoxFont; margin-left: 10px;
+              &:hover{background-color: @msg_buttonBgHover;}
+            }
+            .upload_item{ list-style: none; display: inline-flex; margin: 0; padding: 0;
+              li{margin: 5px;
+                img{width: 25px; cursor: pointer;
+                  &:hover{color: #3b3b3b;}
+                }
+                span, i{font-size: 20px; color: #000; cursor: pointer;
+                  &:hover{color: #3b3b3b; }
+                }
+              }
+            }
+          }
+
+        }
+      }
+    }
+    .answers_module{
+      .title{width: 100%; padding: 5px 25px; font-size: 18px; background-color: #0F58E8; color: #fff;}
+      .input_answer{ padding: 10px;
+        .form_group{ padding: 10px;
+          textarea{width: 100%; border-radius: 5px; padding: 10px; height: 170px;}
+        }
+        .control{ display: flex; padding: 5px;
+          .upload_components{ width: 50%; display: inline; text-align: start; padding: 8px 8px;
+            span, i{font-size: 25px; color: @profile_iconsBg; cursor: pointer; padding: 5px;
+              &:hover{color: @profile_iconsHover; }
+            }
+          }
+          .buttons_section{ width: 50%; text-align: end; display: inline;
+            input{ height: 40px; border-radius: 5px; border: none; margin: 5px 5px; background-color: @msg_buttonBg; color: @msg_msgBoxFont;
+              &.submit{width: 180px;}
+              &:hover{background-color: @msg_buttonBgHover;}
+            }
+          }
+        }
+
+        .post_attachment{ text-align: start; display: flex;
+          .upload_image{ position: relative;
+            img{ height: 160px; margin: 20px 10px; opacity: 1; display: block; transition: .5s ease; backface-visibility: hidden; }
+            .trash_button { transition: .5s ease; opacity: 0; position: absolute; text-align: end; -ms-transform: translate(-50%, -50%); transform: translate(0%, -100%); width: 100%; height: 100%;
+              &:hover{ opacity: 1;}
+              i{ color: @profile_trashBtnBg; font-size: 25px; margin: 30px 20px;cursor: pointer;
+                &:hover{ color: @profile_trashBtnHover ;}
+              }
+            }
+          }
+          .files{ padding: 20px 0 0 20px; width: 100%;
+            .code_group{ width: 100%; height: 45px; position: relative; padding: 5px;
+              &:hover{ background-color: @profile_listHover;}
+              i{font-size: 35px; vertical-align: bottom; margin-bottom: 8px; color: @profile_fileBg;}
+              span{vertical-align: super; position: relative; padding: 5px 5px;  bottom: 5px;}
+              .trash_button { transition: .5s ease; opacity: 0; position: absolute; text-align: end; -ms-transform: translate(-50%, -50%); transform: translate(0%, -100%); width: 100%; height: 100%;
+                &:hover{ opacity: 1;}
+                i{ color: @profile_trashBtnBg; font-size: 25px; margin: 10px 20px; cursor: pointer;
+                  &:hover{ color: @profile_trashBtnHover;}
+                }
+              }
+            }
+          }
+
+        }
+      }
+
+      .answer_block{
+        ul{ width: 100%; padding: 15px 5px; margin: 0;
+          li{ display: inline-flex; width: 100%; border-radius: 2px; border-bottom: 1px solid @userInfo_border; padding-bottom: 10px;
+            &:last-child{ border: none;}
+            .user-img{ padding: 10px 0 10px 25px; width: 10%;
+              .circle{ width: 40px; padding: 2%; height:40px; border-radius: 50%; background-position: center; background-size: cover;}
+            }
+            .content{ width: 95%;
+              a{ color: #2A5885; font-size: 14px;
+                .username{ padding: 5px 0 0 5px; margin: 0;}
+                &:hover{text-decoration: none; color: #1b3654;}
+              }
+              p{
+                &.text{padding: 0 5px; margin: 0;}
+              }
+              .answer_attachment{ text-align: start; display: flex;
+                .upload_image{ position: relative;
+                  img{ height: 160px; margin: 20px 10px; opacity: 1; display: block; transition: .5s ease; backface-visibility: hidden; }
+                }
+                .files{ padding: 20px 20px 0 20px; width: 100%;
+                  .code_group{ width: 100%; height: 45px; position: relative; padding: 5px;
+                    &:hover{ background-color: @profile_listHover;}
+                    i{font-size: 35px; vertical-align: bottom; margin-bottom: 8px; color: @profile_fileBg;}
+                    span{vertical-align: super; position: relative; padding: 5px 5px;  bottom: 5px;}
+                  }
+                }
+              }
+            }
+            .comments_edit { width: 12%;
+              span{ font-size: 20px; color: cornflowerblue; margin: 15px 10px; cursor: pointer;
+                &:hover{ color: #1643ed; }
+              }
+              .date{ padding: 17px 0 0 5px; margin: 0;width: 100%; font-weight: 600;}
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .search{ background: @box_bg; border-radius: 2px; box-shadow: 0 1px 0 0 @userInfo_border, 0 0 0 1px @userInfo_border; height: 300px;
+
+  }
+
+  modal{
+    modal-header{ text-align: start;
+      h2{ margin-left: 10px;}
+    }
+    modal-content{
+      .form_group{ padding: 10px;
+        textarea{width: 100%; border-radius: 5px; padding: 10px; height: 170px;}
+      }
+
+      .post_attachment{ text-align: start; display: flex;
+        .upload_image{ position: relative;
+          img{ height: 160px; margin: 20px 10px; opacity: 1; display: block; transition: .5s ease; backface-visibility: hidden; }
+          .trash_button { transition: .5s ease; opacity: 0; position: absolute; text-align: end; -ms-transform: translate(-50%, -50%); transform: translate(0%, -100%); width: 100%; height: 100%;
+            &:hover{ opacity: 1;}
+            i{ color: @profile_trashBtnBg; font-size: 25px; margin: 30px 20px;cursor: pointer;
+              &:hover{ color: @profile_trashBtnHover ;}
+            }
+          }
+        }
+        .files{ padding: 20px 0px 0px 20px; width: 100%;
+          .code_group{ width: 100%; height: 45px; position: relative; padding: 5px;
+            &:hover{ background-color: @profile_listHover;}
+            i{font-size: 35px; vertical-align: bottom; margin-bottom: 8px; color: @profile_fileBg;}
+            span{vertical-align: super; position: relative; padding: 5px 5px;  bottom: 5px;}
+            .trash_button { transition: .5s ease; opacity: 0; position: absolute; text-align: end; -ms-transform: translate(-50%, -50%); transform: translate(0%, -100%); width: 100%; height: 100%;
+              &:hover{ opacity: 1;}
+              i{ color: @profile_trashBtnBg; font-size: 25px; margin: 10px 20px; cursor: pointer;
+                &:hover{ color: @profile_trashBtnHover;}
+              }
+            }
+          }
+        }
+      }
+    }
+    modal-footer{  display: flex;
+      .upload_components{ width: 50%; display: inline; text-align: start; padding: 8px 8px;
+        span, i{font-size: 25px; color: @profile_iconsBg; cursor: pointer; padding: 5px;
+          &:hover{color: @profile_iconsHover; }
+        }
+      }
+      .buttons_section{ width: 50%; text-align: end; display: inline;
+        input{ height: 40px; border-radius: 5px; border: none; margin: 5px 5px; background-color: @msg_buttonBg; color: @msg_msgBoxFont;
+          &.submit{width: 180px;}
+          &:hover{background-color: @msg_buttonBgHover;}
+        }
+      }
+    }
+  }
+}
