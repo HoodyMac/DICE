@@ -1,6 +1,7 @@
 package pl.zed.dice.user.profile.domain;
 
 import pl.zed.dice.constant.Gender;
+import pl.zed.dice.post.domain.Post;
 import pl.zed.dice.user.profile.model.UserProfileDTO;
 
 import javax.persistence.*;
@@ -48,7 +49,10 @@ public class UserProfile {
     private Boolean isOnline;
 
     @OneToMany(mappedBy = "requestor")
-    List<FriendEntity> friends;
+    private List<FriendEntity> friends;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "author")
+    private List<Post> posts;
 
     public UserProfile(){
 
@@ -203,5 +207,13 @@ public class UserProfile {
 
     public String getFullname() {
         return firstname + ' ' + lastname;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
     }
 }
