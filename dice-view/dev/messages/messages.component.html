@@ -9,40 +9,6 @@
                             <input type="text" class="form-control" placeholder="Search">
                         </form>
                     </div>
-                    <!-- Modal view new conversation -->
-                    <div class="row">
-                        <modal #newConversationModal modalClass="modal-md" [closeOnOutsideClick]="true" [closeOnEscape]="true">
-                            <modal-header>
-                                <h2>Add new conversation</h2>
-                            </modal-header>
-                            <modal-content>
-                                <form>
-                                    <input type="text" class="form-control" placeholder="Search">
-                                </form>
-                                <div class="list-friends">
-                                    <div class="scroll">
-                                        <ul (click)="newConversationModal.close()">
-                                            <li *ngFor="let friend of friends" (click)="createChat(friend.id)">
-                                                <div class="user-img">
-                                                    <div class="circle" [style.background-image]="'url(' + (friend.cropImage ? '/api/profile/image/get/' + friend.cropImage : '/app/img/default_user_photo.jpg') + ')'"></div>
-                                                </div>
-
-                                                <div class="content">
-                                                    <p class="username">{{ friend.firstName }} {{ friend.lastName }}</p>
-                                                </div>
-                                                <div class="isOnline">
-                                                    <p>online</p>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </modal-content>
-                            <modal-footer>
-
-                            </modal-footer>
-                        </modal>
-                    </div>
                     <div class="list-container">
                         <div class="scroll" [ngStyle]="{'max-height': (screenHeight+'px')}" >
                             <ul>
@@ -67,6 +33,40 @@
 
                     </div>
                 </div>
+                <!-- Modal view new conversation -->
+                <div class="row">
+                    <modal #newConversationModal modalClass="modal-md" [closeOnOutsideClick]="true" [closeOnEscape]="true">
+                        <modal-header>
+                            <h2>Add new conversation</h2>
+                        </modal-header>
+                        <modal-content>
+                            <form>
+                                <input type="text" class="form-control" placeholder="Search">
+                            </form>
+                            <div class="list-friends">
+                                <div class="scroll">
+                                    <ul (click)="newConversationModal.close()">
+                                        <li *ngFor="let friend of friends" (click)="createChat(friend.id)">
+                                            <div class="user-img">
+                                                <div class="circle" [style.background-image]="'url(' + (friend.cropImage ? '/api/profile/image/get/' + friend.cropImage : '/app/img/default_user_photo.jpg') + ')'"></div>
+                                            </div>
+
+                                            <div class="content">
+                                                <p class="username">{{ friend.firstName }} {{ friend.lastName }}</p>
+                                            </div>
+                                            <div class="isOnline">
+                                                <p>online</p>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </modal-content>
+                        <modal-footer>
+
+                        </modal-footer>
+                    </modal>
+                </div>
             </div>
             <div class="col-md-8 col-sm-7 col-xs-6 custom-col-messages-block" *ngIf="selectedChat !== undefined">
                 <div class="messages-block">
@@ -78,8 +78,8 @@
                             <p>online</p>
                         </div>
                     </div>
-                    <div class="message_body">
-                        <div class="scroll" id="scroll" [ngStyle]="{height: (screenHeight-8+'px')}" #scroll>
+                    <div class="message_body" [ngStyle]="{'min-height':  (screenHeight-8+'px')}" >
+                        <div class="scroll" id="scroll" #scroll>
                             <div class="message_content" *ngFor="let message of messages">
                                 <div class="user-img" [style.float]="getMessageFloat(message.senderId)">
                                     <a (click)="gotoProfile(message.senderId)">
@@ -104,7 +104,7 @@
                                     <div class="mess-file" *ngIf="attachment.type === 'FILE'"  [style.float]="getMessageFloat(message.senderId)">
                                       <a href="/api/chats/file/{{attachment.token}}/{{attachment.originalFilename}}">
                                         <div class="file-img">
-                                          <div [style.background-image]="'url(/app/img/file_icons/default_document.png)'"></div>
+                                            <i class="fa fa-file" aria-hidden="true"></i>
                                         </div>
                                         <div class="content">
                                           <p class="filename">{{ attachment.originalFilename }}</p>
@@ -113,9 +113,14 @@
                                     </div>
 
                                     <div class="mess-file" *ngIf="attachment.type === 'CODE' && attachment.code != null"  [style.float]="getMessageFloat(message.senderId)">
-                                      <div class="file-img">
-                                        <i class="fa fa-file-code-o fa-4x" aria-hidden="true" (click)="viewAttachment(attachment); codeView.open()"></i>
-                                      </div>
+                                      <a (click)="viewAttachment(attachment); codeView.open()">
+                                          <div class="file-img">
+                                            <i class="fa fa-file-code-o fa-4x" aria-hidden="true"></i>
+                                          </div>
+                                          <div class="content">
+                                              <p class="filename"></p>
+                                          </div>
+                                      </a>
                                     </div>
                                   </div>
                                 </div>
@@ -124,9 +129,25 @@
 
                         <div class="input-text">
                             <div class="upload_files">
-                                <i class="fa fa-file-code-o" *ngIf="isUploadCode"></i>
-                                <i class="fa fa-file" aria-hidden="true" *ngIf="isUploadFile"></i>
-                                <i class="fa fa-picture-o" aria-hidden="true" *ngIf="isUploadPhoto"></i>
+                                <div class="attachment_info" *ngIf="isUploadCode">
+                                    <i class="fa fa-file-code-o" ></i>
+                                    <div class="trash_button">
+                                        <i class="fa fa-times" aria-hidden="true" (click)="deleteCode()"></i>
+                                    </div>
+                                </div>
+                                <div *ngFor="let file of files" class="attachment_info">
+                                    <i class="fa fa-file" aria-hidden="true"></i>
+                                    <span class="filename">{{file.name}}</span>
+                                    <div class="trash_button">
+                                        <i class="fa fa-times" aria-hidden="true" (click)="deleteFile(file)"></i>
+                                    </div>
+                                </div>
+                                <div class="attachment_info" *ngIf="isUploadPhoto">
+                                    <i class="fa fa-picture-o" aria-hidden="true" *ngIf="isUploadPhoto"></i>
+                                    <div class="trash_button">
+                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                    </div>
+                                </div>
                             </div>
                             <form #fromCreateMessage="ngForm" (ngSubmit)="$event.preventDefault(); createMessage(fromCreateMessage.value); fromCreateMessage.reset()">
                                 <input type="text" class="form-control" placeholder="Enter your message" name="content" ngModel #content="ngModel" maxlength="1024">
