@@ -94,10 +94,12 @@ export class MessagesComponent{
 
         this.messages = data;
         this.messages.sort((a, b) => a.createdAt - b.createdAt);
-        jQuery('#scroll').scrollTop(jQuery('#scroll')[0].scrollHeight);
         this.activeChat = this.selectedChat.id;
+        jQuery('#scroll').scrollTop(jQuery('#scroll')[0].scrollHeight);
+        $('html, body').animate({scrollTop:$(document).height()}, 'slow');
       }
     );
+
   }
 
   public createMessage(message) {
@@ -127,6 +129,7 @@ export class MessagesComponent{
       );
     }
     $('html, body').animate({scrollTop:$(document).height()}, 'slow');
+    jQuery('#scroll').scrollTop(jQuery('#scroll')[0].scrollHeight);
   }
 
   public selectFile() {
@@ -200,7 +203,6 @@ export class MessagesComponent{
                 let lastIndex = this.messages.length - 1;
                 this.selectedChat.lastAction = this.messages[lastIndex].createdAt;
                 this.selectedChat.lastMessage = this.messages[lastIndex].content;
-                $('html, body').animate({scrollTop:$(document).height()}, 'slow');
               }
             }
           );
