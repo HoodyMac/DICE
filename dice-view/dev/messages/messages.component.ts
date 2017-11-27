@@ -70,7 +70,7 @@ export class MessagesComponent{
     this.friendsService.getUserFriendsData().subscribe(
       data => this.friends = data
     );
-    this.screenHeight = (window.screen.height) - 380;
+    this.screenHeight = (window.screen.height) - 173;
   }
 
   public createChat(friendId: number) {
@@ -94,10 +94,12 @@ export class MessagesComponent{
 
         this.messages = data;
         this.messages.sort((a, b) => a.createdAt - b.createdAt);
-        jQuery('#scroll').scrollTop(jQuery('#scroll')[0].scrollHeight);
         this.activeChat = this.selectedChat.id;
+        jQuery('#scroll').scrollTop(jQuery('#scroll')[0].scrollHeight);
+        $('html, body').animate({scrollTop:$(document).height()}, 'slow');
       }
     );
+
   }
 
   public createMessage(message) {
@@ -122,9 +124,11 @@ export class MessagesComponent{
             this.editedCodeAttachment = {};
             this.selectedChat.lastAction = data.createdAt;
             this.selectedChat.lastMessage = data.content;
+            this.files = [];
           }
       );
     }
+    $('html, body').animate({scrollTop:$(document).height()}, 'slow');
     jQuery('#scroll').scrollTop(jQuery('#scroll')[0].scrollHeight);
   }
 
@@ -134,6 +138,7 @@ export class MessagesComponent{
     if (fileCount > 0) {
       for (let i = 0; i < fileCount; i++) {
         this.files.push(inputEl.files.item(i));
+        console.log(this.files);
       }
     }
   }
@@ -198,12 +203,20 @@ export class MessagesComponent{
                 let lastIndex = this.messages.length - 1;
                 this.selectedChat.lastAction = this.messages[lastIndex].createdAt;
                 this.selectedChat.lastMessage = this.messages[lastIndex].content;
-                jQuery('#scroll').scrollTop(jQuery('#scroll')[0].scrollHeight);
               }
             }
           );
         }
       });
     });
+  }
+  public deleteFile(file){
+    let index = this.files.indexOf(file);
+    this.files.splice(index, 1);
+  }
+
+  public deleteCode(){
+    this.isUploadCode = false;
+    this.editedCodeAttachment = {};
   }
 }

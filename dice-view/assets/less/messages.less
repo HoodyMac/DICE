@@ -10,7 +10,7 @@ section.messages {
     }
   }
 
-  .friends-list{ width: 100%; border: 1px solid @box_border; background-color: @box_bg; border-radius: 2px;
+  .friends-list{ background-color: @box_bg; border-radius: 2px;position: fixed; width: 365px; top: 67px; box-shadow: 0 1px 0 0 #d2d1d1, 0 0 0 1px #d2d1d1;
     .list-container{ width: 100%; padding: 1%;
        .scroll{ overflow-y: scroll;
          ul{ width: 100%; padding: 0;
@@ -26,52 +26,56 @@ section.messages {
          }
        }
      }
-    .list-friends{ width: 100%; padding: 1%;
-      .scroll{ overflow-y: scroll; max-height: 73vh;
-        ul{ width: 100%; padding: 0;
-          li{ display: inline-flex; width: 96%; border-radius: 2px; border: 1px solid @msg_liBg; margin: 2px 2%;
-            &:hover{ background-color: @msg_liBgHover; color: @msg_liColor; cursor: pointer;}
-            .user-img{ padding: 2%;
-              .circle{ width: 30px; padding: 2%; height: 30px; border-radius: 50%; background-position: center; background-size: cover;}
+
+
+  }
+  modal{
+    modal-header{
+      h2{ font-size: 25px; padding: 0 5%;}
+    }
+    modal-content{
+      form{
+        input{margin: 0 3%; width: 91%;}
+      }
+      .list-friends{ width: 100%; padding: 1%;
+        .scroll{ overflow-y: scroll; max-height: 73vh;
+          ul{ width: 100%; padding: 0;
+            li{ display: inline-flex; width: 96%; border-radius: 2px; border: 1px solid @msg_liBg; margin: 2px 2%;
+              &:hover{ background-color: @msg_liBgHover; color: @msg_liColor; cursor: pointer;}
+              .user-img{ padding: 2%;
+                .circle{ width: 30px; padding: 2%; height: 30px; border-radius: 50%; background-position: center; background-size: cover;}
+              }
+              .content{ width: 60%; padding: 13px 0% 0 4%;
+                p{font-size: 16px;}
+              }
+              .isOnline{ width: 26%; padding-top: 13px; text-align: end; color: @msg_isOnineLabel;}
             }
-            .content{ width: 60%; padding: 13px 0% 0 4%;
-              p{font-size: 16px;}
-            }
-            .isOnline{ width: 26%; padding-top: 13px; text-align: end; color: @msg_isOnineLabel;}
           }
         }
       }
     }
+  }
 
-    modal{
-      modal-header{
-        h2{ font-size: 25px; padding: 0 5%;}
-      }
-      modal-content{
-        form{
-          input{margin: 0 3%; width: 91%;}
+  .messages-block{width: 100%; background-color: @box_bg; border-radius: 2px;
+    .message_header{ position: fixed; width: 750px; border-top: 15px solid #f0f1f5; border-bottom: 1px solid #f0f1f5; background-color: #fff; z-index: 5; top: 52px;
+      .shadow{ box-shadow: 0 1px 0 0 #d2d1d1, 0 0 0 1px #d2d1d1; height: 58px;
+        .username{ width: 70%; float: left;
+          p{ padding: 15px 26px; font-size: 20px;  margin:0;}
+        }
+        .isOnline{ float: right;
+          p{padding: 15px 25px; color: @msg_isOnineLabel; margin:0;}
         }
       }
     }
-  }
-  .messages-block{width: 100%; border: 1px solid @box_border; background-color: @box_bg; border-radius: 2px;
-    .message_header{ display: inline-table; width: 100%; border-bottom: 1px solid @box_border;
-      .username{ width: 50%; float: left;
-        p{ padding: 15px 26px; font-size: 20px;  margin:0;}
-      }
-      .isOnline{ float: right;
-        p{padding: 15px 25px; color: @msg_isOnineLabel; margin:0;}
-      }
-    }
-    .message_body{
-      .scroll{ overflow-y: scroll; max-height: 80vh; height: 72vh;
+    .message_body{ margin-top: 55px;
+      .scroll{ margin-bottom: 30px;
         .message_content{ width: 100%; display: inline-block;
           &:first-child{
             .user-img{padding: 2% 2% 0 2%;
               p{ margin: 0;}
             }
-            .mess-text{ float: left; position: relative; top: 20px; background-color: @msg_msgBoxBg; color:@msg_msgBoxFont; border-radius: 10px; padding: 5px 10px 5px 10px; max-width: 70%;
-              P{margin: 0;}
+            .mess-text{ float: left; word-break: break-all; position: relative; top: 20px; background-color: @msg_msgBoxBg; color:@msg_msgBoxFont; border-radius: 10px; padding: 5px 10px 5px 10px; max-width: 70%;
+              p{margin: 0; }
             }
           }
           .user-img{ padding: 0 2% 0 2%; float: left;
@@ -79,7 +83,7 @@ section.messages {
             .circle{ width: 40px; padding: 2%; height: 40px; border-radius: 50%; background-position: center; background-size: cover;}
           }
           .mess-text{ float: left; position: relative; top: 10px; background-color: @msg_msgBoxBg; color:@msg_msgBoxFont; border-radius: 10px; padding: 5px 10px 5px 10px; max-width: 70%;  margin-bottom: 20px;
-            p{margin: 0;}
+            p{margin: 0; word-break: break-all;}
           }
           .mess-image{ float: left; position: relative; top: 10px;  padding: 5px 10px 5px 10px; max-width: 70%;  margin-bottom: 20px;
             p{margin: 0;
@@ -87,37 +91,53 @@ section.messages {
             }
           }
           .mess-file{
-            .file-img{ padding: 0 2% 0 2%;
-              div{width: 50px; padding: 2%; height: 50px; background-position: center; background-size: cover;}
-              i{padding: 10px 10px 5px 10px;}
-            }
-            .content{
-              .filename{ width: 80px;font-size: 12px; letter-spacing: 0px;line-height: 13px;}
-            }
-          }
-        }
-      }
-      .input-text{ padding: 15px 15px 15px 15px; border-top: 1px solid @box_border; display: table; width: 100%;
-        .upload_files{ width: 100%;
-          span, i{font-size: 25px; color: @msg_iconsBg; cursor: pointer; padding: 5px;
-            &:hover{color: @msg_iconsHover; }
-          }
-        }
-        form{ width: 100%; display: inline-flex; margin: 0;
-          input[type='text']{ width: 85%; margin-right: 10px; }
-          input[type='submit']{ width: 15%; background-color: @msg_buttonBg; border: none; color: @msg_msgBoxFont; margin-left: 10px;
-            &:hover{background-color: @msg_buttonBgHover;}
-          }
-          .upload_item{ list-style: none; display: inline-flex; margin: 0; padding: 0;
-            li{margin: 5px;
-              img{width: 25px; cursor: pointer;}
-              span, i{font-size: 20px; color: @msg_iconsBg; cursor: pointer;
-                &:hover{color: @msg_iconsHover; }
+            a{display: inline-flex; color: #fff; width: 300px; padding-bottom: 5px;
+              &:hover{ background-color: #204265;}
+              .file-img{ padding: 0 2% 0 2%;
+                div{width: 50px; padding: 2%; height: 50px; background-position: center; background-size: cover;}
+                i{padding: 10px 10px 5px 10px; font-size: 26px;}
+              }
+              .content{ width: 80%;
+                .filename{font-size: 12px; letter-spacing: 0; position: relative; word-break: break-all; width: 100%; top: 15px; padding-bottom: 10px;}
               }
             }
           }
         }
-
+      }
+      .input-text{ border-left: 1px solid #f0f1f5; border-right: 1px solid #f0f1f5; border-top: 1px solid @box_border; position: fixed; bottom: 0px; width: 750px; background-color: #fff;  border-bottom: solid 15px #f0f1f5;
+        .shadow{ padding: 10px 15px 15px 15px; box-shadow: 0 1px 0 0 #d2d1d1, 0 0 0 1px #d2d1d1;
+          .upload_files{ width: 100%; padding-bottom: 5px;
+            .attachment_info{ width: 100%; height: 35px; overflow: hidden; word-break: break-all;
+              &:hover{ background-color: @profile_listHover;}
+              i{font-size: 25px; color: @msg_iconsBg; cursor: pointer; padding: 5px;
+                &:hover{color: @msg_iconsHover; }
+              }
+              span{
+                font-size: 14px;
+              }
+              .trash_button { transition: .5s ease; opacity: 0; position: absolute; text-align: end; -ms-transform: translate(-50%, -50%); transform: translate(0%, -100%); width: 100%; height: 35px;
+                &:hover{ opacity: 1;}
+                i{ color: @profile_trashBtnBg; font-size: 25px; margin: 0px 40px; cursor: pointer;
+                  &:hover{ color: @profile_trashBtnHover;}
+                }
+              }
+            }
+          }
+          form{ width: 100%; display: inline-flex; margin: 0;
+            input[type='text']{ width: 85%; margin-right: 10px; }
+            input[type='submit']{ width: 15%; background-color: @msg_buttonBg; border: none; color: @msg_msgBoxFont; margin-left: 10px;
+              &:hover{background-color: @msg_buttonBgHover;}
+            }
+            .upload_item{ list-style: none; display: inline-flex; margin: 0; padding: 0;
+              li{margin: 5px;
+                img{width: 25px; cursor: pointer;}
+                span, i{font-size: 20px; color: @msg_iconsBg; cursor: pointer;
+                  &:hover{color: @msg_iconsHover; }
+                }
+              }
+            }
+          }
+        }
       }
       /*------- Modal window ------------------*/
       modal{
@@ -198,6 +218,35 @@ section.messages {
 
 }
 
+@media (max-width: 1200px){
+  section.messages{
+    .friends-list {top: 116px;}
+    .custom-col-messages-block {position: relative; left:60px;
+      .messages-block{
+        .message_header { width: 617px; top: 100px; }
+        .message_body .input-text { width: 617px;}
+      }
+    }
+  }
+}
+
+@media (max-width: 998px){
+  section.messages{
+    .friends-list {top: 116px;}
+    .custom-col-messages-block {position: relative; left:60px;
+      .messages-block{
+        .message_header { width: 408px; top: 100px; }
+        .message_body{
+          .input-text { width: 408px;}
+          .scroll {
+            .message_content .mess-file a{ width: 240px;}
+          }
+        }
+      }
+    }
+  }
+}
+
 @media (max-width: 768px){
   .navbar-collapse{
     ul, a{text-align: center;}
@@ -207,7 +256,29 @@ section.messages {
     .prgLang{width: 98%}
   }
 
-
+  section.messages{
+    .custom-col-friends-list{ width: 100%;
+      .friends-list {top: 0; position: inherit; width: 100%;
+        .list-container .scroll{ max-height: 400px!important; }
+      }
+    }
+    .search-friends button {
+      margin: 2% 2%;
+    }
+    .custom-col-messages-block {position: inherit; left:0px; width: 100%;
+      .messages-block{ margin-top: 19px;
+        .message_header { width: 100%; top: 0px; position: inherit; border-bottom: none;  border-top:none; height: 55px;}
+        .message_body { max-height: 500px; min-height: 100px!important; margin-top: 0px;
+          .scroll {overflow-y: scroll; max-height: 500px; width: 100%; margin-bottom: 0;
+            .message_content .mess-file a{ width: 240px;}
+          }
+          .input-text { width: 100%; position: inherit;
+            .shadow .upload_files .attachment_info .trash_button i { margin: 0px 70px;}
+          }
+        }
+      }
+    }
+  }
 }
 
 @media (max-width: 620px) {
@@ -240,6 +311,9 @@ section.messages {
     p { padding: 10px 15px; }
   }
 
+  section.messages .custom-col-messages-block .messages-block .message_body .scroll .message_content .mess-file a {
+    width: 170px;
+  }
 }
 
 @media (max-width: 340px){
