@@ -26,7 +26,7 @@ public class Post {
     private String content;
 
     @NotNull
-    @DateTimeFormat
+    @Temporal(TemporalType.TIMESTAMP)
     private Date created_date;
 
     public Post(){}

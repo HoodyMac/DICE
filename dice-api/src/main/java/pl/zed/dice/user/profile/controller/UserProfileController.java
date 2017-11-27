@@ -44,6 +44,7 @@ public class UserProfileController {
     private AuthenticationManager authenticationManager;
 
     @GetMapping("/user")
+    @ResponseStatus(HttpStatus.OK)
     public JwtUser getAuthenticatedUser(HttpServletRequest request) {
         String token = request.getHeader(tokenHeader);
         String email = jwtTokenUtil.getEmailFromToken(token);
@@ -57,16 +58,19 @@ public class UserProfileController {
     }
 
     @GetMapping("/profile/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public UserProfileDTO getProfile(@PathVariable Long id){
         return userService.getUserProfile(id);
     }
 
     @PutMapping("/profile")
+    @ResponseStatus(HttpStatus.OK)
     public UserProfileDTO editProfile(@RequestBody UserProfileDTO userProfileDTO) throws ParseException {
         return userService.editUserProfile(userProfileDTO);
     }
 
     @PutMapping("/account")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity editUserAccountPassword(@RequestBody UserDTO userDTO) {
         if (userDTO.getPassword() == null) {
             userService.editUserAccountEmail(userDTO);
@@ -81,31 +85,37 @@ public class UserProfileController {
     }
 
     @PostMapping("/search")
+    @ResponseStatus(HttpStatus.OK)
     public List<UserProfileSearchResultDTO> search(@RequestBody UserProfileSearchDTO userProfileSearchDTO){
         return userService.search(userProfileSearchDTO);
     }
 
     @PostMapping("/friendRequest/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public void sendFriendRequest(@PathVariable Long id){
         userService.sendFriendRequest(id);
     }
 
     @PutMapping("/acceptFriendRequest/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public void acceptFriendRequest(@PathVariable Long id){
         userService.acceptFriendRequest(id);
     }
 
     @PutMapping("/rejectFriendRequest/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public void rejectFriendRequest(@PathVariable Long id){
         userService.rejectFriendRequest(id);
     }
 
     @DeleteMapping("/removeFriend/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public void removeFriend(@PathVariable Long id){
         userService.removeFriend(id);
     }
 
     @GetMapping({"/friends","/friends/{id}"})
+    @ResponseStatus(HttpStatus.OK)
     public List<FriendDTO> getFriends(@PathVariable Optional<Long> id) {
         if (id.isPresent()) {
             return userService.getFriends(id.get());
@@ -114,6 +124,7 @@ public class UserProfileController {
     }
 
     @GetMapping("/friendRequests")
+    @ResponseStatus(HttpStatus.OK)
     public List<FriendDTO> getFriendRequests(){
         return userService.getFriendRequests();
     }

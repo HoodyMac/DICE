@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import  'rxjs/add/operator/map';
 import {HttpClient} from "../common/services/http-client.service";
 import {Observable} from "rxjs/Observable";
+import { retry } from 'rxjs/operator/retry';
+import { posix } from 'path';
 
 @Injectable()
 export class ProfileService {
@@ -36,4 +38,21 @@ export class ProfileService {
         }
       }).map(resp => resp.json());
   }
+
+  getPosts(id: number){
+    return this.http.get('/api/posts/'+id).map(res => res.json());
+  }
+
+  createUserPost(postDTO: any){
+    return this.http.post('/api/posts/post', postDTO).map(res => res.json());
+  }
+
+  editPost(id: number, postDTO: any){
+    return this.http.put('/api/posts/post/'+id, postDTO).map(res => res.json());
+  }
+
+  deletePost(id: number){
+    return this.http.delete('/api/posts/post/'+id);
+  }
+
 }

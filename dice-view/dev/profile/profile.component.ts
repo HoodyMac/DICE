@@ -24,6 +24,11 @@ export class ProfileComponent implements AfterViewInit {
   editImgSrc: string = "/app/img/edit_icon_gray.png";
   profileId;
   isMe: boolean;
+  profilePosts :any = [];
+  postDTO = {};
+  inPostEdit: boolean = false;
+  postToEdit = {};
+
   @ViewChild('cropbox') cropbox: ElementRef;
 
   private jcropApi: any;
@@ -40,6 +45,8 @@ export class ProfileComponent implements AfterViewInit {
     this.route.params.subscribe(params => {
       this.profileId = params['id'];
     });
+
+    this.getProfilePosts();
 
     var currentUser = this.authenticationService.getUserInfo();
     if (currentUser === undefined) {
@@ -149,5 +156,38 @@ export class ProfileComponent implements AfterViewInit {
 
   editProfile() {
     this._router.navigate(['/edit']);
+  }
+
+  getProfilePosts(){
+    this.profileService.getPosts(this.profileId).subscribe(
+      data => {
+        this.profilePosts = data;
+      }
+    );
+  }
+
+  doPostCreation(){
+    this.profileService.createUserPost(this.postDTO).subscribe(
+      data => {
+        this.profilePosts.push(data);
+      }
+    );
+  }
+
+  deletePost(post){
+    this.profileService.deletePost(post.id).subscribe(
+      success => {
+        let index = this.profilePosts.indexOf(post);
+        this.profilePosts.splice(index, 1);
+      }
+    );
+  }
+
+  selectPostForEditing(post){
+    this.postToEdit = post;
+  }
+
+  editPost(){
+    //TODO
   }
 }
