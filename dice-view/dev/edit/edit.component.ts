@@ -19,12 +19,13 @@ export class EditComponent implements AfterViewInit {
   showEdit: boolean = true;
   showGeneral: boolean = false;
   userBasicInfo = {programmingLanguages: null};
-  userGeneralInfo = {};
   showEditMessage: boolean = false;
   showEditPassMessage: boolean = false;
   showEditEmailMessage: boolean = false;
   progLang: Object;
+  userLang: any = "";
   public passwordData: FormGroup;
+  private translate: TranslateService;
 
     constructor(
         private authenticationService: AuthenticationService,
@@ -33,9 +34,11 @@ export class EditComponent implements AfterViewInit {
         private fb:FormBuilder,
         private titleService: Title,
         private translate: TranslateService) {
-
         translate.get('PAGE_TITLES.EDIT').subscribe((res: string) => {
             this.titleService.setTitle(res);
+        });
+        translate.get('EDIT.'+localStorage.getItem('lang')).subscribe((res: string) => {
+          this.userLang = res;
         });
 
         var userInfo = this.authenticationService.getUserInfo();
@@ -43,7 +46,6 @@ export class EditComponent implements AfterViewInit {
           this.authenticationService.getUserInfoObservable().subscribe(user => {
             this.editService.getUserBasicInfo(user.userProfileId).subscribe(value => {
                 this.userBasicInfo = value;
-
               },
               err => {
                 console.log('Something went wrong!');
@@ -66,6 +68,11 @@ export class EditComponent implements AfterViewInit {
       oldPassword: ['']
     });
 
+  }
+
+  useLanguage(language: string) {
+    this.translate.use(language);
+    localStorage.setItem('lang', language);
   }
 
   saveUserBasicInfo() {

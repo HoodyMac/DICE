@@ -110,6 +110,11 @@
     "confirmPassword": "Confirm password:",
     "cancel": "Cancel",
     "change": "Change",
+    "language":"Language",
+    "pl":"Polish",
+    "en":"English",
+    "ua":"Ukrainian",
+    "ru": "Russian",
 
     "placeholder":{
       "firstname": "First name",
