@@ -40,6 +40,8 @@ export class MessagesComponent{
 
   private redirectFromProfileId;
   private activeChat: "";
+  private filteredChats: any;
+  private filteredFriends: any;
 
   constructor(
     private chatService: ChatService,
@@ -68,9 +70,9 @@ export class MessagesComponent{
       this.getAllChats();
     }
     this.friendsService.getUserFriendsData().subscribe(
-      data => this.friends = data
+      data => this.filteredFriends = this.friends = data
     );
-    this.screenHeight = (window.screen.height) - 173;
+    this.screenHeight = (window.screen.height);
   }
 
   public createChat(friendId: number) {
@@ -80,7 +82,7 @@ export class MessagesComponent{
     }else {
       this.chatService.createChat(friendId).subscribe(
         data => {
-          this.chats.unshift(data);
+          this.filteredChats = this.chats.unshift(data);
           this.selectChat(data);
         }
       );
@@ -120,6 +122,7 @@ export class MessagesComponent{
             var currentChatIndex = this.chats.indexOf(this.selectedChat);
             this.chats[currentChatIndex].lastAction = data.createdAt;
             this.chats.sort((a, b) => a.lastAction < b.lastAction);
+            this.filteredChats = this.chats;
             this.isUploadCode = false;
             this.editedCodeAttachment = {};
             this.selectedChat.lastAction = data.createdAt;
@@ -184,6 +187,7 @@ export class MessagesComponent{
       let that: MessagesComponent = this;
       that.chats = data;
       that.chats.sort((a, b) => b.lastAction - a.lastAction);
+      that.filteredChats = that.chats;
       if(this.redirectFromProfileId){
         this.createChat(this.redirectFromProfileId);
       }else if(that.chats.length > 0) {
@@ -218,5 +222,17 @@ export class MessagesComponent{
   public deleteCode(){
     this.isUploadCode = false;
     this.editedCodeAttachment = {};
+  }
+
+  public filterChats(value){
+    value = value.replace(/[\s]/g, '');
+    if(!value) this.filteredChats = JSON.parse(JSON.stringify(this.chats));
+    this.filteredChats = JSON.parse(JSON.stringify(this.chats)).filter(item => item.name.replace(/[\s]/g, '').toLowerCase().indexOf(value.toLowerCase()) > -1);
+  }
+  public filterFriends(value){
+    value = value.replace(/[\s]/g, '');
+    if(!value) this.filteredFriends = JSON.parse(JSON.stringify(this.friends));
+    this.friends.forEach(item => item['fullName'] = item.firstName + " " + item.lastName);
+    this.filteredFriends = JSON.parse(JSON.stringify(this.friends)).filter(item => item.fullName.replace(/[\s]/g, '').toLowerCase().indexOf(value.toLowerCase()) > -1);
   }
 }
