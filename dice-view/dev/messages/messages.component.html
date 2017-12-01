@@ -96,8 +96,8 @@
                                   <div *ngFor="let attachment of message.attachments">
                                     <div class="mess-image" *ngIf="attachment.type === 'IMAGE'" [style.float]="getMessageFloat(message.senderId)">
                                       <p>
-                                        <a href="/app/img/TEEN.jpg" data-lightbox="image" data-title="My caption">
-                                          <img class="ui bordered small image" src="/app/img/TEEN.jpg">
+                                        <a href="/api/chats/file/{{attachment.token}}/" data-lightbox="image" data-title="{{message.content}}">
+                                          <img class="ui bordered small image" src="/api/chats/file/{{attachment.token}}/">
                                         </a>
                                       </p>
                                     </div>
@@ -155,7 +155,7 @@
                                     <input type="text" class="form-control" placeholder="Enter your message" name="content" ngModel #content="ngModel" maxlength="1024">
                                     <ul class="upload_item">
                                         <li><i class="fa fa-code fa-lg" (click)="codeUpload.open()"></i></li>
-                                        <li> <span class="glyphicon glyphicon-picture" (click)="OpenFileExplorer('imgupload')" aria-hidden="true"></span></li>
+                                        <!--<li> <span class="glyphicon glyphicon-picture" (click)="OpenFileExplorer('imgupload')" aria-hidden="true"></span></li>-->
                                         <li><span class="glyphicon glyphicon-file" (click)="fileUpload.open()" aria-hidden="true"></span></li>
                                     </ul>
                                     <input type="file" id="imgupload" style=" display:none"/>
