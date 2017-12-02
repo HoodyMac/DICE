@@ -81,7 +81,7 @@ public class UserService {
     public UserProfileDTO editUserProfile(UserProfileDTO userProfileDTO) throws ParseException {
         UserProfile userProfile = securityContextService.getCurrentUserProfile();
         userProfile.edit(userProfileDTO);
-        userProfileRepository.save(userProfile);
+        userProfile = userProfileRepository.save(userProfile);
         return userAsm.makeUserProfileDTO(userProfile);
     }
 

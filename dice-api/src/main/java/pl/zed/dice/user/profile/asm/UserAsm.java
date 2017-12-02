@@ -34,9 +34,11 @@ public class UserAsm {
     }
 
     public UserProfileDTO makeUserProfileDTO(UserProfile userProfile){
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String birthDayDate = format.format(userProfile.getBirthdayDate());
         return new UserProfileDTO(userProfile.getId(), userProfile.getFirstname(), userProfile.getLastname(),
                 userProfile.getGender().toString(), userProfile.getOrigImage(), userProfile.getCropImage(),
-                userProfile.getBirthdayDate().toString(), userProfile.getPhoneNumber(),
+                birthDayDate, userProfile.getPhoneNumber(),
                 userProfile.getCity(), userProfile.getProgrammingLanguages(), userProfile.getWork(),
                 userProfile.getEducation());
     }
