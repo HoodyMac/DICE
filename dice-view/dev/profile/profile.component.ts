@@ -169,7 +169,7 @@ export class ProfileComponent implements AfterViewInit {
   doPostCreation(){
     this.profileService.createUserPost(this.postDTO).subscribe(
       data => {
-        this.profilePosts.push(data);
+        this.profilePosts.unshift(data);
       }
     );
   }
