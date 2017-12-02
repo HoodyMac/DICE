@@ -89,7 +89,7 @@ export class SearchComponent implements AfterViewInit{
         searchData['programmingLanguages'] = jQuery(this.choseLang.nativeElement).val();
         searchData['gender'] =  this.searchForm.controls['gender'].value;
         searchData['city'] = this.searchForm.controls['city'].value;
-        searchData['fullName'] = this.searchForm.controls['fullName'].value;
+        searchData['fullName'] = this.searchForm.controls['fullName'].value.trim();
         searchData['gender'] = this.searchForm.controls['gender'].value;
         console.log(this.searchForm.controls['gender'].value);
         console.log(searchData);
