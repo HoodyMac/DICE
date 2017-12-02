@@ -35,19 +35,10 @@ export class FriendsComponent implements AfterViewInit {
           this.titleService.setTitle(res);
       });
 
-      this._activeRoute.params.subscribe(params =>{
+      this._activeRoute.params.subscribe(params => {
         this.profileId = params['profileId'];
+        this.userName = params['username'];
       });
-
-      var currentUser = this.authService.getUserInfo();
-      if(currentUser === undefined) {
-        this.authService.getUserInfoObservable().subscribe(
-          data => {
-            this.userName = data.firstName + ' ' + data.lastName;
-          }
-        );
-      }else
-      this.userName = currentUser.firstName + ' ' + currentUser.lastName;
 
       this.showProfileFriends(this.profileId);
   }
@@ -56,6 +47,16 @@ export class FriendsComponent implements AfterViewInit {
     this.showFriends = true;
     this.showFollowers = false;
     this.showNewFriends = false;
+
+    var currentUser = this.authService.getUserInfo();
+    if(currentUser === undefined) {
+      this.authService.getUserInfoObservable().subscribe(
+        data => {
+          this.userName = data.firstName + ' ' + data.lastName;
+        }
+      );
+    }else
+      this.userName = currentUser.firstName + ' ' + currentUser.lastName;
 
     this.friendsService.getMyFriends().subscribe(
       data => {

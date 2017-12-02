@@ -82,7 +82,7 @@ export class ProfileComponent implements AfterViewInit {
   }
 
   goToFriendsPage(){
-    this._router.navigate(['/friends', {profileId: this.profileId}]);
+    this._router.navigate(['/friends', {profileId: this.profileId, username: this.userInfo.firstname + ' ' + this.userInfo.lastname}]);
   }
 
   cancelFriendRequest(){
