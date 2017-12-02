@@ -3,6 +3,7 @@ package pl.zed.dice.chat.domain;
 import pl.zed.dice.user.profile.domain.UserProfile;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class Message {
     private Chat chat;
 
     @OneToMany(mappedBy = "message", cascade = CascadeType.ALL)
-    private List<Attachment> attachments;
+    private List<Attachment> attachments = new ArrayList<>();
 
     public Message() {
     }

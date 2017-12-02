@@ -6,6 +6,7 @@ import {Observable} from "rxjs/Observable";
 import {ActivatedRoute, Router} from '@angular/router';
 import {TranslateService} from "ng2-translate";
 import {Title} from "@angular/platform-browser";
+import _ from "lodash";
 
 declare var jQuery: any;
 
@@ -40,6 +41,8 @@ export class MessagesComponent{
 
   private redirectFromProfileId;
   private activeChat: "";
+  private filteredChats: any;
+  private filteredFriends: any;
 
   constructor(
     private chatService: ChatService,
@@ -68,9 +71,9 @@ export class MessagesComponent{
       this.getAllChats();
     }
     this.friendsService.getUserFriendsData().subscribe(
-      data => this.friends = data
+      data => this.filteredFriends = this.friends = data
     );
-    this.screenHeight = (window.screen.height) - 173;
+    this.screenHeight = (window.screen.height);
   }
 
   public createChat(friendId: number) {
@@ -80,7 +83,7 @@ export class MessagesComponent{
     }else {
       this.chatService.createChat(friendId).subscribe(
         data => {
-          this.chats.unshift(data);
+          this.filteredChats = this.chats.unshift(data);
           this.selectChat(data);
         }
       );
@@ -104,7 +107,7 @@ export class MessagesComponent{
 
   public createMessage(message) {
     if(message['content'] !== null && message['content'].toString().replace(/ /g, "") !== ""){
-      if(this.editedCodeAttachment !== {}) {
+      if(!_.isEmpty(this.editedCodeAttachment)) {
         message.code = this.editedCodeAttachment;
       }
       let formData = new FormData();
@@ -120,6 +123,7 @@ export class MessagesComponent{
             var currentChatIndex = this.chats.indexOf(this.selectedChat);
             this.chats[currentChatIndex].lastAction = data.createdAt;
             this.chats.sort((a, b) => a.lastAction < b.lastAction);
+            this.filteredChats = this.chats;
             this.isUploadCode = false;
             this.editedCodeAttachment = {};
             this.selectedChat.lastAction = data.createdAt;
@@ -184,6 +188,7 @@ export class MessagesComponent{
       let that: MessagesComponent = this;
       that.chats = data;
       that.chats.sort((a, b) => b.lastAction - a.lastAction);
+      that.filteredChats = that.chats;
       if(this.redirectFromProfileId){
         this.createChat(this.redirectFromProfileId);
       }else if(that.chats.length > 0) {
@@ -203,6 +208,7 @@ export class MessagesComponent{
                 let lastIndex = this.messages.length - 1;
                 this.selectedChat.lastAction = this.messages[lastIndex].createdAt;
                 this.selectedChat.lastMessage = this.messages[lastIndex].content;
+                jQuery('#scroll').scrollTop(jQuery('#scroll')[0].scrollHeight);
               }
             }
           );
@@ -210,6 +216,7 @@ export class MessagesComponent{
       });
     });
   }
+
   public deleteFile(file){
     let index = this.files.indexOf(file);
     this.files.splice(index, 1);
@@ -218,5 +225,18 @@ export class MessagesComponent{
   public deleteCode(){
     this.isUploadCode = false;
     this.editedCodeAttachment = {};
+  }
+
+  public filterChats(value){
+    value = value.replace(/[\s]/g, '');
+    if(!value) this.filteredChats = _.cloneDeep(this.chats) ;
+    this.filteredChats = _.cloneDeep(this.chats).filter(item => item.name.replace(/[\s]/g, '').toLowerCase().indexOf(value.toLowerCase()) > -1);
+  }
+
+  public filterFriends(value){
+    value = value.replace(/[\s]/g, '');
+    if(!value) this.filteredFriends = _.cloneDeep(this.friends);
+    this.friends.forEach(item => item['fullName'] = item.firstName + " " + item.lastName);
+    this.filteredFriends = _.cloneDeep(this.friends).filter(item => item.fullName.replace(/[\s]/g, '').toLowerCase().indexOf(value.toLowerCase()) > -1);
   }
 }

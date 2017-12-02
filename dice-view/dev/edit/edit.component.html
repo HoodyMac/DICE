@@ -85,16 +85,52 @@
                                 <label class="email_label" translate>EDIT.email</label>
                             </div>
                             <div class="settings_value">
-                                <input type="email" id="edit_email" [(ngModel)]="userBasicInfo.email" name="email" required value="{{userGeneralInfo.email}}">
+                                <input type="email" id="edit_email" [(ngModel)]="userBasicInfo.email" name="email" required>
                             </div>
                         </div>
                         <div class="alert alert-success"  *ngIf="showEditEmailMessage">
                             <strong translate>EDIT.editEmailMessage</strong>
                         </div>
+
+                        <div class="block">
+                            <div class="settings_label">
+                                <label class="languages_label" translate>EDIT.language</label>
+                            </div>
+                            <div class="settings_value">
+                                <ul>
+                                    <li class="list-gr"><a>{{userLang}}</a></li>
+                                </ul>
+                            </div>
+                            <a (click)="changeLanguages.open()" class="modal_change" translate>EDIT.change</a>
+                        </div>
                         <div class="block">
                             <button type="submit" class="btn btn-default button" translate>EDIT.save</button>
                         </div>
                     </form>
+                    <!-- modal window for languages -->
+                    <div class="row">
+                        <modal #changeLanguages modalClass="modal-sm" [closeOnOutsideClick]="true" [closeOnEscape]="true">
+                            <modal-header>
+                                <h2>Choose your language</h2>
+                            </modal-header>
+                            <modal-content>
+                                <div class="languages">
+                                    <ul>
+                                        <li class="list-gr" (click)="useLanguage('en'); changeLanguages.close()"><a>english</a></li>
+                                        <li class="list-gr" (click)="useLanguage('pl'); changeLanguages.close()"><a>polski</a></li>
+                                        <li class="list-gr" (click)="useLanguage('ua'); changeLanguages.close()"><a>українська</a></li>
+                                        <li class="list-gr" (click)="useLanguage('ru'); changeLanguages.close()"><a>русский</a></li>
+                                    </ul>
+                                    <hr>
+                                </div>
+                            </modal-content>
+                            <modal-footer>
+                                <input type="reset" class="cancel" value="Cancel" (click)="changeLanguages.close()">
+                            </modal-footer>
+                        </modal>
+                    </div>
+
+
                     <!--#####-Modal window for general settings-######-->
                     <div class="modal" id="modal-edit-password">
                         <div class="modal-box">

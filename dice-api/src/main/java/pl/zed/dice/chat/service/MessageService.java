@@ -21,6 +21,7 @@ import pl.zed.dice.user.profile.domain.UserProfile;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,6 +31,13 @@ public class MessageService {
 
     private static final String DOT_SEPARATOR = ".";
     private static final String FILES_FOLDER = "files/";
+
+    private final List<String> ALLOWED_EXTENSIONS = new ArrayList<String>() {{
+        add("bmp");
+        add("jpeg");
+        add("jpg");
+        add("png");
+    }};
 
     @Autowired
     private MessageAsm messageAsm;
@@ -62,8 +70,13 @@ public class MessageService {
 
         Message message = messageAsm.makeMessage(messageDto, chatId);
         for (MultipartFile multipartFile : multipartFiles) {
+            String extension = Files.getFileExtension(multipartFile.getOriginalFilename()).toLowerCase();
+            boolean isImage = ALLOWED_EXTENSIONS.contains(extension);
             String token = saveFile(multipartFile);
-            message.getAttachments().add(new FileAttachment(AttachmentType.FILE, message, multipartFile.getOriginalFilename(), token));
+            FileAttachment fileAttachment = isImage ?
+                    new FileAttachment(AttachmentType.IMAGE, message, token) :
+                    new FileAttachment(AttachmentType.FILE, message, multipartFile.getOriginalFilename(), token);
+            message.getAttachments().add(fileAttachment);
         }
         messageRepository.save(message);
 

@@ -110,6 +110,11 @@
     "confirmPassword": "Potwierdź hasło:",
     "cancel": "Anuluj",
     "change": "Zmień",
+    "language":"Język",
+    "pl":"Polski",
+    "en":"Angielski",
+    "ua":"Ukrainski",
+    "ru": "Rosyjski",
 
     "placeholder":{
       "firstname": "Imię",

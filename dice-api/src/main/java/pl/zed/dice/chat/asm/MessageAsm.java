@@ -50,10 +50,12 @@ public class MessageAsm {
         Date now = new Date();
         chat.setLastAction(now);
         Message message = new Message(messageCreateDTO.getContent(), now, currentUserProfile, chat);
-        CodeAttachment codeAttachment = attachmentAsm.makeCodeAttachment(messageCreateDTO.getCode());
-        codeAttachment.setMessage(message);
-        List<Attachment> attachments = Lists.newArrayList(codeAttachment);
-        message.setAttachments(attachments);
+        if(messageCreateDTO.getCode() != null) {
+            CodeAttachment codeAttachment = attachmentAsm.makeCodeAttachment(messageCreateDTO.getCode());
+            codeAttachment.setMessage(message);
+            List<Attachment> attachments = Lists.newArrayList(codeAttachment);
+            message.setAttachments(attachments);
+        }
         return message;
     }
 }

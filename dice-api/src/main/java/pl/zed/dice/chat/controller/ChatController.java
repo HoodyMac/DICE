@@ -67,6 +67,18 @@ public class ChatController {
         return ResponseEntity.ok(messages);
     }
 
+    @GetMapping("/file/{filename:.+}/")
+    @ResponseBody
+    public ResponseEntity<Resource> serveImage(@PathVariable("filename") String filename) throws IOException {
+        Resource file = storageService.loadAsResource("files/" + filename);
+        return ResponseEntity
+                .ok()
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .contentLength(file.contentLength())
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\""+file.getFilename()+"\"")
+                .body(file);
+    }
+
     @GetMapping("/file/{filename:.+}/{original:.+}")
     @ResponseBody
     public ResponseEntity<Resource> serveFile(@PathVariable("filename") String filename, @PathVariable("original") String originalFilename) throws IOException {

@@ -1,6 +1,5 @@
 package pl.zed.dice.image.service;
 
-import com.google.common.base.Strings;
 import com.google.common.io.Files;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

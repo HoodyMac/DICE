@@ -189,7 +189,7 @@
 
                                     <div class="buttons_section">
                                         <input type="reset" class="submit" value="Cancel" (click)="createPost.close()">
-                                        <input type="submit" class="submit" value="Create" (click)="doPostCreation()">
+                                        <input type="submit" class="submit" value="Create" (click)="doPostCreation(); createPost.close()">
                                     </div>
                                 </modal-footer>
                             </modal>
@@ -204,9 +204,7 @@
                             <ul>
                                 <li>
                                     <div class="user-img">
-                                        <div class="circle">
-                                            <img [src]="post.cropImg ? '/api/profile/image/get/' + post.cropImg : '/app/img/default_user_photo.jpg'" alt="" >
-                                        </div>
+                                        <div class="circle" [style.background-image]="'url(' + (post.cropImg ? '/api/profile/image/get/' + post.cropImg : '/app/img/default_user_photo.jpg') + ')'"></div>
                                     </div>
 
                                     <div class="content">
@@ -231,7 +229,7 @@
                             <div class="text_block">
                                 <p>{{post.content}}</p>
                             </div>
-                            <div class="img_block">
+                            <div class="img_block" style="display: none;">
                                 <img src="/app/img/MEM1.jpg" alt="">
                             </div>
                             <div class="file_block">
@@ -251,12 +249,12 @@
                                 <p>52</p>
                             </div>
                         </div>
-                        <div class="comments_module">
-                            <div class="show_comments">
+                        <div class="comments_module" >
+                            <div class="show_comments" style="display: none;">
                                 <button>Show comments</button>
                             </div>
 
-                            <div class="comment_block">
+                            <div class="comment_block" style="display: none;">
                                 <ul>
                                     <li>
                                         <div class="user-img">
