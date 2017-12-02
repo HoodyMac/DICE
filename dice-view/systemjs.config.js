@@ -8,6 +8,7 @@
       'ng2-modal': 'node_modules/ng2-modal',
       'ng2-translate': 'npm:ng2-translate/bundles/ng2-translate.umd.js',
       'lodash': 'npm:lodash/lodash.js',
+      'angular-2-dropdown-multiselect': 'npm:angular-2-dropdown-multiselect/src/multiselect-dropdown.js',
       '@angular/core': 'npm:@angular/core/bundles/core.umd.js',
       '@angular/common': 'npm:@angular/common/bundles/common.umd.js',
       '@angular/compiler': 'npm:@angular/compiler/bundles/compiler.umd.js',

@@ -22,6 +22,7 @@ import {ChatService} from "./services/chat.service";
 import {MonacoEditorModule} from 'ngx-monaco-editor';
 import {ForumListComponent} from "./forum-list/forum-list.component";
 import {ForumPostComponent} from "./forum-post/forum-post.component";
+import {MultiselectDropdownModule} from 'angular-2-dropdown-multiselect';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent},
@@ -50,7 +51,8 @@ const appRoutes: Routes = [
       deps: [Http]
     }),
     ModalModule,
-    MonacoEditorModule
+    MonacoEditorModule,
+    MultiselectDropdownModule
   ],
   declarations: [
     AppComponent,
