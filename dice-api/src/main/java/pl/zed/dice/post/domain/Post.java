@@ -1,8 +1,6 @@
 package pl.zed.dice.post.domain;
 
-import org.apache.tomcat.jni.Local;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.format.annotation.DateTimeFormat;
 import pl.zed.dice.post.model.PostDTO;
 import pl.zed.dice.user.profile.domain.UserProfile;
 
@@ -19,6 +17,7 @@ public class Post {
 
     @NotNull
     @ManyToOne
+    @JoinColumn(name = "senderId")
     private UserProfile author;
 
     @NotNull
