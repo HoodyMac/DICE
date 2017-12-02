@@ -48,7 +48,9 @@ public class PostService {
         final UserProfile profile = userProfileRepository.getOne(profileId);
         List<PostDTO> postDTOS = new ArrayList<>();
 
-        profile.getPosts().forEach(post -> postDTOS.add(postAsm.makePostDTO(post)));
+        postRepository.findByAuthorOrderByIdDesc(profile).forEach(
+                post -> postDTOS.add(postAsm.makePostDTO(post))
+        );
 
         return postDTOS;
     }
