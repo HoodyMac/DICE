@@ -1,6 +1,5 @@
 package pl.zed.dice.comment.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import pl.zed.dice.comment.model.CommentDTO;
 import pl.zed.dice.post.domain.Post;
 import pl.zed.dice.user.profile.domain.UserProfile;

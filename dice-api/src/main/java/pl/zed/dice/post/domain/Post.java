@@ -2,6 +2,7 @@ package pl.zed.dice.post.domain;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import pl.zed.dice.comment.domain.Comment;
+import pl.zed.dice.like.domain.LikesEntity;
 import pl.zed.dice.post.model.PostDTO;
 import pl.zed.dice.user.profile.domain.UserProfile;
 
@@ -32,6 +33,9 @@ public class Post {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
     private List<Comment> comments;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
+    private List<LikesEntity> likesEntities;
 
     public Post(){}
 
@@ -83,5 +87,13 @@ public class Post {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public List<LikesEntity> getLikesEntities() {
+        return likesEntities;
+    }
+
+    public void setLikesEntities(List<LikesEntity> likesEntities) {
+        this.likesEntities = likesEntities;
     }
 }

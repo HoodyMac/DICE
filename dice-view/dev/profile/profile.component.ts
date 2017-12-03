@@ -7,6 +7,7 @@ import {AuthenticationService} from "../common/services/authentication.service";
 import {CommentService} from "../common/services/comment.service";
 import {TranslateService} from "ng2-translate";
 import {Title} from "@angular/platform-browser";
+import _ from "lodash";
 
 let clicked = true;
 declare var jQuery: any;
@@ -228,5 +229,26 @@ export class ProfileComponent implements AfterViewInit {
         post.comments.splice(commentIndex, 1);
       }
     );
+  }
+  getImageLink(image: string): string {
+    if(_.isUndefined(image) || _.isEmpty(image)) {
+      return '/app/img/default_user_photo.jpg';
+    }
+    return '/api/profile/image/get/' + image;
+  }
+
+  createLike(post){
+    this.likeService.createLike(post.id).subscribe(
+      response => {
+        if (this.findAlreadyLiked(post).length > 0) {
+          post.likes = post.likes.filter(like => like.user.userId !== this.currentUser.userProfileId);
+        }else
+          post.likes.push(response);
+      }
+    );
+  }
+
+  findAlreadyLiked(post){
+    return post.likes.filter(like => like.user.userId == this.currentUser.userProfileId);
   }
 }

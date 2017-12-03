@@ -83,7 +83,8 @@ export class MessagesComponent{
     }else {
       this.chatService.createChat(friendId).subscribe(
         data => {
-          this.filteredChats = this.chats.unshift(data);
+          this.chats.unshift(data);
+          this.filteredChats = _.cloneDeep(this.chats);
           this.selectChat(data);
         }
       );
@@ -123,7 +124,7 @@ export class MessagesComponent{
             var currentChatIndex = this.chats.indexOf(this.selectedChat);
             this.chats[currentChatIndex].lastAction = data.createdAt;
             this.chats.sort((a, b) => a.lastAction < b.lastAction);
-            this.filteredChats = this.chats;
+            this.filteredChats = _.cloneDeep(this.chats);
             this.isUploadCode = false;
             this.editedCodeAttachment = {};
             this.selectedChat.lastAction = data.createdAt;
