@@ -122,22 +122,22 @@
 
             <!-- Create a post modal windows -->
             <div class="row">
-                <modal #createPost modalClass="modal-lg" id="createPostwModal" [closeOnOutsideClick]="true" [closeOnEscape]="true">
+                <modal #createPost modalClass="modal-lg" id="createPostModal" [closeOnOutsideClick]="true" [closeOnEscape]="true">
                     <modal-header>
                         <h2>Ask your questions</h2>
                     </modal-header>
                     <modal-content>
                         <div class="form_group">
                             <label for="post_title">Title:</label>
-                            <input type="text" id="post_title" class="post_title form-control" placeholder="Title">
+                            <input type="text" id="post_title" class="post_title form-control" placeholder="Title" [(ngModel)]="editedQuestion.title">
                         </div>
                         <div class="form_group">
                             <label for="createPost">Description:</label>
-                            <textarea name="createPost" id="createPost" class="form-control" cols="100" rows="5" placeholder="Enter a text"></textarea>
+                            <textarea name="createPost" id="createPost" class="form-control" cols="100" rows="5" placeholder="Enter a text" [(ngModel)]="editedQuestion.description"></textarea>
                         </div>
                         <div class="form_group">
-                            <label for="related_tags">Related tags</label>
-                            <input type="text" id="related_tags" class="form-control" placeholder="Tags">
+                            <label>Related tags</label>
+                            <ss-multiselect-dropdown [options]="tags" [(ngModel)]="editedQuestion.tags" [settings]="msSettings"></ss-multiselect-dropdown>
                         </div>
                         <div class="post_attachment" style="display: none;">
                             <div class="upload_image">
@@ -187,7 +187,7 @@
 
                         <div class="buttons_section">
                             <input type="reset" class="submit" value="Cancel" (click)="createPost.close()">
-                            <input type="submit" class="submit" value="Create">
+                            <input type="submit" class="submit" value="Create" (click)="createQuestion(); createPost.close()">
                         </div>
                     </modal-footer>
                 </modal>

@@ -1,16 +1,12 @@
 package pl.zed.dice.post.domain;
 
-import org.apache.tomcat.jni.Local;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.format.annotation.DateTimeFormat;
-import pl.zed.dice.comment.domain.Comment;
 import pl.zed.dice.post.model.PostDTO;
 import pl.zed.dice.user.profile.domain.UserProfile;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 public class Post {
@@ -21,6 +17,7 @@ public class Post {
 
     @NotNull
     @ManyToOne
+    @JoinColumn(name = "senderId")
     private UserProfile author;
 
     @NotNull
@@ -30,9 +27,6 @@ public class Post {
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     private Date created_date;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
-    private List<Comment> comments;
 
     public Post(){}
 
@@ -76,13 +70,5 @@ public class Post {
 
     public void edit(PostDTO postDTO){
         this.content = postDTO.getContent();
-    }
-
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
     }
 }
