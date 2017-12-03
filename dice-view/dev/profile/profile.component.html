@@ -5,7 +5,7 @@
                 <div class="profile_image">
                     <div class="img" >
                         <!-- <a href="#"><img src="{{profileImgSrc.cropImgSrc}}" alt=""></a> -->
-                        <a (click)="imgViewModal.open()"><img [src]="userInfo.cropImgSrc ? '/api/profile/image/get/' + userInfo.cropImgSrc : '/app/img/default_user_photo.jpg'" alt="" ></a>   <!-- crop image -->
+                        <a (click)="imgViewModal.open()"><img [src]="getImageLink(userInfo.cropImgSrc)" alt="" ></a>   <!-- crop image -->
                     </div>
                     <div class="change_photo">
                         <button type="button"  *ngIf="isMe" (click)="imgCropViewModal.open()" class="modal-trigger btn btn-default" data-modal="modal-change-photo" translate>PROFILE.changePhoto</button><!-- Trigger Modal. -->
@@ -21,7 +21,7 @@
                                 <modal-content>
                                     <!-- This is the image we're attaching Jcrop to -->
 
-                                    <img src="{{ userInfo.originalImgSrc ? '/api/profile/image/get/' + userInfo.originalImgSrc : '/app/img/default_user_photo.jpg'}}" #cropImgSrc #cropbox id="cropbox" style="width: 100%;"/>  <!-- original image -->
+                                    <img [src]="getImageLink(userInfo.originalImgSrc)" #cropImgSrc #cropbox id="cropbox" style="width: 100%;"/>  <!-- original image -->
 
                                     <!-- This is the form that our event handler fills -->
                                     <form action="" method="post" (submit)="checkCoords()" onsubmit="return checkCoords();">
@@ -49,7 +49,7 @@
                                     <h1></h1>
                                 </modal-header>
                                 <modal-content>
-                                    <img src="{{ userInfo.originalImgSrc ? '/api/profile/image/get/' + userInfo.originalImgSrc : '/app/img/default_user_photo.jpg'}}" class="imgView"/>
+                                    <img [src]="getImageLink(userInfo.originalImgSrc)" class="imgView"/>
                                 </modal-content>
                                 <modal-footer>
 
@@ -204,7 +204,7 @@
                             <ul>
                                 <li>
                                     <div class="user-img">
-                                        <div class="circle" [style.background-image]="'url(' + (post.cropImg ? '/api/profile/image/get/' + post.cropImg : '/app/img/default_user_photo.jpg') + ')'"></div>
+                                        <div class="circle" [style.background-image]="'url(' + getImageLink(post.cropImg) + ')'"></div>
                                     </div>
 
                                     <div class="content">
@@ -258,7 +258,7 @@
                                 <ul>
                                     <li>
                                         <div class="user-img">
-                                            <div class="circle" [style.background-image]="'url(' + (comment.owner.cropImgSrc ? '/api/profile/image/get/' + comment.owner.cropImgSrc : '/app/img/default_user_photo.jpg') + ')'"></div>
+                                            <div class="circle" [style.background-image]="'url(' + getImageLink(comment.owner.cropImgSrc) + ')'"></div>
                                         </div>
 
                                         <div class="content">
