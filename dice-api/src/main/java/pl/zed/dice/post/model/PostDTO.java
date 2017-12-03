@@ -2,6 +2,7 @@ package pl.zed.dice.post.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import pl.zed.dice.comment.model.CommentDTO;
+import pl.zed.dice.like.model.LikeDTO;
 
 import java.util.List;
 
@@ -14,6 +15,7 @@ public class PostDTO {
     private String created_date;
     private String cropImg;
     private List<CommentDTO> comments;
+    private List<LikeDTO> likes;
 
     public PostDTO(){}
 
@@ -71,5 +73,13 @@ public class PostDTO {
 
     public void setComments(List<CommentDTO> comments) {
         this.comments = comments;
+    }
+
+    public List<LikeDTO> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(List<LikeDTO> likes) {
+        this.likes = likes;
     }
 }

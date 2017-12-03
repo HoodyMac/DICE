@@ -6,6 +6,8 @@ import pl.zed.dice.comment.asm.CommentAsm;
 import pl.zed.dice.comment.model.CommentDTO;
 import pl.zed.dice.exception.post.PostNotFoundException;
 import pl.zed.dice.exception.post.WrongOwnerException;
+import pl.zed.dice.like.asm.LikeAsm;
+import pl.zed.dice.like.model.LikeDTO;
 import pl.zed.dice.post.asm.PostAsm;
 import pl.zed.dice.post.domain.Post;
 import pl.zed.dice.post.model.PostDTO;
@@ -41,6 +43,9 @@ public class PostService {
     @Autowired
     private UserAsm userAsm;
 
+    @Autowired
+    private LikeAsm likeAsm;
+
     public PostDTO create(PostDTO postDTO){
         final UserProfile author = securityContextService.getCurrentUserProfile();
         Post post = postAsm.makePost(postDTO, author);
@@ -53,6 +58,7 @@ public class PostService {
 
         postDTO = postAsm.makePostDTO(post);
         postDTO.setComments(Collections.emptyList());
+        postDTO.setLikes(Collections.emptyList());
 
         return postDTO;
     }
@@ -64,8 +70,10 @@ public class PostService {
         postRepository.findByAuthorOrderByIdDesc(profile).forEach(
                 post -> {
                     List<CommentDTO> comments = getAndConvertComments(post);
+                    List<LikeDTO> likes = getAndConvertLikes(post);
                     PostDTO postDTO = postAsm.makePostDTO(post);
                     postDTO.setComments(comments);
+                    postDTO.setLikes(likes);
                     postDTOS.add(postDTO);
                 });
 
@@ -104,6 +112,12 @@ public class PostService {
     private List<CommentDTO> getAndConvertComments(Post post){
         return post.getComments().stream()
                 .map(comment -> commentAsm.makeCommentDto(comment, userAsm.makeUserProfileDTO(comment.getOwner())))
+                .collect(Collectors.toList());
+    }
+
+    private List<LikeDTO> getAndConvertLikes(Post post){
+        return post.getLikesEntities().stream()
+                .map(like -> likeAsm.makeLikeDTO(like, userAsm.makeUserProfileDTO(like.getUser())))
                 .collect(Collectors.toList());
     }
 }

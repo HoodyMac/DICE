@@ -240,13 +240,13 @@
                             </div>
                         </div>
                         <div class="social_module">
-                            <div class="likes">
-                                <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
-                                <p>8156</p>
+                            <div class="likesEntities">
+                                <span class="glyphicon glyphicon-heart" aria-hidden="true" (click)="createLike(post)"></span>
+                                <p>{{ post.likes.length }}</p>
                             </div>
                             <div class="comments">
                                 <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-                                <p>52</p>
+                                <p>{{ post.comments.length }}</p>
                             </div>
                         </div>
                         <div class="comments_module" >

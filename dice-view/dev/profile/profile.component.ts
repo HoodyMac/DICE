@@ -5,6 +5,7 @@ import {SearchService} from '../services/search.service';
 import {FriendsService} from '../services/friends.service';
 import {AuthenticationService} from "../common/services/authentication.service";
 import {CommentService} from "../common/services/comment.service";
+import {LikeService} from "../common/services/like.service";
 import {TranslateService} from "ng2-translate";
 import {Title} from "@angular/platform-browser";
 
@@ -14,7 +15,7 @@ declare var jQuery: any;
 @Component({
   templateUrl: 'dev/profile/profile.component.html',
   styleUrls: ['../app/css/profile.css'],
-  providers: [ProfileService, SearchService, FriendsService, CommentService]
+  providers: [ProfileService, SearchService, FriendsService, CommentService, LikeService]
 })
 
 export class ProfileComponent implements AfterViewInit {
@@ -30,6 +31,7 @@ export class ProfileComponent implements AfterViewInit {
   inPostEdit: boolean = false;
   postToEdit = {};
   commentDTO = {post: null, content: ''};
+  currentUser = {};
 
   @ViewChild('cropbox') cropbox: ElementRef;
 
@@ -43,7 +45,8 @@ export class ProfileComponent implements AfterViewInit {
               private _friendService: FriendsService,
               private titleService: Title,
               private translate: TranslateService,
-              private commentService: CommentService) {
+              private commentService: CommentService,
+              private likeService: LikeService) {
 
     this.route.params.subscribe(params => {
       this.profileId = params['id'];
@@ -51,13 +54,16 @@ export class ProfileComponent implements AfterViewInit {
 
     this.getProfilePosts();
 
-    var currentUser = this.authenticationService.getUserInfo();
-    if (currentUser === undefined) {
+    this.currentUser = this.authenticationService.getUserInfo();
+    if (this.currentUser === undefined) {
       this.authenticationService.getUserInfoObservable().subscribe(
-        data => this.isMe = this.profileId == data.userProfileId
+        data => {
+          this.isMe = this.profileId == data.userProfileId;
+          this.currentUser = data;
+        }
       );
     } else {
-      this.isMe = this.profileId == currentUser.userProfileId;
+      this.isMe = this.profileId == this.currentUser.userProfileId;
     }
 
     this.profileService.getUserInfo(this.profileId).subscribe(
@@ -214,5 +220,20 @@ export class ProfileComponent implements AfterViewInit {
         post.comments.splice(commentIndex, 1);
       }
     );
+  }
+
+  createLike(post){
+    this.likeService.createLike(post.id).subscribe(
+      response => {
+        if (this.findAlreadyLiked(post).length > 0) {
+          post.likes = post.likes.filter(like => like.user.userId !== this.currentUser.userProfileId);
+        }else
+          post.likes.push(response);
+      }
+    );
+  }
+
+  findAlreadyLiked(post){
+    return post.likes.filter(like => like.user.userId == this.currentUser.userProfileId);
   }
 }
