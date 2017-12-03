@@ -171,13 +171,13 @@ section.user_info{padding-bottom: 50px;
             }
             .social_module{ display: inline-flex; padding: 0px 15px;
                 .likes{ display: inline-flex; padding: 10px;
-                    span{font-size: 25px; color: #708bd4; cursor: pointer;
+                    span{font-size: 20px; color: #708bd4; cursor: pointer;
                         &:hover{ color: #3638d4;}
                     }
                     p{padding: 0px 5px; margin: 0;}
                 }
                 .comments{ display: inline-flex; padding: 10px;
-                    span{font-size: 25px; color: #708bd4; cursor: pointer;
+                    span{font-size: 20px; color: #708bd4; cursor: pointer;
                         &:hover{ color: #3638d4;}
                     }
                     p{padding: 0px 5px; margin: 0;}
@@ -185,8 +185,10 @@ section.user_info{padding-bottom: 50px;
             }
             .comments_module{
                 .show_comments{
-                    button{background-color: #d9ddec; width: 100%; height: 35px; border: none;
+                    input{background-color: #d9ddec; width: 100%; height: 35px; border: none; border-radius: 0;
                         &:hover{background-color: #cfd3e2;}
+                        &:active, &:focus, &:visited{ outline: none; }
+                        &.active{ background-color: #a1bbec;}
                     }
                 }
                 .comment_block{
@@ -194,11 +196,11 @@ section.user_info{padding-bottom: 50px;
                         li{ display: inline-flex; width: 100%; border-radius: 2px; border-bottom: 1px solid @userInfo_border;
                             &:last-child{ border: none;}
                             .user-img{ padding: 10px 0px 10px 25px; width: 8%;
-                                .circle{ width: 35px; padding: 2%; height:35px; border-radius: 50%; background-position: center; background-size: cover;}
+                                .circle{ width: 35px; padding: 2%; height:35px; border-radius: 50%; background-position: center; background-size: cover; cursor:pointer;}
                             }
                             .content{ width: 75%;
                                 a{ color: #2A5885; font-size: 14px;
-                                    .username{ padding: 5px 0 0 5px; margin: 0;}
+                                    .username{ padding: 5px 0 0 5px; margin: 0; cursor:pointer;}
                                     &:hover{text-decoration: none; color: #1b3654;}
                                 }
                                 p{

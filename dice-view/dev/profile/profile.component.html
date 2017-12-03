@@ -119,7 +119,7 @@
                 </div>
                 <div class="counts_module">
                     <div class="page_count">
-                        <a href="#"><span class="label_module" translate>PROFILE.newMessages</span></a>
+                        <a (click)="goToMessagePage()"><span class="label_module" translate>PROFILE.newMessages</span></a>
                         <span class="value_module">(1)</span>
                     </div>
                     <div class="page_count">
@@ -211,12 +211,12 @@
                                         <p class="username">{{post.author}}</p>
                                         <p class="date">{{post.created_date | date:'dd.MM HH:mm'}}</p>
                                     </div>
-                                    <div class="post_edit">
+                                    <div class="post_edit" *ngIf="isMe">
                                         <div class="dropdown">
                                             <a alt="More options"  title="More options" class=" dropdown-toggle" id="editPost" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></a>
 
                                             <ul class="dropdown-menu" aria-labelledby="editPost">
-                                                <li><a>Edit post</a></li>
+                                                <li><a (click)="selectPostForEditing(post); createPost.open()">Edit post</a></li>
                                                 <li><a (click)="deletePost(post)">Delete post</a></li>
                                             </ul>
                                         </div>
@@ -251,21 +251,21 @@
                         </div>
                         <div class="comments_module" >
                             <div class="show_comments">
-                                <button>Show comments</button>
+                                <input type="button" (click)="toogleComments()" class="{{showComments ? 'active' : ''}} btn btn-default" value="Show comments">
                             </div>
 
-                            <div class="comment_block" *ngFor="let comment of post.comments">
+                            <div class="comment_block" *ngIf="showComments">
                                 <ul>
-                                    <li>
+                                    <li  *ngFor="let comment of post.comments">
                                         <div class="user-img">
-                                            <div class="circle" [style.background-image]="'url(' + (comment.owner.cropImgSrc ? '/api/profile/image/get/' + comment.owner.cropImgSrc : '/app/img/default_user_photo.jpg') + ')'"></div>
+                                            <div class="circle" (click)="goToProfile(comment.owner.userId)" [style.background-image]="'url(' + (comment.owner.cropImgSrc ? '/api/profile/image/get/' + comment.owner.cropImgSrc : '/app/img/default_user_photo.jpg') + ')'"></div>
                                         </div>
 
                                         <div class="content">
                                             <a (click)="goToProfile(comment.owner.userId)"><p class="username">{{ comment.owner.firstname + ' ' + comment.owner.lastname }}</p></a>
                                             <p class="text">{{ comment.content }}</p>
                                         </div>
-                                        <div class="comments_edit">
+                                        <div class="comments_edit" *ngIf="isMe">
                                             <p class="date">{{ comment.created_date | date:'dd.MM HH:mm' }}</p>
                                             <div class="dropdown">
                                                 <a alt="More options"  title="More options" class=" dropdown-toggle" id="editComment" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></a>
@@ -282,7 +282,7 @@
                             <div class="input-text">
                                 <form #fromCreateMessage="ngForm" (ngSubmit)="createComment(post); fromCreateMessage.reset()">
                                     <div class="user-img">
-                                        <div class="circle" [style.background-image]="'url(/app/img/TEEN.jpg)'"></div>
+                                        <div class="circle" [style.background-image]="'url(' + (userInfo.cropImgSrc ? '/api/profile/image/get/' + userInfo.cropImgSrc : '/app/img/default_user_photo.jpg') + ')'"></div>
                                     </div>
                                     <input type="text" class="form-control" placeholder="Enter your comment" name="content" [(ngModel)]="commentDTO.content" #content="ngModel">
                                     <ul class="upload_item">

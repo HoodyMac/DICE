@@ -30,6 +30,7 @@ export class ProfileComponent implements AfterViewInit {
   inPostEdit: boolean = false;
   postToEdit = {};
   commentDTO = {post: null, content: ''};
+  showComments = false;
 
   @ViewChild('cropbox') cropbox: ElementRef;
 
@@ -49,7 +50,7 @@ export class ProfileComponent implements AfterViewInit {
       this.profileId = params['id'];
     });
 
-    this.getProfilePosts();
+    this.getProfilePosts(this.profileId);
 
     var currentUser = this.authenticationService.getUserInfo();
     if (currentUser === undefined) {
@@ -60,20 +61,7 @@ export class ProfileComponent implements AfterViewInit {
       this.isMe = this.profileId == currentUser.userProfileId;
     }
 
-    this.profileService.getUserInfo(this.profileId).subscribe(
-      data => {
-        this.userInfo = data;
-        if (this.jcropApi !== undefined) {
-          this.jcropApi.setImage('/api/profile/image/get/' + this.userInfo.originalImgSrc);
-        }
-        translate.get('PAGE_TITLES.PROFILE', {username: this.userInfo.firstname + " " + this.userInfo.lastname}).subscribe((res: string) => {
-          this.titleService.setTitle(res);
-        });
-      },
-      err => {
-        console.log('Something went wrong!');
-      }
-    );
+    this.viewUserProfile(this.profileId);
   };
 
   goToMessagePage() {
@@ -161,10 +149,11 @@ export class ProfileComponent implements AfterViewInit {
     this._router.navigate(['/edit']);
   }
 
-  getProfilePosts(){
-    this.profileService.getPosts(this.profileId).subscribe(
+  getProfilePosts(profileId){
+    this.profileService.getPosts(profileId).subscribe(
       data => {
         this.profilePosts = data;
+        console.log(this.profilePosts);
       }
     );
   }
@@ -179,6 +168,25 @@ export class ProfileComponent implements AfterViewInit {
 
   goToProfile(id){
     this._router.navigate(['/profile/'+id]);
+    this.viewUserProfile(id);
+    this.getProfilePosts(id);
+  }
+
+  viewUserProfile(profileId){
+    this.profileService.getUserInfo(profileId).subscribe(
+        data => {
+          this.userInfo = data;
+          if (this.jcropApi !== undefined) {
+            this.jcropApi.setImage('/api/profile/image/get/' + this.userInfo.originalImgSrc);
+          }
+          this.translate.get('PAGE_TITLES.PROFILE', {username: this.userInfo.firstname + " " + this.userInfo.lastname}).subscribe((res: string) => {
+            this.titleService.setTitle(res);
+          });
+        },
+        err => {
+          console.log('Something went wrong!');
+        }
+    );
   }
 
   deletePost(post){
@@ -191,12 +199,10 @@ export class ProfileComponent implements AfterViewInit {
   }
 
   selectPostForEditing(post){
-    this.postToEdit = post;
+    this.postDTO = post;
+    console.log(this.postDTO);
   }
 
-  editPost(){
-    //TODO
-  }
 
   createComment(post){
     this.commentDTO.post = post.id;
@@ -207,6 +213,14 @@ export class ProfileComponent implements AfterViewInit {
     );
   }
 
+  toogleComments(){
+     if(this.showComments){
+       this.showComments = false;
+     }
+     else{
+       this.showComments = true;
+     }
+  }
   deleteComment(post, comment){
     this.commentService.deleteComent(comment.id).subscribe(
       success => {
