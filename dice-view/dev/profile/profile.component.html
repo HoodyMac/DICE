@@ -250,28 +250,28 @@
                             </div>
                         </div>
                         <div class="comments_module" >
-                            <div class="show_comments" style="display: none;">
+                            <div class="show_comments">
                                 <button>Show comments</button>
                             </div>
 
-                            <div class="comment_block" style="display: none;">
+                            <div class="comment_block" *ngFor="let comment of post.comments">
                                 <ul>
                                     <li>
                                         <div class="user-img">
-                                            <div class="circle" [style.background-image]="'url(/app/img/TEEN.jpg)'"></div>
+                                            <div class="circle" [style.background-image]="'url(' + (comment.owner.cropImgSrc ? '/api/profile/image/get/' + comment.owner.cropImgSrc : '/app/img/default_user_photo.jpg') + ')'"></div>
                                         </div>
 
                                         <div class="content">
-                                            <a [routerLink]="['/profile']"><p class="username">Ivan Loichuk</p></a>
-                                            <p class="text">LOL ORU</p>
+                                            <a (click)="goToProfile(comment.owner.userId)"><p class="username">{{ comment.owner.firstname + ' ' + comment.owner.lastname }}</p></a>
+                                            <p class="text">{{ comment.content }}</p>
                                         </div>
                                         <div class="comments_edit">
-                                            <p class="date">12:35 am</p>
+                                            <p class="date">{{ comment.created_date | date:'dd.MM HH:mm' }}</p>
                                             <div class="dropdown">
                                                 <a alt="More options"  title="More options" class=" dropdown-toggle" id="editComment" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></a>
 
                                                 <ul class="dropdown-menu" aria-labelledby="editComment">
-                                                    <li><a>Delete comment</a></li>
+                                                    <li><a (click)="deleteComment(post, comment)">Delete comment</a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -280,18 +280,18 @@
                             </div>
 
                             <div class="input-text">
-                                <form #fromCreateMessage="ngForm" (ngSubmit)="createMessage(fromCreateMessage.value); fromCreateMessage.reset()">
+                                <form #fromCreateMessage="ngForm" (ngSubmit)="createComment(post); fromCreateMessage.reset()">
                                     <div class="user-img">
                                         <div class="circle" [style.background-image]="'url(/app/img/TEEN.jpg)'"></div>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="Enter your comment" name="content" ngModel #content="ngModel">
+                                    <input type="text" class="form-control" placeholder="Enter your comment" name="content" [(ngModel)]="commentDTO.content" #content="ngModel">
                                     <ul class="upload_item">
                                         <li><i class="fa fa-code fa-lg"></i></li>
                                         <li> <span class="glyphicon glyphicon-picture" aria-hidden="true"></span></li>
                                         <li><span class="glyphicon glyphicon-file" aria-hidden="true"></span></li>
                                     </ul>
                                     <input type="file" id="imgupload" style="display:none"/>
-                                    <input  type="submit" class="form-control" value="Send">
+                                    <input type="submit" class="form-control" value="Send">
                                 </form>
                             </div>
                         </div>

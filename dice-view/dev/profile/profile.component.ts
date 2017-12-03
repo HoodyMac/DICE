@@ -4,6 +4,7 @@ import {Router, ActivatedRoute} from '@angular/router';
 import {SearchService} from '../services/search.service';
 import {FriendsService} from '../services/friends.service';
 import {AuthenticationService} from "../common/services/authentication.service";
+import {CommentService} from "../common/services/comment.service";
 import {TranslateService} from "ng2-translate";
 import {Title} from "@angular/platform-browser";
 
@@ -13,7 +14,7 @@ declare var jQuery: any;
 @Component({
   templateUrl: 'dev/profile/profile.component.html',
   styleUrls: ['../app/css/profile.css'],
-  providers: [ProfileService, SearchService, FriendsService]
+  providers: [ProfileService, SearchService, FriendsService, CommentService]
 })
 
 export class ProfileComponent implements AfterViewInit {
@@ -28,6 +29,7 @@ export class ProfileComponent implements AfterViewInit {
   postDTO = {};
   inPostEdit: boolean = false;
   postToEdit = {};
+  commentDTO = {post: null, content: ''};
 
   @ViewChild('cropbox') cropbox: ElementRef;
 
@@ -40,7 +42,8 @@ export class ProfileComponent implements AfterViewInit {
               private _router: Router, private route: ActivatedRoute, private _searchService: SearchService,
               private _friendService: FriendsService,
               private titleService: Title,
-              private translate: TranslateService) {
+              private translate: TranslateService,
+              private commentService: CommentService) {
 
     this.route.params.subscribe(params => {
       this.profileId = params['id'];
@@ -174,6 +177,10 @@ export class ProfileComponent implements AfterViewInit {
     );
   }
 
+  goToProfile(id){
+    this._router.navigate(['/profile/'+id]);
+  }
+
   deletePost(post){
     this.profileService.deletePost(post.id).subscribe(
       success => {
@@ -189,5 +196,23 @@ export class ProfileComponent implements AfterViewInit {
 
   editPost(){
     //TODO
+  }
+
+  createComment(post){
+    this.commentDTO.post = post.id;
+    this.commentService.createComment(this.commentDTO).subscribe(
+      data => {
+        post.comments.push(data);
+      }
+    );
+  }
+
+  deleteComment(post, comment){
+    this.commentService.deleteComent(comment.id).subscribe(
+      success => {
+        let commentIndex = post.comments.indexOf(comment);
+        post.comments.splice(commentIndex, 1);
+      }
+    );
   }
 }

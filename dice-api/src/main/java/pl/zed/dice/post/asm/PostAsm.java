@@ -5,6 +5,8 @@ import pl.zed.dice.post.domain.Post;
 import pl.zed.dice.post.model.PostDTO;
 import pl.zed.dice.user.profile.domain.UserProfile;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Component
@@ -15,8 +17,10 @@ public class PostAsm {
     }
 
     public PostDTO makePostDTO(Post post){
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        String created_date = format.format(post.getCreated_date());
         return new PostDTO(post.getId(), post.getAuthor().getFirstname() + " " + post.getAuthor().getLastname(),
-                post.getContent(), post.getCreated_date().toString(), post.getAuthor().getCropImage());
+                post.getContent(), created_date, post.getAuthor().getCropImage());
     }
 
 }

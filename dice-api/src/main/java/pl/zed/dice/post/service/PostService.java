@@ -2,6 +2,8 @@ package pl.zed.dice.post.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.zed.dice.comment.asm.CommentAsm;
+import pl.zed.dice.comment.model.CommentDTO;
 import pl.zed.dice.exception.post.PostNotFoundException;
 import pl.zed.dice.exception.post.WrongOwnerException;
 import pl.zed.dice.post.asm.PostAsm;
@@ -9,11 +11,14 @@ import pl.zed.dice.post.domain.Post;
 import pl.zed.dice.post.model.PostDTO;
 import pl.zed.dice.post.repository.PostRepository;
 import pl.zed.dice.security.service.SecurityContextService;
+import pl.zed.dice.user.profile.asm.UserAsm;
 import pl.zed.dice.user.profile.domain.UserProfile;
 import pl.zed.dice.user.profile.repository.UserProfileRepository;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PostService {
@@ -30,6 +35,12 @@ public class PostService {
     @Autowired
     private UserProfileRepository userProfileRepository;
 
+    @Autowired
+    private CommentAsm commentAsm;
+
+    @Autowired
+    private UserAsm userAsm;
+
     public PostDTO create(PostDTO postDTO){
         final UserProfile author = securityContextService.getCurrentUserProfile();
         Post post = postAsm.makePost(postDTO, author);
@@ -38,17 +49,25 @@ public class PostService {
         postList.add(post);
 
         author.setPosts(postList);
-
         postRepository.saveAll(postList);
 
-        return postAsm.makePostDTO(post);
+        postDTO = postAsm.makePostDTO(post);
+        postDTO.setComments(Collections.emptyList());
+
+        return postDTO;
     }
 
     public List<PostDTO> getPosts(Long profileId){
         final UserProfile profile = userProfileRepository.getOne(profileId);
         List<PostDTO> postDTOS = new ArrayList<>();
 
-        postRepository.findByAuthorOrderByIdDesc(profile).forEach(post -> postDTOS.add(postAsm.makePostDTO(post)));
+        postRepository.findByAuthorOrderByIdDesc(profile).forEach(
+                post -> {
+                    List<CommentDTO> comments = getAndConvertComments(post);
+                    PostDTO postDTO = postAsm.makePostDTO(post);
+                    postDTO.setComments(comments);
+                    postDTOS.add(postDTO);
+                });
 
         return postDTOS;
     }
@@ -80,5 +99,11 @@ public class PostService {
         }else if(!profile.getId().equals(post.getAuthor().getId())){
             throw new WrongOwnerException();
         }
+    }
+
+    private List<CommentDTO> getAndConvertComments(Post post){
+        return post.getComments().stream()
+                .map(comment -> commentAsm.makeCommentDto(comment, userAsm.makeUserProfileDTO(comment.getOwner())))
+                .collect(Collectors.toList());
     }
 }
