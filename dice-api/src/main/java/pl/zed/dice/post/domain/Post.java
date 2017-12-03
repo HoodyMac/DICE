@@ -30,7 +30,7 @@ public class Post {
     @Temporal(TemporalType.TIMESTAMP)
     private Date created_date;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
     private List<Comment> comments;
 
     public Post(){}
