@@ -4,6 +4,7 @@ import pl.zed.dice.user.profile.domain.UserProfile;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -37,7 +38,7 @@ public class ForumQuestion {
     private List<Tag> tags;
 
     @OneToMany(mappedBy = "forumQuestion")
-    private List<ForumReply> replies;
+    private List<ForumReply> replies = new ArrayList<>();
 
     public ForumQuestion() {
     }

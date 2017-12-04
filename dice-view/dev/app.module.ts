@@ -20,8 +20,8 @@ import {ModalModule} from "ng2-modal"
 import {MessagesComponent} from "./messages/messages.component";
 import {ChatService} from "./services/chat.service";
 import {MonacoEditorModule} from 'ngx-monaco-editor';
-import {ForumListComponent} from "./forum-list/forum-list.component";
-import {ForumPostComponent} from "./forum-post/forum-post.component";
+import {ForumListComponent} from "./forum/list/forum-list.component";
+import {ForumPostComponent} from "./forum/post/forum-post.component";
 import {MultiselectDropdownModule} from 'angular-2-dropdown-multiselect';
 
 const appRoutes: Routes = [
@@ -32,8 +32,8 @@ const appRoutes: Routes = [
   { path: 'edit', component: EditComponent },
   { path: 'messages', component: MessagesComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full'},
-  { path: 'forum-list', component: ForumListComponent},
-  { path: 'forum-post', component: ForumPostComponent}
+  { path: 'forum', component: ForumListComponent},
+  { path: 'forum/post/:id', component: ForumPostComponent}
 ];
 
 @NgModule({

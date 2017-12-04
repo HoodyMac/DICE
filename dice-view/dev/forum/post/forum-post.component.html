@@ -5,7 +5,7 @@
                 <div class="post_top">
                     <div class="post_title">
                         <div>
-                            <p class="title">Can't click or select an item from javascript dropdown menu using VBA</p>
+                            <p class="title">{{question.title}}</p>
                             <div class="breadcrumb">
                                 <ul>
                                     <li>Home</li>
@@ -26,7 +26,7 @@
                             <label for="description">Description</label>
                             <div class="separator"></div>
                             <div class="text_block" id="description">
-                                <p>A primary duty of a Q&A system is matching questions with people who can (and are willing) to answer. Stack Exchange sites use an eclectic mix of tagging, filters, search, sorts and feed algorithms. We also lean heavily on Google (and other search engines) indexing the content. For sites of a certain size, this system works fairly well. But on Stack Overflow it’s been less than ideal for years now. Sklivvz rationalized those elements and honed the UI so that people can customize their view into the site’s questions. We’re building on that work so that more people can find questions to answer. </p>
+                                <p>{{question.description}}</p>
                             </div>
                             <label for="files">Attachments:</label>
                             <div class="separator"></div>
@@ -66,15 +66,14 @@
                         <div class="title">Answers</div>
                         <div class="answer_block">
                             <ul>
-                                <li>
+                                <li *ngFor="let reply of question.replies">
                                     <div class="user-img">
                                         <div class="circle" [style.background-image]="'url(/app/img/TEEN.jpg)'"></div>
                                     </div>
 
                                     <div class="content">
-                                        <a [routerLink]="['/profile']"><p class="username">Ivan Loichuk</p></a>
-                                        <p class="text">I want to print HTML from a C# web service. The Web Browser control is overkill, and does not function well in a service environment, nor does it function well on a system with very tight security constraints.
-                                                        Is there any sort of free .NET library that will support the printing of a basic HTML page? Here is the code I have so far, which does not run properly.</p>
+                                        <a [routerLink]="['/profile']"><p class="username">{{reply.authorName}}</p></a>
+                                        <p class="text">{{reply.content}}</p>
 
                                         <div class="answer_attachment">
                                             <div class="files">
@@ -89,61 +88,7 @@
                                         </div>
                                     </div>
                                     <div class="comments_edit">
-                                        <p class="date">12:35 am</p>
-                                    </div>
-                                </li>
-<!-- NEXT ANSWER -->
-                                <li>
-                                    <div class="user-img">
-                                        <div class="circle" [style.background-image]="'url(/app/img/TEEN.jpg)'"></div>
-                                    </div>
-
-                                    <div class="content">
-                                        <a [routerLink]="['/profile']"><p class="username">Ivan Loichuk</p></a>
-                                        <p class="text">I want to print HTML from a C# web service. The Web Browser control is overkill, and does not function well in a service environment, nor does it function well on a system with very tight security constraints.
-                                            Is there any sort of free .NET library that will support the printing of a basic HTML page? Here is the code I have so far, which does not run properly.</p>
-
-                                        <div class="answer_attachment">
-                                            <div class="files">
-                                                <div class="code_group">
-                                                    <i class="fa fa-file fa-6x" aria-hidden="true"></i>
-                                                    <span>filename</span>
-                                                </div>
-                                            </div>
-                                            <div class="upload_image" style="display: none;">
-                                                <img src="app/img/TEEN.jpg" alt="">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="comments_edit">
-                                        <p class="date">12:35 am</p>
-                                    </div>
-                                </li>
- <!-- NEXT ANSWER -->
-                                <li>
-                                    <div class="user-img">
-                                        <div class="circle" [style.background-image]="'url(/app/img/TEEN.jpg)'"></div>
-                                    </div>
-
-                                    <div class="content">
-                                        <a [routerLink]="['/profile']"><p class="username">Ivan Loichuk</p></a>
-                                        <p class="text">I want to print HTML from a C# web service. The Web Browser control is overkill, and does not function well in a service environment, nor does it function well on a system with very tight security constraints.
-                                            Is there any sort of free .NET library that will support the printing of a basic HTML page? Here is the code I have so far, which does not run properly.</p>
-
-                                        <div class="answer_attachment">
-                                            <div class="files">
-                                                <div class="code_group">
-                                                    <i class="fa fa-file fa-6x" aria-hidden="true"></i>
-                                                    <span>filename</span>
-                                                </div>
-                                            </div>
-                                            <div class="upload_image" style="display: none;">
-                                                <img src="app/img/TEEN.jpg" alt="">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="comments_edit">
-                                        <p class="date">12:35 am</p>
+                                        <p class="date">{{reply.createdAt | date:'MMMM dd, HH:mm'}}</p>
                                     </div>
                                 </li>
                             </ul>
@@ -152,7 +97,7 @@
                         <div class="input_answer">
                             <div class="form_group">
                                 <label for="createAnswer">Your answer:</label>
-                                <textarea name="createAnswer" id="createAnswer" class="form-control" cols="100" rows="5" placeholder="Enter a text"></textarea>
+                                <textarea name="createAnswer" id="createAnswer" class="form-control" cols="100" rows="5" placeholder="Enter a text" [(ngModel)]="answer.content"></textarea>
                             </div>
                             <div class="post_attachment" style="display: none;">
                                 <div class="upload_image">
@@ -199,7 +144,7 @@
                                     <i class="fa fa-picture-o" aria-hidden="true"></i>
                                 </div>
                                 <div class="buttons_section">
-                                    <input type="submit" class="submit" value="Post your answer">
+                                    <input type="submit" class="submit" value="Post your answer" (click)="createAnswer()">
                                 </div>
                             </div>
                         </div>

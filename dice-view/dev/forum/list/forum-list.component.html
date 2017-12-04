@@ -15,88 +15,22 @@
                 </div>
                 <div class="forum">
                     <div class="forum_content">
-                        <div class="post_block">
+                        <div *ngFor="let question of questions" class="post_block">
                             <div class="top">
                                 <div class="related_tags">
-                                    <span>Java</span>
-                                    <span>C++</span>
-                                    <span>PHP</span>
+                                    <span *ngFor="let tag of question.tags">{{tag.title}}</span>
                                 </div>
                                 <div class="modified_date">
-                                    <p>yesterday 16:12</p>
+                                    <p>{{question.createdAt | date:'MMMM dd, HH:mm'}}</p>
                                 </div>
                             </div>
                             <div class="post_title">
-                                <a [routerLink]="['/forum-post']"><p>Can't click or select an item from javascript dropdown menu using VBA</p></a>
+                                <a [routerLink]="['/forum/post/', question.id]"><p>{{question.title}}</p></a>
                             </div>
                             <div class="bottom">
                                 <div class="autor">
-                                    <span class="autor_label">autor:</span>
-                                    <span class="autor_name">Ivan Loichuk</span>
-                                </div>
-                                <div class="social_module">
-                                    <div class="likesEntities">
-                                        <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
-                                        <p>8156</p>
-                                    </div>
-                                    <div class="comments">
-                                        <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-                                        <p>52</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="post_block">
-                            <div class="top">
-                                <div class="related_tags">
-                                    <span>Java</span>
-                                    <span>C++</span>
-                                    <span>PHP</span>
-                                </div>
-                                <div class="modified_date">
-                                    <p>yesterday 16:12</p>
-                                </div>
-                            </div>
-                            <div class="post_title">
-                                <a [routerLink]="['/forum-post']"><p>Oracle Pro C config reload</p></a>
-                            </div>
-                            <div class="bottom">
-                                <div class="autor">
-                                    <span class="autor_label">autor:</span>
-                                    <span class="autor_name">Roman Mysan</span>
-                                </div>
-                                <div class="social_module">
-                                    <div class="likesEntities">
-                                        <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
-                                        <p>8156</p>
-                                    </div>
-                                    <div class="comments">
-                                        <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-                                        <p>52</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="post_block">
-                            <div class="top">
-                                <div class="related_tags">
-                                    <span>Java</span>
-                                    <span>C++</span>
-                                    <span>PHP</span>
-                                </div>
-                                <div class="modified_date">
-                                    <p>yesterday 16:12</p>
-                                </div>
-                            </div>
-                            <div class="post_title">
-                                <a [routerLink]="['/forum-post']"><p>Flask form.populate_obj() keep null values</p></a>
-                            </div>
-                            <div class="bottom">
-                                <div class="autor">
-                                    <span class="autor_label">autor:</span>
-                                    <span class="autor_name">Maksym Osmuk</span>
+                                    <span class="autor_label">author:</span>
+                                    <span class="autor_name">{{question.authorName}}</span>
                                 </div>
                                 <div class="social_module">
                                     <div class="likesEntities">

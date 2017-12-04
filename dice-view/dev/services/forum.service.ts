@@ -12,7 +12,19 @@ export class ForumService {
     return this.http.post('/api/forum/question', question).map(res => res.json());
   }
 
+  getAllQuestions(): Observable {
+    return this.http.get('/api/forum/question').map(res => res.json());
+  }
+
+  getQuestion(id: number): Observable {
+    return this.http.get('/api/forum/question/' + id).map(res => res.json());
+  }
+
   getAllTags(): Observable {
     return this.http.get('/api/forum/tags').map(res => res.json());
+  }
+
+  createAnswer(answer: any, questionId: number): Observable {
+    return this.http.post('/api/forum/question/reply/' + questionId, answer).map(res => res.json());
   }
 }

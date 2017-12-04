@@ -4,10 +4,9 @@ import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.zed.dice.forum.domain.ForumQuestion;
+import pl.zed.dice.forum.domain.ForumReply;
 import pl.zed.dice.forum.domain.Tag;
-import pl.zed.dice.forum.model.ForumQuestionCreateDTO;
-import pl.zed.dice.forum.model.ForumQuestionViewDTO;
-import pl.zed.dice.forum.model.TagViewDTO;
+import pl.zed.dice.forum.model.*;
 import pl.zed.dice.forum.repository.TagRepository;
 import pl.zed.dice.security.service.SecurityContextService;
 import pl.zed.dice.user.profile.domain.UserProfile;
@@ -50,5 +49,32 @@ public class ForumAsm {
                 forumQuestion.getAuthor().getFullname(),
                 tags,
                 forumQuestion.getCreatedAt());
+    }
+
+    public ForumQuestionDetailsDTO makeForumQuestionDetailsDTO(ForumQuestion forumQuestion) {
+        List<TagViewDTO> tags = forumQuestion.getTags().stream().map(tag -> new TagViewDTO(tag.getId(), tag.getTitle())).collect(Collectors.toList());
+        List<ForumReplyViewDTO> replies = forumQuestion.getReplies().stream().map(this::makeForumReplyViewDTO).collect(Collectors.toList());
+        return new ForumQuestionDetailsDTO(
+                forumQuestion.getId(),
+                forumQuestion.getTitle(),
+                forumQuestion.getAuthor().getFullname(),
+                tags,
+                forumQuestion.getCreatedAt(),
+                forumQuestion.getContent(),
+                replies);
+    }
+
+    public ForumReply makeForumReply(ForumReplyCreateDTO forumReplyCreateDTO) {
+        UserProfile currentUserProfile = securityContextService.getCurrentUserProfile();
+        return new ForumReply(forumReplyCreateDTO.getContent(), currentUserProfile, new Date());
+    }
+
+    public ForumReplyViewDTO makeForumReplyViewDTO(ForumReply forumReply) {
+        return new ForumReplyViewDTO(
+                forumReply.getId(),
+                forumReply.getContent(),
+                forumReply.getAuthor().getId(),
+                forumReply.getAuthor().getFullname(),
+                forumReply.getCreatedAt());
     }
 }

@@ -4,6 +4,7 @@ import pl.zed.dice.user.profile.domain.UserProfile;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 @Entity
 public class ForumReply {
@@ -23,7 +24,17 @@ public class ForumReply {
     @ManyToOne
     private ForumQuestion forumQuestion;
 
+    @NotNull
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt;
+
     public ForumReply() {
+    }
+
+    public ForumReply(String content, UserProfile author, Date createdAt) {
+        this.content = content;
+        this.author = author;
+        this.createdAt = createdAt;
     }
 
     public Long getId() {
@@ -56,5 +67,13 @@ public class ForumReply {
 
     public void setForumQuestion(ForumQuestion forumQuestion) {
         this.forumQuestion = forumQuestion;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 }
