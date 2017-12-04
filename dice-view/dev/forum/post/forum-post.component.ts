@@ -27,7 +27,10 @@ export class ForumPostComponent {
 
   public createAnswer(): void {
     this.forumService.createAnswer(this.answer, this.question.id).subscribe(
-      data => console.log(data)
+      data => {
+        this.question.replies.push(data);
+        this.answer = {};
+      }
     );
   }
 }

@@ -46,7 +46,10 @@ export class ForumListComponent {
 
   public createQuestion() {
     this.forumService.createQuestion(this.editedQuestion).subscribe(
-      data => this.editedQuestion = {}
+      data => {
+        this.editedQuestion = {};
+        this.questions.push(data);
+      }
     );
   }
 }
