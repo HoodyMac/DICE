@@ -23,4 +23,8 @@ export class ForumService {
   getAllTags(): Observable {
     return this.http.get('/api/forum/tags').map(res => res.json());
   }
+
+  createAnswer(answer: any, questionId: number): Observable {
+    return this.http.post('/api/forum/question/reply/' + questionId, answer).map(res => res.json());
+  }
 }

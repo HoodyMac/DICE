@@ -12,6 +12,8 @@ export class ForumPostComponent {
 
   public question = {};
 
+  public answer = {};
+
   constructor(private route: ActivatedRoute,
               private forumService: ForumService) {
     this.route.params.subscribe(params => {
@@ -21,5 +23,11 @@ export class ForumPostComponent {
         data => this.question = data
       );
     });
+  }
+
+  public createAnswer(): void {
+    this.forumService.createAnswer(this.answer, this.question.id).subscribe(
+      data => console.log(data)
+    );
   }
 }
