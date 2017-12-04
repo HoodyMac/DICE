@@ -18,13 +18,11 @@ public class PostController {
     @PostMapping("/post")
     @ResponseStatus(HttpStatus.OK)
     public PostDTO create(@RequestBody PostDTO postDTO){
-        return postService.create(postDTO);
-    }
+        if (postDTO.getId() == null) {
+            return postService.create(postDTO);
+        } else
+            return postService.edit(postDTO.getId(), postDTO);
 
-    @GetMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public List<PostDTO> getPosts(@PathVariable Long id){
-        return postService.getPosts(id);
     }
 
     @DeleteMapping("/post/{id}")

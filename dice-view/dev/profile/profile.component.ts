@@ -5,6 +5,7 @@ import {SearchService} from '../services/search.service';
 import {FriendsService} from '../services/friends.service';
 import {AuthenticationService} from "../common/services/authentication.service";
 import {CommentService} from "../common/services/comment.service";
+import {LikeService} from "../common/services/like.service";
 import {TranslateService} from "ng2-translate";
 import {Title} from "@angular/platform-browser";
 import _ from "lodash";
@@ -27,7 +28,6 @@ export class ProfileComponent implements AfterViewInit {
   editImgSrc: string = "/app/img/edit_icon_gray.png";
   profileId;
   isMe: boolean;
-  profilePosts :any = [];
   postDTO = {};
   inPostEdit: boolean = false;
   postToEdit = {};
@@ -156,19 +156,10 @@ export class ProfileComponent implements AfterViewInit {
     this._router.navigate(['/edit']);
   }
 
-  getProfilePosts(profileId){
-    this.profileService.getPosts(profileId).subscribe(
-      data => {
-        this.profilePosts = data;
-        console.log(this.profilePosts);
-      }
-    );
-  }
-
   doPostCreation(){
     this.profileService.createUserPost(this.postDTO).subscribe(
       data => {
-        this.profilePosts.unshift(data);
+        this.userInfo.posts.unshift(data);
       }
     );
   }
@@ -199,8 +190,8 @@ export class ProfileComponent implements AfterViewInit {
   deletePost(post){
     this.profileService.deletePost(post.id).subscribe(
       success => {
-        let index = this.profilePosts.indexOf(post);
-        this.profilePosts.splice(index, 1);
+        let index = this.userInfo.posts.indexOf(post);
+        this.userInfo.posts.splice(index, 1);
       }
     );
   }
@@ -220,14 +211,19 @@ export class ProfileComponent implements AfterViewInit {
     );
   }
 
-  toogleComments(){
-     if(this.showComments){
+  toggleComments(post){
+     if (this.showComments) {
        this.showComments = false;
-     }
-     else{
+     }else {
+        this.commentService.getComments(post.id).subscribe(
+          data => {
+           post.comments = data;
+          }
+        );
        this.showComments = true;
      }
   }
+
   deleteComment(post, comment){
     this.commentService.deleteComent(comment.id).subscribe(
       success => {

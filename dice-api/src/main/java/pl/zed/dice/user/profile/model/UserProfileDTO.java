@@ -1,6 +1,9 @@
 package pl.zed.dice.user.profile.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import pl.zed.dice.post.model.PostDTO;
+
+import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserProfileDTO {
@@ -21,6 +24,7 @@ public class UserProfileDTO {
     private String email;
     private Integer friendsCount;
     private String friendShipStatus;
+    private List<PostDTO> posts;
 
     public UserProfileDTO(){}
 
@@ -165,5 +169,13 @@ public class UserProfileDTO {
 
     public void setFriendShipStatus(String friendShipStatus) {
         this.friendShipStatus = friendShipStatus;
+    }
+
+    public List<PostDTO> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<PostDTO> posts) {
+        this.posts = posts;
     }
 }

@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 import pl.zed.dice.post.domain.Post;
 import pl.zed.dice.post.model.PostDTO;
 import pl.zed.dice.user.profile.domain.UserProfile;
+import pl.zed.dice.user.profile.model.UserProfileDTO;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -16,11 +17,11 @@ public class PostAsm {
         return new Post(author, postDTO.getContent(), new Date());
     }
 
-    public PostDTO makePostDTO(Post post){
+    public PostDTO makePostDTO(Post post, UserProfileDTO user){
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         String created_date = format.format(post.getCreated_date());
-        return new PostDTO(post.getId(), post.getAuthor().getFirstname() + " " + post.getAuthor().getLastname(),
-                post.getContent(), created_date, post.getAuthor().getCropImage());
+        return new PostDTO(post.getId(), user, post.getContent(), created_date,
+                post.getAuthor().getCropImage());
     }
 
 }
