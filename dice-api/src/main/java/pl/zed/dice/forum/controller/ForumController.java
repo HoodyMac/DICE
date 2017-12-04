@@ -4,9 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.zed.dice.forum.domain.Tag;
-import pl.zed.dice.forum.model.ForumQuestionCreateDTO;
-import pl.zed.dice.forum.model.ForumQuestionDetailsDTO;
-import pl.zed.dice.forum.model.ForumQuestionViewDTO;
+import pl.zed.dice.forum.model.*;
 import pl.zed.dice.forum.service.ForumService;
 
 import java.util.List;
@@ -39,5 +37,11 @@ public class ForumController {
     public ResponseEntity<List<Tag>> getAllTags() {
         List<Tag> allTags = forumService.getAllTags();
         return ResponseEntity.ok(allTags);
+    }
+
+    @PostMapping("/question/reply/{id}")
+    public ResponseEntity<ForumReplyViewDTO> replyToQuestion(@PathVariable("id") Long questionId, @RequestBody ForumReplyCreateDTO forumReplyCreateDTO) {
+        ForumReplyViewDTO forumReplyViewDTO = forumService.replyToQuestion(forumReplyCreateDTO, questionId);
+        return ResponseEntity.ok(forumReplyViewDTO);
     }
 }

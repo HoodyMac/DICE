@@ -4,11 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.zed.dice.forum.asm.ForumAsm;
 import pl.zed.dice.forum.domain.ForumQuestion;
+import pl.zed.dice.forum.domain.ForumReply;
 import pl.zed.dice.forum.domain.Tag;
-import pl.zed.dice.forum.model.ForumQuestionCreateDTO;
-import pl.zed.dice.forum.model.ForumQuestionDetailsDTO;
-import pl.zed.dice.forum.model.ForumQuestionViewDTO;
+import pl.zed.dice.forum.model.*;
 import pl.zed.dice.forum.repository.ForumQuestionRepository;
+import pl.zed.dice.forum.repository.ForumReplyRepository;
 import pl.zed.dice.forum.repository.TagRepository;
 
 import java.util.List;
@@ -19,6 +19,9 @@ public class ForumService {
 
     @Autowired
     private ForumQuestionRepository forumQuestionRepository;
+
+    @Autowired
+    private ForumReplyRepository forumReplyRepository;
 
     @Autowired
     private ForumAsm forumAsm;
@@ -46,5 +49,14 @@ public class ForumService {
     public ForumQuestionDetailsDTO getForumQuestion(Long postId) {
         ForumQuestion forumQuestion = forumQuestionRepository.getOne(postId);
         return forumAsm.makeForumQuestionDetailsDTO(forumQuestion);
+    }
+
+    public ForumReplyViewDTO replyToQuestion(ForumReplyCreateDTO forumReplyCreateDTO, Long questionId) {
+        ForumQuestion forumQuestion = forumQuestionRepository.getOne(questionId);
+        ForumReply forumReply = forumAsm.makeForumReply(forumReplyCreateDTO);
+        forumQuestion.getReplies().add(forumReply);
+        forumReply.setForumQuestion(forumQuestion);
+        forumReplyRepository.save(forumReply);
+        return forumAsm.makeForumReplyViewDTO(forumReply);
     }
 }
