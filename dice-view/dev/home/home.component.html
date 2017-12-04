@@ -100,7 +100,7 @@
               </div>
             </div>
             <div class="birthday signup_form">
-              <input type="date"  formControlName="birthdayDate" id="birthdayDate" placeholder="{{'HOME.placeholder.birthday' | translate }}">
+              <input type="date"  formControlName="birthdayDate" id="birthdayDate" placeholder="{{'HOME.placeholder.birthday' | translate }}" max="{{currentDate | date:'yyyy-MM-dd'}}">
               <div class="errors" *ngIf="form.get('birthdayDate').touched">
                 <p *ngIf="form.get('birthdayDate').invalid" translate>HOME.birthdayAlert</p>
               </div>
@@ -170,3 +170,34 @@
     </div> <!--  End row -->
   </div> <!-- End container -->
 </section>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="copyright col-md-2 col-sm-6 col-xs-12">
+        <p>Dice@2017</p><hr>
+      </div>
+
+      <div class="settings col-md-4 col-sm-6 col-xs-12">
+        <ul>
+          <li class="list-gr"><a href="#" translate>FOOTER.about</a></li>
+          <li class="list-gr"><a href="#" translate>FOOTER.help</a></li>
+          <li class="list-gr"><a href="#" translate>FOOTER.developers</a></li>
+        </ul><hr>
+      </div>
+
+      <div class="languages col-md-6 col-sm-12 col-xs-12">
+        <ul>
+          <li class="list-gr" translate>FOOTER.language</li>
+          <li class="list-gr"><a (click)="useLanguage('en')">english</a></li>
+          <li class="list-gr"><a (click)="useLanguage('pl')">polski</a></li>
+          <li class="list-gr"><a (click)="useLanguage('ua')">українська</a></li>
+          <li class="list-gr"><a (click)="useLanguage('ru')">русский</a></li>
+        </ul>
+        <hr>
+      </div>
+
+    </div>
+  </div>
+</footer>
+

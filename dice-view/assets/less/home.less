@@ -293,6 +293,24 @@ form .btn-signin:hover{
   background-color: #E0DCDD;
 }
 
+/* footer */
+footer { background-color: #fff; border-top: 1px solid #888888; color: #000000; width: 100%; bottom: 0; position: absolute; right: 0; left: 0; height: 52px;
+  .settings, .languages{
+    .list-gr { display: inline; padding: 10px 15px; }
+    ul{ padding: 15px 0 5px 0;
+      li{
+        a{color: #888888;
+          &:hover{color: #000000; text-decoration: none; cursor: pointer;}
+        }
+      }
+    }
+  }
+  .copyright{
+    p{ padding: 15px 5px 5px 15px;}
+  }
+}
+
+
 /* RWD */
 
 @media (max-width: 990px) {
@@ -328,6 +346,9 @@ form .btn-signin:hover{
     text-align: center;
   }
 
+}
+@media (max-width: 620px) {
+  footer{height: 0;}
 }
 
 @media (max-width: 480px) {

@@ -15,6 +15,7 @@ import {TranslateService} from "ng2-translate";
 
 export class HomeComponent {
   public form: FormGroup;
+  public currentDate: any = Date.now();
 
   public errorMessage: string;
   public showErrorMessage: boolean = false;
@@ -42,6 +43,10 @@ export class HomeComponent {
         confirmPassword: ['', Validators.required]
       });
   }
+    useLanguage(language: string) {
+        this.translate.use(language);
+        localStorage.setItem('lang', language);
+    }
 
   onSignIn(credentials) {
     this.authenticationService.login(credentials).subscribe(

@@ -26,6 +26,7 @@ export class EditComponent implements AfterViewInit {
   userLang: any = "";
   public passwordData: FormGroup;
   private translate: TranslateService;
+  public currentDate: any = Date.now();
 
     constructor(
         private authenticationService: AuthenticationService,
@@ -73,6 +74,9 @@ export class EditComponent implements AfterViewInit {
   useLanguage(language: string) {
     this.translate.use(language);
     localStorage.setItem('lang', language);
+    this.translate.get('EDIT.'+localStorage.getItem('lang')).subscribe((res: string) => {
+      this.userLang = res;
+    });
   }
 
   saveUserBasicInfo() {

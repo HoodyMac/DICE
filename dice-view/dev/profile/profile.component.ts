@@ -8,6 +8,7 @@ import {CommentService} from "../common/services/comment.service";
 import {TranslateService} from "ng2-translate";
 import {Title} from "@angular/platform-browser";
 import _ from "lodash";
+import {LikeService} from "../common/services/like.service";
 
 let clicked = true;
 declare var jQuery: any;
@@ -15,7 +16,7 @@ declare var jQuery: any;
 @Component({
   templateUrl: 'dev/profile/profile.component.html',
   styleUrls: ['../app/css/profile.css'],
-  providers: [ProfileService, SearchService, FriendsService, CommentService]
+  providers: [ProfileService, SearchService, FriendsService, CommentService, LikeService]
 })
 
 export class ProfileComponent implements AfterViewInit {
@@ -32,6 +33,7 @@ export class ProfileComponent implements AfterViewInit {
   postToEdit = {};
   commentDTO = {post: null, content: ''};
   showComments = false;
+  currentUser = {};
 
   @ViewChild('cropbox') cropbox: ElementRef;
 
@@ -45,7 +47,8 @@ export class ProfileComponent implements AfterViewInit {
               private _friendService: FriendsService,
               private titleService: Title,
               private translate: TranslateService,
-              private commentService: CommentService) {
+              private commentService: CommentService,
+              private likeService: LikeService) {
 
     this.route.params.subscribe(params => {
       this.profileId = params['id'];
@@ -53,13 +56,16 @@ export class ProfileComponent implements AfterViewInit {
 
     this.getProfilePosts(this.profileId);
 
-    var currentUser = this.authenticationService.getUserInfo();
-    if (currentUser === undefined) {
+    this.currentUser = this.authenticationService.getUserInfo();
+    if (this.currentUser === undefined) {
       this.authenticationService.getUserInfoObservable().subscribe(
-        data => this.isMe = this.profileId == data.userProfileId
+        data => {
+          this.isMe = this.profileId == data.userProfileId;
+          this.currentUser = data;
+        }
       );
     } else {
-      this.isMe = this.profileId == currentUser.userProfileId;
+      this.isMe = this.profileId == this.currentUser.userProfileId;
     }
 
     this.viewUserProfile(this.profileId);

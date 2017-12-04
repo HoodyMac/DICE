@@ -13,13 +13,13 @@
                         <div class="age_group">
                             <label>Age</label>
                             <div>
-                                <select  formControlName="ageFrom" (ngModelChange)="getUsersData()" id="age_from"  class="chosen-select" data-placeholder="from" #choseAgeFrom>
+                                <select  formControlName="ageFrom" name="ageFrom" ngModel (change)="setAgeTo(searchForm.get('ageFrom').value); getUsersData()" id="age_from" >
                                     <option value="" selected>From</option>
-                                    <option *ngFor="let ageValue of ageValues" value="{{ageValue}}">{{ageValue}}</option>
+                                    <option *ngFor="let ageFromValue of ageFromValues" value="{{ageFromValue}}">{{ageFromValue}}</option>
                                 </select>
-                                <select formControlName="ageTo" (ngModelChange)="getUsersData()" id="age_to" class="chosen-select" data-placeholder="to" #choseAgeTo>
+                                <select formControlName="ageTo" name="ageTo" ngModel (change)="setAgeFrom(searchForm.get('ageTo').value); getUsersData()"  id="age_to">
                                     <option value="" selected>To</option>
-                                    <option *ngFor="let ageValue of ageValues" value="{{ageValue}}">{{ageValue}}</option>
+                                    <option *ngFor="let ageToValue of ageToValues" value="{{ageToValue}}">{{ageToValue}}</option>
                                 </select>
                             </div>
 

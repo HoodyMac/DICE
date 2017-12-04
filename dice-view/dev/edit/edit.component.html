@@ -43,7 +43,7 @@
                             </select>
                         </div>
                         <div class="edit-form">
-                            <label for="edit_birthday" translate>EDIT.birthday</label><input type="date" id="edit_birthday" class="form-control" [(ngModel)]="userBasicInfo.birthdayDate" required placeholder="{{'EDIT.placeholder.birthday' | translate }}" name="birthdayDate">
+                            <label for="edit_birthday" translate>EDIT.birthday</label><input type="date" id="edit_birthday" class="form-control" max="{{currentDate | date:'yyyy-MM-dd'}}" [(ngModel)]="userBasicInfo.birthdayDate" required placeholder="{{'EDIT.placeholder.birthday' | translate }}" name="birthdayDate">
                         </div>
                         <div class="edit-form">
                             <label for="edit_city" translate>EDIT.city</label><input type="text" id="edit_city" class="form-control" [(ngModel)]="userBasicInfo.city" placeholder="{{'EDIT.placeholder.city' | translate }}" name="city">
