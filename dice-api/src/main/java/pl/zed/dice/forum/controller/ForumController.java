@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.zed.dice.forum.domain.Tag;
 import pl.zed.dice.forum.model.ForumQuestionCreateDTO;
+import pl.zed.dice.forum.model.ForumQuestionDetailsDTO;
 import pl.zed.dice.forum.model.ForumQuestionViewDTO;
 import pl.zed.dice.forum.service.ForumService;
 
@@ -16,6 +17,17 @@ public class ForumController {
 
     @Autowired
     private ForumService forumService;
+
+    @GetMapping("/question")
+    public ResponseEntity<List<ForumQuestionViewDTO>> getAllForumQuestions() {
+        return ResponseEntity.ok(forumService.getAllForumQuestions() );
+    }
+
+    @GetMapping("/question/{id}")
+    public ResponseEntity<ForumQuestionDetailsDTO> getForumQuestion(@PathVariable("id") Long postId) {
+        return ResponseEntity.ok(forumService.getForumQuestion(postId));
+    }
+
 
     @PostMapping("/question")
     public ResponseEntity<ForumQuestionViewDTO> createForumQuestion(@RequestBody ForumQuestionCreateDTO forumQuestionCreateDTO) {

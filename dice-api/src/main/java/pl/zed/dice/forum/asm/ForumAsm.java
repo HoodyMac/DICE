@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import pl.zed.dice.forum.domain.ForumQuestion;
 import pl.zed.dice.forum.domain.Tag;
 import pl.zed.dice.forum.model.ForumQuestionCreateDTO;
+import pl.zed.dice.forum.model.ForumQuestionDetailsDTO;
 import pl.zed.dice.forum.model.ForumQuestionViewDTO;
 import pl.zed.dice.forum.model.TagViewDTO;
 import pl.zed.dice.forum.repository.TagRepository;
@@ -50,5 +51,16 @@ public class ForumAsm {
                 forumQuestion.getAuthor().getFullname(),
                 tags,
                 forumQuestion.getCreatedAt());
+    }
+
+    public ForumQuestionDetailsDTO makeForumQuestionDetailsDTO(ForumQuestion forumQuestion) {
+        List<TagViewDTO> tags = forumQuestion.getTags().stream().map(tag -> new TagViewDTO(tag.getId(), tag.getTitle())).collect(Collectors.toList());
+        return new ForumQuestionDetailsDTO(
+                forumQuestion.getId(),
+                forumQuestion.getTitle(),
+                forumQuestion.getAuthor().getFullname(),
+                tags,
+                forumQuestion.getCreatedAt(),
+                forumQuestion.getContent());
     }
 }
