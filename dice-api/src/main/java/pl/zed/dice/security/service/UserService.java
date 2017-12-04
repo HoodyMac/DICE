@@ -5,10 +5,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import pl.zed.dice.comment.asm.CommentAsm;
 import pl.zed.dice.exception.user.UserAlreadyExistsException;
 import pl.zed.dice.exception.user.UserNotFoundException;
 import pl.zed.dice.exception.user.WrongOldPasswordException;
 import pl.zed.dice.exception.userProfile.FriendShipDoesNotExist;
+import pl.zed.dice.like.asm.LikeAsm;
+import pl.zed.dice.like.model.LikeDTO;
+import pl.zed.dice.post.asm.PostAsm;
+import pl.zed.dice.post.domain.Post;
+import pl.zed.dice.post.model.PostDTO;
+import pl.zed.dice.post.repository.PostRepository;
 import pl.zed.dice.security.asm.UserAccountAsm;
 import pl.zed.dice.security.model.UserInfoDTO;
 import pl.zed.dice.security.repository.UserAccountRepository;
@@ -25,8 +32,10 @@ import pl.zed.dice.user.profile.repository.UserProfileRepository;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -49,6 +58,15 @@ public class UserService {
     @Autowired
     private FriendShipRepository friendShipRepository;
 
+    @Autowired
+    private LikeAsm likeAsm;
+
+    @Autowired
+    private PostAsm postAsm;
+
+    @Autowired
+    private PostRepository postRepository;
+
     public void save(UserDTO userDTO) throws ParseException {
         if(userRepository.findByEmail(userDTO.getEmail()) == null) {
             UserProfile userProfile = userAsm.makeUserProfile(userDTO);
@@ -67,6 +85,7 @@ public class UserService {
         if(userProfile.isPresent()){
             UserProfileDTO userProfileDTO = userAsm.makeUserProfileDTO(userProfile.get());
             userProfileDTO.setFriendsCount(countFriends(userProfile.get()));
+            userProfileDTO.setPosts(getPosts(userProfileDTO.getUserId()));
             if(userProfile.get() != me){
                 FriendEntity friendship = friendShipRepository.getFriendShip(userProfile.get(), me);
                 if(friendship != null) {
@@ -168,6 +187,28 @@ public class UserService {
         }
         resultDTO.setFriendsCount(countFriends(p));
         return resultDTO;
+    }
+
+    public List<PostDTO> getPosts(Long profileId){
+        final UserProfile profile = userProfileRepository.getOne(profileId);
+        List<PostDTO> postDTOS = new ArrayList<>();
+
+        postRepository.findByAuthorOrderByIdDesc(profile).forEach(
+                post -> {
+                    List<LikeDTO> likes = getAndConvertLikes(post);
+                    PostDTO postDTO = postAsm.makePostDTO(post, userAsm.makeUserProfileDTO(profile));
+                    postDTO.setComments(Collections.emptyList());
+                    postDTO.setLikes(likes);
+                    postDTOS.add(postDTO);
+                });
+
+        return postDTOS;
+    }
+
+    private List<LikeDTO> getAndConvertLikes(Post post){
+        return post.getLikesEntities().stream()
+                .map(like -> likeAsm.makeLikeDTO(like, userAsm.makeUserProfileDTO(like.getUser())))
+                .collect(Collectors.toList());
     }
 
     private class User{

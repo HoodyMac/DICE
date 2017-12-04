@@ -35,16 +35,7 @@ public class PostService {
     private PostAsm postAsm;
 
     @Autowired
-    private UserProfileRepository userProfileRepository;
-
-    @Autowired
-    private CommentAsm commentAsm;
-
-    @Autowired
     private UserAsm userAsm;
-
-    @Autowired
-    private LikeAsm likeAsm;
 
     public PostDTO create(PostDTO postDTO){
         final UserProfile author = securityContextService.getCurrentUserProfile();
@@ -56,28 +47,11 @@ public class PostService {
         author.setPosts(postList);
         postRepository.saveAll(postList);
 
-        postDTO = postAsm.makePostDTO(post);
+        postDTO = postAsm.makePostDTO(post, userAsm.makeUserProfileDTO(author));
         postDTO.setComments(Collections.emptyList());
         postDTO.setLikes(Collections.emptyList());
 
         return postDTO;
-    }
-
-    public List<PostDTO> getPosts(Long profileId){
-        final UserProfile profile = userProfileRepository.getOne(profileId);
-        List<PostDTO> postDTOS = new ArrayList<>();
-
-        postRepository.findByAuthorOrderByIdDesc(profile).forEach(
-                post -> {
-                    List<CommentDTO> comments = getAndConvertComments(post);
-                    List<LikeDTO> likes = getAndConvertLikes(post);
-                    PostDTO postDTO = postAsm.makePostDTO(post);
-                    postDTO.setComments(comments);
-                    postDTO.setLikes(likes);
-                    postDTOS.add(postDTO);
-                });
-
-        return postDTOS;
     }
 
     public void delete(Long id){
@@ -98,7 +72,7 @@ public class PostService {
         post.edit(postDTO);
         postRepository.save(post);
 
-        return postAsm.makePostDTO(post);
+        return postAsm.makePostDTO(post, userAsm.makeUserProfileDTO(userProfile));
     }
 
     private void checkForIllegal(Post post, UserProfile profile, Long id){
@@ -107,17 +81,5 @@ public class PostService {
         }else if(!profile.getId().equals(post.getAuthor().getId())){
             throw new WrongOwnerException();
         }
-    }
-
-    private List<CommentDTO> getAndConvertComments(Post post){
-        return post.getComments().stream()
-                .map(comment -> commentAsm.makeCommentDto(comment, userAsm.makeUserProfileDTO(comment.getOwner())))
-                .collect(Collectors.toList());
-    }
-
-    private List<LikeDTO> getAndConvertLikes(Post post){
-        return post.getLikesEntities().stream()
-                .map(like -> likeAsm.makeLikeDTO(like, userAsm.makeUserProfileDTO(like.getUser())))
-                .collect(Collectors.toList());
     }
 }

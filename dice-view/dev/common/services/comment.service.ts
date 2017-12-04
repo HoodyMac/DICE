@@ -11,6 +11,10 @@ export class CommentService {
     createComment(commentDTO: any){
         return this.http.post('/api/comments/comment', commentDTO).map(res => res.json());
     }
+
+    getComments(id){
+        return this.http.get('/api/comments/post/'+id).map(res => res.json());
+    }
     
     editComment(id: number, commentDTO:any){
         return this.http.post('/api/comments/comment/'+id, commentDTO).map(res => res.json());

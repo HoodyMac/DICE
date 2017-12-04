@@ -3,6 +3,7 @@ package pl.zed.dice.post.model;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import pl.zed.dice.comment.model.CommentDTO;
 import pl.zed.dice.like.model.LikeDTO;
+import pl.zed.dice.user.profile.model.UserProfileDTO;
 
 import java.util.List;
 
@@ -10,16 +11,16 @@ import java.util.List;
 public class PostDTO {
 
     private Long id;
-    private String author;
+    private UserProfileDTO author;
     private String content;
     private String created_date;
     private String cropImg;
-    private List<CommentDTO> comments;
     private List<LikeDTO> likes;
+    private List<CommentDTO> comments;
 
     public PostDTO(){}
 
-    public PostDTO(Long id, String author, String content, String created_date, String cropImg) {
+    public PostDTO(Long id, UserProfileDTO author, String content, String created_date, String cropImg) {
         this.id = id;
         this.author = author;
         this.content = content;
@@ -35,11 +36,11 @@ public class PostDTO {
         this.id = id;
     }
 
-    public String getAuthor() {
+    public UserProfileDTO getAuthor() {
         return author;
     }
 
-    public void setAuthor(String author) {
+    public void setAuthor(UserProfileDTO author) {
         this.author = author;
     }
 
@@ -67,19 +68,19 @@ public class PostDTO {
         this.cropImg = cropImg;
     }
 
-    public List<CommentDTO> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<CommentDTO> comments) {
-        this.comments = comments;
-    }
-
     public List<LikeDTO> getLikes() {
         return likes;
     }
 
     public void setLikes(List<LikeDTO> likes) {
         this.likes = likes;
+    }
+
+    public List<CommentDTO> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<CommentDTO> comments) {
+        this.comments = comments;
     }
 }

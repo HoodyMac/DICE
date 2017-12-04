@@ -5,6 +5,7 @@ import {SearchService} from '../services/search.service';
 import {FriendsService} from '../services/friends.service';
 import {AuthenticationService} from "../common/services/authentication.service";
 import {CommentService} from "../common/services/comment.service";
+import {LikeService} from "../common/services/like.service";
 import {TranslateService} from "ng2-translate";
 import {Title} from "@angular/platform-browser";
 import _ from "lodash";
@@ -15,7 +16,7 @@ declare var jQuery: any;
 @Component({
   templateUrl: 'dev/profile/profile.component.html',
   styleUrls: ['../app/css/profile.css'],
-  providers: [ProfileService, SearchService, FriendsService, CommentService]
+  providers: [ProfileService, SearchService, FriendsService, CommentService, LikeService]
 })
 
 export class ProfileComponent implements AfterViewInit {
@@ -26,12 +27,12 @@ export class ProfileComponent implements AfterViewInit {
   editImgSrc: string = "/app/img/edit_icon_gray.png";
   profileId;
   isMe: boolean;
-  profilePosts :any = [];
   postDTO = {};
   inPostEdit: boolean = false;
   postToEdit = {};
   commentDTO = {post: null, content: ''};
   showComments = false;
+  currentUser = {};
 
   @ViewChild('cropbox') cropbox: ElementRef;
 
@@ -45,21 +46,23 @@ export class ProfileComponent implements AfterViewInit {
               private _friendService: FriendsService,
               private titleService: Title,
               private translate: TranslateService,
-              private commentService: CommentService) {
+              private commentService: CommentService,
+              private likeService: LikeService) {
 
     this.route.params.subscribe(params => {
       this.profileId = params['id'];
     });
 
-    this.getProfilePosts(this.profileId);
-
-    var currentUser = this.authenticationService.getUserInfo();
-    if (currentUser === undefined) {
+    this.currentUser = this.authenticationService.getUserInfo();
+    if (this.currentUser === undefined) {
       this.authenticationService.getUserInfoObservable().subscribe(
-        data => this.isMe = this.profileId == data.userProfileId
+        data => {
+          this.isMe = this.profileId == data.userProfileId;
+          this.currentUser = data;
+        }
       );
     } else {
-      this.isMe = this.profileId == currentUser.userProfileId;
+      this.isMe = this.profileId == this.currentUser.userProfileId;
     }
 
     this.viewUserProfile(this.profileId);
@@ -150,19 +153,10 @@ export class ProfileComponent implements AfterViewInit {
     this._router.navigate(['/edit']);
   }
 
-  getProfilePosts(profileId){
-    this.profileService.getPosts(profileId).subscribe(
-      data => {
-        this.profilePosts = data;
-        console.log(this.profilePosts);
-      }
-    );
-  }
-
   doPostCreation(){
     this.profileService.createUserPost(this.postDTO).subscribe(
       data => {
-        this.profilePosts.unshift(data);
+        this.userInfo.posts.unshift(data);
       }
     );
   }
@@ -193,8 +187,8 @@ export class ProfileComponent implements AfterViewInit {
   deletePost(post){
     this.profileService.deletePost(post.id).subscribe(
       success => {
-        let index = this.profilePosts.indexOf(post);
-        this.profilePosts.splice(index, 1);
+        let index = this.userInfo.posts.indexOf(post);
+        this.userInfo.posts.splice(index, 1);
       }
     );
   }
@@ -214,14 +208,19 @@ export class ProfileComponent implements AfterViewInit {
     );
   }
 
-  toogleComments(){
-     if(this.showComments){
+  toggleComments(post){
+     if (this.showComments) {
        this.showComments = false;
-     }
-     else{
+     }else {
+        this.commentService.getComments(post.id).subscribe(
+          data => {
+           post.comments = data;
+          }
+        );
        this.showComments = true;
      }
   }
+
   deleteComment(post, comment){
     this.commentService.deleteComent(comment.id).subscribe(
       success => {

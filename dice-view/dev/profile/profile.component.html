@@ -199,7 +199,7 @@
                 </div>
 
                 <div class="posts_container">
-                    <div class="post_block" *ngFor="let post of profilePosts">
+                    <div class="post_block" *ngFor="let post of userInfo.posts">
                         <div class="header">
                             <ul>
                                 <li>
@@ -208,7 +208,7 @@
                                     </div>
 
                                     <div class="content">
-                                        <p class="username">{{post.author}}</p>
+                                        <p class="username">{{userInfo.firstname + ' ' + userInfo.lastname}}</p>
                                         <p class="date">{{post.created_date | date:'dd.MM HH:mm'}}</p>
                                     </div>
                                     <div class="post_edit" *ngIf="isMe">
@@ -251,7 +251,7 @@
                         </div>
                         <div class="comments_module" >
                             <div class="show_comments">
-                                <input type="button" (click)="toogleComments()" class="{{showComments ? 'active' : ''}} btn btn-default" value="Show comments">
+                                <input type="button" (click)="toggleComments(post)" class="{{showComments ? 'active' : ''}} btn btn-default" value="Show comments">
                             </div>
 
                             <div class="comment_block" *ngIf="showComments">

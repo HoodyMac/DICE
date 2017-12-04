@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import pl.zed.dice.comment.model.CommentDTO;
 import pl.zed.dice.comment.service.CommentService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/comments")
 public class CommentController {
@@ -29,6 +31,12 @@ public class CommentController {
     @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable Long id){
         commentService.delete(id);
+    }
+
+    @GetMapping("/post/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<CommentDTO> getComments(@PathVariable Long id){
+        return commentService.getComments(id);
     }
 
 }

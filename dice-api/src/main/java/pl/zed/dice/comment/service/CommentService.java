@@ -14,6 +14,7 @@ import pl.zed.dice.user.profile.asm.UserAsm;
 import pl.zed.dice.user.profile.domain.UserProfile;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CommentService {
@@ -43,6 +44,14 @@ public class CommentService {
 
         commentRepository.saveAll(comments);
         return commentAsm.makeCommentDto(comment, userAsm.makeUserProfileDTO(userProfile));
+    }
+
+    public List<CommentDTO> getComments(Long id){
+        return postRepository.getOne(id)
+                .getComments()
+                .stream()
+                .map(comment -> commentAsm.makeCommentDto(comment, userAsm.makeUserProfileDTO(comment.getOwner())))
+                .collect(Collectors.toList());
     }
 
     public CommentDTO edit(Long id, CommentDTO commentDTO){
