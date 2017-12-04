@@ -1,18 +1,17 @@
 import {Component, OnInit} from "@angular/core";
 import {IMultiSelectOption} from "angular-2-dropdown-multiselect";
-import {ForumService} from "../services/forum.service";
+import {ForumService} from "../../services/forum.service";
 
 @Component({
-  templateUrl: '../app/forum-list/forum-list.component.html',
+  templateUrl: '../app/forum/list/forum-list.component.html',
   styleUrls: ['../app/css/forum-list.css'],
   providers: [ForumService]
 })
 export class ForumListComponent {
 
   public editedQuestion = {};
-
-  public selectedTags: number[];
   public tags: IMultiSelectOption[] = [];
+  public questions = [];
 
   public  msSettings: IMultiSelectSettings = {
     pullRight: false,
@@ -39,15 +38,15 @@ export class ForumListComponent {
         };
       })
     );
+
+    this.forumService.getAllQuestions().subscribe(
+      data => this.questions = data
+    );
   }
 
   public createQuestion() {
-    console.log(this.editedQuestion);
     this.forumService.createQuestion(this.editedQuestion).subscribe(
-      data => {
-        console.log(data);
-        this.editedQuestion = {};
-      }
+      data => this.editedQuestion = {}
     );
   }
 }

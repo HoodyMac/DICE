@@ -21,7 +21,7 @@ declare var jQuery: any;
 export class ProfileComponent implements AfterViewInit {
   @ViewChild('fileInput') inputEl: ElementRef;
 
-  countModules: any; //count_module[];
+  countModules: any;
   userInfo = {};
   editImgSrc: string = "/app/img/edit_icon_gray.png";
   profileId;
@@ -41,7 +41,8 @@ export class ProfileComponent implements AfterViewInit {
 
   constructor(private profileService: ProfileService,
               private authenticationService: AuthenticationService,
-              private _router: Router, private route: ActivatedRoute, private _searchService: SearchService,
+              private _router: Router, private route: ActivatedRoute,
+              private _searchService: SearchService,
               private _friendService: FriendsService,
               private titleService: Title,
               private translate: TranslateService,
@@ -53,13 +54,13 @@ export class ProfileComponent implements AfterViewInit {
 
     this.getProfilePosts(this.profileId);
 
-    var currentUser = this.authenticationService.getUserInfo();
+    let currentUser = this.authenticationService.getUserInfo();
     if (currentUser === undefined) {
       this.authenticationService.getUserInfoObservable().subscribe(
-        data => this.isMe = this.profileId == data.userProfileId
+        data => this.isMe = this.profileId === data.userProfileId
       );
     } else {
-      this.isMe = this.profileId == currentUser.userProfileId;
+      this.isMe = this.profileId === currentUser.userProfileId;
     }
 
     this.viewUserProfile(this.profileId);
