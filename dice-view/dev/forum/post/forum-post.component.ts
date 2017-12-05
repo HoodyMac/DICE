@@ -23,6 +23,8 @@ export class ForumPostComponent {
         data => this.question = data
       );
     });
+
+    console.log(this.question);
   }
 
   public createAnswer(): void {

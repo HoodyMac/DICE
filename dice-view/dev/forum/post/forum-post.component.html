@@ -15,15 +15,26 @@
                             </div>
                         </div>
 
-                        <div class="ask_button">
-                            <button type="button"  class="btn btn-default" (click)="createPost.open()">Ask a questions</button>
+                        <div class="author_info">
+                            <div class="user-img">
+                                <div class="circle" [style.background-image]="'url(/app/img/MEM1.jpg)'"></div>
+                            </div>
+                            <div class="author_name">
+                                <label>Author:</label>
+                                <p>{{question.authorName}}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="post_content">
                     <div class="post_block">
                         <div class="main_content">
-                            <label for="description">Description</label>
+                            <div class="block_title">
+                                <label for="description">Description</label>
+                                <div class="createTime">
+                                    <label>Date of publication:</label><span>{{question.createdAt | date:'dd.MM.yyyy'}}</span> <label>at</label><span>{{question.createdAt | date:'HH:mm'}}</span>
+                                </div>
+                            </div>
                             <div class="separator"></div>
                             <div class="text_block" id="description">
                                 <p>{{question.description}}</p>
