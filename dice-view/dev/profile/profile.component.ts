@@ -54,8 +54,6 @@ export class ProfileComponent implements AfterViewInit {
       this.profileId = params['id'];
     });
 
-    this.getProfilePosts(this.profileId);
-
     this.currentUser = this.authenticationService.getUserInfo();
     if (this.currentUser === undefined) {
       this.authenticationService.getUserInfoObservable().subscribe(

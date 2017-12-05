@@ -39,7 +39,6 @@ section.user_info{padding-bottom: 50px;
             0% { top: -250px; opacity: 0; }
             100% { top: 0; opacity: 1; }
         }
-
     }
 
     .page_info{position: relative; background: @box_bg; border-radius: 2px; box-shadow: 0 1px 0 0 @userInfo_border, 0 0 0 1px @userInfo_border;
@@ -62,9 +61,13 @@ section.user_info{padding-bottom: 50px;
     .counts_module{ border: 1px solid; border-radius: 2px; margin-top: 10px; border-color: @userInfo_border; display: inline-flex; width: 100%; background-color: @box_bg;
         .page_count{ padding: 1% 2% 1% 2%; text-align: center; display: grid; border-right: 1px solid @userInfo_border; width: 25%;
             &:last-child{border: none;}
-            a{color: @userInfo_fontValue; font-size: 16px; text-decoration: none; cursor: pointer;
-                &:hover{color: @userInfo_fontLabelHover;}
-                .label_module{ }
+            a.label{
+                .label_module{color: @userInfo_fontValue; font-size: 16px; text-decoration: none; cursor: pointer; font-weight: 500;
+                    &:hover{color: @userInfo_fontLabelHover;}
+                }
+            }
+            a.icon{display: none; cursor: pointer;
+                i{font-size: 20px;}
             }
             .value_module{ color: @userInfo_fontLabel;
                 i{font-size: 16px;}
@@ -99,7 +102,6 @@ section.user_info{padding-bottom: 50px;
                                 }
                             }
                         }
-
                     }
                 }
                 modal-footer{  display: flex;
@@ -127,12 +129,12 @@ section.user_info{padding-bottom: 50px;
                         .user-img{ padding: 1% 25px; width: 10%;
                             .circle{ width: 50px; padding: 2%; height:50px; border-radius: 50%; background-position: center; background-size: cover;}
                         }
-                        .content{ width: 85%;
+                        .content{ width: 85%; word-break: break-all;
                             p{
-                                &.username{ padding: 15px 0px 0px 5px; font-size: 16px; margin: 0;  color: #2A5885;
+                                &.username{ padding: 10px 0 0 5px; font-size: 16px; margin: 0;  color: #2A5885;
                                     &{color: #1b3654; cursor: pointer;}
                                 }
-                                &.date{ padding: 0px 0px 0px 5px; margin: 0;}
+                                &.date{ padding: 0 0 0 5px; margin: 0;}
                             }
                         }
                         .post_edit {
@@ -167,7 +169,6 @@ section.user_info{padding-bottom: 50px;
                         }
                     }
                 }
-
             }
             .social_module{ display: inline-flex; padding: 0px 15px;
                 .likesEntities{ display: inline-flex; padding: 10px;
@@ -188,7 +189,7 @@ section.user_info{padding-bottom: 50px;
                     input{background-color: #d9ddec; width: 100%; height: 35px; border: none; border-radius: 0;
                         &:hover{background-color: #cfd3e2;}
                         &:active, &:focus, &:visited{ outline: none; }
-                        &.active{ background-color: #a1bbec;}
+                        &:active{ background-color: #a1bbec;}
                     }
                 }
                 .comment_block{
@@ -198,7 +199,7 @@ section.user_info{padding-bottom: 50px;
                             .user-img{ padding: 10px 0px 10px 25px; width: 8%;
                                 .circle{ width: 35px; padding: 2%; height:35px; border-radius: 50%; background-position: center; background-size: cover; cursor:pointer;}
                             }
-                            .content{ width: 75%;
+                            .content{ width: 75%; word-break: break-all;
                                 a{ color: #2A5885; font-size: 14px;
                                     .username{ padding: 5px 0 0 5px; margin: 0; cursor:pointer;}
                                     &:hover{text-decoration: none; color: #1b3654;}
@@ -206,9 +207,6 @@ section.user_info{padding-bottom: 50px;
                                 p{
                                     &.text{padding: 0px 5px; margin: 0;}
                                 }
-                            }
-                            .content{
-                                p{margin: 0;}
                             }
                             .comments_edit {display: inline-flex; width: 17%;
                                 span{ font-size: 20px; color: cornflowerblue; margin: 15px 10px; cursor: pointer;
@@ -299,28 +297,142 @@ section.user_info{padding-bottom: 50px;
             }
         }
     }
+    section.user_info .posts_container .post_block {
+        .header ul li{
+            .user-img { width: 13%; }
+        }
+        .comments_module .comment_block ul li {
+            .comments_edit { width: 20%; }
+            .user-img { width: 15%; }
+        }
+    }
+    .dropdown-menu{left: -145px; top: 35px;}
+}
+@media (max-width: 990px){
+    section.user_info{
+        .counts_module .page_count {
+            a.icon{ display: block;}
+            a.label{display: none;}
+        }
+        .posts_container .post_block {
+              .header ul li {
+                  .user-img { width: 20%; }
+              }
+              .comments_module{
+                  .input-text form input[type='text'] { margin-right: 10px; margin-left: 15px; }
+                  .input-text form input[type='submit'] { width: 20%; }
+                  .comment_block ul li {
+                      .comments_edit { width: 45%; }
+                      .user-img { width: 20%; }
+                  }
+              }
+          }
+    }
+
+
 }
 
-@media (max-width: 768px){ }
+@media (max-width: 768px){
+    section.user_info .posts_container .post_block {
+        .comments_module{
+            .comment_block ul li {
+                .comments_edit { width: 55%; }
+            }
+        }
+    }
+}
 
 @media (max-width: 720px){
-    .dropdown-menu{left: -145px;}
+    section.user_info {
+        .posts_container .post_block {
+            .header ul li {
+                .user-img { width: 25%; margin-left:0; }
+            }
+            .comments_module .comment_block ul li {
+                .comments_edit { width: 65%; }
+            }
+        }
+    }
 }
 
 @media (max-width: 620px) {
     .custom-col-image{width: 70%; margin-left: 15%; margin-right: 15%; }
     .custom-col-info{width: 100%; margin-top: 5%;}
+
+    section.user_info .posts_container .post_block {
+        .header ul li {
+            .user-img { width: 20%; }
+        }
+        .comments_module .comment_block ul li {
+            .comments_edit { width: 60%; }
+        }
+    }
+
 }
 
 @media (max-width: 480px){
+    .custom-col-image{width: 100%; margin-left: 0; margin-right: 0;
+        .forum_box{margin-bottom: 10px!important;}
+    }
+    .custom-col-info{width: 100%; margin-top: 0;  }
     .post_edit{padding: 5px 3px 0 0; }
     .comments_edit{padding: 5px 3px 0 0; }
 
+    section.user_info .posts_container .post_block {
+        .header ul li {
+            .user-img { width: 25%; padding: 10px 10px;
+                .circle { width: 35px; height: 35px; }
+            }
+        }
+        .comments_module {
+            .input-text { padding: 10px 10px 10px 10px;
+                form input[type='text'] {  margin-right: 0; margin-left: 5px;  }
+                form .user-img{width: 15%;}
+            }
+            .comment_block ul li {
+                .comments_edit { width: 70%; }
+            }
+        }
+    }
+
+    section.user_info .page_info .profile_info .profile_info_row {
+        .value {width: 80%;}
+        .label_info { display: none;}
+    }
+    section.user_info .counts_module .page_count modal modal-footer .buttons_section input.submit { width: 150px; }
 }
 
 @media (max-width: 340px){
     .custom-col-image{width: 100%; margin-left: 0; margin-right: 0; }
     .custom-col-info{width: 100%;}
+
+    section.user_info .posts_container .post_block {
+        .header ul li {
+            .user-img { width: 30%; padding: 10px 10px;
+                .circle { width: 35px; height: 35px; }
+            }
+            .content{
+                p.username{ padding: 5px 0 0 5px;}
+            }
+        }
+        .comments_module {
+            .input-text form input[type='submit'] {
+                width: 25%;
+                margin-left: 5px;
+            }
+            .input-text { padding: 10px 5px 10px 0;
+                form input[type='text'] {  margin-right: 0; margin-left: 5px;  }
+            }
+            .comment_block ul li {
+                .content {
+                    p.username{ padding: 5px 0 0 5px;}
+                }
+                .user-img { width: 35%; padding: 10px 0 10px 10px; }
+            }
+            .input-text form .user-img { display: none; }
+        }
+    }
+    section.user_info .counts_module .page_count modal modal-footer .buttons_section input.submit { width: 130px; }
 }
 
 /*--- END (media) Responsive style -----------------------*/

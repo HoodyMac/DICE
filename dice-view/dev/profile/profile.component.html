@@ -119,20 +119,23 @@
                 </div>
                 <div class="counts_module">
                     <div class="page_count">
-                        <a (click)="goToMessagePage()"><span class="label_module" translate>PROFILE.newMessages</span></a>
+                        <a (click)="goToMessagePage()" class="label"><span class="label_module" translate>PROFILE.newMessages</span></a>
+                        <a (click)="goToMessagePage()" class="icon" title="{{'PROFILE.newMessages' | translate }}"><i class="fa fa-envelope" aria-hidden="true"></i></a>
                         <span class="value_module">(1)</span>
                     </div>
                     <div class="page_count">
-                        <a (click)="goToFriendsPage()"><span class="label_module" translate>PROFILE.friends</span></a>
+                        <a (click)="goToFriendsPage()" class="label"><span class="label_module" translate>PROFILE.friends</span></a>
+                        <a (click)="goToMessagePage()" class="icon" title="{{'PROFILE.friends' | translate }}"><i class="fa fa-users" aria-hidden="true"></i></a>
                         <span (click)="goToFriendsPage()" class="value_module">{{userInfo.friendsCount}}</span>
                     </div>
                     <div class="page_count">
-                        <a href="#"><span class="label_module" translate>PROFILE.posts</span></a>
+                        <a href="#" class="label"><span class="label_module" translate>PROFILE.posts</span></a>
+                        <a (click)="goToMessagePage()" class="icon" title="{{'PROFILE.posts' | translate }}"><i class="fa fa-newspaper-o" aria-hidden="true"></i></a>
                         <span class="value_module">18</span>
                     </div>
                     <div class="page_count">
-                        <a (click)="createPost.open()"><span class="label_module" translate>PROFILE.createPost</span></a>
-                        <span><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
+                        <a (click)="createPost.open()" class="label"><span class="label_module" translate>PROFILE.createPost</span></a>
+                        <a (click)="createPost.open()" class="icon" title="{{'PROFILE.createPost' | translate }}"> <span><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span></a>
                         <!-- Create a post modal windows -->
                         <div class="row">
                             <modal #createPost modalClass="modal-lg" id="createPostwModal" [closeOnOutsideClick]="true" [closeOnEscape]="true">
@@ -285,12 +288,6 @@
                                         <div class="circle" [style.background-image]="'url(' + (userInfo.cropImgSrc ? '/api/profile/image/get/' + userInfo.cropImgSrc : '/app/img/default_user_photo.jpg') + ')'"></div>
                                     </div>
                                     <input type="text" class="form-control" placeholder="Enter your comment" name="content" [(ngModel)]="commentDTO.content" #content="ngModel">
-                                    <ul class="upload_item">
-                                        <li><i class="fa fa-code fa-lg"></i></li>
-                                        <li> <span class="glyphicon glyphicon-picture" aria-hidden="true"></span></li>
-                                        <li><span class="glyphicon glyphicon-file" aria-hidden="true"></span></li>
-                                    </ul>
-                                    <input type="file" id="imgupload" style="display:none"/>
                                     <input type="submit" class="form-control" value="Send">
                                 </form>
                             </div>
