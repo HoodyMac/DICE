@@ -29,8 +29,10 @@
 
     "firstNameAlert": "Вы должны ввести имя",
     "firstNameLongAlert": "Слишком длинное имя",
+    "firstNameShortAlert": "Слишком короткое имя",
     "lastNameAlert": "Вы должны ввести фамилию",
     "lastNameLongAlert": "Слишком длинная фамилия",
+    "lastNameShortAlert": "Слишком короткая фамилия",
     "genderAlert": "Вы должны вибрать пол",
     "birthdayAlert": "Вы должны ввести дату рождения",
     "emailAlert": "Вы должны ввести адрес электронной почты",

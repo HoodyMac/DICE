@@ -80,6 +80,7 @@
               <div class="errors" *ngIf="form.get('firstname').touched">
                 <p *ngIf="form.get('firstname').errors != null ? form.get('firstname').errors.required :  false " translate>HOME.firstNameAlert</p>
                 <p *ngIf="form.get('firstname').errors != null ? form.get('firstname').errors.maxlength :  false " translate>HOME.firstNameLongAlert</p>
+                <p *ngIf="form.get('firstname').errors != null ? form.get('firstname').errors.minlength :  false " translate>HOME.firstNameShortAlert</p>
               </div>
 
             </div>
@@ -88,6 +89,7 @@
               <div class="errors" *ngIf="form.get('lastname').touched">
                 <p *ngIf="form.get('lastname').errors != null ? form.get('lastname').errors.required :  false " translate>HOME.lastNameAlert</p>
                 <p *ngIf="form.get('lastname').errors != null ? form.get('lastname').errors.maxlength :  false " translate>HOME.lastNameLongAlert</p>
+                <p *ngIf="form.get('lastname').errors != null ? form.get('lastname').errors.minlength :  false " translate>HOME.lastNameShortAlert</p>
               </div>
             </div>
             <div class="gender">

@@ -29,8 +29,10 @@
 
     "firstNameAlert": "Введіть ім'я",
     "firstNameLongAlert": "Введене ім'я задовге",
+    "firstNameShortAlert": "Введене ім'я за коротке",
     "lastNameAlert": "Введіть прізвище",
     "lastNameLongAlert": "Введене прізвище задовге",
+    "lastNameShortAlert": "Введене прізвище за коротке",
     "genderAlert": "Введіть стать",
     "birthdayAlert": "Введіть дату народження",
     "emailAlert": "Введіть електронний адрес",

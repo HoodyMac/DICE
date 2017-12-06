@@ -154,13 +154,17 @@ export class ProfileComponent implements AfterViewInit {
     this._router.navigate(['/edit']);
   }
 
-  doPostCreation(){
+  doPostCreation(post){
+    console.log(post);
     this.profileService.createUserPost(this.postDTO).subscribe(
       data => {
-        this.userInfo.posts.unshift(data);
+        if(typeof post.id === "undefined"){
+          this.userInfo.posts.unshift(data);
+        }
       }
     );
   }
+
 
   goToProfile(id){
     this._router.navigate(['/profile/'+id]);
@@ -196,7 +200,6 @@ export class ProfileComponent implements AfterViewInit {
 
   selectPostForEditing(post){
     this.postDTO = post;
-    console.log(this.postDTO);
   }
 
 

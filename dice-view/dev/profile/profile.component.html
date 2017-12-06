@@ -192,7 +192,7 @@
 
                                     <div class="buttons_section">
                                         <input type="reset" class="submit" value="Cancel" (click)="createPost.close()">
-                                        <input type="submit" class="submit" value="Create" (click)="doPostCreation(); createPost.close()">
+                                        <input type="submit" class="submit" value="Create" (click)="doPostCreation(postDTO); createPost.close()">
                                     </div>
                                 </modal-footer>
                             </modal>

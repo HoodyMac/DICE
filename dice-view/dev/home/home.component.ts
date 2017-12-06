@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from "../common/services/authentication.service";
 import {RegistrationService} from "../services/registration.service";
-import {Validators, FormGroup, FormBuilder,} from "@angular/forms";
+import {Validators, FormGroup, FormBuilder, Validator,} from "@angular/forms";
 import {Router, NavigationEnd, ActivatedRoute} from "@angular/router";
 import { Title } from '@angular/platform-browser';
 import {TranslateService} from "ng2-translate";
@@ -34,12 +34,12 @@ export class HomeComponent {
       });
 
       this.form = this.fb.group({
-        firstname: ['', Validators.compose([ Validators.required, Validators.maxLength(60)])],
-        lastname: ['',Validators.compose([ Validators.required, Validators.maxLength(60)])],
+        firstname: ['', Validators.compose([ Validators.required, Validators.maxLength(60), Validators.minLength(3)])],
+        lastname: ['',Validators.compose([ Validators.required, Validators.maxLength(60), Validators.minLength(3)])],
         gender: ['', Validators.required],
         birthdayDate: ['', Validators.required],
         email: ['', Validators.required],
-        password: ['', Validators.required],
+        password: ['', Validators.compose([ Validators.required, Validators.minLength(3)])],
         confirmPassword: ['', Validators.required]
       });
   }
