@@ -47,8 +47,12 @@ section.search{
 
   .search-results{width: 100%; border: 1px solid @box_border; border-radius: 2px; margin-top: 2%; background-color: @box_bg; margin-bottom: 7%;
     ul{list-style: none; padding: 0; margin: 0;
-      li{padding: 1%;}
-      li.header p{ text-align: center; font-size: 18px; margin: 0;}
+      li{padding: 1%;
+        &.header p{ text-align: center; font-size: 18px; margin: 0;}
+        &.spinner{ text-align: center;
+          i{font-size: 35px;color: @navBar_bg; animation: spin 2s linear infinite;}
+        }
+      }
       .main_content{
         li{border-top: 1px solid; }
         .content_box{
@@ -72,7 +76,9 @@ section.search{
             }
             .add_button{text-align: center; vertical-align: text-top;
               input{width: 55%; margin: 1% 35%;}
-              a{color: @font_value; margin-left: 85px;}
+              a{color: @font_value; margin-left: 85px;
+                span{ cursor: pointer;}
+              }
             }
             .mutual_friends{
               .span{color: #000000;}

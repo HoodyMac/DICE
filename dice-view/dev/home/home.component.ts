@@ -20,6 +20,8 @@ export class HomeComponent {
   public errorMessage: string;
   public showErrorMessage: boolean = false;
   public showLoginMessage: boolean = false;
+  public spinnerInShow = false;
+  public spinnerUpShow = false;
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -49,10 +51,12 @@ export class HomeComponent {
     }
 
   onSignIn(credentials) {
+    this.spinnerInShow = true;
     this.authenticationService.login(credentials).subscribe(
       data => this.route.navigate(['/profile', data.userProfileId]),
       () => {
         this.showLoginMessage = true;
+        this.spinnerInShow = false;
         setTimeout(function() {
           this.showLoginMessage = false;
         }.bind(this), 5000);
@@ -61,6 +65,7 @@ export class HomeComponent {
   }
 
   onSignUp(credentials){
+    this.spinnerUpShow = true;
     this.registrationService.doSignUp(credentials)
       .subscribe(
         () => this.onSignIn({
@@ -71,9 +76,11 @@ export class HomeComponent {
           console.log(error);
           this.errorMessage = error._body;
           this.showErrorMessage = true;
+          this.spinnerUpShow = false;
           setTimeout(function() {
             this.showErrorMessage = false;
           }.bind(this), 5000);
+
         }
       );
   }

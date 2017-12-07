@@ -149,6 +149,7 @@
     "friends":"Друзья",
     "posts":"Публикации",
     "forum":"Форум",
-    "createPost": "Create a post"
+    "createPost": "Создать запись",
+    "questions": "Вопросы"
   }
 }

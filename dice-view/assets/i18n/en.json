@@ -149,7 +149,8 @@
     "friends":"Friends",
     "posts":"Posts",
     "forum":"Forum",
-    "createPost": "Create a post"
+    "createPost": "Create a post",
+    "questions": "Questions"
   }
 
 }

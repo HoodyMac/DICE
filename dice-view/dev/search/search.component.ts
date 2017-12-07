@@ -1,9 +1,10 @@
 import {Component, AfterViewInit, ElementRef, ViewChild} from '@angular/core';
 import {SearchService} from '../services/search.service'
 import {FormGroup, FormBuilder, NgForm} from "@angular/forms";
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {TranslateService} from "ng2-translate";
 import {Title} from "@angular/platform-browser";
+import {FriendsService} from "../services/friends.service";
 declare var jQuery: any;
 
 @Component({
@@ -21,12 +22,15 @@ export class SearchComponent implements AfterViewInit{
     public searchForm: FormGroup;
     public fullname: "";
     private buttonDisabled;
+    private spinnerShow = false;
 
     constructor(private searchService: SearchService,
                 private fb:FormBuilder,
                 private activatedRoute: ActivatedRoute,
                 private titleService: Title,
-                private translate: TranslateService) {
+                private translate: TranslateService,
+                private _router: Router,
+                private route: ActivatedRoute) {
 
         translate.get('PAGE_TITLES.SEARCH').subscribe((res: string) => {
             this.titleService.setTitle(res);
@@ -75,6 +79,10 @@ export class SearchComponent implements AfterViewInit{
         this.getUsersData();
     }
 
+     goToFriendsPage(userId, username){
+      this._router.navigate(['/friends', {profileId: userId, username: username}]);
+    }
+
     setAgeTo(minAgeValue){
         this.ageToValues = [];
         if(minAgeValue != ""){
@@ -113,11 +121,12 @@ export class SearchComponent implements AfterViewInit{
         searchData['ageTo'] = this.searchForm.controls['ageTo'].value;
         console.log(searchData);
 
+        this.spinnerShow = true;
         this.searchService.getUserSearchData(searchData)
             .subscribe(
                 data =>{
                     this.searchData = data;
-                    console.log(this.searchData);
+                    this.spinnerShow = false;
                 }
             );
     }

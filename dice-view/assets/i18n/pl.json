@@ -148,6 +148,7 @@
     "friends":"Znajomi",
     "posts":"Publikacje",
     "forum":"Forum",
-    "createPost": "Create a post"
+    "createPost": "Utwórz wpis",
+    "questions": "Zapytania"
   }
 }

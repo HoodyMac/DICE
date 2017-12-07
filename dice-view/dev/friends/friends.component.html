@@ -39,11 +39,12 @@
         </div>
 
         <div class="friends-content">
+          <div class="spinner"><i class="fa fa-spinner" aria-hidden="true" *ngIf="spinnerShow"></i></div>
           <ul>
             <li class="content_box" *ngFor="let userData of userFriendsData">
               <table>
                 <tr>
-                  <td class="img_block" rowspan="3"><a href="#" class="img"><img src="{{userData.cropImage ? '/api/profile/image/get/' + userData.cropImage : '/app/img/default_user_photo.jpg'}}" alt=""></a></td>
+                  <td class="img_block" rowspan="3"><a [routerLink]="['/profile', userData.id]" class="img"><img src="{{userData.cropImage ? '/api/profile/image/get/' + userData.cropImage : '/app/img/default_user_photo.jpg'}}" alt=""></a></td>
                   <td class="info_block" rowspan="3">
                     <a [routerLink]="['/profile', userData.id]" class="title"><span class="title">{{userData.firstName}}  {{userData.lastName}}</span></a>
                     <a (click)="getFriendsOfFriend(userData.id, userData.firstName + ' ' + userData.lastName)"><span class="friends">{{userData.friendsCount}} friends</span></a>

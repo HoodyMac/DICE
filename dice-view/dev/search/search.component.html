@@ -65,12 +65,13 @@
                 <div class="search-results">
                     <ul>
                         <li class="header"><p>Search results</p></li>
+                        <li class="spinner" *ngIf="spinnerShow"><i class="fa fa-spinner" aria-hidden="true"></i></li>
                         <li class="main_content">
                             <ul>
                                 <li class="content_box" *ngFor="let data of searchData">
                                     <table>
                                         <tr>
-                                            <td class="img_block" rowspan="3"><a href="#" class="img"><img src="{{data.cropImage ? '/api/profile/image/get/' + data.cropImage : '/app/img/default_user_photo.jpg'}}" alt=""></a></td>
+                                            <td class="img_block" rowspan="3"><a [routerLink]="['/profile', data.id]" class="img"><img src="{{data.cropImage ? '/api/profile/image/get/' + data.cropImage : '/app/img/default_user_photo.jpg'}}" alt=""></a></td>
                                             <td class="info_block" rowspan="3">
                                                 <a [routerLink]="['/profile', data.id]" class="title"><span>{{data.firstName}}  {{data.lastName}}</span></a>
                                                 <span class="town">{{data.city}}</span>
@@ -80,7 +81,7 @@
                                                 <input type="button" class="btn btn-default" id="addToFriends{{data.id}}" *ngIf="data.friendShipStatus == null" (click)="addUserToFriends(data.id)"  value="Add to friends">
                                                 <input type="button" class="btn btn-default" *ngIf="data.friendShipStatus == 'SENT' || data.friendShipStatus == 'REJECTED'" disabled  value="Request send">
                                                 <input type="button" class="btn btn-default" *ngIf="data.friendShipStatus == 'ACCEPTED'" disabled value="Friend">
-                                                <a href="#"><span>{{data.friendsCount}} friends</span></a>
+                                                <a (click)="goToFriendsPage(data.id, data.firstName + ' ' + data.lastName)"><span>{{data.friendsCount}} friends</span></a>
                                             </td>
                                         </tr>
                                     </table>

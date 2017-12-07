@@ -27,7 +27,11 @@ section.user_info{padding-bottom: 50px;
                         }
                     }
                 }
-                modal-footer{ text-align: center;}
+                modal-footer{ text-align: center;
+                  .spinner{width: 100%;bottom: 0; z-index: 1000; background-color: rgba(45,45,45,0.4); height: 100%; right: 0; color: cadetblue; position: fixed;
+                    i{ font-size: 55px; position: relative; top: 340px; color: @search_spinnerFont; animation: spin 2s linear infinite;}
+                  }
+                }
             }
             .imgView{ max-width: 100%;}
         }
@@ -183,6 +187,7 @@ section.user_info{padding-bottom: 50px;
                         &:hover{ color: #3638d4;}
                     }
                     p{padding: 0px 5px; margin: 0;}
+                    i{animation: spin 2s linear infinite; text-align: center;font-size: 18px; padding-top: 1px; color: #2520f7;}
                 }
             }
             .comments_module{

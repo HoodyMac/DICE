@@ -149,6 +149,7 @@
     "friends":"Друзі",
     "posts":"Публікації",
     "forum":"Форум",
-    "createPost": "Create a post"
+    "createPost": "Створити запис",
+    "questions": "Запитання"
   }
 }

@@ -38,6 +38,7 @@
                                     <div class="alert alert-success"  *ngIf="viewImageChangeMessage">
                                         <strong translate>PROFILE.imageChangeMessage</strong>
                                     </div>
+                                  <div class="spinner" *ngIf="showImgSpinner"><i class="fa fa-spinner" aria-hidden="true"></i></div>
                                 </modal-footer>
                             </modal>
                         </div>
@@ -129,14 +130,17 @@
                         <span (click)="goToFriendsPage()" class="value_module">{{userInfo.friendsCount}}</span>
                     </div>
                     <div class="page_count">
-                        <a href="#" class="label"><span class="label_module" translate>PROFILE.posts</span></a>
-                        <a (click)="goToMessagePage()" class="icon" title="{{'PROFILE.posts' | translate }}"><i class="fa fa-newspaper-o" aria-hidden="true"></i></a>
+                        <a href="#" class="label"><span class="label_module" translate>PROFILE.questions</span></a>
+                        <a class="icon" title="{{'PROFILE.questions' | translate }}"><i class="fa fa-newspaper-o" aria-hidden="true"></i></a>
                         <span class="value_module">18</span>
                     </div>
                     <div class="page_count">
-                        <a (click)="createPost.open()" class="label"><span class="label_module" translate>PROFILE.createPost</span></a>
-                        <a (click)="createPost.open()" class="icon" title="{{'PROFILE.createPost' | translate }}"> <span><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span></a>
-                        <!-- Create a post modal windows -->
+                        <a (click)="createPost.open()" class="label" *ngIf="isMe"><span class="label_module" translate>PROFILE.createPost</span></a>
+                        <a (click)="createPost.open()" class="icon" title="{{'PROFILE.createPost' | translate }}" *ngIf="isMe"> <span><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span></a>
+                        <a class="label" title="{{'PROFILE.posts' | translate }}" *ngIf="!isMe"><span class="label_module" translate>PROFILE.posts</span></a>
+                        <span  class="value_module">{{userInfo.postsCount}}</span>
+
+                      <!-- Create a post modal windows -->
                         <div class="row">
                             <modal #createPost modalClass="modal-lg" id="createPostwModal" [closeOnOutsideClick]="true" [closeOnEscape]="true">
                                 <modal-header>
@@ -250,6 +254,7 @@
                             <div class="comments">
                                 <span class="glyphicon glyphicon-comment" (click)="toggleComments(post)" aria-hidden="true"></span>
                                 <p>{{ post.comments.length }}</p>
+                                <i class="fa fa-spinner" aria-hidden="true" *ngIf="spinnerShow[post.id]"></i>
                             </div>
                         </div>
                         <div class="comments_module">

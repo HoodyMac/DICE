@@ -35,6 +35,8 @@ export class ProfileComponent implements AfterViewInit {
   commentsContent = [];
   showComments = false;
   currentUser = {};
+  spinnerShow = [];
+  showImgSpinner = false;
 
   @ViewChild('cropbox') cropbox: ElementRef;
 
@@ -66,9 +68,7 @@ export class ProfileComponent implements AfterViewInit {
     } else {
       this.isMe = this.profileId == this.currentUser.userProfileId;
     }
-
     this.viewUserProfile(this.profileId);
-
   };
 
   goToMessagePage() {
@@ -142,11 +142,13 @@ export class ProfileComponent implements AfterViewInit {
       for (let i = 0; i < fileCount; i++) {
         formData.append('file', inputEl.files.item(i));
       }
+      this.showImgSpinner = true;
       this.profileService.uploadProfilePicture(formData)
         .subscribe(
           (data) => {
             this.userInfo.originalImgSrc = data.newImageFileName;
             this.jcropApi.setImage('/api/profile/image/get/' + this.userInfo.originalImgSrc);
+            this.showImgSpinner = false;
           }
         );
     }
@@ -178,6 +180,7 @@ export class ProfileComponent implements AfterViewInit {
     this.profileService.getUserInfo(profileId).subscribe(
         data => {
           this.userInfo = data;
+          this.userInfo.postsCount = this.userInfo.posts.length;
           if (this.jcropApi !== undefined) {
             this.jcropApi.setImage('/api/profile/image/get/' + this.userInfo.originalImgSrc);
           }
@@ -225,9 +228,11 @@ export class ProfileComponent implements AfterViewInit {
          post.isShowComments = true;
        }
        else{
+         this.spinnerShow[post.id] = true;
          this.commentService.getComments(post.id).subscribe(
            data => {
              post.comments = data;
+             this.spinnerShow[post.id] = false;
            }
          );
          post.isShowComments = true;
