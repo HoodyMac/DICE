@@ -77,10 +77,10 @@ export class MessagesComponent{
   }
 
   public createChat(friendId: number) {
-    var chat = this.chats.filter(chat => chat.participantId == friendId);
+    let chat = this.chats.filter(chat => chat.participantId === friendId);
     if (chat.length === 1) {
       this.selectChat(chat[0]);
-    }else {
+    } else {
       this.chatService.createChat(friendId).subscribe(
         data => {
           this.chats.unshift(data);

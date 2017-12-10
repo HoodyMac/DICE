@@ -44,7 +44,7 @@ public class ChatService {
         UserProfile participantUserProfile = userProfileRepository.getOne(participantId);
 
         if(currentUserProfile.getId().equals(participantId)) {
-            // todo throw exception
+            throw new IllegalArgumentException("Chat create chat with yourself");
         }
 
         Chat chatWithSameParticipants = chatRepository.findChatByParticipants(currentUserProfile.getId(), participantUserProfile.getId());

@@ -172,7 +172,6 @@
                               <h2 *ngIf="codeView.isOpened">{{presentedAttachment.language}} code</h2>
                             </modal-header>
                             <modal-content>
-                              <!--<label>Your code</label>-->
                               <ngx-monaco-editor *ngIf="codeView.isOpened" [options]="viewOptions" style="height: 70%"></ngx-monaco-editor>
                               <label for="code_comment">Comment</label>
                               <p *ngIf="codeView.isOpened">{{presentedAttachment.comment}}</p>
