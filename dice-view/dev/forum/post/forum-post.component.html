@@ -64,12 +64,61 @@
                             </div>
                         </div>
                         <div class="social_module">
-                            <div class="likesEntities">
-                                <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
-                                <p>8156</p>
-                            </div>
+                          <div class="comments">
+                            <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+                            <p>52</p>
+                          </div>
+                          <div class="likesEntities">
+                            <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+                            <p>8156</p>
+                          </div>
                         </div>
-                        <div class="comments_module">
+                        <div class="comments">
+                          <div class="comment_block" >
+                            <ul>
+                              <li>
+                                <div class="user-img">
+                                  <div class="circle" [style.background-image]="'url(/app/img/default_user_photo.jpg)'"></div>
+                                </div>
+
+                                <div class="content">
+                                  <a><p class="username">Ivan Loichuk</p></a>
+                                  <p class="text">LOL KEK </p>
+                                </div>
+                                <div class="comments_edit">
+                                  <p class="date">22:27</p>
+                                  <div class="dropdown">
+                                    <a alt="More options"  title="More options" class=" dropdown-toggle" id="editComment" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></a>
+
+                                    <ul class="dropdown-menu" aria-labelledby="editComment">
+                                      <li><a>Delete comment</a></li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </li>
+                              <li>
+                                <div class="user-img">
+                                  <div class="circle" [style.background-image]="'url(/app/img/default_user_photo.jpg)'"></div>
+                                </div>
+
+                                <div class="content">
+                                  <a><p class="username">Ivan Loichuk</p></a>
+                                  <p class="text">Hello!!! Об этом фестивале знает весь мир, каждый год туда стремятся, без преувеличения, миллионы людей. Стоит только ввести в поиск слово Tomorrowland и через пару минут ты уже влюблен в этот фестиваль на всю жизнь!
+                                  </p>
+                                </div>
+                                <div class="comments_edit">
+                                  <p class="date">22:27</p>
+                                  <div class="dropdown">
+                                    <a alt="More options"  title="More options" class=" dropdown-toggle" id="editComment" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></a>
+
+                                    <ul class="dropdown-menu" aria-labelledby="editComment">
+                                      <li><a>Delete comment</a></li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
                         </div>
                     </div>
                     <div class="separator"></div>
@@ -78,29 +127,69 @@
                         <div class="answer_block">
                             <ul>
                                 <li *ngFor="let reply of question.replies">
+                                  <div class="main">
                                     <div class="user-img">
-                                        <div class="circle" [style.background-image]="'url(/app/img/TEEN.jpg)'"></div>
+                                      <div class="circle" [style.background-image]="'url(/app/img/TEEN.jpg)'"></div>
                                     </div>
 
                                     <div class="content">
-                                        <a [routerLink]="['/profile']"><p class="username">{{reply.authorName}}</p></a>
-                                        <p class="text">{{reply.content}}</p>
+                                      <a [routerLink]="['/profile']"><p class="username">{{reply.authorName}}</p></a>
+                                      <p class="text">{{reply.content}}</p>
 
-                                        <div class="answer_attachment">
-                                            <div class="files">
-                                                <div class="code_group">
-                                                    <i class="fa fa-file fa-6x" aria-hidden="true"></i>
-                                                    <span>filename</span>
-                                                </div>
-                                            </div>
-                                            <div class="upload_image" style="display: none;">
-                                                <img src="app/img/TEEN.jpg" alt="">
-                                            </div>
+                                      <div class="answer_attachment">
+                                        <div class="files">
+                                          <div class="code_group">
+                                            <i class="fa fa-file fa-6x" aria-hidden="true"></i>
+                                            <span>filename</span>
+                                          </div>
                                         </div>
+                                        <div class="upload_image" style="display: none;">
+                                          <img src="app/img/TEEN.jpg" alt="">
+                                        </div>
+                                      </div>
                                     </div>
-                                    <div class="comments_edit">
-                                        <p class="date">{{reply.createdAt | date:'MMMM dd, HH:mm'}}</p>
+                                    <div class="date">
+                                      <p class="date">{{reply.createdAt | date:'MMMM dd, HH:mm'}}</p>
                                     </div>
+                                  </div>
+                                  <div class="social_module">
+                                    <div class="comments">
+                                      <i class="fa fa-spinner" aria-hidden="true"></i>
+                                      <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+                                      <p>52</p>
+                                    </div>
+                                    <div class="likesEntities">
+                                      <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+                                      <p>8156</p>
+                                    </div>
+                                  </div>
+                                  <div class="comments">
+                                    <div class="comment_block" >
+                                      <ul>
+                                        <li>
+                                          <div class="user-img">
+                                            <div class="circle" [style.background-image]="'url(/app/img/default_user_photo.jpg)'"></div>
+                                          </div>
+
+                                          <div class="content">
+                                            <a><p class="username">Ivan Loichuk</p></a>
+                                            <p class="text">Hello!!! Об этом фестивале знает весь мир, каждый год туда стремятся, без преувеличения, миллионы людей. Стоит только ввести в поиск слово Tomorrowland и через пару минут ты уже влюблен в этот фестиваль на всю жизнь!
+                                            </p>
+                                          </div>
+                                          <div class="comments_edit">
+                                            <p class="date">22:27</p>
+                                            <div class="dropdown">
+                                              <a alt="More options"  title="More options" class=" dropdown-toggle" id="editComment" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></a>
+
+                                              <ul class="dropdown-menu" aria-labelledby="editComment">
+                                                <li><a>Delete comment</a></li>
+                                              </ul>
+                                            </div>
+                                          </div>
+                                        </li>
+                                      </ul>
+                                    </div>
+                                  </div>
                                 </li>
                             </ul>
                         </div>

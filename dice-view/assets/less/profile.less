@@ -1,4 +1,5 @@
 @import "colors";
+@import "functions";
 
 
 section.user_info{padding-bottom: 50px;
@@ -174,53 +175,11 @@ section.user_info{padding-bottom: 50px;
                     }
                 }
             }
-            .social_module{ display: inline-flex; padding: 0px 15px;
-                .likesEntities{ display: inline-flex; padding: 10px;
-                    span{font-size: 20px; color: #708bd4; cursor: pointer;
-                        &.active{ color: #3638d4;}
-                        &:hover{ color: #3638d4;}
-                    }
-                    p{padding: 0px 5px; margin: 0;}
-                }
-                .comments{ display: inline-flex; padding: 10px;
-                    span{font-size: 20px; color: #708bd4; cursor: pointer;
-                        &:hover{ color: #3638d4;}
-                    }
-                    p{padding: 0px 5px; margin: 0;}
-                    i{animation: spin 2s linear infinite; text-align: center;font-size: 18px; padding-top: 1px; color: #2520f7;}
-                }
+            .social_module{ display: inline-flex; padding: 0 15px;
+              .social_module( 25px, @socialModuleFont);
             }
             .comments_module{
-                .comment_block{ border-top: 1px solid @userInfo_border;
-                    ul{ width: 100%; padding: 0; margin: 0;
-                        li{ display: inline-flex; width: 94%; border-radius: 2px; border-bottom: 1px solid @userInfo_commentBorder; margin: 0 3%;
-                            &:last-child{ border: none;}
-                            .user-img{ padding: 10px 0px 10px 10px; width: 8%;
-                                .circle{ width: 35px; padding: 2%; height:35px; border-radius: 50%; background-position: center; background-size: cover; cursor:pointer;}
-                            }
-                            .content{ width: 75%; word-break: break-all;
-                                a{ color: #2A5885; font-size: 14px;
-                                    .username{ padding: 5px 0 0 5px; margin: 0; cursor:pointer;}
-                                    &:hover{text-decoration: none; color: #1b3654;}
-                                }
-                                p{
-                                    &.text{padding: 0px 5px; margin: 0;}
-                                }
-                            }
-                            .comments_edit {display: inline-flex; width: 17%;
-                                span{ font-size: 20px; color: cornflowerblue; margin: 15px 10px; cursor: pointer;
-                                    &:hover{ color: #1643ed; }
-                                }
-                                .date{ padding: 17px 0px 0px 5px; margin: 0;width: 65%;}
-                                ul{width: 160px; float: none; padding: 0; border-radius: 2px; margin-top: 0;  margin-bottom: 0; list-style: none;
-                                    li{background-color: inherit; border: none; margin: 0; width: 100%; float: none;
-                                        a{cursor: pointer; width: 100%;}
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+                .setCommentsStyle();
 
                 .input-text{ padding: 15px 25px 15px 25px;; border-top: 1px solid @box_border; display: inline-flex; width: 100%;
                     form{ width: 100%; display: inline-flex; margin: 0;
@@ -242,7 +201,6 @@ section.user_info{padding-bottom: 50px;
                             }
                         }
                     }
-
                 }
             }
         }
@@ -300,10 +258,6 @@ section.user_info{padding-bottom: 50px;
         .header ul li{
             .user-img { width: 13%; }
         }
-        .comments_module .comment_block ul li {
-            .comments_edit { width: 20%; }
-            .user-img { width: 8%; }
-        }
     }
     .dropdown-menu{left: -145px; top: 35px;}
 }
@@ -320,10 +274,6 @@ section.user_info{padding-bottom: 50px;
               .comments_module{
                   .input-text form input[type='text'] { margin-right: 10px; margin-left: 15px; }
                   .input-text form input[type='submit'] { width: 20%; }
-                  .comment_block ul li {
-                      .comments_edit { width: 45%; }
-                      .user-img { width: 20%; }
-                  }
               }
           }
     }
@@ -332,13 +282,7 @@ section.user_info{padding-bottom: 50px;
 }
 
 @media (max-width: 768px){
-    section.user_info .posts_container .post_block {
-        .comments_module{
-            .comment_block ul li {
-                .comments_edit { width: 55%; }
-            }
-        }
-    }
+
 }
 
 @media (max-width: 720px){
@@ -346,9 +290,6 @@ section.user_info{padding-bottom: 50px;
         .posts_container .post_block {
             .header ul li {
                 .user-img { width: 25%; margin-left:0; }
-            }
-            .comments_module .comment_block ul li {
-                .comments_edit { width: 65%; }
             }
         }
     }
@@ -361,9 +302,6 @@ section.user_info{padding-bottom: 50px;
     section.user_info .posts_container .post_block {
         .header ul li {
             .user-img { width: 20%; }
-        }
-        .comments_module .comment_block ul li {
-            .comments_edit { width: 60%; }
         }
     }
 
@@ -387,9 +325,6 @@ section.user_info{padding-bottom: 50px;
             .input-text { padding: 10px 10px 10px 10px;
                 form input[type='text'] {  margin-right: 0; margin-left: 5px;  }
                 form .user-img{width: 15%;}
-            }
-            .comment_block ul li {
-                .comments_edit { width: 70%; }
             }
         }
     }
@@ -421,12 +356,6 @@ section.user_info{padding-bottom: 50px;
             }
             .input-text { padding: 10px 5px 10px 0;
                 form input[type='text'] {  margin-right: 0; margin-left: 5px;  }
-            }
-            .comment_block ul li {
-                .content {
-                    p.username{ padding: 5px 0 0 5px;}
-                }
-                .user-img { width: 35%; padding: 10px 0 10px 10px; }
             }
             .input-text form .user-img { display: none; }
         }

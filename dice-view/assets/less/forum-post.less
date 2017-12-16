@@ -1,4 +1,5 @@
 @import "colors";
+@import "functions";
 
 section.forum-post{padding-bottom: 50px;
   .post_top{ border: 1px solid @userInfo_border; border-radius: 2px; background-color: @box_bg; margin-bottom: 10px;
@@ -48,39 +49,12 @@ section.forum-post{padding-bottom: 50px;
             span{vertical-align: super; position: relative; padding: 5px 5px;  bottom: 5px;}
           }
         }
-
       }
       .social_module{ padding: 0 15px; width: 100%; text-align: end;
-        .likesEntities{ display: inline-flex; padding: 10px;
-          span{font-size: 25px; color: #708bd4; cursor: pointer;
-            &:hover{ color: #3638d4;}
-          }
-          p{padding: 0 5px; margin: 0;}
-        }
+        .social_module( 25px, @socialModuleFont);
       }
-      .comments_module{
-        .input-text{ padding: 15px 25px 15px 25px;; border-top: 1px solid @box_border; display: inline-flex; width: 100%;
-          form{ width: 100%; display: inline-flex; margin: 0;
-            .user-img{ width: 8%;
-              .circle{ width: 35px; padding: 2%; height:35px; border-radius: 50%; background-position: center; background-size: cover;}
-            }
-            input[type='text']{ width: 85%; margin-right: 10px; }
-            input[type='submit']{ width: 15%; background-color: @msg_buttonBg; border: none; color: @msg_msgBoxFont; margin-left: 10px;
-              &:hover{background-color: @msg_buttonBgHover;}
-            }
-            .upload_item{ list-style: none; display: inline-flex; margin: 0; padding: 0;
-              li{margin: 5px;
-                img{width: 25px; cursor: pointer;
-                  &:hover{color: #3b3b3b;}
-                }
-                span, i{font-size: 20px; color: #000; cursor: pointer;
-                  &:hover{color: #3b3b3b; }
-                }
-              }
-            }
-          }
-
-        }
+      .comments{
+        .setCommentsStyle();
       }
     }
     .answers_module{
@@ -131,38 +105,46 @@ section.forum-post{padding-bottom: 50px;
       }
 
       .answer_block{
-        ul{ width: 100%; padding: 15px 5px; margin: 0;
-          li{ display: inline-flex; width: 100%; border-radius: 2px; border-bottom: 1px solid @userInfo_border; padding-bottom: 10px;
-            &:last-child{ border: none;}
-            .user-img{ padding: 10px 0 10px 25px; width: 10%;
-              .circle{ width: 40px; padding: 2%; height:40px; border-radius: 50%; background-position: center; background-size: cover;}
-            }
-            .content{ width: 95%;
-              a{ color: #2A5885; font-size: 14px;
-                .username{ padding: 5px 0 0 5px; margin: 0;}
-                &:hover{text-decoration: none; color: #1b3654;}
+        ul{ width: 100%; padding: 15px 5px; margin: 0; list-style: none;
+          li{ width: 100%; border-radius: 2px; border-bottom: 1px solid @userInfo_border;
+            .main{ display: inline-flex; width: 100%;
+              &:last-child{ border: none;}
+              .user-img{ padding: 10px 0 10px 25px; width: 10%;
+                .circle{ width: 40px; padding: 2%; height:40px; border-radius: 50%; background-position: center; background-size: cover;}
               }
-              p{
-                &.text{padding: 0 5px; margin: 0;}
-              }
-              .answer_attachment{ text-align: start; display: flex;
-                .upload_image{ position: relative;
-                  img{ height: 160px; margin: 20px 10px; opacity: 1; display: block; transition: .5s ease; backface-visibility: hidden; }
+              .content{ width: 95%;
+                a{ color: #2A5885; font-size: 14px;
+                  .username{ padding: 5px 0 0 5px; margin: 0;}
+                  &:hover{text-decoration: none; color: #1b3654;}
                 }
-                .files{ padding: 20px 20px 0 20px; width: 100%;
-                  .code_group{ width: 100%; height: 45px; position: relative; padding: 5px;
-                    &:hover{ background-color: @profile_listHover;}
-                    i{font-size: 35px; vertical-align: bottom; margin-bottom: 8px; color: @profile_fileBg;}
-                    span{vertical-align: super; position: relative; padding: 5px 5px;  bottom: 5px;}
+                p{
+                  &.text{padding: 0 5px; margin: 0;}
+                }
+                .answer_attachment{ text-align: start; display: flex;
+                  .upload_image{ position: relative;
+                    img{ height: 160px; margin: 20px 10px; opacity: 1; display: block; transition: .5s ease; backface-visibility: hidden; }
+                  }
+                  .files{ padding: 20px 20px 0 20px; width: 100%;
+                    .code_group{ width: 100%; height: 45px; position: relative; padding: 5px;
+                      &:hover{ background-color: @profile_listHover;}
+                      i{font-size: 35px; vertical-align: bottom; margin-bottom: 8px; color: @profile_fileBg;}
+                      span{vertical-align: super; position: relative; padding: 5px 5px;  bottom: 5px;}
+                    }
                   }
                 }
               }
-            }
-            .comments_edit { width: 12%;
-              span{ font-size: 20px; color: cornflowerblue; margin: 15px 10px; cursor: pointer;
-                &:hover{ color: #1643ed; }
+              .date{ width: 12%;
+                span{ font-size: 20px; color: cornflowerblue; margin: 15px 10px; cursor: pointer;
+                  &:hover{ color: #1643ed; }
+                }
+                .date{ padding: 17px 0 0 5px; margin: 0;width: 100%; font-weight: 600;}
               }
-               .date{ padding: 17px 0 0 5px; margin: 0;width: 100%; font-weight: 600;}
+            }
+            .social_module{ padding: 0 15px; width: 100%; text-align: end;
+              .social_module( 18px, @socialModuleFont);
+            }
+            .comments{
+              .setCommentsStyle();
             }
           }
         }
