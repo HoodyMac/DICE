@@ -53,7 +53,7 @@ section.user_info{padding-bottom: 50px;
         }
         .profile_info{
             .profile_info_row{ display: flex; padding: 1% 0 1% 5%;
-                &:first-child{padding-top: 2%;}
+                &:first-child{padding-top: 2%; width: 100%;}
                 &:last-child{padding-bottom: 2%;}
                 .label_info{font-size: 16px; width: 30%; color: @userInfo_fontLabel;}
                 .city{width: 65%;}
@@ -64,9 +64,9 @@ section.user_info{padding-bottom: 50px;
     }
 
     .counts_module{ border: 1px solid; border-radius: 2px; margin-top: 10px; border-color: @userInfo_border; display: inline-flex; width: 100%; background-color: @box_bg;
-        .page_count{ padding: 1% 2% 1% 2%; text-align: center; display: grid; border-right: 1px solid @userInfo_border; width: 25%;
+        .page_count{text-align: center; display: grid; border-right: 1px solid @userInfo_border; width: 25%;
             &:last-child{border: none;}
-            a.label{
+            a.label{ padding-top: 10px;
                 .label_module{color: @userInfo_fontValue; font-size: 16px; text-decoration: none; cursor: pointer; font-weight: 500;
                     &:hover{color: @userInfo_fontLabelHover;}
                 }
@@ -74,7 +74,7 @@ section.user_info{padding-bottom: 50px;
             a.icon{display: none; cursor: pointer;
                 i{font-size: 20px;}
             }
-            .value_module{ color: @userInfo_fontLabel;
+            .value_module{ color: @userInfo_fontLabel; padding-bottom: 10px;
                 i{font-size: 16px;}
             }
 
@@ -84,10 +84,10 @@ section.user_info{padding-bottom: 50px;
                 }
                 modal-content{
                     textarea{width: 98%; border-radius: 5px; padding: 10px; height: 170px;}
-                    .post_attachment{ text-align: start; display: flex;
+                    .post_attachment{ text-align: left; display: flex;
                         .upload_image{ position: relative;
                             img{ height: 160px; margin: 20px 10px; opacity: 1; display: block; transition: .5s ease; backface-visibility: hidden; }
-                            .trash_button { transition: .5s ease; opacity: 0; position: absolute; text-align: end; -ms-transform: translate(-50%, -50%); transform: translate(0%, -100%); width: 100%; height: 100%;
+                            .trash_button { transition: .5s ease; opacity: 0; position: absolute; text-align: right; -ms-transform: translate(-50%, -50%); transform: translate(0%, -100%); width: 100%; height: 100%;
                                 &:hover{ opacity: 1;}
                                 i{ color: @profile_trashBtnBg; font-size: 25px; margin: 30px 20px;cursor: pointer;
                                     &:hover{ color: @profile_trashBtnHover ;}
@@ -99,7 +99,7 @@ section.user_info{padding-bottom: 50px;
                                 &:hover{ background-color: @profile_listHover;}
                                 i{font-size: 35px; vertical-align: bottom; margin-bottom: 8px; color: @profile_fileBg;}
                                 span{vertical-align: super; position: relative; padding: 5px 5px;  bottom: 5px;}
-                                .trash_button { transition: .5s ease; opacity: 0; position: absolute; text-align: end; -ms-transform: translate(-50%, -50%); transform: translate(0%, -100%); width: 100%; height: 100%;
+                                .trash_button { transition: .5s ease; opacity: 0; position: absolute; text-align: right; -ms-transform: translate(-50%, -50%); transform: translate(0%, -100%); width: 100%; height: 100%;
                                     &:hover{ opacity: 1;}
                                     i{ color: @profile_trashBtnBg; font-size: 25px; margin: 10px 20px; cursor: pointer;
                                         &:hover{ color: @profile_trashBtnHover;}
@@ -110,12 +110,12 @@ section.user_info{padding-bottom: 50px;
                     }
                 }
                 modal-footer{  display: flex;
-                    .upload_components{ width: 50%; display: inline; text-align: start; padding: 8px 8px;
+                    .upload_components{ width: 50%; display: inline; text-align: left; padding: 8px 8px;
                         span, i{font-size: 25px; color: @profile_iconsBg; cursor: pointer; padding: 5px;
                             &:hover{color: @profile_iconsHover; }
                         }
                     }
-                    .buttons_section{ width: 50%; text-align: end; display: inline;
+                    .buttons_section{ width: 50%; text-align: right; display: inline;
                         input{ height: 40px; border-radius: 5px; border: none; margin: 5px 5px; background-color: @msg_buttonBg; color: @msg_msgBoxFont;
                             &.submit{width: 180px;}
                             &:hover{background-color: @msg_buttonBgHover;}
@@ -132,7 +132,7 @@ section.user_info{padding-bottom: 50px;
                 ul{ width: 100%; padding: 0; margin: 0;
                     li{ display: inline-flex; width: 100%; border-radius: 2px;
                         .user-img{ padding: 1% 25px; width: 10%;
-                            .circle{ width: 50px; padding: 2%; height:50px; border-radius: 50%; background-position: center; background-size: cover;}
+                            .circle{ width: 50px; margin: 5px 0; height:50px; border-radius: 50%; background-position: center; background-size: cover;}
                         }
                         .content{ width: 85%; word-break: break-all;
                             p{
@@ -234,7 +234,7 @@ section.user_info{padding-bottom: 50px;
                             }
                             .views_value{color: @forum_font_views_value;}
                         }
-                        .date_block{text-align: end;}
+                        .date_block{text-align: right;}
                         .img_block{width: 25%;}
                     }
                 }

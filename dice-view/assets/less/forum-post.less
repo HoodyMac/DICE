@@ -16,11 +16,11 @@ section.forum-post{padding-bottom: 50px;
         }
       }
 
-      .author_info{ width: 25%; text-align: end; display: grid;
-        .user-img { width: 100%; padding: 10px 5px; text-align: end;
+      .author_info{ width: 25%; text-align: right; display: grid;
+        .user-img { width: 100%; padding: 10px 5px; text-align: right;
           .circle { width: 50px; height: 50px; border-radius: 50%; float: right; }
         }
-        .author_name{ padding: 0 5px;  width: 100%;
+        .author_name{ padding: 0 5px;  width: 100%; text-align: right;
           p{ cursor: pointer; color: @fPost_autorFont; font-size: 16px; font-weight: 600; letter-spacing: 1px;
             &:hover{color: @fPost_autorFontHover;}
           }
@@ -50,7 +50,7 @@ section.forum-post{padding-bottom: 50px;
           }
         }
       }
-      .social_module{ padding: 0 15px; width: 100%; text-align: end;
+      .social_module{ padding: 0 15px; width: 100%; text-align: right;
         .social_module( 25px, @socialModuleFont);
       }
       .comments{
@@ -64,12 +64,12 @@ section.forum-post{padding-bottom: 50px;
           textarea{width: 100%; border-radius: 5px; padding: 10px; height: 170px;}
         }
         .control{ display: flex; padding: 5px;
-          .upload_components{ width: 50%; display: inline; text-align: start; padding: 8px 8px;
+          .upload_components{ width: 50%; display: inline; text-align: left; padding: 8px 8px;
             span, i{font-size: 25px; color: @profile_iconsBg; cursor: pointer; padding: 5px;
               &:hover{color: @profile_iconsHover; }
             }
           }
-          .buttons_section{ width: 50%; text-align: end; display: inline;
+          .buttons_section{ width: 50%; text-align: right; display: inline;
             input{ height: 40px; border-radius: 5px; border: none; margin: 5px 5px; background-color: @msg_buttonBg; color: @msg_msgBoxFont;
               &.submit{width: 180px;}
               &:hover{background-color: @msg_buttonBgHover;}
@@ -77,10 +77,10 @@ section.forum-post{padding-bottom: 50px;
           }
         }
 
-        .post_attachment{ text-align: start; display: flex;
+        .post_attachment{ text-align: left; display: flex;
           .upload_image{ position: relative;
             img{ height: 160px; margin: 20px 10px; opacity: 1; display: block; transition: .5s ease; backface-visibility: hidden; }
-            .trash_button { transition: .5s ease; opacity: 0; position: absolute; text-align: end; -ms-transform: translate(-50%, -50%); transform: translate(0%, -100%); width: 100%; height: 100%;
+            .trash_button { transition: .5s ease; opacity: 0; position: absolute; text-align: right; -ms-transform: translate(-50%, -50%); transform: translate(0%, -100%); width: 100%; height: 100%;
               &:hover{ opacity: 1;}
               i{ color: @profile_trashBtnBg; font-size: 25px; margin: 30px 20px;cursor: pointer;
                 &:hover{ color: @profile_trashBtnHover ;}
@@ -92,7 +92,7 @@ section.forum-post{padding-bottom: 50px;
               &:hover{ background-color: @profile_listHover;}
               i{font-size: 35px; vertical-align: bottom; margin-bottom: 8px; color: @profile_fileBg;}
               span{vertical-align: super; position: relative; padding: 5px 5px;  bottom: 5px;}
-              .trash_button { transition: .5s ease; opacity: 0; position: absolute; text-align: end; -ms-transform: translate(-50%, -50%); transform: translate(0%, -100%); width: 100%; height: 100%;
+              .trash_button { transition: .5s ease; opacity: 0; position: absolute; text-align: right; -ms-transform: translate(-50%, -50%); transform: translate(0%, -100%); width: 100%; height: 100%;
                 &:hover{ opacity: 1;}
                 i{ color: @profile_trashBtnBg; font-size: 25px; margin: 10px 20px; cursor: pointer;
                   &:hover{ color: @profile_trashBtnHover;}
@@ -119,7 +119,7 @@ section.forum-post{padding-bottom: 50px;
                 p{
                   &.text{padding: 0 5px; margin: 0;}
                 }
-                .answer_attachment{ text-align: start; display: flex;
+                .answer_attachment{ text-align: left; display: flex;
                   .upload_image{ position: relative;
                     img{ height: 160px; margin: 20px 10px; opacity: 1; display: block; transition: .5s ease; backface-visibility: hidden; }
                   }
@@ -132,14 +132,14 @@ section.forum-post{padding-bottom: 50px;
                   }
                 }
               }
-              .date{ width: 12%;
+              .date{ width: 12%; overflow: hidden;
                 span{ font-size: 20px; color: cornflowerblue; margin: 15px 10px; cursor: pointer;
                   &:hover{ color: #1643ed; }
                 }
                 .date{ padding: 17px 0 0 5px; margin: 0;width: 100%; font-weight: 600;}
               }
             }
-            .social_module{ padding: 0 15px; width: 100%; text-align: end;
+            .social_module{ padding: 0 15px; width: 100%; text-align: right;
               .social_module( 18px, @socialModuleFont);
             }
             .comments{
@@ -156,7 +156,7 @@ section.forum-post{padding-bottom: 50px;
   }
 
   modal{
-    modal-header{ text-align: start;
+    modal-header{ text-align: left;
       h2{ margin-left: 10px;}
     }
     modal-content{
@@ -164,10 +164,10 @@ section.forum-post{padding-bottom: 50px;
         textarea{width: 100%; border-radius: 5px; padding: 10px; height: 170px;}
       }
 
-      .post_attachment{ text-align: start; display: flex;
+      .post_attachment{ text-align: left; display: flex;
         .upload_image{ position: relative;
           img{ height: 160px; margin: 20px 10px; opacity: 1; display: block; transition: .5s ease; backface-visibility: hidden; }
-          .trash_button { transition: .5s ease; opacity: 0; position: absolute; text-align: end; -ms-transform: translate(-50%, -50%); transform: translate(0%, -100%); width: 100%; height: 100%;
+          .trash_button { transition: .5s ease; opacity: 0; position: absolute; text-align: right; -ms-transform: translate(-50%, -50%); transform: translate(0%, -100%); width: 100%; height: 100%;
             &:hover{ opacity: 1;}
             i{ color: @profile_trashBtnBg; font-size: 25px; margin: 30px 20px;cursor: pointer;
               &:hover{ color: @profile_trashBtnHover ;}
@@ -179,7 +179,7 @@ section.forum-post{padding-bottom: 50px;
             &:hover{ background-color: @profile_listHover;}
             i{font-size: 35px; vertical-align: bottom; margin-bottom: 8px; color: @profile_fileBg;}
             span{vertical-align: super; position: relative; padding: 5px 5px;  bottom: 5px;}
-            .trash_button { transition: .5s ease; opacity: 0; position: absolute; text-align: end; -ms-transform: translate(-50%, -50%); transform: translate(0%, -100%); width: 100%; height: 100%;
+            .trash_button { transition: .5s ease; opacity: 0; position: absolute; text-align: right; -ms-transform: translate(-50%, -50%); transform: translate(0%, -100%); width: 100%; height: 100%;
               &:hover{ opacity: 1;}
               i{ color: @profile_trashBtnBg; font-size: 25px; margin: 10px 20px; cursor: pointer;
                 &:hover{ color: @profile_trashBtnHover;}
@@ -190,12 +190,12 @@ section.forum-post{padding-bottom: 50px;
       }
     }
     modal-footer{  display: flex;
-      .upload_components{ width: 50%; display: inline; text-align: start; padding: 8px 8px;
+      .upload_components{ width: 50%; display: inline; text-align: left; padding: 8px 8px;
         span, i{font-size: 25px; color: @profile_iconsBg; cursor: pointer; padding: 5px;
           &:hover{color: @profile_iconsHover; }
         }
       }
-      .buttons_section{ width: 50%; text-align: end; display: inline;
+      .buttons_section{ width: 50%; text-align: right; display: inline;
         input{ height: 40px; border-radius: 5px; border: none; margin: 5px 5px; background-color: @msg_buttonBg; color: @msg_msgBoxFont;
           &.submit{width: 180px;}
           &:hover{background-color: @msg_buttonBgHover;}
