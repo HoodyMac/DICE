@@ -17,6 +17,7 @@ declare var jQuery: any;
 })
 export class MessagesComponent{
   @ViewChild('fileInput') inputEl: ElementRef;
+  @ViewChild('imgInput') inputImg: ElementRef;
 
   public viewOptions = {theme: 'vs', readOnly: true};
   public presentedAttachment;
@@ -44,6 +45,9 @@ export class MessagesComponent{
   private filteredChats: any;
   private filteredFriends: any;
 
+  public fileAccept = ".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf, .zip, .rar, .7z, .csv, .json, .php, .less, .css, .ts, .js, .html, .java, .xml";
+  public imgAccept = "image/*";
+
   constructor(
     private chatService: ChatService,
     private friendsService: FriendsService,
@@ -53,6 +57,7 @@ export class MessagesComponent{
     private router: Router,
     private translate: TranslateService) {
 
+    console.log(this.fileAccept);
     translate.get('PAGE_TITLES.MESSAGES').subscribe((res: string) => {
       this.titleService.setTitle(res);
     });
@@ -143,6 +148,17 @@ export class MessagesComponent{
     if (fileCount > 0) {
       for (let i = 0; i < fileCount; i++) {
         this.files.push(inputEl.files.item(i));
+        console.log(this.files);
+      }
+    }
+  }
+
+  public selectImages() {
+    let inputImg: HTMLInputElement = this.inputImg.nativeElement;
+    let imgCount: number = inputImg.files.length;
+    if (imgCount > 0) {
+      for (let i = 0; i < imgCount; i++) {
+        this.files.push(inputImg.files.item(i));
         console.log(this.files);
       }
     }

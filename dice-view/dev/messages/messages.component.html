@@ -154,10 +154,10 @@
                                     <input type="text" class="form-control" placeholder="Enter your message" name="content" ngModel #content="ngModel" maxlength="1024">
                                     <ul class="upload_item">
                                         <li><i class="fa fa-code fa-lg" (click)="codeUpload.open()"></i></li>
-                                        <!--<li> <span class="glyphicon glyphicon-picture" (click)="OpenFileExplorer('imgupload')" aria-hidden="true"></span></li>-->
+                                        <li> <span class="glyphicon glyphicon-picture" (click)="OpenFileExplorer('imgupload')" aria-hidden="true"></span></li>
                                         <li><span class="glyphicon glyphicon-file" (click)="fileUpload.open()" aria-hidden="true"></span></li>
                                     </ul>
-                                    <input type="file" id="imgupload" style=" display:none"/>
+                                    <input type="file" id="imgupload" style=" display:none" accept="{{imgAccept}}" (change)="selectImages(); fileUpload.close()" [multiple]="true" #imgInput/>
                                     <input  type="submit" class="form-control" value="Send">
                                 </form>
                             </div>
@@ -219,7 +219,7 @@
                                 <modal-content>
                                     <form action="">
                                         <button type="button"  (click)="OpenFileExplorer('fileupload')" class="modal-trigger btn btn-default" translate>Upload new file</button>
-                                        <input type="file" id="fileupload" style="display:none" (change)="selectFile(); fileUpload.close()" [multiple]="true" #fileInput/>
+                                        <input type="file" id="fileupload" accept="{{fileAccept}}" style="display:none" (change)="selectFile(); fileUpload.close()" [multiple]="true" #fileInput/>
                                     </form>
                                     <div class="scroll" [ngStyle]="{'max-height': screenHeight}">
                                         <ul>
