@@ -1,0 +1,18 @@
+section.notification_element{ position: fixed; bottom: 5px;left: 5px;
+  ul{ display: grid; margin: 0; padding: 0; cursor: pointer;
+    li{width: 300px; height: 100px; display: inline-flex; background-color: fade(@navBar_bg, 90%); border-radius: 8px; padding-top: 5px; margin-top: 5px;
+      .user-img { width: 20%; padding: 5px;
+        .circle { width: 50px; height: 50px; border-radius: 50%; float: right; background-position: center; background-size: cover;}
+      }
+      .center{width: 80%; display: block;
+        .user-name{ width: 100%; display: inline-flex;
+          p{padding: 5px 0 0 5px;font-size: 16px; margin: 0; color: @navBar_font; width: 90%;}
+          i{ float: right;font-size: 16px; text-align: end; color:@navBar_font; padding: 0 5px;}
+        }
+        .message{ width: 95%;
+          p{text-overflow: ellipsis; height: 60px; overflow: hidden; color: @navBar_font; padding: 5px 0 0 5px;font-size: 12px; margin: 0;}
+        }
+      }
+    }
+  }
+}
