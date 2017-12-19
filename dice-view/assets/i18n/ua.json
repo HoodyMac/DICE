@@ -118,6 +118,7 @@
     "en":"Англійська",
     "ua":"Українська",
     "ru": "Російська",
+    "chooseLanguage": "Виберіть мову",
 
     "placeholder":{
       "firstname": "Ім'я",
@@ -135,7 +136,7 @@
   },
 
   "PROFILE":{
-      "changePhoto":"Змінити фотографію",
+    "changePhoto":"Змінити фотографію",
     "cropInfo":"Обріжте фотографію профілю",
     "uploadImage": "Завантажити зображення",
     "cropAndSave": "Обрізати та зберегти",
@@ -150,6 +151,42 @@
     "posts":"Публікації",
     "forum":"Форум",
     "createPost": "Створити запис",
-    "questions": "Запитання"
+    "questions": "Запитання",
+    "editProfile": "Редагувати профіль",
+    "enterText": "Введіть текст",
+    "cancel": "Скасувати",
+    "create": "Створити",
+    "editPost": "Редагувати публікацію",
+    "deletePost": "Видалити публікацію",
+    "moreOptions": "Більше варіантів",
+    "deleteComment": "Видалити коментар",
+    "send": "Відправити",
+    "enterComment": "Введіть свій коментар",
+    "sendMessage":"Надіслати повідомлення",
+    "addToFriends": "Додати до друзів",
+    "cancelFriendRequest": "Скасувати запит",
+    "comments": "Переглянути коментарі",
+    "enterCode": "Добавить фрагмент кода",
+    "enterFile": "Добавить файл",
+    "enterImg": "Добавить изображение",
+    "lastActivity":"Остання активність"
+  },
+
+  "MESSAGES":{
+    "newConversation":"Створити нову бесіду",
+    "search": "Пошук",
+    "addNewConversation":"Додати нову бесіду",
+    "enterMessage": "Введіть своє повідомлення",
+    "send": "Відправити",
+    "code": "код",
+    "comment": "Коментар",
+    "ok":"ok",
+    "chooseProgLanguage":"Виберіть мову програмування",
+    "createSnippet": "Створити фрагмент",
+    "yourCode": "Ваш код",
+    "yourFiles": "Ваші файли",
+    "cancel": "Скасувати",
+    "save": "Зберегти",
+    "uploadFile": "Завантажити новий файл"
   }
 }

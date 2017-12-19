@@ -117,6 +117,7 @@
     "en":"Английський",
     "ua":"Украинский",
     "ru": "Русский",
+    "chooseLanguage": "Выберите язык",
 
     "placeholder":{
       "firstname": "Имя",
@@ -150,6 +151,42 @@
     "posts":"Публикации",
     "forum":"Форум",
     "createPost": "Создать запись",
-    "questions": "Вопросы"
+    "questions": "Вопросы",
+    "editProfile": "Редактировать профиль",
+    "enterText": "Введите текст",
+    "cancel": "Отмена",
+    "create": "Отправить",
+    "editPost": "Редактировать запись",
+    "deletePost": "Удалить запись",
+    "moreOptions": "Больше опций",
+    "deleteComment": "Удалить комментарий",
+    "send": "Отправить",
+    "enterComment": "Введите ваш комментарий",
+    "sendMessage":"Написать сообщение",
+    "addToFriends":"Добавить в друзья",
+    "cancelFriendRequest":"Отменить запрос",
+    "comments":"Просмотреть комментарии",
+    "enterCode": "Добавить фрагмент кода",
+    "enterFile": "Добавить файл",
+    "enterImg": "Добавить изображение",
+    "lastActivity":"Последняя активность"
+  },
+
+  "MESSAGES":{
+    "newConversation":"Начать беседу",
+    "search":"Поиск",
+    "addNewConversation":"Начать новую беседу",
+    "enterMessage": "Введите ваше сообщение",
+    "send": "Отправить",
+    "code": "код",
+    "comment": "Комментарий",
+    "ok":"ok",
+    "chooseProgLanguage":"Выберите язык программирования",
+    "createSnippet": "Создать фрагмент",
+    "yourCode": "Ваш код",
+    "yourFiles": "Ваши файлы",
+    "cancel": "Отмена",
+    "save": "Сохранить",
+    "uploadFile": "Загрузить новый файл"
   }
 }

@@ -117,6 +117,7 @@
     "en":"Angielski",
     "ua":"Ukrainski",
     "ru": "Rosyjski",
+    "chooseLanguage": "Wybierz swój język",
 
     "placeholder":{
       "firstname": "Imię",
@@ -149,6 +150,42 @@
     "posts":"Publikacje",
     "forum":"Forum",
     "createPost": "Utwórz wpis",
-    "questions": "Zapytania"
+    "questions": "Zapytania",
+    "editProfile": "Edytuj swój profil",
+    "enterText": "Wpisz tekst",
+    "cancel": "Anuluj",
+    "create": "Utwórz",
+    "editPost": "Edytuj publikację",
+    "deletePost": "Usuń publikację",
+    "moreOptions": "Więcej możliwości",
+    "deleteComment": "Usuń komentarz",
+    "send": "Wyślij",
+    "enterComment": "Wpisz swój komentarz",
+    "sendMessage":"Wyślij wiadomość",
+    "addToFriends":"Dodaj do znajomych",
+    "cancelFriendRequest":"Anuluj zaproszenie",
+    "comments":"Zobacz komentarze",
+    "enterCode": "Dodaj fragment kodu",
+    "enterFile": "Dodaj plik",
+    "enterImg": "Dodaj zdjęcie",
+    "lastActivity":"Ostatnia aktywność"
+  },
+
+  "MESSAGES":{
+    "newConversation":"Nowa rozmowa",
+    "search":"Wyszukaj",
+    "addNewConversation":"Dodaj nową rozmowę",
+    "enterMessage": "Wpisz swoją wiadomość",
+    "send": "Wyślij",
+    "code": "kod",
+    "comment": "Komentarz",
+    "ok":"ok",
+    "chooseProgLanguage":"Wybierz język programowania",
+    "createSnippet": "Utwórz fragment",
+    "yourCode": "Twój kod",
+    "yourFiles": "Twoje pliki",
+    "cancel": "Anuluj",
+    "save": "Zapisz",
+    "uploadFile": "Prześlij nowy plik"
   }
 }

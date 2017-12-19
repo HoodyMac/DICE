@@ -4,9 +4,9 @@
             <div class="col-md-4 col-sm-5 col-xs-6 custom-col-friends-list">
                 <div class="friends-list">
                     <div class="search-friends">
-                        <button type="button" (click)="newConversationModal.open()" class="modal-trigger btn btn-default">New conversation</button>
+                        <button type="button" (click)="newConversationModal.open()" class="modal-trigger btn btn-default" translate>MESSAGES.newConversation</button>
                         <form>
-                            <input type="text" #searchChat class="form-control" placeholder="Search" (input)="filterChats(searchChat.value)">
+                            <input type="text" #searchChat class="form-control" placeholder="{{'MESSAGES.search' | translate }}" (input)="filterChats(searchChat.value)">
                         </form>
                     </div>
                     <div class="list-container">
@@ -36,11 +36,11 @@
                 <div class="row">
                     <modal #newConversationModal modalClass="modal-md" [closeOnOutsideClick]="true" [closeOnEscape]="true">
                         <modal-header>
-                            <h2>Add new conversation</h2>
+                            <h2 translate>MESSAGES.addNewConversation</h2>
                         </modal-header>
                         <modal-content>
                             <form>
-                                <input type="text" #searchUser class="form-control" placeholder="Search" (input)="filterFriends(searchUser.value)">
+                                <input type="text" #searchUser class="form-control" placeholder="{{'MESSAGES.search' | translate }}" (input)="filterFriends(searchUser.value)">
                             </form>
                             <div class="list-friends">
                                 <div class="scroll">
@@ -151,14 +151,14 @@
                                     </div>
                                 </div>
                                 <form #fromCreateMessage="ngForm" (ngSubmit)="$event.preventDefault(); createMessage(fromCreateMessage.value); fromCreateMessage.reset()">
-                                    <input type="text" class="form-control" placeholder="Enter your message" name="content" ngModel #content="ngModel" maxlength="1024">
+                                    <input type="text" class="form-control" placeholder="{{'MESSAGES.enterMessage' | translate }}" name="content" ngModel #content="ngModel" maxlength="1024">
                                     <ul class="upload_item">
                                         <li><i class="fa fa-code fa-lg" (click)="codeUpload.open()"></i></li>
                                         <li> <span class="glyphicon glyphicon-picture" (click)="OpenFileExplorer('imgupload')" aria-hidden="true"></span></li>
                                         <li><span class="glyphicon glyphicon-file" (click)="fileUpload.open()" aria-hidden="true"></span></li>
                                     </ul>
                                     <input type="file" id="imgupload" style=" display:none" accept="{{imgAccept}}" (change)="selectImages(); fileUpload.close()" [multiple]="true" #imgInput/>
-                                    <input  type="submit" class="form-control" value="Send">
+                                    <input  type="submit" class="form-control" value="{{'MESSAGES.send' | translate }}">
                                 </form>
                             </div>
 
@@ -168,16 +168,16 @@
                         <div class="row">
                           <modal #codeView modalClass="modal-lg" id="codeViewModal" [closeOnOutsideClick]="true" [closeOnEscape]="true">
                             <modal-header>
-                              <h2 *ngIf="codeView.isOpened">{{presentedAttachment.language}} code</h2>
+                              <h2 *ngIf="codeView.isOpened" translate>{{presentedAttachment.language}} MESSAGES.code</h2>
                             </modal-header>
                             <modal-content>
                               <ngx-monaco-editor *ngIf="codeView.isOpened" [options]="viewOptions" style="height: 70%"></ngx-monaco-editor>
-                              <label for="code_comment">Comment</label>
+                              <label for="code_comment" translate>MESSAGES.Comment</label>
                               <p *ngIf="codeView.isOpened">{{presentedAttachment.comment}}</p>
                             </modal-content>
                             <modal-footer>
                               <div class="buttons_section">
-                                <input type="reset" class="submit" value="Ok" (click)="codeView.close()">
+                                <input type="reset" class="submit" value="{{'MESSAGES.ok' | translate }}" (click)="codeView.close()">
                               </div>
                             </modal-footer>
                           </modal>
@@ -186,26 +186,26 @@
                         <div class="row">
                             <modal #codeUpload modalClass="modal-lg" id="codeModal" [closeOnOutsideClick]="true" [closeOnEscape]="true">
                                 <modal-header>
-                                    <h2>Create Snippet</h2>
+                                    <h2 translate>MESSAGES.createSnippet</h2>
                                 </modal-header>
                                 <modal-content>
                                   <select class="prgLang" [(ngModel)]="editedCodeBeforeSend.language" (change)="languageSelect($event.target.value)">
-                                    <option disabled hidden value="">Choose a programming language</option>
+                                    <option disabled hidden value="" translate>MESSAGES.chooseProgLanguage</option>
                                     <option value="Java">Java</option>
                                     <option value="JavaScript">JavaScript</option>
                                     <option value="HTML">HTML</option>
                                     <option value="CSS">CSS</option>
                                   </select>
-                                  <label>Your code</label>
+                                  <label translate>MESSAGES.yourCode</label>
                                   <ngx-monaco-editor *ngIf="codeUpload.isOpened && !!editorOptions.language" [options]="editorOptions" [(ngModel)]="editedCodeBeforeSend.code" style="height: 50%"></ngx-monaco-editor>
-                                  <p *ngIf="!editorOptions.language ">Select programming language</p>
-                                  <label for="code_comment">Comment</label>
+                                  <p *ngIf="!editorOptions.language" translate>MESSAGES.chooseProgLanguage</p>
+                                  <label for="code_comment" translate>MESSAGES.comment</label>
                                   <textarea name="code_comment" id="code_comment" cols="100" rows="5" [(ngModel)]="editedCodeBeforeSend.comment"></textarea>
                                 </modal-content>
                                 <modal-footer>
                                     <div class="buttons_section">
-                                        <input type="reset" class="cancel" value="Cancel" (click)="clearCodeAttachment(); codeUpload.close()">
-                                        <input type="submit" class="submit" value="Save" (click)="saveCodeSnippet(); codeUpload.close()">
+                                        <input type="reset" class="cancel" value="{{'MESSAGES.cancel' | translate }}" (click)="clearCodeAttachment(); codeUpload.close()">
+                                        <input type="submit" class="submit" value="{{'MESSAGES.save' | translate }}" (click)="saveCodeSnippet(); codeUpload.close()">
                                     </div>
                                 </modal-footer>
                             </modal>
@@ -214,11 +214,11 @@
                         <div class="row">
                             <modal #fileUpload modalClass="modal-md" id="fileModal" [closeOnOutsideClick]="true" [closeOnEscape]="true">
                                 <modal-header>
-                                    <h2>Your files</h2>
+                                    <h2 translate>MESSAGES.yourFiles</h2>
                                 </modal-header>
                                 <modal-content>
                                     <form action="">
-                                        <button type="button"  (click)="OpenFileExplorer('fileupload')" class="modal-trigger btn btn-default" translate>Upload new file</button>
+                                        <button type="button"  (click)="OpenFileExplorer('fileupload')" class="modal-trigger btn btn-default" translate>MESSAGES.uploadFile</button>
                                         <input type="file" id="fileupload" accept="{{fileAccept}}" style="display:none" (change)="selectFile(); fileUpload.close()" [multiple]="true" #fileInput/>
                                     </form>
                                     <div class="scroll" [ngStyle]="{'max-height': screenHeight}">
@@ -305,7 +305,7 @@
                                 </modal-content>
                                 <modal-footer>
                                     <div class="buttons_section">
-                                        <input type="reset" class="cancel" value="Cancel" (click)="fileUpload.close()">
+                                        <input type="reset" class="cancel" value="{{'MESSAGES.cancel' | translate}}" (click)="fileUpload.close()">
                                     </div>
                                 </modal-footer>
                             </modal>

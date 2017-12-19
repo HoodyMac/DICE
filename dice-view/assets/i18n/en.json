@@ -117,6 +117,7 @@
     "en":"English",
     "ua":"Ukrainian",
     "ru": "Russian",
+    "chooseLanguage": "Choose your language",
 
     "placeholder":{
       "firstname": "First name",
@@ -150,7 +151,42 @@
     "posts":"Posts",
     "forum":"Forum",
     "createPost": "Create a post",
-    "questions": "Questions"
-  }
+    "questions": "Questions",
+    "editProfile": "Edit profile",
+    "enterText": "Enter a text",
+    "cancel": "Cancel",
+    "create": "Create",
+    "editPost": "Edit post",
+    "deletePost": "Delete post",
+    "moreOptions": "More options",
+    "deleteComment": "Delete comment",
+    "send": "Send",
+    "enterComment": "Enter your comment",
+    "sendMessage":"Send a message",
+    "addToFriends":"Add to friends",
+    "cancelFriendRequest": "Cancel friend request",
+    "comments":"View comments",
+    "enterCode": "Add a piece of code",
+    "enterFile": "Add a file",
+    "enterImg": "Add a picture",
+    "lastActivity":"Last activity"
+  },
 
+  "MESSAGES":{
+    "newConversation":"New conversation",
+    "search":"Search",
+    "addNewConversation":"Add new conversation",
+    "enterMessage": "Enter your message",
+    "send": "Send",
+    "code": "code",
+    "comment": "Comment",
+    "ok":"ok",
+    "chooseProgLanguage":"Choose a programming language",
+    "createSnippet": "Create Snippet",
+    "yourCode": "Your code",
+    "yourFiles": "Your files",
+    "cancel": "Cancel",
+    "save": "Save",
+    "uploadFile": "Upload new file"
+  }
 }
