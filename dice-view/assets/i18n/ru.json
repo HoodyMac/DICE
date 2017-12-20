@@ -188,5 +188,43 @@
     "cancel": "Отмена",
     "save": "Сохранить",
     "uploadFile": "Загрузить новый файл"
+  },
+
+  "FRIENDS":{
+    "myFriends": "Мои друзья",
+    "newFriends": "Новые друзья",
+    "followers": "Заявки в друзья",
+    "outgoing": "Исходящие",
+    "pending": "Входящие",
+    "onlineNow": "сейчас в сети",
+    "friends": "друзья",
+    "Friends": "Друзья",
+    "sendMessage": "Отправить сообщение",
+    "accept": "Принять",
+    "reject": "Отклонить",
+    "done": "Готово",
+    "moreOptions": "Больше опций",
+    "deleteFriend": "Удалить друга",
+    "search": "Поиск"
+  },
+
+  "SEARCH":{
+    "city": "Город",
+    "searchParameters": "Параметры поиска",
+    "enterCity": "Введите город",
+    "ageFrom": "От",
+    "ageTo": "До",
+    "gender": "Пол",
+    "any": "Любой",
+    "male": "Мужской",
+    "female": "Женский",
+    "onlineNow": "сейчас в сети",
+    "people": "Люди",
+    "search": "Поиск",
+    "searchResults": "Результаты поиска",
+    "addFriends": "Добавить в друзья",
+    "requestSend": "Заявка отправлена",
+    "friends": "друзья",
+    "Friends": "Друзья"
   }
 }

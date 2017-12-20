@@ -188,5 +188,43 @@
     "cancel": "Скасувати",
     "save": "Зберегти",
     "uploadFile": "Завантажити новий файл"
+  },
+
+  "FRIENDS":{
+    "myFriends": "Мої друзі",
+    "newFriends": "Нові друзі",
+    "followers": "Запити про дружбу",
+    "outgoing": "Вихідні",
+    "pending": "Вхідні",
+    "onlineNow": "зараз онлайн",
+    "friends": "друзі",
+    "Friends": "Друзі",
+    "sendMessage": "Надіслати повідомлення",
+    "accept": "Прийняти",
+    "reject": "Відхилити",
+    "done": "Готово",
+    "moreOptions": "Більше",
+    "deleteFriend": "Видалити друга",
+    "search": "Пошук"
+  },
+
+  "SEARCH":{
+    "city": "Місто",
+    "searchParameters": "Параметри пошуку",
+    "enterCity": "Введіть місто",
+    "ageFrom": "Від",
+    "ageTo": "До",
+    "gender": "Стать",
+    "any": "Будь-яка",
+    "male": "Чоловіча",
+    "female": "Жіноча",
+    "onlineNow": "онлайн зараз",
+    "people": "Люди",
+    "search": "Пошук",
+    "searchResults": "Результати пошуку",
+    "addFriends": "Додати до друзів",
+    "requestSend": "Запит надіслати",
+    "friends": "друзі",
+    "Friends": "Друзі"
   }
 }

@@ -14,6 +14,7 @@ section.friends{
       .nav_hide{display: none;}
       img{display: inline-block; }
       a{padding: 5px 10px; display: inline-block; color: #000000; text-decoration: none;
+        &.nav-friends:first-letter{text-transform: uppercase;}
         &.username{padding: 5px 8px;}
         &:hover{color: @search_border;}
       }
@@ -56,7 +57,8 @@ section.friends{
             img{width: 100%; padding: 5% 5%;}
           }
           .info_block{ height: 100%; width: 35%; vertical-align: text-top; padding-left: 2%; padding-top: 2%;
-            a{display: block; font-size: 14px; color: #474748;
+            a{display: flex; font-size: 14px; color: #474748;
+              span{margin-left: 5px;}
               &.title{  font-size: 16px;
                 &:hover{text-decoration: none; color: #000000;}
               }
@@ -67,7 +69,7 @@ section.friends{
             }
           }
           .add_button{text-align: center; vertical-align: middle; width: 35%;
-            input{width: 90%; margin: 1% 5%;}
+            input{width: 100%; margin: 1% 0%;}
             a{color: @font_value;}
           }
           .controlBlock{vertical-align: top; padding: 5px 3px 0 0px;

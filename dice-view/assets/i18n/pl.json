@@ -187,5 +187,43 @@
     "cancel": "Anuluj",
     "save": "Zapisz",
     "uploadFile": "Prześlij nowy plik"
+  },
+
+  "FRIENDS":{
+    "myFriends": "Moi znajomi",
+    "newFriends": "Nowi znajomi",
+    "followers": "Obserwujący",
+    "outgoing": "Przychodzące",
+    "pending": "Wychodzące",
+    "onlineNow": "teraz online",
+    "friends": "znajomych",
+    "Friends": "Znajomi",
+    "sendMessage": "Wyślij wiadomość",
+    "accept": "Akceptuj",
+    "reject": "Odrzuć",
+    "done": "Zrobione",
+    "moreOptions": "Więcej opcji",
+    "deleteFriend": "Usuń znajomego",
+    "search": "Wyszukaj"
+  },
+
+  "SEARCH":{
+    "city": "Miasto",
+    "searchParameters": "Parametry wyszukiwania",
+    "enterCity": "Wprowadź miasto",
+    "ageFrom": "Od",
+    "ageTo": "Do",
+    "gender": "Płeć",
+    "any": "Każdy",
+    "male": "Mężczyzna",
+    "female": "Kobieta",
+    "onlineNow": "teraz online",
+    "people": "Ludzie",
+    "search": "Szukaj",
+    "searchResults": "Wyniki wyszukiwania",
+    "addFriends": "Dodać do znajomych",
+    "requestSend": "Zaproszenie wysłano",
+    "friends": "znajomych",
+    "Friends": "Znajomi"
   }
 }

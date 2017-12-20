@@ -188,5 +188,43 @@
     "cancel": "Cancel",
     "save": "Save",
     "uploadFile": "Upload new file"
+  },
+
+  "FRIENDS":{
+    "myFriends": "My friends",
+    "newFriends": "New friends",
+    "followers": "Followers",
+    "outgoing": "Outgoing",
+    "pending": "Pending",
+    "onlineNow": "online now",
+    "friends": "friends",
+    "Friends": "Friends",
+    "sendMessage": "Send a message",
+    "accept": "Accept",
+    "reject": "Reject",
+    "done": "Done",
+    "moreOptions": "More options",
+    "deleteFriend": "Delete friend",
+    "search": "Search"
+  },
+
+  "SEARCH":{
+    "city": "City",
+    "searchParameters": "Search parameters",
+    "enterCity": "Enter a city",
+    "ageFrom": "From",
+    "ageTo": "to",
+    "gender": "Gender",
+    "any": "Any",
+    "male": "Male",
+    "female": "Female",
+    "onlineNow": "online now",
+    "people": "People",
+    "search": "Search",
+    "searchResults": "Search results",
+    "addFriends": "Add to friends",
+    "requestSend": "Request send",
+    "friends": "friends",
+    "Friends": "Friends"
   }
 }
