@@ -8,11 +8,15 @@
     "EDIT":"Edytowanie mojego profilu"
   },
 
+  "COMMON":{
+    "relatedTags": "Tagi powiązane"
+  },
+
   "HOME": {
 
     "HOME": "DICE",
     "ABOUT": "O nas",
-    "SIGN_UP": "Zarejestruj się",
+    "SIGN_UP": "Załóż konto",
 
     "Its_free": "To jest za darmo",
     "jmt-info_h2": "Nawiąż kontakt z przyjaciółmi w sferze IT z DICE",
@@ -21,7 +25,7 @@
     "log_in": "Zaloguj się",
     "complete_form": "Proszę wypełnić formularz.",
     "sign_in": "Zaloguj się",
-    "sign_up": "Rejestracja",
+    "sign_up": "Rejestruj",
 
     "loginFailed": "Błąd! Niepoprawne dane logowania.",
     "registrationSuccess": "Powodzenie! Twoje konto zostało zarejestrowane.",

@@ -8,6 +8,10 @@
     "EDIT":"Edit your profile"
   },
 
+  "COMMON":{
+    "relatedTags": "Related tags"
+  },
+
   "HOME": {
 
     "HOME": "home",
