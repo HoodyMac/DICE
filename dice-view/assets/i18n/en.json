@@ -230,5 +230,39 @@
     "requestSend": "Request send",
     "friends": "friends",
     "Friends": "Friends"
+  },
+
+  "FORUM_POST":{
+    "home":"Home",
+    "questions": "Questions",
+    "author": "Author",
+    "description": "Description",
+    "dateOfPublication":"Date of publication",
+    "attachments": "Attachments",
+    "deleteComment": "Delete comment",
+    "answers": "Answers",
+    "yourAnswer": "Your answer",
+    "enterText": "Enter a text",
+    "postYourAnswer":"Post your answer",
+    "askQuestions": "Ask your questions",
+    "title": "Title",
+    "relatedTags": "Related tags",
+    "tags": "Tags",
+    "cancel": "Cancel",
+    "create": "Create"
+  },
+
+  "FORUM_LIST":{
+    "allQuestions":"All questions",
+    "askQuestions": "Ask a questions",
+    "search": "Search",
+    "author": "Author:",
+    "askYourQuestions": "Ask your questions",
+    "title": "Title",
+    "enterText": "Enter a text",
+    "relatedTags": "Related tags",
+    "cancel": "Cancel",
+    "create": "Create",
+    "description":"description"
   }
 }

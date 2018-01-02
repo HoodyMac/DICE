@@ -229,5 +229,39 @@
     "requestSend": "Zaproszenie wysłano",
     "friends": "znajomych",
     "Friends": "Znajomi"
+  },
+
+  "FORUM_POST":{
+    "home":"Strona domowa",
+    "questions": "Zapytania",
+    "author": "Autor",
+    "description": "Opis",
+    "dateOfPublication":"Data publikacji",
+    "attachments": "Załączniki",
+    "deleteComment": "Usuń komentarz",
+    "answers": "Odpowiedzi",
+    "yourAnswer": "Twoja odpowiedź",
+    "enterText": "Wpisz tekst",
+    "postYourAnswer":"Opublikuj odpowiedź",
+    "askQuestions": "Zadaj pytania",
+    "title": "Tytuł",
+    "relatedTags": "Powiązane tagi",
+    "tags": "Tagi",
+    "cancel": "Anuluj",
+    "create": "Stwórz"
+  },
+
+  "FORUM_LIST":{
+    "allQuestions":"Wszystkie pytania",
+    "askQuestions": "Zadaj pytanie",
+    "search": "Szukaj",
+    "author": "Autor:",
+    "askYourQuestions": "Zadaj swoje pytania",
+    "title": "Tytuł",
+    "enterText": "Wpisz tekst",
+    "relatedTags": "Powiązane tagi",
+    "cancel": "Anuluj",
+    "create": "Stwórz",
+    "description": "Opis"
   }
 }

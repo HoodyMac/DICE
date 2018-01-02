@@ -230,5 +230,39 @@
     "requestSend": "Заявка отправлена",
     "friends": "друзья",
     "Friends": "Друзья"
+  },
+
+  "FORUM_POST":{
+    "home":"Главная",
+    "questions": "Вопросы",
+    "author": "Aвтор",
+    "description": "Описание",
+    "dateOfPublication":"Дата публикации",
+    "attachments": "Вложения",
+    "deleteComment": "Удалить комментарий",
+    "answers": "Oтветы",
+    "yourAnswer": "Ваш ответ",
+    "enterText": "Введите текст",
+    "postYourAnswer":"Отправьте свой ответ",
+    "askQuestions": "Задайте свой вопрос",
+    "title": "Титул",
+    "relatedTags": "Связанные теги",
+    "tags": "Теги",
+    "cancel": "Отмена",
+    "create": "Создайте"
+  },
+
+  "FORUM_LIST":{
+    "allQuestions":"Все вопросы",
+    "askQuestions": "Задать вопрос",
+    "search": "Поиск",
+    "author": "Автор:",
+    "askYourQuestions": "Задайте свой вопрос",
+    "title": "Титул",
+    "enterText": "Введите текст",
+    "relatedTags": "Связанные теги",
+    "cancel": "Отмена",
+    "create": "Создайте",
+    "description": "Описание"
   }
 }

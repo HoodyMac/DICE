@@ -230,5 +230,39 @@
     "requestSend": "Запит надіслати",
     "friends": "друзі",
     "Friends": "Друзі"
+  },
+
+  "FORUM_POST":{
+    "home": "Головна",
+    "questions": "Питання",
+    "author": "Автор",
+    "description": "Опис",
+    "dateOfPublication":"Дата публікації",
+    "attachments": "Вкладення",
+    "deleteComment": "Видалити коментар",
+    "answers": "Відповіді",
+    "yourAnswer": "Ваша відповідь",
+    "enterText": "Введіть текст",
+    "postYourAnswer":"Опублікуйте свою відповідь",
+    "askQuestions": "Задайте свої запитання",
+    "title": "Назва",
+    "relatedTags": "Пов'язані теги",
+    "tags": "Теги",
+    "cancel": "Скасувати",
+    "create": "Створити"
+  },
+
+  "FORUM_LIST":{
+    "allQuestions":"Всі питання",
+    "askQuestions": "Задати питання",
+    "search": "Пошук",
+    "author": "Автор:",
+    "askYourQuestions": "Задайте своє запитання",
+    "title": "Назва",
+    "enterText": "Введіть текст",
+    "relatedTags": "Пов'язані теги",
+    "cancel": "Скасувати",
+    "create": "Створити",
+    "description":"Опис"
   }
 }

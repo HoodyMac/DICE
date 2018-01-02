@@ -1,6 +1,7 @@
 import {Component} from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
 import {ForumService} from "../../services/forum.service";
+import {TranslateService} from "ng2-translate";
 
 
 @Component({

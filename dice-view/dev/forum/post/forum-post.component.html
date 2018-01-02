@@ -8,9 +8,9 @@
                             <p class="title">{{question.title}}</p>
                             <div class="breadcrumb">
                                 <ul>
-                                    <li>Home</li>
+                                    <li translate>FORUM_POST.home</li>
                                     <li><i class="fa fa-angle-right fa-2x" aria-hidden="true"></i></li>
-                                    <li>Questions</li>
+                                    <li translate>FORUM_POST.questions</li>
                                 </ul>
                             </div>
                         </div>
@@ -20,7 +20,7 @@
                                 <div class="circle" [style.background-image]="'url(/app/img/MEM1.jpg)'"></div>
                             </div>
                             <div class="author_name">
-                                <label>Author:</label>
+                                <label translate>FORUM_POST.author</label>
                                 <p>{{question.authorName}}</p>
                             </div>
                         </div>
@@ -30,16 +30,16 @@
                     <div class="post_block">
                         <div class="main_content">
                             <div class="block_title">
-                                <label for="description">Description</label>
+                                <label for="description" translate>FORUM_POST.description</label>
                                 <div class="createTime">
-                                    <label>Date of publication:</label><span>{{question.createdAt | date:'dd.MM.yyyy'}}</span> <label>at</label><span>{{question.createdAt | date:'HH:mm'}}</span>
+                                    <label translate>FORUM_POST.dateOfPublication</label><span>{{question.createdAt | date:'dd.MM.yyyy'}}</span>
                                 </div>
                             </div>
                             <div class="separator"></div>
                             <div class="text_block" id="description">
                                 <p>{{question.description}}</p>
                             </div>
-                            <label for="files">Attachments:</label>
+                            <label for="files" translate>FORUM_POST.attachments</label>
                             <div class="separator"></div>
                             <div class="files" id="files">
                                 <div class="code_group">
@@ -91,28 +91,7 @@
                                     <a alt="More options"  title="More options" class=" dropdown-toggle" id="editComment" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></a>
 
                                     <ul class="dropdown-menu" aria-labelledby="editComment">
-                                      <li><a>Delete comment</a></li>
-                                    </ul>
-                                  </div>
-                                </div>
-                              </li>
-                              <li>
-                                <div class="user-img">
-                                  <div class="circle" [style.background-image]="'url(/app/img/default_user_photo.jpg)'"></div>
-                                </div>
-
-                                <div class="content">
-                                  <a><p class="username">Ivan Loichuk</p></a>
-                                  <p class="text">Hello!!! Об этом фестивале знает весь мир, каждый год туда стремятся, без преувеличения, миллионы людей. Стоит только ввести в поиск слово Tomorrowland и через пару минут ты уже влюблен в этот фестиваль на всю жизнь!
-                                  </p>
-                                </div>
-                                <div class="comments_edit">
-                                  <p class="date">22:27</p>
-                                  <div class="dropdown">
-                                    <a alt="More options"  title="More options" class=" dropdown-toggle" id="editComment" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></a>
-
-                                    <ul class="dropdown-menu" aria-labelledby="editComment">
-                                      <li><a>Delete comment</a></li>
+                                      <li><a translate>FORUM_POST.deleteComment</a></li>
                                     </ul>
                                   </div>
                                 </div>
@@ -123,7 +102,7 @@
                     </div>
                     <div class="separator"></div>
                     <div class="answers_module">
-                        <div class="title">Answers</div>
+                        <div class="title" translate>FORUM_POST.answers</div>
                         <div class="answer_block">
                             <ul>
                                 <li *ngFor="let reply of question.replies">
@@ -182,7 +161,7 @@
                                               <a alt="More options"  title="More options" class=" dropdown-toggle" id="editComment" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></a>
 
                                               <ul class="dropdown-menu" aria-labelledby="editComment">
-                                                <li><a>Delete comment</a></li>
+                                                <li><a translate>FORUM_POST.deleteComment</a></li>
                                               </ul>
                                             </div>
                                           </div>
@@ -196,8 +175,8 @@
                         <div class="separator"></div>
                         <div class="input_answer">
                             <div class="form_group">
-                                <label for="createAnswer">Your answer:</label>
-                                <textarea name="createAnswer" id="createAnswer" class="form-control" cols="100" rows="5" placeholder="Enter a text" [(ngModel)]="answer.content"></textarea>
+                                <label for="createAnswer" translate>FORUM_POST.yourAnswer</label>
+                                <textarea name="createAnswer" id="createAnswer" class="form-control" cols="100" rows="5" placeholder="{{'FORUM_POST.enterText' | translate}}" [(ngModel)]="answer.content"></textarea>
                             </div>
                             <div class="post_attachment" style="display: none;">
                                 <div class="upload_image">
@@ -244,7 +223,7 @@
                                     <i class="fa fa-picture-o" aria-hidden="true"></i>
                                 </div>
                                 <div class="buttons_section">
-                                    <input type="submit" class="submit" value="Post your answer" (click)="createAnswer()">
+                                    <input type="submit" class="submit" value="{{'FORUM_POST.postYourAnswer' | translate}}" (click)="createAnswer()">
                                 </div>
                             </div>
                         </div>
@@ -260,20 +239,20 @@
             <div class="row">
                 <modal #createPost modalClass="modal-lg" id="createPostwModal" [closeOnOutsideClick]="true" [closeOnEscape]="true">
                     <modal-header>
-                        <h2>Ask your questions</h2>
+                        <h2 translate>FORUM_POST.askQuestions</h2>
                     </modal-header>
                     <modal-content>
                         <div class="form_group">
-                            <label for="post_title">Title:</label>
-                            <input type="text" id="post_title" class="post_title form-control" placeholder="Title">
+                            <label for="post_title" translate>FORUM_POST.title:</label>
+                            <input type="text" id="post_title" class="post_title form-control" placeholder="{{'FORUM_POST.title' | translate}}">
                         </div>
                         <div class="form_group">
-                            <label for="createPost">Description:</label>
-                            <textarea name="createPost" id="createPost" class="form-control" cols="100" rows="5" placeholder="Enter a text"></textarea>
+                            <label for="createPost" translate>FORUM_POST.description:</label>
+                            <textarea name="createPost" id="createPost" class="form-control" cols="100" rows="5" placeholder="{{'FORUM_POST.enterText' | translate}}"></textarea>
                         </div>
                         <div class="form_group">
-                            <label for="related_tags">Related tags</label>
-                            <input type="text" id="related_tags" class="form-control" placeholder="Tags">
+                            <label for="related_tags" translate>FORUM_POST.relatedTags</label>
+                            <input type="text" id="related_tags" class="form-control" placeholder="{{'FORUM_POST.tags' | translate}}">
                         </div>
                         <div class="post_attachment" style="display: none;">
                             <div class="upload_image">
@@ -322,8 +301,8 @@
                         </div>
 
                         <div class="buttons_section">
-                            <input type="reset" class="submit" value="Cancel" (click)="createPost.close()">
-                            <input type="submit" class="submit" value="Create">
+                            <input type="reset" class="submit" value="{{'FORUM_POST.cancel' | translate}}" (click)="createPost.close()">
+                            <input type="submit" class="submit" value="{{'FORUM_POST.create' | translate}}">
                         </div>
                     </modal-footer>
                 </modal>
