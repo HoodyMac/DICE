@@ -1,6 +1,8 @@
 package pl.zed.dice.forum.model;
 
+import pl.zed.dice.comment.model.CommentDTO;
 import pl.zed.dice.forum.domain.Tag;
+import pl.zed.dice.like.model.LikeDTO;
 
 import java.util.Date;
 import java.util.List;
@@ -12,6 +14,9 @@ public class ForumQuestionViewDTO {
     private String authorName;
     private List<TagViewDTO> tags;
     private Date createdAt;
+    private int commentsSize;
+    private List<LikeDTO> likes;
+    private List<CommentDTO> comments;
 
     public ForumQuestionViewDTO(Long id, String title, String authorName, List<TagViewDTO> tags, Date createdAt) {
         this.id = id;
@@ -59,5 +64,29 @@ public class ForumQuestionViewDTO {
 
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public int getCommentsSize() {
+        return commentsSize;
+    }
+
+    public void setCommentsSize(int commentsSize) {
+        this.commentsSize = commentsSize;
+    }
+
+    public List<LikeDTO> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(List<LikeDTO> likes) {
+        this.likes = likes;
+    }
+
+    public List<CommentDTO> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<CommentDTO> comments) {
+        this.comments = comments;
     }
 }

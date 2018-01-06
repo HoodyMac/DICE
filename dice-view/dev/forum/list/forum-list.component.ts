@@ -1,17 +1,20 @@
 import {Component, OnInit} from "@angular/core";
 import {IMultiSelectOption} from "angular-2-dropdown-multiselect";
 import {ForumService} from "../../services/forum.service";
+import {LikeService} from "../../common/services/like.service";
+import {AuthenticationService} from "../../common/services/authentication.service";
 
 @Component({
   templateUrl: '../app/forum/list/forum-list.component.html',
   styleUrls: ['../app/css/forum-list.css'],
-  providers: [ForumService]
+  providers: [ForumService, LikeService]
 })
 export class ForumListComponent {
 
   public editedQuestion = {};
   public tags: IMultiSelectOption[] = [];
   public questions = [];
+  public currentUser = {};
 
   public  msSettings: IMultiSelectSettings = {
     pullRight: false,
@@ -29,7 +32,7 @@ export class ForumListComponent {
     selectAddedValues: true
   };
 
-  constructor(private forumService: ForumService) {
+  constructor(private forumService: ForumService, private likeService: LikeService, private authenticationService: AuthenticationService) {
     this.forumService.getAllTags().subscribe(
       data => this.tags = data.map(item => {
         return {
@@ -42,6 +45,15 @@ export class ForumListComponent {
     this.forumService.getAllQuestions().subscribe(
       data => this.questions = data
     );
+
+    this.currentUser = this.authenticationService.getUserInfo();
+    if (this.currentUser === undefined) {
+      this.authenticationService.getUserInfoObservable().subscribe(
+        data => {
+          this.currentUser = data;
+        }
+      );
+    }
   }
 
   public createQuestion() {
@@ -49,6 +61,14 @@ export class ForumListComponent {
       data => {
         this.editedQuestion = {};
         this.questions.push(data);
+      }
+    );
+  }
+
+  public createLike(post){
+    this.likeService.createLike(post.id).subscribe(
+      response => {
+        this.likeService.handleLikeCreation(post, this.currentUser.userProfileId, response);
       }
     );
   }

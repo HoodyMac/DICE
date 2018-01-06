@@ -1,5 +1,7 @@
 package pl.zed.dice.like.domain;
 
+import pl.zed.dice.forum.domain.ForumQuestion;
+import pl.zed.dice.forum.domain.ForumReply;
 import pl.zed.dice.post.domain.Post;
 import pl.zed.dice.user.profile.domain.UserProfile;
 
@@ -19,12 +21,28 @@ public class LikesEntity {
     private Post post;
 
     @ManyToOne
+    private ForumQuestion forumQuestion;
+
+    @ManyToOne
+    private ForumReply forumReply;
+
+    @ManyToOne
     private UserProfile user;
 
     public LikesEntity(){}
 
     public LikesEntity(Post post, UserProfile user) {
         this.post = post;
+        this.user = user;
+    }
+
+    public LikesEntity(ForumQuestion forumQuestion, UserProfile user) {
+        this.forumQuestion = forumQuestion;
+        this.user = user;
+    }
+
+    public LikesEntity(ForumReply forumReply, UserProfile user) {
+        this.forumReply = forumReply;
         this.user = user;
     }
 
@@ -50,5 +68,21 @@ public class LikesEntity {
 
     public void setUser(UserProfile user) {
         this.user = user;
+    }
+
+    public ForumQuestion getForumQuestion() {
+        return forumQuestion;
+    }
+
+    public void setForumQuestion(ForumQuestion forumQuestion) {
+        this.forumQuestion = forumQuestion;
+    }
+
+    public ForumReply getForumReply() {
+        return forumReply;
+    }
+
+    public void setForumReply(ForumReply forumReply) {
+        this.forumReply = forumReply;
     }
 }

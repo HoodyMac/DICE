@@ -50,6 +50,6 @@ public class UserAsm {
 
     public FriendDTO makeFriendDTO(UserProfile userProfile){
         return new FriendDTO(userProfile.getId(), userProfile.getFirstname(), userProfile.getLastname(),
-                userProfile.getCropImage());
+                userProfile.getCropImage(), userProfile.getFriends().size());
     }
 }

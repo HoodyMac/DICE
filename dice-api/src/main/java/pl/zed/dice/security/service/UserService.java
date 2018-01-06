@@ -69,9 +69,10 @@ public class UserService {
 
     public void save(UserDTO userDTO) throws ParseException {
         if(userRepository.findByEmail(userDTO.getEmail()) == null) {
+			//tworzenie profilu użytkownika
             UserProfile userProfile = userAsm.makeUserProfile(userDTO);
             userProfileRepository.save(userProfile);
-
+			//tworzenie encji UserAccount
             UserAccount userAccount = userAsm.makeUserAccount(userDTO);
             userAccount.setProfile(userProfile);
             userRepository.save(userAccount);
@@ -113,8 +114,7 @@ public class UserService {
 
     public void editUserPassword(UserDTO userDTO){
         UserAccount userAccount = securityContextService.getCurrentUserAccount();
-
-        if(new BCryptPasswordEncoder().matches(userDTO.getOldPassword(), userAccount.getPassword())){
+        if(new BCryptPasswordEncoder() .matches(userDTO.getOldPassword(),userAccount.getPassword())){
             userAccount.editUserPassword(userDTO);
             userRepository.save(userAccount);
         }else
@@ -198,6 +198,7 @@ public class UserService {
                     List<LikeDTO> likes = getAndConvertLikes(post);
                     PostDTO postDTO = postAsm.makePostDTO(post, userAsm.makeUserProfileDTO(profile));
                     postDTO.setComments(Collections.emptyList());
+                    postDTO.setCommentsSize(post.getComments().size());
                     postDTO.setLikes(likes);
                     postDTOS.add(postDTO);
                 });

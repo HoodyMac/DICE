@@ -1,10 +1,7 @@
 package pl.zed.dice.like.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.zed.dice.like.model.LikeDTO;
 import pl.zed.dice.like.service.LikeService;
 
@@ -16,7 +13,12 @@ public class LikeController {
     private LikeService likeService;
 
     @PostMapping("/{id}")
-    public LikeDTO like(@PathVariable Long id){
-        return likeService.create(id);
+    public LikeDTO like(@PathVariable Long id, @RequestBody String type){
+        if (type.contains("post")) {
+            return likeService.createLikeForPost(id);
+        }else if (type.contains("question")) {
+            return likeService.createLikeForQuestion(id);
+        }else
+            return likeService.createLikeForReply(id);
     }
 }

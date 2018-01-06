@@ -15,6 +15,7 @@ public class PostDTO {
     private String content;
     private String created_date;
     private String cropImg;
+    private int commentsSize;
     private List<LikeDTO> likes;
     private List<CommentDTO> comments;
 
@@ -82,5 +83,13 @@ public class PostDTO {
 
     public void setComments(List<CommentDTO> comments) {
         this.comments = comments;
+    }
+
+    public int getCommentsSize() {
+        return commentsSize;
+    }
+
+    public void setCommentsSize(int commentsSize) {
+        this.commentsSize = commentsSize;
     }
 }

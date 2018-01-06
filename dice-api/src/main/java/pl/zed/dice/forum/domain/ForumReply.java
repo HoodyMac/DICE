@@ -1,10 +1,12 @@
 package pl.zed.dice.forum.domain;
 
+import pl.zed.dice.like.domain.LikesEntity;
 import pl.zed.dice.user.profile.domain.UserProfile;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class ForumReply {
@@ -27,6 +29,9 @@ public class ForumReply {
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "forumReply")
+    private List<LikesEntity> likesEntities;
 
     public ForumReply() {
     }
@@ -75,5 +80,13 @@ public class ForumReply {
 
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public List<LikesEntity> getLikesEntities() {
+        return likesEntities;
+    }
+
+    public void setLikesEntities(List<LikesEntity> likesEntities) {
+        this.likesEntities = likesEntities;
     }
 }

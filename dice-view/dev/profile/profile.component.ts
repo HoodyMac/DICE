@@ -204,6 +204,7 @@ export class ProfileComponent implements AfterViewInit {
     this.commentService.createComment(this.commentDTO).subscribe(
       data => {
         post.comments.push(data);
+        post.commentsSize++;
       }
     );
   }
@@ -239,15 +240,8 @@ export class ProfileComponent implements AfterViewInit {
   createLike(post){
     this.likeService.createLike(post.id).subscribe(
       response => {
-        if (this.findAlreadyLiked(post).length > 0) {
-          post.likes = post.likes.filter(like => like.user.userId !== this.currentUser.userProfileId);
-        }else
-          post.likes.push(response);
+        this.likeService.handleLikeCreation(post, this.currentUser.userProfileId, response);
       }
     );
-  }
-
-  findAlreadyLiked(post){
-    return post.likes.filter(like => like.user.userId == this.currentUser.userProfileId);
   }
 }

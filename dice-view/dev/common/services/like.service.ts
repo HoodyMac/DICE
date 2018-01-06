@@ -8,7 +8,18 @@ export class LikeService {
 
     constructor(private http: HttpClient) {}
 
-    createLike(id: number){
-        return this.http.post('/api/like/'+id, null).map(res => res.json());
+    createLike(id: number) {
+        return this.http.post('/api/like/'+id, 'question').map(res => res.json());
+    }
+
+    handleLikeCreation(post, userProfileId, response) {
+        if (this.findAlreadyLiked(post, userProfileId).length > 0) {
+            post.likes = post.likes.filter(like => like.user.userId !== userProfileId);
+        }else
+            post.likes.push(response);
+    }
+
+    findAlreadyLiked(post, userProfileId) {
+        return post.likes.filter(like => like.user.userId === userProfileId);
     }
 }

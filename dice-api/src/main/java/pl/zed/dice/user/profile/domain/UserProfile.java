@@ -5,6 +5,7 @@ import pl.zed.dice.post.domain.Post;
 import pl.zed.dice.user.profile.model.UserProfileDTO;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -21,33 +22,24 @@ public class UserProfile {
     private Long id;
 
     @Size(min = 2, max = 128)
+    @NotNull
     private String firstname;
-
     @Size(min = 2, max = 128)
+    @NotNull
     private String lastname;
-
-    //@Enumerated(value = EnumType.STRING)
+    @NotNull
     private Gender gender;
-
     @Temporal(TemporalType.DATE)
+    @NotNull
     private Date birthdayDate;
-
     private String phoneNumber;
-
     private String city;
-
     private String origImage;
-
     private String cropImage;
-
     private String programmingLanguages;
-
     private String work;
-
     private String education;
-
     private Boolean isOnline;
-
     @OneToMany(mappedBy = "requestor")
     private List<FriendEntity> friends;
 

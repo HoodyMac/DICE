@@ -10,7 +10,12 @@ import pl.zed.dice.forum.model.*;
 import pl.zed.dice.forum.repository.ForumQuestionRepository;
 import pl.zed.dice.forum.repository.ForumReplyRepository;
 import pl.zed.dice.forum.repository.TagRepository;
+import pl.zed.dice.like.asm.LikeAsm;
+import pl.zed.dice.like.model.LikeDTO;
+import pl.zed.dice.user.profile.asm.UserAsm;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,6 +34,12 @@ public class ForumService {
     @Autowired
     private TagRepository tagRepository;
 
+    @Autowired
+    private LikeAsm likeAsm;
+
+    @Autowired
+    private UserAsm userAsm;
+
     public ForumQuestionViewDTO createForumQuestion(ForumQuestionCreateDTO forumQuestionCreateDTO) {
         ForumQuestion forumQuestion = forumAsm.makeForumQuestion(forumQuestionCreateDTO);
         forumQuestionRepository.save(forumQuestion);
@@ -36,10 +47,14 @@ public class ForumService {
     }
 
     public List<ForumQuestionViewDTO> getAllForumQuestions() {
-        return forumQuestionRepository.findAll()
-                .stream()
-                .map(forumAsm::makeForumQuestionViewDTO)
-                .collect(Collectors.toList());
+        List<ForumQuestionViewDTO> forumQuestionViewDTOS = new ArrayList<>();
+        forumQuestionRepository.findAll().forEach(forumQuestion -> {
+            List<LikeDTO> likes = getAndConvertLikes(forumQuestion);
+            ForumQuestionViewDTO forumQuestionViewDTO = forumAsm.makeForumQuestionViewDTO(forumQuestion);
+            forumQuestionViewDTO.setLikes(likes);
+            forumQuestionViewDTOS.add(forumQuestionViewDTO);
+        });
+        return forumQuestionViewDTOS;
     }
 
     public List<Tag> getAllTags() {
@@ -48,7 +63,9 @@ public class ForumService {
 
     public ForumQuestionDetailsDTO getForumQuestion(Long postId) {
         ForumQuestion forumQuestion = forumQuestionRepository.getOne(postId);
-        return forumAsm.makeForumQuestionDetailsDTO(forumQuestion);
+        ForumQuestionDetailsDTO forumQuestionDetailsDTO = forumAsm.makeForumQuestionDetailsDTO(forumQuestion);
+        forumQuestionDetailsDTO.setLikes(getAndConvertLikes(forumQuestion));
+        return forumQuestionDetailsDTO;
     }
 
     public ForumReplyViewDTO replyToQuestion(ForumReplyCreateDTO forumReplyCreateDTO, Long questionId) {
@@ -58,5 +75,11 @@ public class ForumService {
         forumReply.setForumQuestion(forumQuestion);
         forumReplyRepository.save(forumReply);
         return forumAsm.makeForumReplyViewDTO(forumReply);
+    }
+
+    private List<LikeDTO> getAndConvertLikes(ForumQuestion question){
+        return question.getLikesEntities().stream()
+                .map(like -> likeAsm.makeLikeDTO(like, userAsm.makeUserProfileDTO(like.getUser())))
+                .collect(Collectors.toList());
     }
 }

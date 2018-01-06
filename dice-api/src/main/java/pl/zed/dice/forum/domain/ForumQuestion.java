@@ -1,5 +1,6 @@
 package pl.zed.dice.forum.domain;
 
+import pl.zed.dice.like.domain.LikesEntity;
 import pl.zed.dice.user.profile.domain.UserProfile;
 
 import javax.persistence.*;
@@ -39,6 +40,9 @@ public class ForumQuestion {
 
     @OneToMany(mappedBy = "forumQuestion")
     private List<ForumReply> replies = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "forumQuestion")
+    private List<LikesEntity> likesEntities;
 
     public ForumQuestion() {
     }
@@ -105,5 +109,13 @@ public class ForumQuestion {
 
     public void setReplies(List<ForumReply> replies) {
         this.replies = replies;
+    }
+
+    public List<LikesEntity> getLikesEntities() {
+        return likesEntities;
+    }
+
+    public void setLikesEntities(List<LikesEntity> likesEntities) {
+        this.likesEntities = likesEntities;
     }
 }

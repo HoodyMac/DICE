@@ -63,7 +63,6 @@ export class HomeComponent {
           password: credentials.password
         }),
         error => {
-          console.log(error);
           this.errorMessage = error._body;
           this.showErrorMessage = true;
           setTimeout(function() {

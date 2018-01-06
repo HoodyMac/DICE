@@ -34,8 +34,8 @@
                                 </div>
                                 <div class="social_module">
                                     <div class="likesEntities">
-                                        <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
-                                        <p>8156</p>
+                                        <span class="glyphicon glyphicon-heart" aria-hidden="true" (click)="createLike(question)"></span>
+                                        <p>{{ question.likes.length }}</p>
                                     </div>
                                     <div class="comments">
                                         <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
