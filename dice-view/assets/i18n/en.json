@@ -105,7 +105,7 @@
     "city": "City:",
     "education": "Education:",
     "work": "Work:",
-    "programmingLang": "Programing languages:",
+    "programmingLang": "Your skills:",
     "password": "Password:",
     "email": "Email:",
     "save": "Save",
@@ -121,7 +121,7 @@
     "en":"English",
     "ua":"Ukrainian",
     "ru": "Russian",
-    "chooseLanguage": "Choose your language",
+      "chooseLanguage": "Choose your skills",
 
     "placeholder":{
       "firstname": "First name",
@@ -134,7 +134,8 @@
       "work": "Work",
       "currentPassword": "Current password",
       "newPassword": "New password",
-      "confirmPassword": "Confirm password:"
+      "confirmPassword": "Confirm password:",
+      "yourSkills": "Select skills"
     }
 
   },
@@ -149,7 +150,7 @@
     "educationLabel":"Education:",
     "workLabel":"Work:",
     "ageLabel": "Age:",
-    "programLangLabel": "Programming languages:",
+    "programLangLabel": "Your skills:",
     "newMessages":"New messages",
     "friends":"Friends",
     "posts":"Posts",
@@ -249,7 +250,11 @@
     "relatedTags": "Related tags",
     "tags": "Tags",
     "cancel": "Cancel",
-    "create": "Create"
+    "create": "Create",
+    "addComment": "Add comment",
+    "createComment": "Create a comment",
+    "enterComment": "Enter your comment",
+    "send": "Send"
   },
 
   "FORUM_LIST":{

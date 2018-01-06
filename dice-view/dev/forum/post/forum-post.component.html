@@ -64,6 +64,9 @@
                             </div>
                         </div>
                         <div class="social_module">
+                          <div class="addComment">
+                            <span class="btnAddComment" (click)="commentCreateModal.open()" translate >FORUM_POST.addComment</span>
+                          </div>
                           <div class="comments">
                             <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
                             <p>52</p>
@@ -132,6 +135,9 @@
                                     </div>
                                   </div>
                                   <div class="social_module">
+                                    <div class="addComment">
+                                      <span class="btnAddComment" (click)="commentCreateModal.open()" translate >FORUM_POST.addComment</span>
+                                    </div>
                                     <div class="comments">
                                       <i class="fa fa-spinner" aria-hidden="true"></i>
                                       <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
@@ -235,78 +241,32 @@
                 <related-tags-block></related-tags-block>
                 <last-activity-block></last-activity-block>
             </div>
-            <!-- Create a post modal windows -->
-            <div class="row">
-                <modal #createPost modalClass="modal-lg" id="createPostwModal" [closeOnOutsideClick]="true" [closeOnEscape]="true">
-                    <modal-header>
-                        <h2 translate>FORUM_POST.askQuestions</h2>
-                    </modal-header>
-                    <modal-content>
-                        <div class="form_group">
-                            <label for="post_title" translate>FORUM_POST.title:</label>
-                            <input type="text" id="post_title" class="post_title form-control" placeholder="{{'FORUM_POST.title' | translate}}">
-                        </div>
-                        <div class="form_group">
-                            <label for="createPost" translate>FORUM_POST.description:</label>
-                            <textarea name="createPost" id="createPost" class="form-control" cols="100" rows="5" placeholder="{{'FORUM_POST.enterText' | translate}}"></textarea>
-                        </div>
-                        <div class="form_group">
-                            <label for="related_tags" translate>FORUM_POST.relatedTags</label>
-                            <input type="text" id="related_tags" class="form-control" placeholder="{{'FORUM_POST.tags' | translate}}">
-                        </div>
-                        <div class="post_attachment" style="display: none;">
-                            <div class="upload_image">
-                                <img src="app/img/TEEN.jpg" alt="">
-                                <div class="trash_button">
-                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                </div>
-                            </div>
-                            <div class="files">
-                                <div class="code_group">
-                                    <i class="fa fa-file fa-6x" aria-hidden="true"></i>
-                                    <span>filename</span>
-                                    <div class="trash_button">
-                                        <i class="fa fa-trash" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                                <div class="code_group">
-                                    <i class="fa fa-file-code-o fa-6x" aria-hidden="true"></i>
-                                    <span>longlonglonglonglonglong_filename</span>
-                                    <div class="trash_button">
-                                        <i class="fa fa-trash" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                                <div class="code_group">
-                                    <i class="fa fa-file-code-o fa-6x" aria-hidden="true"></i>
-                                    <span>longlonglonglonglonglong_filename</span>
-                                    <div class="trash_button">
-                                        <i class="fa fa-trash" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                                <div class="code_group">
-                                    <i class="fa fa-file-code-o fa-6x" aria-hidden="true"></i>
-                                    <span>longlonglonglonglonglong_filename</span>
-                                    <div class="trash_button">
-                                        <i class="fa fa-trash" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </modal-content>
-                    <modal-footer>
-                        <div class="upload_components">
-                            <i class="fa fa-file-code-o"></i>
-                            <i class="fa fa-file" aria-hidden="true"></i>
-                            <i class="fa fa-picture-o" aria-hidden="true"></i>
-                        </div>
 
-                        <div class="buttons_section">
-                            <input type="reset" class="submit" value="{{'FORUM_POST.cancel' | translate}}" (click)="createPost.close()">
-                            <input type="submit" class="submit" value="{{'FORUM_POST.create' | translate}}">
-                        </div>
-                    </modal-footer>
-                </modal>
-            </div>
+          <!-- create a comment -->
+
+          <div class="row">
+            <modal #commentCreateModal modalClass="modal-lg" [closeOnOutsideClick]="true" [closeOnEscape]="true">
+              <modal-header>
+                <h2 translate>FORUM_POST.createComment</h2>
+              </modal-header>
+              <modal-content>
+                <form >
+                  <div class="input-text">
+                    <form>
+                      <textarea  class="form-control"  cols="100" rows="5" placeholder="{{'FORUM_POST.enterComment' | translate }}"></textarea>
+                    </form>
+                  </div>
+                </form>
+              </modal-content>
+              <modal-footer>
+                <div class="buttons_section">
+                  <input type="reset" class="submit" value="{{'FORUM_POST.cancel' | translate}}" (click)="commentCreateModal.close()">
+                  <input type="submit" class="submit" value="{{'FORUM_POST.create' | translate}}">
+                </div>
+              </modal-footer>
+            </modal>
+          </div>
+
         </div>
     </div>
 </section>

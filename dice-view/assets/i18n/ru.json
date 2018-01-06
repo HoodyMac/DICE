@@ -105,7 +105,7 @@
     "city": "Родной город:",
     "education": "Образование:",
     "work": "Место работы:",
-    "programmingLang": "Языки программирования:",
+    "programmingLang": "Ваши навыки и возможности:",
     "password": "Пароль:",
     "email": "Aдрес электронной почты:",
     "save": "Сохранить",
@@ -121,7 +121,7 @@
     "en":"Английський",
     "ua":"Украинский",
     "ru": "Русский",
-    "chooseLanguage": "Выберите язык",
+    "chooseLanguage": "Выберите свои навыки",
 
     "placeholder":{
       "firstname": "Имя",
@@ -149,7 +149,7 @@
     "educationLabel":"Образование:",
     "workLabel":"Место работы:",
     "ageLabel": "Возраст:",
-    "programLangLabel": "Языки программирования:",
+    "programLangLabel": "Ваши навыки и возможности:",
     "newMessages":"Cообщения",
     "friends":"Друзья",
     "posts":"Публикации",
@@ -229,7 +229,8 @@
     "addFriends": "Добавить в друзья",
     "requestSend": "Заявка отправлена",
     "friends": "друзья",
-    "Friends": "Друзья"
+    "Friends": "Друзья",
+    "yourSkills": "Навыки и возможности"
   },
 
   "FORUM_POST":{
@@ -249,7 +250,11 @@
     "relatedTags": "Связанные теги",
     "tags": "Теги",
     "cancel": "Отмена",
-    "create": "Создайте"
+    "create": "Создайте",
+    "addComment": "Создать коментарий",
+    "createComment": "Создать коментарий",
+    "enterComment": "Введите ваш комментарий",
+    "send": "Отправить"
   },
 
   "FORUM_LIST":{

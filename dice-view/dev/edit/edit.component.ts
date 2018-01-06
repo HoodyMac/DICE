@@ -25,7 +25,6 @@ export class EditComponent implements AfterViewInit {
   progLang: Object;
   userLang: any = "";
   public passwordData: FormGroup;
-  private translate: TranslateService;
   public currentDate: any = Date.now();
 
     constructor(
@@ -35,6 +34,7 @@ export class EditComponent implements AfterViewInit {
         private fb:FormBuilder,
         private titleService: Title,
         private translate: TranslateService) {
+
         translate.get('PAGE_TITLES.EDIT').subscribe((res: string) => {
             this.titleService.setTitle(res);
         });
@@ -76,6 +76,8 @@ export class EditComponent implements AfterViewInit {
     localStorage.setItem('lang', language);
     this.translate.get('EDIT.'+localStorage.getItem('lang')).subscribe((res: string) => {
       this.userLang = res;
+      console.log(localStorage.getItem('lang'));
+      console.log(this.userLang);
     });
   }
 

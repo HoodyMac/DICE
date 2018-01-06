@@ -168,11 +168,11 @@
                         <div class="row">
                           <modal #codeView modalClass="modal-lg" id="codeViewModal" [closeOnOutsideClick]="true" [closeOnEscape]="true">
                             <modal-header>
-                              <h2 *ngIf="codeView.isOpened" translate>{{presentedAttachment.language}} MESSAGES.code</h2>
+                              <h2 *ngIf="codeView.isOpened">{{presentedAttachment.language}} <span translate>MESSAGES.code</span></h2>
                             </modal-header>
                             <modal-content>
                               <ngx-monaco-editor *ngIf="codeView.isOpened" [options]="viewOptions" style="height: 70%"></ngx-monaco-editor>
-                              <label for="code_comment" translate>MESSAGES.Comment</label>
+                              <label for="code_comment" translate>MESSAGES.comment</label>
                               <p *ngIf="codeView.isOpened">{{presentedAttachment.comment}}</p>
                             </modal-content>
                             <modal-footer>

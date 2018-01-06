@@ -77,6 +77,7 @@ export class ProfileComponent implements AfterViewInit {
 
   addToFriends() {
     this._searchService.addToFriends(this.profileId).subscribe();
+    jQuery('#addToFriends').attr('disabled', 'disabled');
   }
 
   goToFriendsPage(){
@@ -85,6 +86,7 @@ export class ProfileComponent implements AfterViewInit {
 
   cancelFriendRequest(){
     this._friendService.removeFriend(this.profileId).subscribe();
+    jQuery('#removeFriend').attr('disabled', 'disabled');
   }
 
   ngAfterViewInit() {
