@@ -8,9 +8,13 @@ import pl.zed.dice.forum.domain.ForumReply;
 import pl.zed.dice.forum.domain.Tag;
 import pl.zed.dice.forum.model.*;
 import pl.zed.dice.forum.repository.TagRepository;
+import pl.zed.dice.like.asm.LikeAsm;
+import pl.zed.dice.like.model.LikeDTO;
 import pl.zed.dice.security.service.SecurityContextService;
+import pl.zed.dice.user.profile.asm.UserAsm;
 import pl.zed.dice.user.profile.domain.UserProfile;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,6 +27,12 @@ public class ForumAsm {
 
     @Autowired
     private TagRepository tagRepository;
+
+    @Autowired
+    private LikeAsm likeAsm;
+
+    @Autowired
+    private UserAsm userAsm;
 
     public ForumQuestion makeForumQuestion(ForumQuestionCreateDTO forumQuestionCreateDTO) {
         List<Tag> tags = Lists.newArrayList();
@@ -53,7 +63,12 @@ public class ForumAsm {
 
     public ForumQuestionDetailsDTO makeForumQuestionDetailsDTO(ForumQuestion forumQuestion) {
         List<TagViewDTO> tags = forumQuestion.getTags().stream().map(tag -> new TagViewDTO(tag.getId(), tag.getTitle())).collect(Collectors.toList());
-        List<ForumReplyViewDTO> replies = forumQuestion.getReplies().stream().map(this::makeForumReplyViewDTO).collect(Collectors.toList());
+        List<ForumReplyViewDTO> replies = new ArrayList<>();
+        forumQuestion.getReplies().forEach(forumReply -> {
+            ForumReplyViewDTO forumReplyViewDTO = makeForumReplyViewDTO(forumReply);
+            forumReplyViewDTO.setLikes(getAndConvertLikes(forumReply));
+            replies.add(forumReplyViewDTO);
+        });
         return new ForumQuestionDetailsDTO(
                 forumQuestion.getId(),
                 forumQuestion.getTitle(),
@@ -76,5 +91,11 @@ public class ForumAsm {
                 forumReply.getAuthor().getId(),
                 forumReply.getAuthor().getFullname(),
                 forumReply.getCreatedAt());
+    }
+
+    private List<LikeDTO> getAndConvertLikes(ForumReply forumReply){
+        return forumReply.getLikesEntities().stream()
+                .map(like -> likeAsm.makeLikeDTO(like, userAsm.makeUserProfileDTO(like.getUser())))
+                .collect(Collectors.toList());
     }
 }

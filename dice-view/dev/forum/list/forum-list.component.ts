@@ -66,7 +66,7 @@ export class ForumListComponent {
   }
 
   public createLike(post){
-    this.likeService.createLike(post.id).subscribe(
+    this.likeService.createLike(post.id, 'question').subscribe(
       response => {
         this.likeService.handleLikeCreation(post, this.currentUser.userProfileId, response);
       }

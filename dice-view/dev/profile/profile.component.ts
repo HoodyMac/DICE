@@ -238,7 +238,7 @@ export class ProfileComponent implements AfterViewInit {
   }
 
   createLike(post){
-    this.likeService.createLike(post.id).subscribe(
+    this.likeService.createLike(post.id, 'post').subscribe(
       response => {
         this.likeService.handleLikeCreation(post, this.currentUser.userProfileId, response);
       }
