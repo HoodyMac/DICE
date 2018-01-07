@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from "../common/services/authentication.service";
 import {RegistrationService} from "../services/registration.service";
-import {Validators, FormGroup, FormBuilder,} from "@angular/forms";
+import {Validators, FormGroup, FormBuilder, Validator,} from "@angular/forms";
 import {Router, NavigationEnd, ActivatedRoute} from "@angular/router";
 import { Title } from '@angular/platform-browser';
 import {TranslateService} from "ng2-translate";
@@ -15,10 +15,13 @@ import {TranslateService} from "ng2-translate";
 
 export class HomeComponent {
   public form: FormGroup;
+  public currentDate: any = Date.now();
 
   public errorMessage: string;
   public showErrorMessage: boolean = false;
   public showLoginMessage: boolean = false;
+  public spinnerInShow = false;
+  public spinnerUpShow = false;
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -33,21 +36,27 @@ export class HomeComponent {
       });
 
       this.form = this.fb.group({
-        firstname: ['', Validators.compose([ Validators.required, Validators.maxLength(60)])],
-        lastname: ['',Validators.compose([ Validators.required, Validators.maxLength(60)])],
+        firstname: ['', Validators.compose([ Validators.required, Validators.maxLength(60), Validators.minLength(3)])],
+        lastname: ['',Validators.compose([ Validators.required, Validators.maxLength(60), Validators.minLength(3)])],
         gender: ['', Validators.required],
         birthdayDate: ['', Validators.required],
         email: ['', Validators.required],
-        password: ['', Validators.required],
+        password: ['', Validators.compose([ Validators.required, Validators.minLength(3)])],
         confirmPassword: ['', Validators.required]
       });
   }
+    useLanguage(language: string) {
+        this.translate.use(language);
+        localStorage.setItem('lang', language);
+    }
 
   onSignIn(credentials) {
+    this.spinnerInShow = true;
     this.authenticationService.login(credentials).subscribe(
       data => this.route.navigate(['/profile', data.userProfileId]),
       () => {
         this.showLoginMessage = true;
+        this.spinnerInShow = false;
         setTimeout(function() {
           this.showLoginMessage = false;
         }.bind(this), 5000);
@@ -56,6 +65,7 @@ export class HomeComponent {
   }
 
   onSignUp(credentials){
+    this.spinnerUpShow = true;
     this.registrationService.doSignUp(credentials)
       .subscribe(
         () => this.onSignIn({
@@ -65,9 +75,11 @@ export class HomeComponent {
         error => {
           this.errorMessage = error._body;
           this.showErrorMessage = true;
+          this.spinnerUpShow = false;
           setTimeout(function() {
             this.showErrorMessage = false;
           }.bind(this), 5000);
+
         }
       );
   }

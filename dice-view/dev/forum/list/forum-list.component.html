@@ -4,13 +4,13 @@
             <div class="col-md-9 col-sm-12 col-xs-12 custom-col-posts">
                 <div class="forum_top">
                     <div class="forum_title">
-                        <p class="title">All questions</p>
+                        <p class="title" translate>FORUM_LIST.allQuestions</p>
                         <div class="ask_button">
-                            <button type="button"  class="btn btn-default" (click)="createPost.open()">Ask a questions</button>
+                            <button type="button"  class="btn btn-default" (click)="createPost.open()" translate>FORUM_LIST.askQuestions</button>
                         </div>
                     </div>
                     <form>
-                        <input type="text" class="form-control" placeholder="Search">
+                        <input type="text" class="form-control" placeholder="{{'FORUM_LIST.search' | translate}}">
                     </form>
                 </div>
                 <div class="forum">
@@ -29,7 +29,7 @@
                             </div>
                             <div class="bottom">
                                 <div class="autor">
-                                    <span class="autor_label">author:</span>
+                                    <span class="autor_label" translate>FORUM_LIST.author</span>
                                     <span class="autor_name">{{question.authorName}}</span>
                                 </div>
                                 <div class="social_module">
@@ -49,28 +49,27 @@
             </div>
 
             <div class="col-md-3 col-sm-12 col-xs-12 custom-col-navigation">
-                <div class="search">
-
-                </div>
+                <related-tags-block></related-tags-block>
+                <last-activity-block></last-activity-block>
             </div>
 
             <!-- Create a post modal windows -->
             <div class="row">
                 <modal #createPost modalClass="modal-lg" id="createPostModal" [closeOnOutsideClick]="true" [closeOnEscape]="true">
                     <modal-header>
-                        <h2>Ask your questions</h2>
+                        <h2 translate>FORUM_LIST.askYourQuestions</h2>
                     </modal-header>
                     <modal-content>
                         <div class="form_group">
-                            <label for="post_title">Title:</label>
-                            <input type="text" id="post_title" class="post_title form-control" placeholder="Title" [(ngModel)]="editedQuestion.title">
+                            <label for="post_title" translate>FORUM_LIST.title</label>
+                            <input type="text" id="post_title" class="post_title form-control" placeholder="{{'FORUM_LIST.title' | translate}}" [(ngModel)]="editedQuestion.title">
                         </div>
                         <div class="form_group">
-                            <label for="createPost">Description:</label>
-                            <textarea name="createPost" id="createPost" class="form-control" cols="100" rows="5" placeholder="Enter a text" [(ngModel)]="editedQuestion.description"></textarea>
+                            <label for="createPost" translate>FORUM_LIST.description</label>
+                            <textarea name="createPost" id="createPost" class="form-control" cols="100" rows="5" placeholder="{{'FORUM_LIST.enterText' | translate}}" [(ngModel)]="editedQuestion.description"></textarea>
                         </div>
                         <div class="form_group">
-                            <label>Related tags</label>
+                            <label translate>FORUM_LIST.relatedTags</label>
                             <ss-multiselect-dropdown [options]="tags" [(ngModel)]="editedQuestion.tags" [settings]="msSettings"></ss-multiselect-dropdown>
                         </div>
                         <div class="post_attachment" style="display: none;">
@@ -120,8 +119,8 @@
                         </div>
 
                         <div class="buttons_section">
-                            <input type="reset" class="submit" value="Cancel" (click)="createPost.close()">
-                            <input type="submit" class="submit" value="Create" (click)="createQuestion(); createPost.close()">
+                            <input type="reset" class="submit" value="{{'FORUM_LIST.cancel' | translate}}" (click)="createPost.close()">
+                            <input type="submit" class="submit" value="{{'FORUM_LIST.create' | translate}}" (click)="createQuestion(); createPost.close()">
                         </div>
                     </modal-footer>
                 </modal>

@@ -52,13 +52,13 @@
               <strong translate>HOME.loginFailed</strong>
             </div>
             <button type="submit" class="btn btn-default btn-signin  button" translate>HOME.sign_in</button>
+            <i class="fa fa-spinner signInSpinner" aria-hidden="true" *ngIf="spinnerInShow"></i>
           </form>
         </div>
       </div>
     </div>   <!-- End row -->
   </div>  <!-- End container -->
 </header>
-
 <section class="registration-form" id="registration">
   <div class="container">
     <div class="row">
@@ -66,20 +66,12 @@
         <div class="form">
           <form class="signup" novalidate [formGroup]="form" password-matcher #f="ngForm" (ngSubmit)="onSignUp(f.value)">                <!-- signup form -->
             <span><h2 translate>HOME.sign_up</h2></span>
-
-            <div class="alert alert-success signup_form" *ngIf="showRegistrationMessage">
-              <strong translate>HOME.registrationSuccess</strong> {{registrationMessage}}
-            </div>
-
-            <div class="alert alert-danger signup_form" *ngIf="showErrorMessage">
-              <strong>{{errorMessage}}</strong>
-            </div>
-
             <div class="signup_form">
               <input type="text" class="form-control" formControlName="firstname" name="firstname" id="firstname" placeholder="{{'HOME.placeholder.firstName' | translate}}">
               <div class="errors" *ngIf="form.get('firstname').touched">
                 <p *ngIf="form.get('firstname').errors != null ? form.get('firstname').errors.required :  false " translate>HOME.firstNameAlert</p>
                 <p *ngIf="form.get('firstname').errors != null ? form.get('firstname').errors.maxlength :  false " translate>HOME.firstNameLongAlert</p>
+                <p *ngIf="form.get('firstname').errors != null ? form.get('firstname').errors.minlength :  false " translate>HOME.firstNameShortAlert</p>
               </div>
 
             </div>
@@ -88,6 +80,7 @@
               <div class="errors" *ngIf="form.get('lastname').touched">
                 <p *ngIf="form.get('lastname').errors != null ? form.get('lastname').errors.required :  false " translate>HOME.lastNameAlert</p>
                 <p *ngIf="form.get('lastname').errors != null ? form.get('lastname').errors.maxlength :  false " translate>HOME.lastNameLongAlert</p>
+                <p *ngIf="form.get('lastname').errors != null ? form.get('lastname').errors.minlength :  false " translate>HOME.lastNameShortAlert</p>
               </div>
             </div>
             <div class="gender">
@@ -100,7 +93,7 @@
               </div>
             </div>
             <div class="birthday signup_form">
-              <input type="date"  formControlName="birthdayDate" id="birthdayDate" placeholder="{{'HOME.placeholder.birthday' | translate }}">
+              <input type="date"  formControlName="birthdayDate" id="birthdayDate" placeholder="{{'HOME.placeholder.birthday' | translate }}" max="{{currentDate | date:'yyyy-MM-dd'}}">
               <div class="errors" *ngIf="form.get('birthdayDate').touched">
                 <p *ngIf="form.get('birthdayDate').invalid" translate>HOME.birthdayAlert</p>
               </div>
@@ -125,6 +118,14 @@
               </div>
             </div>
             <button type="submit" class="btn btn-default btn-signin button" [disabled]="!form.valid" translate>HOME.sign_up</button>
+            <div class="signUpSpinner" *ngIf="spinnerUpShow"><i class="fa fa-spinner" aria-hidden="true"></i></div>
+            <div class="alert alert-success signup_form" *ngIf="showRegistrationMessage">
+              <strong translate>HOME.registrationSuccess</strong> {{registrationMessage}}
+            </div>
+
+            <div class="alert alert-danger signup_form" *ngIf="showErrorMessage">
+              <strong>{{errorMessage}}</strong>
+            </div>
           </form>
         </div>
 
@@ -170,3 +171,34 @@
     </div> <!--  End row -->
   </div> <!-- End container -->
 </section>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="copyright col-md-2 col-sm-6 col-xs-12">
+        <p>Dice@2017</p><hr>
+      </div>
+
+      <div class="settings col-md-4 col-sm-6 col-xs-12">
+        <ul>
+          <li class="list-gr"><a href="#" translate>FOOTER.about</a></li>
+          <li class="list-gr"><a href="#" translate>FOOTER.help</a></li>
+          <li class="list-gr"><a href="#" translate>FOOTER.developers</a></li>
+        </ul><hr>
+      </div>
+
+      <div class="languages col-md-6 col-sm-12 col-xs-12">
+        <ul>
+          <li class="list-gr" translate>FOOTER.language</li>
+          <li class="list-gr"><a (click)="useLanguage('en')">english</a></li>
+          <li class="list-gr"><a (click)="useLanguage('pl')">polski</a></li>
+          <li class="list-gr"><a (click)="useLanguage('ua')">українська</a></li>
+          <li class="list-gr"><a (click)="useLanguage('ru')">русский</a></li>
+        </ul>
+        <hr>
+      </div>
+
+    </div>
+  </div>
+</footer>
+

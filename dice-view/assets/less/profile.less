@@ -1,4 +1,5 @@
 @import "colors";
+@import "functions";
 
 
 section.user_info{padding-bottom: 50px;
@@ -27,7 +28,11 @@ section.user_info{padding-bottom: 50px;
                         }
                     }
                 }
-                modal-footer{ text-align: center;}
+                modal-footer{ text-align: center;
+                  .spinner{width: 100%;bottom: 0; z-index: 1000; background-color: rgba(45,45,45,0.4); height: 100%; right: 0; color: cadetblue; position: fixed;
+                    i{ font-size: 55px; position: relative; top: 340px; color: @search_spinnerFont; animation: spin 2s linear infinite;}
+                  }
+                }
             }
             .imgView{ max-width: 100%;}
         }
@@ -39,7 +44,6 @@ section.user_info{padding-bottom: 50px;
             0% { top: -250px; opacity: 0; }
             100% { top: 0; opacity: 1; }
         }
-
     }
 
     .page_info{position: relative; background: @box_bg; border-radius: 2px; box-shadow: 0 1px 0 0 @userInfo_border, 0 0 0 1px @userInfo_border;
@@ -49,7 +53,7 @@ section.user_info{padding-bottom: 50px;
         }
         .profile_info{
             .profile_info_row{ display: flex; padding: 1% 0 1% 5%;
-                &:first-child{padding-top: 2%;}
+                &:first-child{padding-top: 2%; width: 100%;}
                 &:last-child{padding-bottom: 2%;}
                 .label_info{font-size: 16px; width: 30%; color: @userInfo_fontLabel;}
                 .city{width: 65%;}
@@ -60,13 +64,17 @@ section.user_info{padding-bottom: 50px;
     }
 
     .counts_module{ border: 1px solid; border-radius: 2px; margin-top: 10px; border-color: @userInfo_border; display: inline-flex; width: 100%; background-color: @box_bg;
-        .page_count{ padding: 1% 2% 1% 2%; text-align: center; display: grid; border-right: 1px solid @userInfo_border; width: 25%;
+        .page_count{text-align: center; display: grid; border-right: 1px solid @userInfo_border; width: 25%;
             &:last-child{border: none;}
-            a{color: @userInfo_fontValue; font-size: 16px; text-decoration: none; cursor: pointer;
-                &:hover{color: @userInfo_fontLabelHover;}
-                .label_module{ }
+            a.label{ padding-top: 10px;
+                .label_module{color: @userInfo_fontValue; font-size: 16px; text-decoration: none; cursor: pointer; font-weight: 500;
+                    &:hover{color: @userInfo_fontLabelHover;}
+                }
             }
-            .value_module{ color: @userInfo_fontLabel;
+            a.icon{display: none; cursor: pointer; padding-top: 5px;
+                i{font-size: 20px;}
+            }
+            .value_module{ color: @userInfo_fontLabel; padding-bottom: 10px;
                 i{font-size: 16px;}
             }
 
@@ -76,10 +84,10 @@ section.user_info{padding-bottom: 50px;
                 }
                 modal-content{
                     textarea{width: 98%; border-radius: 5px; padding: 10px; height: 170px;}
-                    .post_attachment{ text-align: start; display: flex;
+                    .post_attachment{ text-align: left; display: flex;
                         .upload_image{ position: relative;
                             img{ height: 160px; margin: 20px 10px; opacity: 1; display: block; transition: .5s ease; backface-visibility: hidden; }
-                            .trash_button { transition: .5s ease; opacity: 0; position: absolute; text-align: end; -ms-transform: translate(-50%, -50%); transform: translate(0%, -100%); width: 100%; height: 100%;
+                            .trash_button { transition: .5s ease; opacity: 0; position: absolute; text-align: right; -ms-transform: translate(-50%, -50%); transform: translate(0%, -100%); width: 100%; height: 100%;
                                 &:hover{ opacity: 1;}
                                 i{ color: @profile_trashBtnBg; font-size: 25px; margin: 30px 20px;cursor: pointer;
                                     &:hover{ color: @profile_trashBtnHover ;}
@@ -91,7 +99,7 @@ section.user_info{padding-bottom: 50px;
                                 &:hover{ background-color: @profile_listHover;}
                                 i{font-size: 35px; vertical-align: bottom; margin-bottom: 8px; color: @profile_fileBg;}
                                 span{vertical-align: super; position: relative; padding: 5px 5px;  bottom: 5px;}
-                                .trash_button { transition: .5s ease; opacity: 0; position: absolute; text-align: end; -ms-transform: translate(-50%, -50%); transform: translate(0%, -100%); width: 100%; height: 100%;
+                                .trash_button { transition: .5s ease; opacity: 0; position: absolute; text-align: right; -ms-transform: translate(-50%, -50%); transform: translate(0%, -100%); width: 100%; height: 100%;
                                     &:hover{ opacity: 1;}
                                     i{ color: @profile_trashBtnBg; font-size: 25px; margin: 10px 20px; cursor: pointer;
                                         &:hover{ color: @profile_trashBtnHover;}
@@ -99,16 +107,15 @@ section.user_info{padding-bottom: 50px;
                                 }
                             }
                         }
-
                     }
                 }
                 modal-footer{  display: flex;
-                    .upload_components{ width: 50%; display: inline; text-align: start; padding: 8px 8px;
+                    .upload_components{ width: 50%; display: inline; text-align: left; padding: 8px 8px;
                         span, i{font-size: 25px; color: @profile_iconsBg; cursor: pointer; padding: 5px;
                             &:hover{color: @profile_iconsHover; }
                         }
                     }
-                    .buttons_section{ width: 50%; text-align: end; display: inline;
+                    .buttons_section{ width: 50%; text-align: right; display: inline;
                         input{ height: 40px; border-radius: 5px; border: none; margin: 5px 5px; background-color: @msg_buttonBg; color: @msg_msgBoxFont;
                             &.submit{width: 180px;}
                             &:hover{background-color: @msg_buttonBgHover;}
@@ -125,14 +132,14 @@ section.user_info{padding-bottom: 50px;
                 ul{ width: 100%; padding: 0; margin: 0;
                     li{ display: inline-flex; width: 100%; border-radius: 2px;
                         .user-img{ padding: 1% 25px; width: 10%;
-                            .circle{ width: 50px; padding: 2%; height:50px; border-radius: 50%; background-position: center; background-size: cover;}
+                            .circle{ width: 50px; margin: 5px 0; height:50px; border-radius: 50%; background-position: center; background-size: cover;}
                         }
-                        .content{ width: 85%;
+                        .content{ width: 85%; word-break: break-all;
                             p{
-                                &.username{ padding: 15px 0px 0px 5px; font-size: 16px; margin: 0;  color: #2A5885;
+                                &.username{ padding: 10px 0 0 5px; font-size: 16px; margin: 0;  color: #2A5885;
                                     &{color: #1b3654; cursor: pointer;}
                                 }
-                                &.date{ padding: 0px 0px 0px 5px; margin: 0;}
+                                &.date{ padding: 0 0 0 5px; margin: 0;}
                             }
                         }
                         .post_edit {
@@ -167,63 +174,12 @@ section.user_info{padding-bottom: 50px;
                         }
                     }
                 }
-
             }
-            .social_module{ display: inline-flex; padding: 0px 15px;
-                .likesEntities{ display: inline-flex; padding: 10px;
-                    span{font-size: 20px; color: #708bd4; cursor: pointer;
-                        &:hover{ color: #3638d4;}
-                    }
-                    p{padding: 0px 5px; margin: 0;}
-                }
-                .comments{ display: inline-flex; padding: 10px;
-                    span{font-size: 20px; color: #708bd4; cursor: pointer;
-                        &:hover{ color: #3638d4;}
-                    }
-                    p{padding: 0px 5px; margin: 0;}
-                }
+            .social_module{ display: inline-flex; padding: 0 15px;
+              .social_module( 25px, @socialModuleFont);
             }
             .comments_module{
-                .show_comments{
-                    input{background-color: #d9ddec; width: 100%; height: 35px; border: none; border-radius: 0;
-                        &:hover{background-color: #cfd3e2;}
-                        &:active, &:focus, &:visited{ outline: none; }
-                        &.active{ background-color: #a1bbec;}
-                    }
-                }
-                .comment_block{
-                    ul{ width: 100%; padding: 0; margin: 0;
-                        li{ display: inline-flex; width: 100%; border-radius: 2px; border-bottom: 1px solid @userInfo_border;
-                            &:last-child{ border: none;}
-                            .user-img{ padding: 10px 0px 10px 25px; width: 8%;
-                                .circle{ width: 35px; padding: 2%; height:35px; border-radius: 50%; background-position: center; background-size: cover; cursor:pointer;}
-                            }
-                            .content{ width: 75%;
-                                a{ color: #2A5885; font-size: 14px;
-                                    .username{ padding: 5px 0 0 5px; margin: 0; cursor:pointer;}
-                                    &:hover{text-decoration: none; color: #1b3654;}
-                                }
-                                p{
-                                    &.text{padding: 0px 5px; margin: 0;}
-                                }
-                            }
-                            .content{
-                                p{margin: 0;}
-                            }
-                            .comments_edit {display: inline-flex; width: 17%;
-                                span{ font-size: 20px; color: cornflowerblue; margin: 15px 10px; cursor: pointer;
-                                    &:hover{ color: #1643ed; }
-                                }
-                                .date{ padding: 17px 0px 0px 5px; margin: 0;width: 65%;}
-                                ul{width: 160px; float: none; padding: 0; border-radius: 2px; margin-top: 0;  margin-bottom: 0; list-style: none;
-                                    li{background-color: inherit; border: none; margin: 0; width: 100%; float: none;
-                                        a{cursor: pointer; width: 100%;}
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+                .setCommentsStyle();
 
                 .input-text{ padding: 15px 25px 15px 25px;; border-top: 1px solid @box_border; display: inline-flex; width: 100%;
                     form{ width: 100%; display: inline-flex; margin: 0;
@@ -245,48 +201,10 @@ section.user_info{padding-bottom: 50px;
                             }
                         }
                     }
-
                 }
             }
         }
     }
-
-    .forum_box{width: 100%; border: 1px solid @userInfo_border; border-radius: 2px; margin-top: 10px; background-color: @box_bg; margin-bottom: 7%;
-        ul{list-style: none; padding: 0; margin: 0;}
-        .forums{
-            li{padding: 2%;}
-            li.header p{ text-align: center; font-size: 18px; margin: 0;}
-            .forum_posts{
-                li{border-top: 1px solid; }
-                .forum_post{
-                    table{width: 100%;
-                        a {
-                            img{padding-right: 15%; width: 100%; vertical-align: text-top;}
-                        }
-                        .title_block{
-                            a{color: @forum_font_title; text-decoration: none;
-                                &:hover{text-decoration: none; color: @forum_font_title_hover;}
-                            }
-                        }
-                        .author_block{
-                            a{color: @forum_font_author;
-                                &:hover{text-decoration: none; color: @forum_font_author_hover;}
-                            }
-                        }
-                        .views_block{ width: 35%;
-                            .views_label{
-                                img{position: relative; bottom: 1px;}
-                            }
-                            .views_value{color: @forum_font_views_value;}
-                        }
-                        .date_block{text-align: end;}
-                        .img_block{width: 25%;}
-                    }
-                }
-            }
-        }
-    }
-
 }
 
 /*--- (media) Responsive style -----------------------*/
@@ -299,28 +217,113 @@ section.user_info{padding-bottom: 50px;
             }
         }
     }
+    section.user_info .posts_container .post_block {
+        .header ul li{
+            .user-img { width: 13%; }
+        }
+    }
+    .dropdown-menu{left: -145px; top: 35px;}
+}
+@media (max-width: 990px){
+    section.user_info{
+        .counts_module .page_count {
+            a.icon{ display: block;}
+            a.label{display: none;}
+        }
+        .posts_container .post_block {
+              .header ul li {
+                  .user-img { width: 20%; }
+              }
+              .comments_module{
+                  .input-text form input[type='text'] { margin-right: 10px; margin-left: 15px; }
+                  .input-text form input[type='submit'] { width: 20%; }
+              }
+          }
+    }
+
+
 }
 
-@media (max-width: 768px){ }
+@media (max-width: 768px){
+
+}
 
 @media (max-width: 720px){
-    .dropdown-menu{left: -145px;}
+    section.user_info {
+        .posts_container .post_block {
+            .header ul li {
+                .user-img { width: 25%; margin-left:0; }
+            }
+        }
+    }
 }
 
 @media (max-width: 620px) {
     .custom-col-image{width: 70%; margin-left: 15%; margin-right: 15%; }
     .custom-col-info{width: 100%; margin-top: 5%;}
+
+    section.user_info .posts_container .post_block {
+        .header ul li {
+            .user-img { width: 20%; }
+        }
+    }
+
 }
 
 @media (max-width: 480px){
+    .custom-col-image{width: 100%; margin-left: 0; margin-right: 0;
+        .forum_box{margin-bottom: 10px!important;}
+    }
+    .custom-col-info{width: 100%; margin-top: 0;  }
     .post_edit{padding: 5px 3px 0 0; }
     .comments_edit{padding: 5px 3px 0 0; }
 
+    section.user_info .posts_container .post_block {
+        .header ul li {
+            .user-img { width: 25%; padding: 10px 10px;
+                .circle { width: 35px; height: 35px; }
+            }
+        }
+        .comments_module {
+            .input-text { padding: 10px 10px 10px 10px;
+                form input[type='text'] {  margin-right: 0; margin-left: 5px;  }
+                form .user-img{width: 15%;}
+            }
+        }
+    }
+
+    section.user_info .page_info .profile_info .profile_info_row {
+        .value {width: 80%;}
+        .label_info { display: none;}
+    }
+    section.user_info .counts_module .page_count modal modal-footer .buttons_section input.submit { width: 150px; }
 }
 
 @media (max-width: 340px){
     .custom-col-image{width: 100%; margin-left: 0; margin-right: 0; }
     .custom-col-info{width: 100%;}
+
+    section.user_info .posts_container .post_block {
+        .header ul li {
+            .user-img { width: 30%; padding: 10px 10px;
+                .circle { width: 35px; height: 35px; }
+            }
+            .content{
+                p.username{ padding: 5px 0 0 5px;}
+            }
+        }
+        .comments_module {
+            .input-text form input[type='submit'] {
+                width: 25%;
+                margin-left: 5px;
+            }
+            .input-text { padding: 10px 5px 10px 0;
+                form input[type='text'] {  margin-right: 0; margin-left: 5px;  }
+            }
+            .input-text form .user-img { display: none; }
+        }
+    }
+    section.user_info .counts_module .page_count modal modal-footer .buttons_section input.submit { width: 130px; }
 }
 
 /*--- END (media) Responsive style -----------------------*/

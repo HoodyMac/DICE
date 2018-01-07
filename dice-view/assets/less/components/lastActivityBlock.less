@@ -1,0 +1,37 @@
+@import "../colors";
+
+.forum_box{width: 100%; border: 1px solid @userInfo_border; border-radius: 2px; margin-top: 10px; background-color: @box_bg; margin-bottom: 7%;
+  ul{list-style: none; padding: 0; margin: 0;}
+  .forums{
+    li{padding: 2%;}
+    li.header p{ text-align: center; font-size: 18px; margin: 0;}
+    .forum_posts{
+      li{border-top: 1px solid; }
+      .forum_post{
+        table{width: 100%;
+          a {
+            img{padding-right: 15%; width: 100%; vertical-align: text-top;}
+          }
+          .title_block{
+            a{color: @forum_font_title; text-decoration: none;
+              &:hover{text-decoration: none; color: @forum_font_title_hover;}
+            }
+          }
+          .author_block{
+            a{color: @forum_font_author;
+              &:hover{text-decoration: none; color: @forum_font_author_hover;}
+            }
+          }
+          .views_block{ width: 35%;
+            .views_label{
+              img{position: relative; bottom: 1px;}
+            }
+            .views_value{color: @forum_font_views_value;}
+          }
+          .date_block{text-align: right;}
+          .img_block{width: 25%;}
+        }
+      }
+    }
+  }
+}

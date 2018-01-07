@@ -23,6 +23,7 @@ export class FriendsComponent implements AfterViewInit {
   private profileId = true;
   private myId;
   private userName = '';
+  private spinnerShow;
 
   constructor(private friendsService: FriendsService,
               private _router: Router,
@@ -49,10 +50,12 @@ export class FriendsComponent implements AfterViewInit {
     this.showNewFriends = false;
 
     var currentUser = this.authService.getUserInfo();
+    this.spinnerShow = true;
     if(currentUser === undefined) {
       this.authService.getUserInfoObservable().subscribe(
         data => {
           this.userName = data.firstName + ' ' + data.lastName;
+          this.spinnerShow = false;
         }
       );
     }else
@@ -61,6 +64,7 @@ export class FriendsComponent implements AfterViewInit {
     this.friendsService.getMyFriends().subscribe(
       data => {
         this.userFriendsData = data;
+        this.spinnerShow = false;
       }
     );
   }

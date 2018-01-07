@@ -43,7 +43,7 @@
                             </select>
                         </div>
                         <div class="edit-form">
-                            <label for="edit_birthday" translate>EDIT.birthday</label><input type="date" id="edit_birthday" class="form-control" [(ngModel)]="userBasicInfo.birthdayDate" required placeholder="{{'EDIT.placeholder.birthday' | translate }}" name="birthdayDate">
+                            <label for="edit_birthday" translate>EDIT.birthday</label><input type="date" id="edit_birthday" class="form-control" max="{{currentDate | date:'yyyy-MM-dd'}}" [(ngModel)]="userBasicInfo.birthdayDate" required placeholder="{{'EDIT.placeholder.birthday' | translate }}" name="birthdayDate">
                         </div>
                         <div class="edit-form">
                             <label for="edit_city" translate>EDIT.city</label><input type="text" id="edit_city" class="form-control" [(ngModel)]="userBasicInfo.city" placeholder="{{'EDIT.placeholder.city' | translate }}" name="city">
@@ -55,7 +55,7 @@
                             <label for="edit_work"translate>EDIT.work</label><input type="text" id="edit_work" class="form-control" [(ngModel)]="userBasicInfo.work" placeholder="{{'EDIT.placeholder.work' | translate }}" name="work">
                         </div>
                         <div class="edit-form"><label for="edit_prg_lang" translate>EDIT.programmingLang</label>
-                            <select id="edit_prg_lang" #choosenSelect data-placeholder="Choose your languages" class="chosen-select" multiple tabindex="5" size="5" >
+                            <select id="edit_prg_lang" #choosenSelect data-placeholder="Choose your language" class="chosen-select" multiple tabindex="5" size="5" >
                                 <option value="java">Java</option>
                                 <option value="php">PHP</option>
                                 <option value="java" >Java</option>
@@ -65,7 +65,7 @@
                             <strong translate>EDIT.editMessage</strong>
                         </div>
                         <div class="edit-form">
-                            <button type="submit" class="btn btn-default button" translate>Save</button>
+                            <button type="submit" class="btn btn-default button" translate>EDIT.save</button>
                         </div>
 
 
@@ -111,7 +111,7 @@
                     <div class="row">
                         <modal #changeLanguages modalClass="modal-sm" [closeOnOutsideClick]="true" [closeOnEscape]="true">
                             <modal-header>
-                                <h2>Choose your language</h2>
+                                <h2 translate>EDIT.chooseLanguage</h2>
                             </modal-header>
                             <modal-content>
                                 <div class="languages">
@@ -125,7 +125,7 @@
                                 </div>
                             </modal-content>
                             <modal-footer>
-                                <input type="reset" class="cancel" value="Cancel" (click)="changeLanguages.close()">
+                                <input type="reset" class="cancel" value="{{'PROFILE.cancel' | translate }}" (click)="changeLanguages.close()">
                             </modal-footer>
                         </modal>
                     </div>

@@ -8,6 +8,10 @@
     "EDIT":"Edit your profile"
   },
 
+  "COMMON":{
+    "relatedTags": "Related tags"
+  },
+
   "HOME": {
 
     "HOME": "home",
@@ -27,10 +31,12 @@
     "registrationSuccess": "Success! Your account has been registered.",
     "imageChangeMessage": "Your photo has changed. Please, close the window.",
 
-    "firstNameAlert": "You must enter a firstname",
-    "firstNameLongAlert": "Long firstname",
-    "lastNameAlert": "You must enter a lastname",
-    "lastNameLongAlert": "Long lastname",
+    "firstNameAlert": "You must enter a first name",
+    "firstNameLongAlert": "Long first name",
+    "firstNameShortAlert": "Short first name",
+    "lastNameAlert": "You must enter a last name",
+    "lastNameLongAlert": "Long last name",
+    "lastNameShortAlert": "Short last name",
     "genderAlert": "You must select a gender",
     "birthdayAlert": "You must enter a birthdayDate",
     "emailAlert": "You must enter an email address",
@@ -99,7 +105,7 @@
     "city": "City:",
     "education": "Education:",
     "work": "Work:",
-    "programmingLang": "Programing languages:",
+    "programmingLang": "Your skills:",
     "password": "Password:",
     "email": "Email:",
     "save": "Save",
@@ -115,6 +121,7 @@
     "en":"English",
     "ua":"Ukrainian",
     "ru": "Russian",
+      "chooseLanguage": "Choose your skills",
 
     "placeholder":{
       "firstname": "First name",
@@ -127,7 +134,8 @@
       "work": "Work",
       "currentPassword": "Current password",
       "newPassword": "New password",
-      "confirmPassword": "Confirm password:"
+      "confirmPassword": "Confirm password:",
+      "yourSkills": "Select skills"
     }
 
   },
@@ -142,12 +150,124 @@
     "educationLabel":"Education:",
     "workLabel":"Work:",
     "ageLabel": "Age:",
-    "programLangLabel": "Programming languages:",
+    "programLangLabel": "Your skills:",
     "newMessages":"New messages",
     "friends":"Friends",
     "posts":"Posts",
     "forum":"Forum",
-    "createPost": "Create a post"
-  }
+    "createPost": "Create a post",
+    "questions": "Questions",
+    "editProfile": "Edit profile",
+    "enterText": "Enter a text",
+    "cancel": "Cancel",
+    "create": "Create",
+    "editPost": "Edit post",
+    "deletePost": "Delete post",
+    "moreOptions": "More options",
+    "deleteComment": "Delete comment",
+    "send": "Send",
+    "enterComment": "Enter your comment",
+    "sendMessage":"Send a message",
+    "addToFriends":"Add to friends",
+    "cancelFriendRequest": "Cancel friend request",
+    "comments":"View comments",
+    "enterCode": "Add a piece of code",
+    "enterFile": "Add a file",
+    "enterImg": "Add a picture",
+    "lastActivity":"Last activity"
+  },
 
+  "MESSAGES":{
+    "newConversation":"New conversation",
+    "search":"Search",
+    "addNewConversation":"Add new conversation",
+    "enterMessage": "Enter your message",
+    "send": "Send",
+    "code": "code",
+    "comment": "Comment",
+    "ok":"ok",
+    "chooseProgLanguage":"Choose a programming language",
+    "createSnippet": "Create Snippet",
+    "yourCode": "Your code",
+    "yourFiles": "Your files",
+    "cancel": "Cancel",
+    "save": "Save",
+    "uploadFile": "Upload new file"
+  },
+
+  "FRIENDS":{
+    "myFriends": "My friends",
+    "newFriends": "New friends",
+    "followers": "Followers",
+    "outgoing": "Outgoing",
+    "pending": "Pending",
+    "onlineNow": "online now",
+    "friends": "friends",
+    "Friends": "Friends",
+    "sendMessage": "Send a message",
+    "accept": "Accept",
+    "reject": "Reject",
+    "done": "Done",
+    "moreOptions": "More options",
+    "deleteFriend": "Delete friend",
+    "search": "Search"
+  },
+
+  "SEARCH":{
+    "city": "City",
+    "searchParameters": "Search parameters",
+    "enterCity": "Enter a city",
+    "ageFrom": "From",
+    "ageTo": "to",
+    "gender": "Gender",
+    "any": "Any",
+    "male": "Male",
+    "female": "Female",
+    "onlineNow": "online now",
+    "people": "People",
+    "search": "Search",
+    "searchResults": "Search results",
+    "addFriends": "Add to friends",
+    "requestSend": "Request send",
+    "friends": "friends",
+    "Friends": "Friends"
+  },
+
+  "FORUM_POST":{
+    "home":"Home",
+    "questions": "Questions",
+    "author": "Author",
+    "description": "Description",
+    "dateOfPublication":"Date of publication",
+    "attachments": "Attachments",
+    "deleteComment": "Delete comment",
+    "answers": "Answers",
+    "yourAnswer": "Your answer",
+    "enterText": "Enter a text",
+    "postYourAnswer":"Post your answer",
+    "askQuestions": "Ask your questions",
+    "title": "Title",
+    "relatedTags": "Related tags",
+    "tags": "Tags",
+    "cancel": "Cancel",
+    "create": "Create",
+    "addComment": "Add comment",
+    "createComment": "Create a comment",
+    "enterComment": "Enter your comment",
+    "send": "Send"
+  },
+
+  "FORUM_LIST":{
+    "allQuestions":"All questions",
+    "askQuestions": "Ask a questions",
+    "search": "Search",
+    "author": "Author:",
+    "askYourQuestions": "Ask your questions",
+    "title": "Title",
+    "enterText": "Enter a text",
+    "relatedTags": "Related tags",
+    "cancel": "Cancel",
+    "create": "Create",
+    "description":"description"
+  }
 }

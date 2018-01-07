@@ -1,0 +1,107 @@
+.social_module(@fontSize, @fontColor) {
+  .likesEntities{ display: inline-flex; padding: 10px;
+    span{font-size: @fontSize; color: @fontColor; cursor: pointer;
+      &:hover{ color: @fontColor - #222222;}
+      &.active{ color: @socialModuleFontActive;}
+    }
+    p{padding: 0 5px; margin: 0;}
+  }
+  .comments{ display: inline-flex; padding: 10px;
+    p{padding: 0 5px; margin: 0;}
+    span{ font-size: @fontSize; color: @fontColor; cursor: pointer; padding: 0 0 0 5px;
+      &:hover{ color:  @fontColor - #222222;}
+      &.active{ color: @socialModuleFontActive;}
+    }
+    i{animation: spin 2s linear infinite; text-align: center;font-size: 18px; padding-top: 1px; color: #2520f7;}
+  }
+
+  .addComment{display: inline-flex; padding: 5px 10px; vertical-align: text-bottom; cursor: pointer; color: #0c141f;
+    &:hover{ color: #000000;}
+  }
+}
+
+
+// ######## COMMENTS STYLE  ###########################################
+
+.setCommentsStyle(){
+  .comment_block{ border-top: 1px solid @userInfo_border;
+    ul{ width: 100%; padding: 0; margin: 0; list-style: none;
+      li{ display: inline-flex; width: 94%; border-radius: 2px; border-bottom: 1px solid @userInfo_commentBorder; margin: 0 3%;
+        &:last-child{ border: none;}
+        .user-img{ padding: 10px 0 10px 10px; width: 8%;
+          .circle{ width: 35px; padding: 2%; height:35px; border-radius: 50%; background-position: center; background-size: cover; cursor:pointer;}
+        }
+        .content{ width: 75%; word-break: break-all;
+          a{ color: #2A5885; font-size: 14px;
+            .username{ padding: 5px 0 0 5px; margin: 0; cursor:pointer;}
+            &:hover{text-decoration: none; color: #1b3654;}
+          }
+          p{
+            &.text{padding: 0 5px 5px 5px; margin: 0;}
+          }
+        }
+        .comments_edit {display: inline-flex; width: 17%;
+          span{ font-size: 20px; color: cornflowerblue; margin: 15px 10px; cursor: pointer;
+            &:hover{ color: #1643ed; }
+          }
+          .date{ padding: 17px 0 0 5px; margin: 0;width: 65%;}
+          ul{width: 160px; float: none; padding: 0; border-radius: 2px; margin-top: 0;  margin-bottom: 0; list-style: none; top: 35px;
+            li{background-color: inherit; border: none; margin: 0; width: 100%; float: none;
+              a{cursor: pointer; width: 100%;}
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 1272px){
+    .comment_block ul li {
+        .comments_edit { width: 20%; }
+        .user-img { width: 8%; }
+      }
+    .dropdown-menu{left: -145px; top: 35px;}
+  }
+
+  @media (max-width: 990px){
+    .comment_block ul li {
+      .comments_edit { width: 45%; }
+      .user-img { width: 20%; }
+    }
+  }
+
+  @media (max-width: 768px){
+    .comment_block ul li {
+      .comments_edit { width: 55%; }
+    }
+  }
+
+  @media (max-width: 720px){
+    .comment_block ul li {
+      .comments_edit { width: 65%; }
+    }
+  }
+
+  @media (max-width: 620px) {
+    .comment_block ul li {
+        .comments_edit { width: 60%; }
+      }
+  }
+
+  @media (max-width: 480px){
+    .comment_block ul li {
+      .comments_edit { width: 70%; }
+    }
+  }
+
+  @media (max-width: 340px){
+    .comment_block ul li {
+      .content {
+        p.username{ padding: 5px 0 0 5px;}
+      }
+      .user-img { width: 35%; padding: 10px 0 10px 10px; }
+    }
+  }
+}
+
+// ######## END COMMENTS STYLE  ###########################################

@@ -9,9 +9,9 @@
                     </div>
                     <div class="change_photo">
                         <button type="button"  *ngIf="isMe" (click)="imgCropViewModal.open()" class="modal-trigger btn btn-default" data-modal="modal-change-photo" translate>PROFILE.changePhoto</button><!-- Trigger Modal. -->
-                        <button type="button" (click)="goToMessagePage()" class="btn btn-default" *ngIf="!isMe && userInfo.friendShipStatus == 'ACCEPTED'">Send a messege</button>
-                        <button type="button" (click)="addToFriends()" class="btn btn-default" *ngIf="!isMe && userInfo.friendShipStatus == null">Add to friends</button>
-                        <button type="button" (click)="cancelFriendRequest()" class="btn btn-default" *ngIf="!isMe && userInfo.friendShipStatus != 'ACCEPTED' && userInfo.friendShipStatus != null">Cancel friend request</button>
+                        <button type="button" (click)="goToMessagePage()" class="btn btn-default" *ngIf="!isMe && userInfo.friendShipStatus == 'ACCEPTED'" translate>PROFILE.sendMessage</button>
+                        <button type="button" (click)="addToFriends()" id="addToFriends" class="btn btn-default" *ngIf="!isMe && userInfo.friendShipStatus == null" translate>PROFILE.addToFriends</button>
+                        <button type="button" (click)="cancelFriendRequest()" id="removeFriend" class="btn btn-default" *ngIf="!isMe && userInfo.friendShipStatus != 'ACCEPTED' && userInfo.friendShipStatus != null" translate>PROFILE.cancelFriendRequest</button>
                         <!-- Modal view profile image -->
                         <div class="row">
                             <modal #imgCropViewModal modalClass="modal-lg" [closeOnOutsideClick]="true" [closeOnEscape]="true">
@@ -38,6 +38,7 @@
                                     <div class="alert alert-success"  *ngIf="viewImageChangeMessage">
                                         <strong translate>PROFILE.imageChangeMessage</strong>
                                     </div>
+                                  <div class="spinner" *ngIf="showImgSpinner"><i class="fa fa-spinner" aria-hidden="true"></i></div>
                                 </modal-footer>
                             </modal>
                         </div>
@@ -58,31 +59,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="forum_box">
-                    <ul class="forums">
-                        <li class="header"><p>Last activity</p></li>
-                        <li class="forum_posts">
-                            <ul>
-                                <li class="forum_post">
-                                    <table>
-                                        <tr>
-                                            <td rowspan="2" class="img_block"><a href="#" class="img"><img src="app/img/Ivan_Loichuk_bg.jpg" alt=""></a></td>
-                                            <td colspan="2" class="title_block"><a href="#"><span>How to fix this</span></a></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="author_block"><a href="#" ><span>Ivan,</span></a></td>
-                                            <td class="views_block"><span class="views_label"><img
-                                                    src="app/img/views-icon.png" alt="Views"></span> <span class="views_value">2,455</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="3" class="date_block"><span>Sunday, 4 July</span></td>
-                                        </tr>
-                                    </table>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
+
+              <last-activity-block></last-activity-block>
+
             </div>
             <div class="col-md-9 col-sm-8 col-xs-7 custom-col-info">
                 <div class="page_info">
@@ -96,7 +75,7 @@
                             <div class="label_info city" *ngIf="userInfo.city" translate>PROFILE.cityLabel</div>
                             <div class="value" *ngIf="userInfo.city">{{userInfo.city}}</div>
                             <div class="edit_user_info">
-                                <a (click)="editProfile()" id="link_edit_icon" title="Edit profile" *ngIf="isMe"><img [src]="editImgSrc" (mouseover)="onMouseOver()" (mouseout)="onMouseOut()" id="edit_icon" alt="Edit profile" title="Edit profile"></a>
+                                <a (click)="editProfile()" id="link_edit_icon" title="{{'PROFILE.editProfile' | translate }}" *ngIf="isMe"><img [src]="editImgSrc" (mouseover)="onMouseOver()" (mouseout)="onMouseOut()" id="edit_icon" alt="{{'PROFILE.editProfile' | translate }}"></a>
                             </div>
                         </div>
                         <div class="profile_info_row" *ngIf="userInfo.education">
@@ -119,28 +98,34 @@
                 </div>
                 <div class="counts_module">
                     <div class="page_count">
-                        <a (click)="goToMessagePage()"><span class="label_module" translate>PROFILE.newMessages</span></a>
+                        <a (click)="goToMessagePage()" class="label"><span class="label_module" translate>PROFILE.newMessages</span></a>
+                        <a (click)="goToMessagePage()" class="icon" title="{{'PROFILE.newMessages' | translate }}"><i class="fa fa-envelope" aria-hidden="true"></i></a>
                         <span class="value_module">(1)</span>
                     </div>
                     <div class="page_count">
-                        <a (click)="goToFriendsPage()"><span class="label_module" translate>PROFILE.friends</span></a>
+                        <a (click)="goToFriendsPage()" class="label"><span class="label_module" translate>PROFILE.friends</span></a>
+                        <a (click)="goToMessagePage()" class="icon" title="{{'PROFILE.friends' | translate }}"><i class="fa fa-users" aria-hidden="true"></i></a>
                         <span (click)="goToFriendsPage()" class="value_module">{{userInfo.friendsCount}}</span>
                     </div>
                     <div class="page_count">
-                        <a href="#"><span class="label_module" translate>PROFILE.posts</span></a>
+                        <a href="#" class="label"><span class="label_module" translate>PROFILE.questions</span></a>
+                        <a class="icon" title="{{'PROFILE.questions' | translate }}"><i class="fa fa-newspaper-o" aria-hidden="true"></i></a>
                         <span class="value_module">18</span>
                     </div>
                     <div class="page_count">
-                        <a (click)="createPost.open()"><span class="label_module" translate>PROFILE.createPost</span></a>
-                        <span><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
-                        <!-- Create a post modal windows -->
+                        <a (click)="createPost.open()" class="label" *ngIf="isMe"><span class="label_module" translate>PROFILE.createPost</span></a>
+                        <a (click)="createPost.open()" class="icon" title="{{'PROFILE.createPost' | translate }}" *ngIf="isMe"> <span><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span></a>
+                        <a class="label" title="{{'PROFILE.posts' | translate }}" *ngIf="!isMe"><span class="label_module" translate>PROFILE.posts</span></a>
+                        <span  class="value_module">{{userInfo.postsCount}}</span>
+
+                      <!-- Create a post modal windows -->
                         <div class="row">
                             <modal #createPost modalClass="modal-lg" id="createPostwModal" [closeOnOutsideClick]="true" [closeOnEscape]="true">
                                 <modal-header>
-                                    <h2>Create a post</h2>
+                                    <h2 translate>PROFILE.createPost</h2>
                                 </modal-header>
                                 <modal-content>
-                                    <textarea name="createPost" id="createPost" [(ngModel)]="postDTO.content" cols="100" rows="5" placeholder="Enter a text"></textarea>
+                                    <textarea name="createPost" id="createPost" [(ngModel)]="postDTO.content" cols="100" rows="5" placeholder="{{'PROFILE.enterText' | translate }}"></textarea>
                                     <div class="post_attachment" style="display: none;">
                                         <div class="upload_image">
                                             <img src="app/img/TEEN.jpg" alt="">
@@ -182,14 +167,14 @@
                                 </modal-content>
                                 <modal-footer>
                                     <div class="upload_components">
-                                        <i class="fa fa-file-code-o"></i>
-                                        <i class="fa fa-file" aria-hidden="true"></i>
-                                        <i class="fa fa-picture-o" aria-hidden="true"></i>
+                                        <i class="fa fa-file-code-o" title="{{'PROFILE.enterCode' | translate }}"></i>
+                                        <i class="fa fa-file" aria-hidden="true" title="{{'PROFILE.enterFile' | translate }}"></i>
+                                        <i class="fa fa-picture-o" aria-hidden="true" title="{{'PROFILE.enterImg' | translate }}"></i>
                                     </div>
 
                                     <div class="buttons_section">
-                                        <input type="reset" class="submit" value="Cancel" (click)="createPost.close()">
-                                        <input type="submit" class="submit" value="Create" (click)="doPostCreation(); createPost.close()">
+                                        <input type="reset" class="submit" value="{{'PROFILE.cancel' | translate }}" (click)="createPost.close()">
+                                        <input type="submit" class="submit" value="{{'PROFILE.create' | translate }}" (click)="doPostCreation(postDTO); createPost.close()">
                                     </div>
                                 </modal-footer>
                             </modal>
@@ -213,11 +198,11 @@
                                     </div>
                                     <div class="post_edit" *ngIf="isMe">
                                         <div class="dropdown">
-                                            <a alt="More options"  title="More options" class=" dropdown-toggle" id="editPost" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></a>
+                                            <a title="{{'PROFILE.moreOptions' | translate }}" class=" dropdown-toggle" id="editPost" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></a>
 
                                             <ul class="dropdown-menu" aria-labelledby="editPost">
-                                                <li><a (click)="selectPostForEditing(post); createPost.open()">Edit post</a></li>
-                                                <li><a (click)="deletePost(post)">Delete post</a></li>
+                                                <li><a (click)="selectPostForEditing(post); createPost.open()" translate>PROFILE.editPost</a></li>
+                                                <li><a (click)="deletePost(post)" translate>PROFILE.deletePost</a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -241,20 +226,17 @@
                         </div>
                         <div class="social_module">
                             <div class="likesEntities">
-                                <span class="glyphicon glyphicon-heart" aria-hidden="true" (click)="createLike(post)"></span>
+                                <span class="glyphicon glyphicon-heart {{likeService.findAlreadyLiked(post) ? 'active' : ''}}" aria-hidden="true" (click)="createLike(post)"></span>
                                 <p>{{ post.likes.length }}</p>
                             </div>
                             <div class="comments">
-                                <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+                                <span class="glyphicon glyphicon-comment" title="{{'PROFILE.comments' | translate }}" (click)="toggleComments(post)" aria-hidden="true"></span>
                                 <p>{{ post.commentsSize }}</p>
+                                <i class="fa fa-spinner" aria-hidden="true" *ngIf="spinnerShow[post.id]"></i>
                             </div>
                         </div>
-                        <div class="comments_module" >
-                            <div class="show_comments">
-                                <input type="button" (click)="toggleComments(post)" class="{{showComments ? 'active' : ''}} btn btn-default" value="Show comments">
-                            </div>
-
-                            <div class="comment_block" *ngIf="showComments">
+                        <div class="comments_module">
+                            <div class="comment_block" *ngIf="post.isShowComments">
                                 <ul>
                                     <li  *ngFor="let comment of post.comments">
                                         <div class="user-img">
@@ -268,10 +250,10 @@
                                         <div class="comments_edit" *ngIf="isMe">
                                             <p class="date">{{ comment.created_date | date:'dd.MM HH:mm' }}</p>
                                             <div class="dropdown">
-                                                <a alt="More options"  title="More options" class=" dropdown-toggle" id="editComment" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></a>
+                                                <a title="{{'PROFILE.moreOptions' | translate }}" class=" dropdown-toggle" id="editComment" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></a>
 
                                                 <ul class="dropdown-menu" aria-labelledby="editComment">
-                                                    <li><a (click)="deleteComment(post, comment)">Delete comment</a></li>
+                                                    <li><a (click)="deleteComment(post, comment)" translate>PROFILE.deleteComment</a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -284,14 +266,8 @@
                                     <div class="user-img">
                                         <div class="circle" [style.background-image]="'url(' + (userInfo.cropImgSrc ? '/api/profile/image/get/' + userInfo.cropImgSrc : '/app/img/default_user_photo.jpg') + ')'"></div>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="Enter your comment" name="content" [(ngModel)]="commentDTO.content" #content="ngModel">
-                                    <ul class="upload_item">
-                                        <li><i class="fa fa-code fa-lg"></i></li>
-                                        <li> <span class="glyphicon glyphicon-picture" aria-hidden="true"></span></li>
-                                        <li><span class="glyphicon glyphicon-file" aria-hidden="true"></span></li>
-                                    </ul>
-                                    <input type="file" id="imgupload" style="display:none"/>
-                                    <input type="submit" class="form-control" value="Send">
+                                    <input type="text" class="form-control" placeholder="{{'PROFILE.enterComment' | translate }}" name="content{{post.id}}" [(ngModel)]="commentsContent[post.id]" #content="ngModel">
+                                    <input type="submit" class="form-control" value="{{'PROFILE.send' | translate }}">
                                 </form>
                             </div>
                         </div>
@@ -301,3 +277,5 @@
         </div>
     </div>
 </section>
+
+<notification-element></notification-element>

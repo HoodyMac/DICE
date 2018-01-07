@@ -5,19 +5,19 @@
         <div class="search-filter">
           <div class="menu" >
             <ul id="nav-friends" class="nav nav-pills nav-stacked">
-              <li class="{{showFriends ? 'active': ''}}" (click)="showMyFriends()" >My friends</li>
-              <li class="{{showNewFriends ? 'active': ''}}" (click)="showMyNewFriends()">New friends</li>
-              <li class="{{showFollowers ? 'active': ''}}" (click)="showMyFollowers()">Followers</li>
+              <li class="{{showFriends ? 'active': ''}}" (click)="showMyFriends()" translate>FRIENDS.myFriends</li>
+              <li class="{{showNewFriends ? 'active': ''}}" (click)="showMyNewFriends()" translate>FRIENDS.newFriends</li>
+              <!--<li class="{{showFollowers ? 'active': ''}}" (click)="showMyFollowers()" translate>FRIENDS.followers</li>-->
             </ul>
           </div>
-          <form action="" method="POST">
+          <form action="" method="POST" *ngIf="showFollowers || showFriends">
             <div class="followers {{showFollowers ? 'show' : 'hide'}}">
-              <label for="outgoing">Outgoing</label><input type="radio" name="follow" id="outgoing">
-              <label for="pending">Pending</label><input type="radio" name="follow" id="pending">
+              <label for="outgoing" translate>FRIENDS.outgoing</label><input type="radio" name="follow" id="outgoing">
+              <label for="pending" translate>FRIENDS.pending</label><input type="radio" name="follow" id="pending">
             </div>
             <div class="online_group {{showFriends ? 'show' : 'hide'}}">
               <input type="checkbox" name="online_now" id="online_now">
-              <label for="online_now">online now</label>
+              <label for="online_now" translate>FRIENDS.onlineNow</label>
             </div>
           </form>
         </div>
@@ -28,38 +28,39 @@
             <div>
               <a (click)="goToProfile()" class="active username" >{{userName}}</a>
               <img src="/app/img/arrow.png" alt="">
-              <a class="nav-friends {{showFriends ? 'nav_show' : 'nav_hide'}}">Friends</a>
-              <a class="nav-followers {{showNewFriends ? 'nav_show' : 'nav_hide'}}">New friends</a>
-              <a  class="nav-followers {{showFollowers ? 'nav_show' : 'nav_hide'}}">Followers</a>
+              <a class="nav-friends {{showFriends ? 'nav_show' : 'nav_hide'}}" translate>FRIENDS.Friends</a>
+              <a class="nav-followers {{showNewFriends ? 'nav_show' : 'nav_hide'}}" translate>FRIENDS.newFriends</a>
+              <a  class="nav-followers {{showFollowers ? 'nav_show' : 'nav_hide'}}" translate>FRIENDS.followers</a>
             </div>
           </div>
           <form>
-            <input type="text" class="form-control" placeholder="Search">
+            <input type="text" class="form-control" placeholder="{{'FRIENDS.search' | translate}}">
           </form>
         </div>
 
         <div class="friends-content">
+          <div class="spinner"><i class="fa fa-spinner" aria-hidden="true" *ngIf="spinnerShow"></i></div>
           <ul>
             <li class="content_box" *ngFor="let userData of userFriendsData">
               <table>
                 <tr>
-                  <td class="img_block" rowspan="3"><a href="#" class="img"><img src="{{userData.cropImage ? '/api/profile/image/get/' + userData.cropImage : '/app/img/default_user_photo.jpg'}}" alt=""></a></td>
+                  <td class="img_block" rowspan="3"><a [routerLink]="['/profile', userData.id]" class="img"><img src="{{userData.cropImage ? '/api/profile/image/get/' + userData.cropImage : '/app/img/default_user_photo.jpg'}}" alt=""></a></td>
                   <td class="info_block" rowspan="3">
                     <a [routerLink]="['/profile', userData.id]" class="title"><span class="title">{{userData.firstName}}  {{userData.lastName}}</span></a>
-                    <a (click)="getFriendsOfFriend(userData.id, userData.firstName + ' ' + userData.lastName)"><span class="friends">{{userData.friendsCount}} friends</span></a>
+                    <a (click)="getFriendsOfFriend(userData.id, userData.firstName + ' ' + userData.lastName)"><span>{{userData.friendsCount}} </span><span class="friends" translate> FRIENDS.friends</span></a>
                   </td>
                   <td class="add_button" rowspan="3">
-                    <input (click)="goToMessagePage(userData.id)" type="button" class="btn btn-default" value="Send a messege" *ngIf="showFriends || showFollowers && !showNewFriends">
-                    <input type="button" id="acceptFriend{{userData.id}}" class="btn btn-default" value="Accept" *ngIf="showNewFriends" (click)="acceptFriendsRequest(userData.id)">
-                    <input type="button" id="rejectFriend{{userData.id}}" class="btn btn-default" value="Reject" *ngIf="showNewFriends" (click)="rejectFriendRequest(userData.id)">
-                    <input type="button" id="done{{userData.id}}" class="btn btn-default hide" value="Done" disabled>
+                    <input (click)="goToMessagePage(userData.id)" type="button" class="btn btn-default" value="{{'FRIENDS.sendMessage' | translate}}" *ngIf="showFriends || showFollowers && !showNewFriends">
+                    <input type="button" id="acceptFriend{{userData.id}}" class="btn btn-default" value="{{'FRIENDS.accept' | translate}}" *ngIf="showNewFriends" (click)="acceptFriendsRequest(userData.id)">
+                    <input type="button" id="rejectFriend{{userData.id}}" class="btn btn-default" value="{{'FRIENDS.reject' | translate}}" *ngIf="showNewFriends" (click)="rejectFriendRequest(userData.id)">
+                    <input type="button" id="done{{userData.id}}" class="btn btn-default hide" value="{{'FRIENDS.done' | translate}}" disabled>
                   </td>
                   <td class="controlBlock">
                     <div class="dropdown">
-                      <a alt="More options"  title="More options" class=" dropdown-toggle" id="moreOption" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></a>
+                      <a alt="More options"  title="{{'FRIENDS.moreOptions' | translate}}" class=" dropdown-toggle" id="moreOption" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></a>
 
                       <ul class="dropdown-menu" aria-labelledby="moreOption">
-                        <li><a (click)="removeFriend(userData)">Delete friend</a></li>
+                        <li><a (click)="removeFriend(userData)" translate>FRIENDS.deleteFriend</a></li>
                       </ul>
                     </div>
                   </td>
@@ -68,7 +69,6 @@
             </li>
           </ul>
         </div>
-
       </div>
     </div>
   </div>

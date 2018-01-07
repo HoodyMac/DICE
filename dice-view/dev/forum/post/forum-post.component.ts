@@ -1,6 +1,7 @@
 import {Component} from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
 import {ForumService} from "../../services/forum.service";
+import {TranslateService} from "ng2-translate";
 import {LikeService} from "../../common/services/like.service";
 import {AuthenticationService} from "../../common/services/authentication.service";
 
@@ -29,7 +30,7 @@ export class ForumPostComponent {
     this.currentUser = this.authenticationService.getUserInfo();
     if (this.currentUser === undefined) {
       this.authenticationService.getUserInfoObservable().subscribe(
-        (data) => {
+        data => {
           this.currentUser = data;
         }
       );
@@ -45,10 +46,10 @@ export class ForumPostComponent {
     );
   }
 
-  createLike(){
-    this.likeService.createLike(this.question.id, 'question').subscribe(
+  createLike(post, type){
+    this.likeService.createLike(post.id, type).subscribe(
       response => {
-        this.likeService.handleLikeCreation(this.question, this.currentUser.userProfileId, response);
+        this.likeService.handleLikeCreation(post, this.currentUser.userProfileId, response);
       }
     );
   }

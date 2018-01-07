@@ -9,7 +9,6 @@ export class LikeService {
     constructor(private http: HttpClient) {}
 
     createLike(id: number, type) {
-        console.log(type);
         return this.http.post('/api/like/'+id, type).map(res => res.json());
     }
 

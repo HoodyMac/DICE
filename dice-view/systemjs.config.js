@@ -30,6 +30,7 @@
       },
       'ng2-translate' : { defaultExtension: 'js' },
       "ng2-modal": { "main": "index.js", "defaultExtension": "js"}
+
     }
   });
 })(this);

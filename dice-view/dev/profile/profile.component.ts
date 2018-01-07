@@ -9,6 +9,7 @@ import {LikeService} from "../common/services/like.service";
 import {TranslateService} from "ng2-translate";
 import {Title} from "@angular/platform-browser";
 import _ from "lodash";
+import {LikeService} from "../common/services/like.service";
 
 let clicked = true;
 declare var jQuery: any;
@@ -31,8 +32,11 @@ export class ProfileComponent implements AfterViewInit {
   inPostEdit: boolean = false;
   postToEdit = {};
   commentDTO = {post: null, content: ''};
+  commentsContent = [];
   showComments = false;
   currentUser = {};
+  spinnerShow = [];
+  showImgSpinner = false;
 
   @ViewChild('cropbox') cropbox: ElementRef;
 
@@ -64,7 +68,6 @@ export class ProfileComponent implements AfterViewInit {
     } else {
       this.isMe = this.profileId == this.currentUser.userProfileId;
     }
-
     this.viewUserProfile(this.profileId);
   };
 
@@ -74,6 +77,7 @@ export class ProfileComponent implements AfterViewInit {
 
   addToFriends() {
     this._searchService.addToFriends(this.profileId).subscribe();
+    jQuery('#addToFriends').attr('disabled', 'disabled');
   }
 
   goToFriendsPage(){
@@ -82,6 +86,7 @@ export class ProfileComponent implements AfterViewInit {
 
   cancelFriendRequest(){
     this._friendService.removeFriend(this.profileId).subscribe();
+    jQuery('#removeFriend').attr('disabled', 'disabled');
   }
 
   ngAfterViewInit() {
@@ -139,11 +144,13 @@ export class ProfileComponent implements AfterViewInit {
       for (let i = 0; i < fileCount; i++) {
         formData.append('file', inputEl.files.item(i));
       }
+      this.showImgSpinner = true;
       this.profileService.uploadProfilePicture(formData)
         .subscribe(
           (data) => {
             this.userInfo.originalImgSrc = data.newImageFileName;
             this.jcropApi.setImage('/api/profile/image/get/' + this.userInfo.originalImgSrc);
+            this.showImgSpinner = false;
           }
         );
     }
@@ -153,13 +160,17 @@ export class ProfileComponent implements AfterViewInit {
     this._router.navigate(['/edit']);
   }
 
-  doPostCreation(){
+  doPostCreation(post){
     this.profileService.createUserPost(this.postDTO).subscribe(
       data => {
-        this.userInfo.posts.unshift(data);
+        if(typeof post.id === "undefined"){
+          this.userInfo.posts.unshift(data);
+        }
+        this.postDTO = {};
       }
     );
   }
+
 
   goToProfile(id){
     this._router.navigate(['/profile/'+id]);
@@ -171,9 +182,11 @@ export class ProfileComponent implements AfterViewInit {
     this.profileService.getUserInfo(profileId).subscribe(
         data => {
           this.userInfo = data;
+          this.userInfo.postsCount = this.userInfo.posts.length;
           if (this.jcropApi !== undefined) {
             this.jcropApi.setImage('/api/profile/image/get/' + this.userInfo.originalImgSrc);
           }
+          this.userInfo.posts.filter(post => post.isShowComments = false);
           this.translate.get('PAGE_TITLES.PROFILE', {username: this.userInfo.firstname + " " + this.userInfo.lastname}).subscribe((res: string) => {
             this.titleService.setTitle(res);
           });
@@ -195,30 +208,38 @@ export class ProfileComponent implements AfterViewInit {
 
   selectPostForEditing(post){
     this.postDTO = post;
-    console.log(this.postDTO);
   }
 
 
   createComment(post){
     this.commentDTO.post = post.id;
+    this.commentDTO.content = this.commentsContent[post.id];
     this.commentService.createComment(this.commentDTO).subscribe(
       data => {
         post.comments.push(data);
         post.commentsSize++;
+        post.isShowComments = true;
       }
     );
   }
 
   toggleComments(post){
-     if (this.showComments) {
-       this.showComments = false;
+     if (post.isShowComments) {
+       post.isShowComments = false;
      }else {
-        this.commentService.getComments(post.id).subscribe(
-          data => {
-           post.comments = data;
-          }
-        );
-       this.showComments = true;
+       if(post.comments.length > 0){
+         post.isShowComments = true;
+       }
+       else{
+         this.spinnerShow[post.id] = true;
+         this.commentService.getComments(post.id).subscribe(
+           data => {
+             post.comments = data;
+             this.spinnerShow[post.id] = false;
+           }
+         );
+         post.isShowComments = true;
+       }
      }
   }
 

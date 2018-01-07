@@ -23,6 +23,9 @@ import {MonacoEditorModule} from 'ngx-monaco-editor';
 import {ForumListComponent} from "./forum/list/forum-list.component";
 import {ForumPostComponent} from "./forum/post/forum-post.component";
 import {MultiselectDropdownModule} from 'angular-2-dropdown-multiselect';
+import {NotificationComponent} from "./common/components/notification.component";
+import {LastActivityBlockComponent} from "./common/components/lastActivityBlock.component";
+import {RelatedTagsComponent} from "./common/components/relatedTags.component";
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent},
@@ -66,7 +69,10 @@ const appRoutes: Routes = [
     PasswordMatcher,
     MessagesComponent,
     ForumListComponent,
-    ForumPostComponent
+    ForumPostComponent,
+    NotificationComponent,
+    LastActivityBlockComponent,
+    RelatedTagsComponent
   ],
   providers: [HttpClient, AuthenticationService, RegistrationService, ChatService],
   bootstrap: [AppComponent]

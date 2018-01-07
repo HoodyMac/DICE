@@ -8,11 +8,15 @@
     "EDIT":"Edytowanie mojego profilu"
   },
 
+  "COMMON":{
+    "relatedTags": "Tagi powiązane"
+  },
+
   "HOME": {
 
     "HOME": "DICE",
     "ABOUT": "O nas",
-    "SIGN_UP": "Zarejestruj się",
+    "SIGN_UP": "Załóż konto",
 
     "Its_free": "To jest za darmo",
     "jmt-info_h2": "Nawiąż kontakt z przyjaciółmi w sferze IT z DICE",
@@ -21,7 +25,7 @@
     "log_in": "Zaloguj się",
     "complete_form": "Proszę wypełnić formularz.",
     "sign_in": "Zaloguj się",
-    "sign_up": "Rejestracja",
+    "sign_up": "Rejestruj",
 
     "loginFailed": "Błąd! Niepoprawne dane logowania.",
     "registrationSuccess": "Powodzenie! Twoje konto zostało zarejestrowane.",
@@ -29,8 +33,10 @@
 
     "firstNameAlert": "Musisz podać imię",
     "firstNameLongAlert": "Imię jest zbyt długie",
+    "firstNameShortAlert": "Imię jest za krótkie",
     "lastNameAlert": "Musisz podać nazwisko",
     "lastNameLongAlert": "Nazwisko jest zbyt długie",
+    "lastNameShortAlert": "Nazwisko jest za krótkie",
     "genderAlert": "Musisz wybrać płeć",
     "birthdayAlert": "Musisz podać datę urodzenia",
     "emailAlert": "Musisz podać email",
@@ -99,7 +105,7 @@
     "city": "Miasto:",
     "education": "Wyksztawcenie:",
     "work": "Miejsce pracy:",
-    "programmingLang": "Języki programowania:",
+    "programmingLang": "Twoje umiejętności:",
     "password": "Hasło:",
     "email": "Email:",
     "save": "Zapisz",
@@ -115,6 +121,7 @@
     "en":"Angielski",
     "ua":"Ukrainski",
     "ru": "Rosyjski",
+    "chooseLanguage": "Wybierz swoje umiejętności",
 
     "placeholder":{
       "firstname": "Imię",
@@ -141,11 +148,125 @@
     "educationLabel":"Wykształcenie:",
     "workLabel":"Miejsce pracy:",
     "ageLabel": "Wiek:",
-    "programLangLabel": "Języki programowania:",
+    "programLangLabel": "Twoje umiejętności:",
     "newMessages":"Nowe wiadomości",
     "friends":"Znajomi",
     "posts":"Publikacje",
     "forum":"Forum",
-    "createPost": "Create a post"
+    "createPost": "Utwórz wpis",
+    "questions": "Zapytania",
+    "editProfile": "Edytuj swój profil",
+    "enterText": "Wpisz tekst",
+    "cancel": "Anuluj",
+    "create": "Utwórz",
+    "editPost": "Edytuj publikację",
+    "deletePost": "Usuń publikację",
+    "moreOptions": "Więcej możliwości",
+    "deleteComment": "Usuń komentarz",
+    "send": "Wyślij",
+    "enterComment": "Wpisz swój komentarz",
+    "sendMessage":"Wyślij wiadomość",
+    "addToFriends":"Dodaj do znajomych",
+    "cancelFriendRequest":"Anuluj zaproszenie",
+    "comments":"Zobacz komentarze",
+    "enterCode": "Dodaj fragment kodu",
+    "enterFile": "Dodaj plik",
+    "enterImg": "Dodaj zdjęcie",
+    "lastActivity":"Ostatnia aktywność"
+  },
+
+  "MESSAGES":{
+    "newConversation":"Nowa rozmowa",
+    "search":"Wyszukaj",
+    "addNewConversation":"Dodaj nową rozmowę",
+    "enterMessage": "Wpisz swoją wiadomość",
+    "send": "Wyślij",
+    "code": "kod",
+    "comment": "Komentarz",
+    "ok":"ok",
+    "chooseProgLanguage":"Wybierz język programowania",
+    "createSnippet": "Utwórz fragment",
+    "yourCode": "Twój kod",
+    "yourFiles": "Twoje pliki",
+    "cancel": "Anuluj",
+    "save": "Zapisz",
+    "uploadFile": "Prześlij nowy plik"
+  },
+
+  "FRIENDS":{
+    "myFriends": "Moi znajomi",
+    "newFriends": "Nowi znajomi",
+    "followers": "Obserwujący",
+    "outgoing": "Przychodzące",
+    "pending": "Wychodzące",
+    "onlineNow": "teraz online",
+    "friends": "znajomych",
+    "Friends": "Znajomi",
+    "sendMessage": "Wyślij wiadomość",
+    "accept": "Akceptuj",
+    "reject": "Odrzuć",
+    "done": "Zrobione",
+    "moreOptions": "Więcej opcji",
+    "deleteFriend": "Usuń znajomego",
+    "search": "Wyszukaj"
+  },
+
+  "SEARCH":{
+    "city": "Miasto",
+    "searchParameters": "Parametry wyszukiwania",
+    "enterCity": "Wprowadź miasto",
+    "ageFrom": "Od",
+    "ageTo": "Do",
+    "gender": "Płeć",
+    "any": "Każdy",
+    "male": "Mężczyzna",
+    "female": "Kobieta",
+    "onlineNow": "teraz online",
+    "people": "Ludzie",
+    "search": "Szukaj",
+    "searchResults": "Wyniki wyszukiwania",
+    "addFriends": "Dodaj do znajomych",
+    "requestSend": "Zaproszenie wysłano",
+    "friends": "znajomych",
+    "Friends": "Znajomi",
+    "yourSkills": "Wybierz umiejętności"
+  },
+
+  "FORUM_POST":{
+    "home":"Strona domowa",
+    "questions": "Zapytania",
+    "author": "Autor",
+    "description": "Opis",
+    "dateOfPublication":"Data publikacji",
+    "attachments": "Załączniki",
+    "deleteComment": "Usuń komentarz",
+    "answers": "Odpowiedzi",
+    "yourAnswer": "Twoja odpowiedź",
+    "enterText": "Wpisz tekst",
+    "postYourAnswer":"Opublikuj odpowiedź",
+    "askQuestions": "Zadaj pytania",
+    "title": "Tytuł",
+    "relatedTags": "Powiązane tagi",
+    "tags": "Tagi",
+    "cancel": "Anuluj",
+    "create": "Stwórz",
+    "addComment": "Dodaj komentarz",
+    "createComment": "Utwórz commentarz",
+    "enterComment": "Wpisz swój komentarz",
+    "send": "Wyślij"
+  },
+
+  "FORUM_LIST":{
+    "allQuestions":"Wszystkie pytania",
+    "askQuestions": "Zadaj pytanie",
+    "search": "Szukaj",
+    "author": "Autor:",
+    "askYourQuestions": "Zadaj swoje pytania",
+    "title": "Tytuł",
+    "enterText": "Wpisz tekst",
+    "relatedTags": "Powiązane tagi",
+    "cancel": "Anuluj",
+    "create": "Stwórz",
+    "description": "Opis"
   }
 }

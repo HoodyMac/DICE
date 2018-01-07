@@ -3,42 +3,43 @@
         <div class="row">
             <div class="col-md-3 col-sm-4 col-xs-5 custom-col-filter">
                 <div class="search-filter">
-                    <div class="header">Search parameters</div>
+                    <div class="header" translate>SEARCH.searchParameters</div>
                     <form action="" method="POST" [formGroup]="searchForm"  >
                         <div class="city_group">
-                            <label>City</label>
-                            <input type="text" class="form-control" placeholder="Enter a city" formControlName="city" (keyup.enter)="getUsersData()">
+                            <label translate>SEARCH.city</label>
+                            <input type="text" class="form-control" placeholder="{{'SEARCH.enterCity' | translate}}" formControlName="city" (keyup.enter)="getUsersData()">
                         </div>
 
                         <div class="age_group">
                             <label>Age</label>
                             <div>
-                                <select  formControlName="ageFrom" (ngModelChange)="getUsersData()" id="age_from"  class="chosen-select" data-placeholder="from" #choseAgeFrom>
-                                    <option value="" selected>From</option>
-                                    <option *ngFor="let ageValue of ageValues" value="{{ageValue}}">{{ageValue}}</option>
+                                <select  formControlName="ageFrom" name="ageFrom" ngModel (change)="setAgeTo(searchForm.get('ageFrom').value); getUsersData()" id="age_from" >
+                                    <option value="" selected translate>SEARCH.ageFrom</option>
+                                    <option *ngFor="let ageFromValue of ageFromValues" value="{{ageFromValue}}">{{ageFromValue}}</option>
                                 </select>
-                                <select formControlName="ageTo" (ngModelChange)="getUsersData()" id="age_to" class="chosen-select" data-placeholder="to" #choseAgeTo>
-                                    <option value="" selected>To</option>
-                                    <option *ngFor="let ageValue of ageValues" value="{{ageValue}}">{{ageValue}}</option>
+                                <select formControlName="ageTo" name="ageTo" ngModel (change)="setAgeFrom(searchForm.get('ageTo').value); getUsersData()"  id="age_to">
+                                    <option value="" selected translate>SEARCH.ageTo</option>
+                                    <option *ngFor="let ageToValue of ageToValues" value="{{ageToValue}}">{{ageToValue}}</option>
                                 </select>
                             </div>
 
                         </div>
                         <div class="sex_group">
-                            <label for="gender_form">Gender</label>
+                            <label for="gender_form" translate>SEARCH.gender</label>
                             <select formControlName="gender" (change)="getUsersData()" ngModel name="gender" id="gender_form">
-                                <option value="" selected>Any</option>
-                                <option value="MALE">Male</option>
-                                <option value="FEMALE">Female</option>
+                                <option value="" selected translate>SEARCH.any</option>
+                                <option value="MALE" translate>SEARCH.male</option>
+                                <option value="FEMALE" translate>SEARCH.female</option>
                             </select>
                         </div>
                         <div class="online_group">
                             <input type="checkbox" (change)="getUsersData()" formControlName="isOnline" id="online_now">
-                            <label for="online_now">online now</label>
+                            <label for="online_now" translate>SEARCH.onlineNow</label>
                         </div>
                         <div id="lang_select">
+                            <label for="prg_lang" translate>SEARCH.yourSkills</label>
                             <select formControlName="programmingLanguages" (ngModelChange)="getUsersData()" id="prg_lang" size="1" class="chosen-select" data-placeholder="Choose language" #choseLang>
-                                <option value="" selected>Any</option>
+                                <option value="" selected translate>SEARCH.any</option>
                                 <option value="java">Java</option>
                                 <option value="c++">C++</option>
                                 <option value="php">PHP</option>
@@ -53,34 +54,35 @@
                 <div class="search-form">
                     <div class="menu" id="">
                         <ul id="search_menu">
-                            <li><a href="#" class="active">Friends</a></li>
+                            <li><a href="#" class="active" translate>SEARCH.people</a></li>
                             <!-- <li><a href="#">Groups</a></li> -->
                         </ul>
                     </div>
                     <form  [formGroup]="searchForm" (ngSubmit)="getUsersData()">
-                        <input  formControlName="fullName" type="text" class="form-control" [(ngModel)]="fullname" name="fullname" placeholder="Search">
+                        <input  formControlName="fullName" type="text" class="form-control" [(ngModel)]="fullname" name="fullname" placeholder="{{'SEARCH.search' | translate}}">
                     </form>
                 </div>
 
                 <div class="search-results">
                     <ul>
-                        <li class="header"><p>Search results</p></li>
+                        <li class="header"><p translate>SEARCH.searchResults </p></li>
+                        <li class="spinner" *ngIf="spinnerShow"><i class="fa fa-spinner" aria-hidden="true"></i></li>
                         <li class="main_content">
                             <ul>
                                 <li class="content_box" *ngFor="let data of searchData">
                                     <table>
                                         <tr>
-                                            <td class="img_block" rowspan="3"><a href="#" class="img"><img src="{{data.cropImage ? '/api/profile/image/get/' + data.cropImage : '/app/img/default_user_photo.jpg'}}" alt=""></a></td>
+                                            <td class="img_block" rowspan="3"><a [routerLink]="['/profile', data.id]" class="img"><img src="{{data.cropImage ? '/api/profile/image/get/' + data.cropImage : '/app/img/default_user_photo.jpg'}}" alt=""></a></td>
                                             <td class="info_block" rowspan="3">
                                                 <a [routerLink]="['/profile', data.id]" class="title"><span>{{data.firstName}}  {{data.lastName}}</span></a>
                                                 <span class="town">{{data.city}}</span>
                                                 <span class="work">{{data.work}}</span>
                                             </td>
                                             <td class="add_button" rowspan="3">
-                                                <input type="button" class="btn btn-default" id="addToFriends{{data.id}}" *ngIf="data.friendShipStatus == null" (click)="addUserToFriends(data.id)"  value="Add to friends">
-                                                <input type="button" class="btn btn-default" *ngIf="data.friendShipStatus == 'SENT' || data.friendShipStatus == 'REJECTED'" disabled  value="Request send">
-                                                <input type="button" class="btn btn-default" *ngIf="data.friendShipStatus == 'ACCEPTED'" disabled value="Friend">
-                                                <a href="#"><span>{{data.friendsCount}} friends</span></a>
+                                                <input type="button" class="btn btn-default" id="addToFriends{{data.id}}" *ngIf="data.friendShipStatus == null" (click)="addUserToFriends(data.id)"  value="{{'SEARCH.addFriends' | translate}}">
+                                                <input type="button" class="btn btn-default" *ngIf="data.friendShipStatus == 'SENT' || data.friendShipStatus == 'REJECTED'" disabled  value="{{'SEARCH.requestSend' | translate}}">
+                                                <input type="button" class="btn btn-default" *ngIf="data.friendShipStatus == 'ACCEPTED'" disabled value="{{'SEARCH.Friends' | translate}}">
+                                                <a (click)="goToFriendsPage(data.id, data.firstName + ' ' + data.lastName)"><span>{{data.friendsCount}} </span><span translate>SEARCH.friends</span></a>
                                             </td>
                                         </tr>
                                     </table>
