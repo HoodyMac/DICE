@@ -1,4 +1,4 @@
-This is a social network for IT comunity. People here can share their code with others and also ask questions related to the IT.
+This is a social network for IT comunity. This project was created for our diploma thesis purposes. People here can share their code with others, comunicate with others and also ask questions related to the IT.
 
 # **Main features:** <br/>
 -- share your code with others
